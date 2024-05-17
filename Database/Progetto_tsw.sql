@@ -7,7 +7,7 @@ CREATE TABLE Utente
     id           INT PRIMARY KEY AUTO_INCREMENT,
     nome         VARCHAR(30)  NOT NULL,
     email        VARCHAR(255) NOT NULL UNIQUE,
-    passwordhash VARCHAR(40)  NOT NULL,
+    passwordhash VARCHAR(100)  NOT NULL,
     telefono     VARCHAR(13)  NOT NULL,
     is_admin     BOOLEAN      NOT NULL DEFAULT FALSE
     /* potrebbe essere sostituita con enumerazione se si dovessero aggiungere altri ruoli*/
@@ -116,12 +116,12 @@ CREATE TABLE Recenzione
 
 
 INSERT INTO Utente (nome, email, passwordhash, telefono, is_admin)
-VALUES ('Domenico', 'Domenico.admin@unisa.com', sha1("c'è poco da dire"), '1234567890', TRUE),
-       ('Alesssandro', 'Alessandro.admin@unisa.com', sha1("c'è tanto da fare"), '3210987654', TRUE),
-       ('Christian', 'Christian.admin@unisa.com', sha1("bullo"), '3210987654', TRUE),
-       ('Domenico', 'Domenico.user@unisa.com', sha1("c'è poco da dire"), '1234567890', FALSE),
-       ('Alesssandro', 'Alessandro.user@unisa.com', sha1("c'è tanto da fare"), '3210987654', FALSE),
-       ('Christian', 'Christian.user@unisa.com', sha1("bullo"), '3210987654', FALSE);
+VALUES ('Domenico', 'Domenico.admin@unisa.com', sha1('c\'è poco da dire'), '1234567890', TRUE),
+       ('Alesssandro', 'Alessandro.admin@unisa.com', sha1('c\'è tanto da fare'), '3210987654', TRUE),
+       ('Christian', 'Christian.admin@unisa.com', sha1('bullo'), '3210987654', TRUE),
+       ('Domenico', 'Domenico.user@unisa.com', sha1('c\'è poco da dire'), '1234567890', FALSE),
+       ('Alesssandro', 'Alessandro.user@unisa.com', sha1('c\'è tanto da fare'), '3210987654', FALSE),
+       ('Christian', 'Christian.user@unisa.com', sha1('bullo'), '3210987654', FALSE);
 
 
 INSERT INTO Indirizzo (città, n_civico, via, cap)
