@@ -102,7 +102,7 @@ CREATE TABLE Ordine_Prodotto
     FOREIGN KEY (id_ordine) references Ordine (id),
     FOREIGN KEY (id_prodotto) references Prodotto (id)
 );
-CREATE TABLE Recenzione
+CREATE TABLE Recensione
 (
     id_utente   INT          NOT NULL,
     id_prodotto INT          NOT NULL,
@@ -164,6 +164,6 @@ VALUES (1, 1, 3, 39.80),
 
 
 
-INSERT INTO Recenzione (id_utente, id_prodotto, voto, descrizione)
+INSERT INTO Recensione (id_utente, id_prodotto, voto, descrizione)
 VALUES (4, 1, 5, 'Ottimo prodotto! Spedizione veloce e prodotto conforme alla descrizione.'),
        (4, 2, 4, 'Il prodotto è arrivato con un leggero ritardo, ma per il resto sono soddisfatto.');
