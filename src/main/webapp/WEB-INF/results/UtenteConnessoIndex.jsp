@@ -11,11 +11,9 @@
     <title>Homepage</title>
 </head>
 <body>
-<form action="login.jsp" method="get">
-    <input type="submit" value="Login">
-</form>
-<form action="registrazione.jsp" method="get">
-    <input type="submit" value="Registrati">
-</form>
+<%Utente Connesso = (Utente) session.getAttribute("UtenteConnesso");%>
+<%if((boolean) session.getAttribute("connessione") == true) {%>
+<%= "Utente Connesso: " + Connesso.getEmail()%>
+<%}//dati riguardanti l'account che si e' connesso%>
 </body>
 </html>
