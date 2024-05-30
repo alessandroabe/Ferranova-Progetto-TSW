@@ -1,4 +1,4 @@
-<%@ page import="model.Utente" %>
+<%@ page import="org.unisa.abeilleamorellifontana_pj.Model.Utente" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>

@@ -1,9 +1,10 @@
-package model;
+package org.unisa.abeilleamorellifontana_pj.Model;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-    public class UtenteDAO {
+
+import static org.unisa.abeilleamorellifontana_pj.Model.SHA1PasswordVerifier.sha1Hash;
+
+public class UtenteDAO {
 
 
         public Utente doRetrieveByEmail(String mail) {
@@ -40,7 +41,7 @@ import java.sql.*;
             return utente;
         }
 
-        public boolean inserisciUtente(Utente utente) {
+        public boolean doInsert(Utente utente) {
             String query = "INSERT INTO Utente (nome, email, passwordhash, telefono, is_admin) VALUES (?, ?, ?, ?, ?)";
 
             boolean esistente = false;
@@ -65,21 +66,6 @@ import java.sql.*;
 
             return esistente;
         }
-
-        public static String sha1Hash(String input) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA-1");
-                byte[] messageDigest = md.digest(input.getBytes());
-                StringBuilder sb = new StringBuilder();
-                for (byte b : messageDigest) {
-                    sb.append(String.format("%02x", b));
-                }
-                return sb.toString();
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
 
     }
 

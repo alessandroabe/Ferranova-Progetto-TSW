@@ -29,7 +29,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package model;
+package org.unisa.abeilleamorellifontana_pj.Model;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
@@ -47,7 +47,7 @@ public class ConPool {
             p.setUrl("jdbc:mysql://localhost:3306/Progetto_tsw?serverTimezone=" + TimeZone.getDefault().getID());
             p.setDriverClassName("com.mysql.cj.jdbc.Driver");
             p.setUsername("root");
-            p.setPassword("1q2w3e4r5t"); //domenico deve sistemare
+            p.setPassword("Amorelli"); //domenico deve sistemare, per ora mettete sempre la password nuova
             p.setMaxActive(100);
             p.setInitialSize(10);
             p.setMinIdle(10);

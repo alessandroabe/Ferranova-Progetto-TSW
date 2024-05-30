@@ -1,4 +1,4 @@
-<%@ page import="model.Utente" %>
+<%@ page import="org.unisa.abeilleamorellifontana_pj.Model.Utente" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
 
 
 <div class="wrapper">
-    <form action="login" method="get">
+    <form action="login" method="post">
 
         <h3>Accedi al sito</h3>
         <div class="login">

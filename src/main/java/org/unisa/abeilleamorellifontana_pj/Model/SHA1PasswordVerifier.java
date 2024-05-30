@@ -1,4 +1,4 @@
-package model;
+package org.unisa.abeilleamorellifontana_pj.Model;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

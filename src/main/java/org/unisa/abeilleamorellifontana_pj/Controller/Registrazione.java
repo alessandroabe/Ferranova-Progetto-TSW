@@ -6,9 +6,8 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.SHA1PasswordVerifier;
-import model.Utente;
-import model.UtenteDAO;
+import org.unisa.abeilleamorellifontana_pj.Model.Utente;
+import org.unisa.abeilleamorellifontana_pj.Model.UtenteDAO;
 
 @WebServlet(name = "registrazione", value = "/registrazione")
 public class Registrazione extends HttpServlet {
@@ -21,26 +20,31 @@ public class Registrazione extends HttpServlet {
 
 
         HttpSession session = request.getSession();
-        String address = new String();
-        String nome = (String) request.getParameter("nome");
-        String email = (String) request.getParameter("username");
-        String password = (String) request.getParameter("password");
-        String telefono = (String) request.getParameter("telefono");
+        String address;
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("username");
+        String password = request.getParameter("password");
+        String telefono = request.getParameter("telefono");
         UtenteDAO utenteDAO = new UtenteDAO();
 
 
-        Utente utente_da_inserire = new Utente(1,nome,email,password,telefono,false);
-        boolean exist_nome = utenteDAO.inserisciUtente(utente_da_inserire);
+        Utente utente_da_inserire = new Utente(1, nome, email, password, telefono, false);
+        boolean exist_nome = utenteDAO.doInsert(utente_da_inserire);
 
-        if(exist_nome == false) {
+        if (!exist_nome) {
             address = "index.jsp"; //ritorno alla homepage una volta registrato se non c'e' gia un account esistente
-        }else if(exist_nome == true) {
+        } else {
             address = "/WEB-INF/results/RegistrazioneAccountEsistente.jsp";//ritorno alla jsp con errore
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 
     public void destroy() {

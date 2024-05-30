@@ -11,7 +11,7 @@
     <title>Registrazione</title>
 </head>
 <body>
-<form action="registrazione" method="get">
+<form action="registrazione" method="post">
   <label for="nome">Nome: </label>
   <input type="text" id="nome" name="nome"> <br>
   <label for="email">Email: </label>

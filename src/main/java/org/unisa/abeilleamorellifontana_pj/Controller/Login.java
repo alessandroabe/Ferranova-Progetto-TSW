@@ -6,9 +6,9 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.SHA1PasswordVerifier;
-import model.Utente;
-import model.UtenteDAO;
+import org.unisa.abeilleamorellifontana_pj.Model.SHA1PasswordVerifier;
+import org.unisa.abeilleamorellifontana_pj.Model.Utente;
+import org.unisa.abeilleamorellifontana_pj.Model.UtenteDAO;
 
 @WebServlet(name = "login", value = "/login")
 public class Login extends HttpServlet {
@@ -26,24 +26,28 @@ public class Login extends HttpServlet {
         String address;
         UtenteDAO U = new UtenteDAO();
         Utente input = U.doRetrieveByEmail(mail);
-        boolean connesso = false;
 
         if(input != null && input.getEmail().compareTo(mail) == 0 && SHA1PasswordVerifier.verifyPassword(password,input.getPasswordhash())) {
 
-            connesso = true;
-            session.setAttribute("connessione",connesso);
+            session.setAttribute("connessione", true);
             session.setAttribute("UtenteConnesso",input);
             address = "/WEB-INF/results/UtenteConnessoIndex.jsp";
 
         }else {
 
-            session.setAttribute("connessione",connesso);
+            session.setAttribute("connessione", false);
             session.setAttribute("UtenteConnesso",input);
             address = "/WEB-INF/results/UtenteNonConnessoLogin.jsp";
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
 
     }
 

@@ -1,4 +1,4 @@
-<%@ page import="model.Utente" %><%--
+<%@ page import="org.unisa.abeilleamorellifontana_pj.Model.Utente" %><%--
   Created by IntelliJ IDEA.
   User: chris
   Date: 28/05/2024

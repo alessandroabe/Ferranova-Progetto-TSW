@@ -1,4 +1,4 @@
-package model;
+package org.unisa.abeilleamorellifontana_pj.Model;
 
 public class Utente {
 
@@ -19,6 +19,7 @@ public class Utente {
     }
 
     public Utente() {
+        super();
     }
 
     public int getId() {
