@@ -21,9 +21,9 @@ public class Login extends HttpServlet {
 
 
         HttpSession session = request.getSession();
-        String mail = (String) request.getParameter("username");
-        String password = (String) request.getParameter("password");
-        String address = new String();
+        String mail = request.getParameter("email");
+        String password = request.getParameter("password");
+        String address;
         UtenteDAO U = new UtenteDAO();
         Utente input = U.doRetrieveByEmail(mail);
         boolean connesso = false;

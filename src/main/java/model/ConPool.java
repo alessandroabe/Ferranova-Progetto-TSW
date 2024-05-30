@@ -47,7 +47,7 @@ public class ConPool {
             p.setUrl("jdbc:mysql://localhost:3306/Progetto_tsw?serverTimezone=" + TimeZone.getDefault().getID());
             p.setDriverClassName("com.mysql.cj.jdbc.Driver");
             p.setUsername("root");
-            p.setPassword("Chri2002");
+            p.setPassword("1q2w3e4r5t"); //domenico deve sistemare
             p.setMaxActive(100);
             p.setInitialSize(10);
             p.setMinIdle(10);

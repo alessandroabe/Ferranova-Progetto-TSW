@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: black;
+    text-align: center;
+}
+
+nav {
+    overflow: auto; /*nel caso la barra non entra nello schermo permette di scrollarla*/
+    background-color: #295115;
+    position: fixed; /*fissa la barra in cima alla pagina*/
+    height: 60px;
+    width: 100%;  /*copre l'intera larghezza della pagina*/
+    z-index: 1000; /* Assicura che la barra di navigazione abbia una priorità di sovrapposizione più alta */
+    text-align: center; /*per centrare il logo*/
+}
+
+nav img {
+    padding-top: 17px;
+    padding-bottom: 12px;
+}
+
+
+.wrapper{
+    background-color: rgb(255, 255, 255);
+    margin-top: 130px;
+    padding: 35px 20px 35px 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #3d5b2d;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+
+form h3{
+    font-size: 25px;
+    padding-bottom: 25px;
+    color: #121212;
+}
+
+
+
+
+input{
+    width: 250px;
+    height: 30px;
+    border-width: 1px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+input#submit{
+    margin-top: 10px;
+    font-size: medium;
+    color:white;
+    background-color: #335e1e;
+    border: none;
+    border-radius: 20px;
+    width: 170px;
+    height: 40px;
+}
+
+#submit:hover{
+    background-color: #29451c;
+}
+
+.registrazione{
+    margin-top: 35px;
+    font-size:smaller;
+}
+
+.registrazione a{
+    color: #335e1e;
+    text-decoration: none;
+}
+
+.registrazione a:hover{
+    text-decoration: underline;
+}
