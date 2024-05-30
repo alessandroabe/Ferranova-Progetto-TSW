@@ -34,7 +34,9 @@ public class Registrazione extends HttpServlet {
         if (!exist_nome) {
             address = "index.jsp"; //ritorno alla homepage una volta registrato se non c'e' gia un account esistente
         } else {
-            address = "/WEB-INF/results/RegistrazioneAccountEsistente.jsp";//ritorno alla jsp con errore
+            exist_nome = true;
+            session.setAttribute("alreadysub",exist_nome);
+            address = "registrazione.jsp";//ritorno alla jsp con errore
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);

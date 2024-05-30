@@ -4,7 +4,7 @@ import java.sql.*;
 
 import static org.unisa.abeilleamorellifontana_pj.Model.SHA1PasswordVerifier.sha1Hash;
 
-public class UtenteDAO {
+public class  UtenteDAO {
 
 
         public Utente doRetrieveByEmail(String mail) {

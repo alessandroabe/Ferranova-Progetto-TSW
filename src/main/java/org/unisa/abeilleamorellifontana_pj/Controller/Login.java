@@ -31,13 +31,13 @@ public class Login extends HttpServlet {
 
             session.setAttribute("connessione", true);
             session.setAttribute("UtenteConnesso",input);
-            address = "/WEB-INF/results/UtenteConnessoIndex.jsp";
+            address = "index.jsp";
 
         }else {
 
             session.setAttribute("connessione", false);
             session.setAttribute("UtenteConnesso",input);
-            address = "/WEB-INF/results/UtenteNonConnessoLogin.jsp";
+            address = "index.jsp";
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);

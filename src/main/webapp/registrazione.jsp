@@ -11,6 +11,10 @@
     <title>Registrazione</title>
 </head>
 <body>
+<%if(session.getAttribute("alreadysub") != null && (boolean) session.getAttribute("alreadysub") == true) {%>
+<%= "Questo account esiste gia"%>
+<%}%>
+
 <form action="registrazione" method="post">
   <label for="nome">Nome: </label>
   <input type="text" id="nome" name="nome"> <br>
