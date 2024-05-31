@@ -19,9 +19,15 @@
      Cliccando il pulsante viene registrato un nuovo utente
 -->
 
-<%if(session.getAttribute("alreadysub") != null && (boolean) session.getAttribute("alreadysub") == true) {%>
-<%= "Questo account esiste gia"%>
-<%}%>
+<%//if(session.getAttribute("alreadysub") != null && (boolean) session.getAttribute("alreadysub") == true)%>
+<%//= "Questo account esiste gia"%>
+<%//}%>
+
+
+<!-- controllo account già esistente, in caso positivo showAlert diventa true-->
+<%
+  boolean showAlert = session.getAttribute("alreadysub") != null && (boolean) session.getAttribute("alreadysub") == true;
+%>
 
   <div class="wrapper">
     <form action="registrazione" method="post">
@@ -34,8 +40,18 @@
       <input type="email" id="email" placeholder="email" name="email"><br><br>
       <input type="password" id="password" placeholder="password" name="password" required><br><br>
 
+      <!-- messaggio alert-->
+      <div id="alert" class="alert" style="display:none;">Account già esistente</div><br>
+
       <input type="submit" id="submit" value="Registra"/>
     </form>
   </div>
+
+<!-- mostra l'alert se showAlert è true-->
+<script type="text/javascript">
+  <% if (showAlert) { %>
+  document.getElementById('alert').style.display = 'block';
+  <% } %>
+</script>
 
 </body></html>
