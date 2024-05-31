@@ -1,30 +1,41 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: chris
-  Date: 30/05/2024
-  Time: 16:42
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
+
 <head>
-    <title>Registrazione</title>
+  <title>Registrazione Ferranova</title>
+  <link rel="stylesheet" href="Styles/loginStyle.css"/>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
 </head>
+
 <body>
+
+<nav>
+  <img src="images/logo.png" alt="home" width="130" height="26" >
+</nav>
+
+<!--
+     Cliccando il pulsante viene registrato un nuovo utente
+-->
+
 <%if(session.getAttribute("alreadysub") != null && (boolean) session.getAttribute("alreadysub") == true) {%>
 <%= "Questo account esiste gia"%>
 <%}%>
 
-<form action="registrazione" method="post">
-  <label for="nome">Nome: </label>
-  <input type="text" id="nome" name="nome"> <br>
-  <label for="email">Email: </label>
-  <input type="text" id="email" name="username"> <br>
-  <label for="password">Password: </label>
-  <input type="password" id="password" name="password"> <br>
-  <label for="telefono">Telefono: </label>
-  <input type="text" id="telefono" name="telefono"> <br>
-  <input type="submit" value="Registrati">
-</form>
-</body>
-</html>
+  <div class="wrapper">
+    <form action="registrazione" method="post">
+
+      <h3>Registrati al sito</h3>
+
+      <input type="text" id="nome" placeholder="nome" name="nome" required><br><br>
+      <!--<input type="text" id="cognome" placeholder="cognome" required><br><br> Si deve mettere il cognome?-->
+      <input type="text" id="telefono" placeholder="telefono"><br><br>
+      <input type="email" id="email" placeholder="email" name="email"><br><br>
+      <input type="password" id="password" placeholder="password" name="password" required><br><br>
+
+      <input type="submit" id="submit" value="Registra"/>
+    </form>
+  </div>
+
+</body></html>

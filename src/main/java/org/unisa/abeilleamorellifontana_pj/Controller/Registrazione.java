@@ -22,7 +22,7 @@ public class Registrazione extends HttpServlet {
         HttpSession session = request.getSession();
         String address;
         String nome = request.getParameter("nome");
-        String email = request.getParameter("username");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
         String telefono = request.getParameter("telefono");
         UtenteDAO utenteDAO = new UtenteDAO();
