@@ -11,7 +11,7 @@
 <body>
 
 <nav>
-    <img src="images/logo.png" alt="home" width="130" height="26" >
+    <img src="images/logo.png" alt="home" width="111" height="16" >
 </nav>
 
 <%//if(session.getAttribute("connessione") != null && (boolean) session.getAttribute("connessione") == false ) {%>
