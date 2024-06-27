@@ -46,8 +46,15 @@ public class ConPool {
             PoolProperties p = new PoolProperties();
             p.setUrl("jdbc:mysql://localhost:3306/Progetto_tsw?serverTimezone=" + TimeZone.getDefault().getID());
             p.setDriverClassName("com.mysql.cj.jdbc.Driver");
-            p.setUsername("root");
-            p.setPassword("1q2w3e4r5t"); //domenico deve sistemare, per ora mettete sempre la password nuova
+            // Retrieve database credentials from environment variables
+            String envPassword = System.getenv("PasswordDB");
+            if (envPassword == null) envPassword = "1q2w3e4r5t";
+
+            String envUser = System.getenv("UserNameDB");
+            if (envUser == null) envUser = "root";
+
+            p.setUsername(envUser);
+            p.setPassword(envPassword); //domenico deve sistemare, per ora mettete sempre la password nuova
             p.setMaxActive(100);
             p.setInitialSize(10);
             p.setMinIdle(10);

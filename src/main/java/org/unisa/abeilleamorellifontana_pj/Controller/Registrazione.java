@@ -6,6 +6,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.unisa.abeilleamorellifontana_pj.Model.SHA1PasswordVerifier;
 import org.unisa.abeilleamorellifontana_pj.Model.Utente;
 import org.unisa.abeilleamorellifontana_pj.Model.UtenteDAO;
 
@@ -25,17 +26,21 @@ public class Registrazione extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String telefono = request.getParameter("telefono");
+        String admin = request.getParameter("is_admin");
+
         UtenteDAO utenteDAO = new UtenteDAO();
 
 
-        Utente utente_da_inserire = new Utente(1, nome, email, password, telefono, false);
+        Utente utente_da_inserire = new Utente(1, nome, email, SHA1PasswordVerifier.sha1Hash(password), telefono, !(admin == null));
         boolean exist_nome = utenteDAO.doInsert(utente_da_inserire);
 
+
         if (!exist_nome) {
-            address = "index.jsp"; //ritorno alla homepage una volta registrato se non c'e' gia un account esistente
+            session.setAttribute("connessione", true);
+            session.setAttribute("UtenteConnesso", utente_da_inserire);
+            address = "index"; //ritorno alla homepage una volta registrato se non c'e' gia un account esistente
         } else {
-            exist_nome = true;
-            session.setAttribute("alreadysub",exist_nome);
+
             address = "registrazione.jsp";//ritorno alla jsp con errore
         }
 

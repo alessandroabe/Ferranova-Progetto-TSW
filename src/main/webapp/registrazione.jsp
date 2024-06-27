@@ -1,57 +1,53 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-
+<html lang="it">
 <head>
-  <title>Registrazione Ferranova</title>
-  <link rel="stylesheet" href="Styles/loginStyle.css"/>
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <title>Registrazione Ferranova</title>
+    <link rel="stylesheet" type="text/css" href="css/loginStyle.css"/>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
 </head>
 
 <body>
 
-<nav>
-  <img src="images/logo.png" alt="home" width="111" height="16" >
-</nav>
-
-<!--
-     Cliccando il pulsante viene registrato un nuovo utente
--->
-
-<%//if(session.getAttribute("alreadysub") != null && (boolean) session.getAttribute("alreadysub") == true)%>
-<%//= "Questo account esiste gia"%>
-<%//}%>
+<%@ include file="./WEB-INF/navbar.jsp" %>
 
 
-<!-- controllo account già esistente, in caso positivo showAlert diventa true-->
-<%
-  boolean showAlert = session.getAttribute("alreadysub") != null && (boolean) session.getAttribute("alreadysub") == true;
-%>
-
-  <div class="wrapper">
+<div class="wrapper">
     <form action="registrazione" method="post">
 
-      <h3>Registrati al sito</h3>
+        <h3>Registrati al sito</h3>
 
-      <input type="text" id="nome" placeholder="nome" name="nome" required><br><br>
-      <!--<input type="text" id="cognome" placeholder="cognome" required><br><br> Si deve mettere il cognome?-->
-      <input type="text" id="telefono" placeholder="telefono"><br><br>
-      <input type="email" id="email" placeholder="email" name="email"><br><br>
-      <input type="password" id="password" placeholder="password" name="password" required><br><br>
+        <!-- TODO: devi mettere i label perchè servono per l'accessibilità -->
+        <<label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br>
 
-      <!-- messaggio alert-->
-      <div id="alert" class="alert" style="display:none;">Account già esistente</div><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
 
-      <input type="submit" id="submit" value="Registra"/>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="telefono">Telefono:</label>
+        <input type="tel" id="telefono" name="telefono" required><br>
+
+        <label for="is_admin">Amministratore:</label>
+        <input type="checkbox" id="is_admin" name="is_admin"><br>
+
+
+        <c:if test="${param.error == 1}">
+            <div id="alert" class="alert">Account già esistente</div>
+            <br>
+        </c:if>
+
+        <input type="submit" id="submit" value="Registra"/>
     </form>
-  </div>
+</div>
+<div class="registrazione">
+    <p>Sei già utente di Ferranova?</p>
+    <a href="login.jsp">entra</a>
+</div>
 
-<!-- mostra l'alert se showAlert è true-->
-<script type="text/javascript">
-  <% if (showAlert) { %>
-  document.getElementById('alert').style.display = 'block';
-  <% } %>
-</script>
-
-</body></html>
+</body>
+</html>

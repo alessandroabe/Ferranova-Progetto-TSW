@@ -27,17 +27,18 @@ public class Login extends HttpServlet {
         UtenteDAO U = new UtenteDAO();
         Utente input = U.doRetrieveByEmail(mail);
 
-        if(input != null && input.getEmail().compareTo(mail) == 0 && SHA1PasswordVerifier.verifyPassword(password,input.getPasswordhash())) {
 
+
+        if(input.getEmail().equals(mail) && SHA1PasswordVerifier.verifyPassword(password,input.getPasswordhash())) {
+
+
+            // TODO: migliorare l'uso della sessione
             session.setAttribute("connessione", true);
             session.setAttribute("UtenteConnesso",input);
-            address = "index.jsp";
+            address = "index";
 
         }else {
-
-            session.setAttribute("connessione", false);
-            session.setAttribute("UtenteConnesso",input);
-            address = "index.jsp";
+            address = "login.jsp?error=1";
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
