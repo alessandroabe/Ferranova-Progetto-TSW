@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--per rendere la pagina respobsive-->
     <title>Ferranova</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="Styles/ferraStyle.css"/>
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ferraStyle.css"/>
 
 </head>
 
@@ -15,13 +15,14 @@
 
 <nav>
     <ul>
-        <li style="float: left;"><a class="logo" href="index.jsp"><img src="images/logo.png" alt="home" width="111" height="16" ></a></li>
+        <li style="float: left;"><a class="logo" href="index.jsp"><img src="images/logo.png" alt="home" width="111"
+                                                                       height="16"></a></li>
 
         <!--questo a destra-->
-        <li><a href=""><img src="images/carrello.png" alt="carrello" width="15" height="15" ></a></li>
+        <li><a href=""><img src="images/carrello.png" alt="carrello" width="15" height="15"></a></li>
 
         <li class="dropdown">
-            <a href="#"><img src="images/utente.png" alt="area utente" width="15" height="15" ></a>
+            <a href="#"><img src="images/utente.png" alt="area utente" width="15" height="15"></a>
             <div class="dropdown-content">
                 <a href="login.jsp">Login</a>
                 <a href="registrazione.jsp">Registrazione</a>
@@ -48,7 +49,6 @@
 </main>
 
 
-
 <footer>
     <div class="row">
         <div class="footer-col">
@@ -64,7 +64,9 @@
             <ul>
                 <li><p>Email: ferranova@progettotsw.com</p></li>
                 <li><p>Tel: +39 1234567890</p></li>
-                <li><address>Indirizzo: Unisa, Fisciano(SA)</address></li>
+                <li>
+                    <address>Indirizzo: Unisa, Fisciano(SA)</address>
+                </li>
             </ul>
         </div>
         <div class="footer-col">
