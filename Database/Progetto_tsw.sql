@@ -63,7 +63,7 @@ CREATE TABLE Prodotto
         REFERENCES Categoria (sigla)
 );
 
-/* forse sul carrello il prezzo finale è un pò overhead ma soprattutto confisionario,
+/*TODO : forse sul carrello il prezzo finale è un pò overhead ma soprattutto confisionario,
  perchè alla fine il prodotto non è ancora stato aquistato
  quindi il prezzo dovrebbe essere il linea con quello del prodotto con le promozioni attuali*/
 CREATE TABLE Carrello

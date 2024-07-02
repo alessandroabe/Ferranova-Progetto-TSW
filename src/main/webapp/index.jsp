@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -17,10 +18,10 @@
     <ul>
         <li style="float: left;"><a class="logo" href="index.jsp"><img src="images/logo.png" alt="home" width="111"
                                                                        height="16"></a></li>
-
+        <!-- TODO: fai in modo che parta prima index, modifica CatalogoServlet-->
         <!--questo a destra-->
         <li><a href=""><img src="images/carrello.png" alt="carrello" width="15" height="15"></a></li>
-
+        <!-- TODO: fai e cose fatte bene con le jstl, che nascondi le cose se loggato -->
         <li class="dropdown">
             <a href="#"><img src="images/utente.png" alt="area utente" width="15" height="15"></a>
             <div class="dropdown-content">
@@ -49,36 +50,8 @@
 </main>
 
 
-<footer>
-    <div class="row">
-        <div class="footer-col">
-            <h3>Link Utili</h3>
-            <ul class="list">
-                <li><a href="index.jsp">Home</a></li>
-                <li><a href="chiSiamo.html">Chi siamo</a></li>
-                <li><a href="terminiEPrivacy.html">Termini e Privacy</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h3>Contatti</h3>
-            <ul>
-                <li><p>Email: ferranova@progettotsw.com</p></li>
-                <li><p>Tel: +39 1234567890</p></li>
-                <li>
-                    <address>Indirizzo: Unisa, Fisciano(SA)</address>
-                </li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h3>Seguici</h3>
-            <ul>
-                <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
-                <li><a href="https://www.instagram.com/" target="_blank">Instagram</a></li>
-                <li><a href="https://tiktok.com/" target="_blank">TikTok</a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
+<%@ include file="./WEB-INF/footer.jsp" %>
+
 </body>
 
 </html>
