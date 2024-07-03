@@ -11,7 +11,7 @@ import org.unisa.abeilleamorellifontana_pj.Model.Utente;
 import org.unisa.abeilleamorellifontana_pj.Model.UtenteDAO;
 
 @WebServlet(name = "login", value = "/login")
-public class Login extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     public void init() {
         
@@ -38,7 +38,7 @@ public class Login extends HttpServlet {
             address = "index";
 
         }else {
-            address = "login.jsp?error=1";
+            address = getServletContext().getContextPath() + "/login.jsp?error=1";
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);

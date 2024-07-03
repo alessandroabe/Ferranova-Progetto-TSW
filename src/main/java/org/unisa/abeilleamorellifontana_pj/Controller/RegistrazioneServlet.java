@@ -11,7 +11,7 @@ import org.unisa.abeilleamorellifontana_pj.Model.Utente;
 import org.unisa.abeilleamorellifontana_pj.Model.UtenteDAO;
 
 @WebServlet(name = "registrazione", value = "/registrazione")
-public class Registrazione extends HttpServlet {
+public class RegistrazioneServlet extends HttpServlet {
 
     public void init() {
 

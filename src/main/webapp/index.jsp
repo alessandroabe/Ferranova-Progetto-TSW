@@ -27,6 +27,7 @@
             <div class="dropdown-content">
                 <a href="login.jsp">Login</a>
                 <a href="registrazione.jsp">Registrazione</a>
+                <a href="catalogo">Catalogo</a>
             </div>
         </li>
     </ul>

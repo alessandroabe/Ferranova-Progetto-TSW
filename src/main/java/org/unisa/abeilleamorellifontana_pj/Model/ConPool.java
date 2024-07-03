@@ -47,6 +47,7 @@ public class ConPool {
             p.setUrl("jdbc:mysql://localhost:3306/Progetto_tsw?serverTimezone=" + TimeZone.getDefault().getID());
             p.setDriverClassName("com.mysql.cj.jdbc.Driver");
             // Retrieve database credentials from environment variables
+
             String envPassword = System.getenv("PasswordDB");
             if (envPassword == null) envPassword = "1q2w3e4r5t";
 
