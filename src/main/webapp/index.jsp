@@ -14,26 +14,15 @@
 
 <body>
 
-<nav>
-    <ul>
-        <li style="float: left;"><a class="logo" href="index.jsp"><img src="images/logo.png" alt="home" width="111"
-                                                                       height="16"></a></li>
-        <!-- TODO: fai in modo che parta prima index, modifica CatalogoServlet-->
-        <!--questo a destra-->
-        <li><a href=""><img src="images/carrello.png" alt="carrello" width="15" height="15"></a></li>
-        <!-- TODO: fai e cose fatte bene con le jstl, che nascondi le cose se loggato -->
-        <li class="dropdown">
-            <a href="#"><img src="images/utente.png" alt="area utente" width="15" height="15"></a>
-            <div class="dropdown-content">
-                <a href="login.jsp">Login</a>
-                <a href="registrazione.jsp">Registrazione</a>
-                <a href="catalogo">Catalogo</a>
-            </div>
-        </li>
-    </ul>
-</nav>
+<%@ include file="/WEB-INF/navbar.jsp" %>
 
-<!--<h2 id="saluto">Ciao Alessandro, scegli in che categoria acquistare...</h2>-->
+
+<c:if test="${not empty UtenteConnesso }">
+
+    <<h2 id="saluto">Ciao ${UtenteConnesso.nome}, scegli in che categoria acquistare...</h2>
+
+</c:if>
+
 <main>
     <div class="catconteiner">
         <div class="catrow">
@@ -52,7 +41,6 @@
 
 
 <%@ include file="./WEB-INF/footer.jsp" %>
-
 </body>
 
 </html>

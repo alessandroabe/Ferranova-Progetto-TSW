@@ -10,6 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestione della Privacy</title>
 </head>
+
+<%@ include file="./WEB-INF/navbar.jsp" %>
+
 <body>
 <h1>Avviso Legale: Gestione della Privacy</h1>
 
@@ -29,5 +32,9 @@
 <p>La sicurezza dei dati personali è una priorità. L'autenticazione a due fattori è disponibile per garantire un livello aggiuntivo di sicurezza nell'accesso all'account dell'utente.</p>
 
 <p>Si prega di prendere visione delle informazioni fornite e di contattare il responsabile della protezione dei dati per eventuali richieste o chiarimenti in merito alla gestione della privacy e dei dati personali.</p>
+
+
+<%@ include file="./WEB-INF/footer.jsp" %>
+
 </body>
 </html>

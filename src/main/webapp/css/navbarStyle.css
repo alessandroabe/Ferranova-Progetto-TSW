@@ -1,0 +1,90 @@
+
+
+body{
+    min-height: 100vh;
+    position: relative;
+}
+
+
+/*Style della navigation bar*/
+
+nav {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: white;
+    overflow: visible;
+    background-color: #335e1e;
+    position: fixed; /*fissa la barra in cima alla pagina*/
+    width: 100%;  /*copre l'intera larghezza della pagina*/
+    padding-bottom: 0;
+    top: 0;
+    z-index: 1000; /* Assicura che la barra di navigazione abbia una priorità di sovrapposizione più alta */
+}
+
+/*rimuovo i puntini di default delle liste*/
+ul{
+    list-style: none;
+}
+
+
+nav ul li{
+    float: right; /*allinea gli elementi da destra*/
+}
+
+nav ul li a {
+    display: block; /* Rende i link dei blocchi, così che il padding sia applicato correttamente */
+    padding: 20px; /* Dimensioni dei pulsanti */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-size: 13px;
+}
+
+
+/*per aggiustare il padding del logo*/
+nav ul li a.logo {
+    padding: 20px;
+}
+
+
+
+nav ul li:hover {
+    background-color: #29451c; /* Cambia il colore del link quando si passa sopra col puntatore */
+}
+
+/*stile menù a tendina*/
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none; /*rende non visibile il menu a tendina*/
+    position: absolute;
+    background-color: #ffffff;
+    top: 55px; /*altezza della navbar*/
+    left: -50%; /*per centrare il menu a tendina al link utente*/
+    min-width: 100px;
+    border: 2px solid #335e1e;
+    border-top: 0px;
+    z-index: 1;
+}
+
+/* link all'interno del menù a tendina */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* cambia il colore dei link del menù a tendina quando ci si passa fuori */
+.dropdown-content a:hover {
+    background-color:#29451c;
+    color: #ffffff;
+}
+
+/* rende il menu a tendina visibile quando ci si passa sopra */
+.dropdown:hover .dropdown-content {
+    display: block;
+}

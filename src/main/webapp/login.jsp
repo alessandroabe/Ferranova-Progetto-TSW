@@ -20,8 +20,10 @@
         <h3>Accedi al sito</h3>
 
         <div class="login">
-            <input type="email" id="email" placeholder="email" name="email"><br><br>
-            <input type="password" id="password" placeholder="password" name="password"><br><br>
+            <label for="email">Email</label>
+            <input type="email" id="email"  name="email"><br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"><br>
 
             <c:if test="${param.error == 1}">
                 <div id="alert" class="alert">Email e/o password errate</div>

@@ -11,93 +11,18 @@ body{
     position: relative;
 }
 
-
-/*Style della navigation bar*/
-
-nav {
-    overflow: visible;
-    background-color: #335e1e;
-    position: fixed; /*fissa la barra in cima alla pagina*/
-    width: 100%;  /*copre l'intera larghezza della pagina*/
-    padding-bottom: 0;
-    top: 0;
-    z-index: 1000; /* Assicura che la barra di navigazione abbia una priorità di sovrapposizione più alta */
-}
-
-/*rimuovo i puntini di default delle liste*/
-ul{
-    list-style: none;
-}
-
-
-nav ul li{
-    float: right; /*allinea gli elementi da destra*/
-    padding: 20px;   /*dimensioni dei pulsanti*/
-}
-
-
-/*per aggiustare il padding del logo*/
-nav ul li a.logo {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-nav ul li:hover {
-    background-color: #29451c; /* Cambia il colore del link quando si passa sopra col puntatore */
-}
-
-/*stile menù a tendina*/
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none; /*rende non visibile il menu a tendina*/
-    position: absolute;
-    background-color: #ffffff;
-    top: 59px; /*altezza della navbar*/
-    left: -30px;
-    min-width: 100px;
-    border: 2px solid #335e1e;
-    border-top: 0;
-    z-index: 1;
-}
-
-/* link all'interno del menù a tendina */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* cambia il colore dei link del menù a tendina quando ci si passa fuori */
-.dropdown-content a:hover {
-    background-color:#29451c;
-    color: #ffffff;
-}
-
-/* rende il menu a tendina visibile quando ci si passa sopra */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-
-
-
 /*stile contenitore categorie*/
 main{
     width: 80%;
     margin: 10%  auto 10% auto;
 }
 
-/*#saluto{
-    padding: 100px 0 0 37px;
+#saluto{
+    margin-top: 100px;
+    margin-left: 40px;
     color:#335e1e;
     font-size: large;
-}*/
+}
 
 .catcontainer{
     padding: 0 20px; /*spaziatura interna del contenitore*/
@@ -125,50 +50,4 @@ main{
 
 .categoria:hover {
     transform: scale(1.03); /* Ingrandisce l'elemento al 103% */
-}
-
-
-
-/*Personalizziamo il footer*/
-
-footer{
-    position: absolute;
-    padding: 20px 0 0 0; /*dare un po' di spazio sopra*/
-    bottom: 0;
-    /*box-sizing: border-box;*/
-    width: 100%; /*in modo che prenda tutta la larghezza*/
-    background-color:#335e1e;
-    text-align: center;
-    min-height: 5vh; /*altezza del footer (vh: percentuale altezza della porta di visualizzazione)*/
-}
-
-
-.row{
-    display: grid;  /*per affiancare le colonne*/
-    background-color: rgba(0, 255, 255, 0);
-    padding-bottom: 1.5rem; /*distanziare un po' dal fondo del footer (rem: root em, 1 rem = 10px*/
-    /*justify-content: space-between;
-    flex-direction: row;*/
-    grid-template-columns: 33% 33% 33%;
-}
-
-
-.footer-col{
-    width: 100%;
-    background-color: rgba(250, 235, 215, 0);
-}
-
-.footer-col h3{
-    font-size: 17px;
-    text-decoration:double;
-    padding: 10px 0 10px 0;
-
-}
-
-.footer-col ul{
-    font-size: 12px;
-}
-
-.footer-col li{
-    padding: 4px;
 }
