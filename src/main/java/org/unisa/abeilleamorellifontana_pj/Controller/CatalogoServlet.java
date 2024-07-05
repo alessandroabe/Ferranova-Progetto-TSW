@@ -22,8 +22,17 @@ public class CatalogoServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ArrayList<Prodotto> catalogo;
 
-        catalogo = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveAll();
-        request.setAttribute("catalogo", catalogo);
+        String categoria = request.getParameter("categoria");
+
+        if (categoria != null) {
+            catalogo = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveAllByCategoria(categoria);
+            request.setAttribute("catalogo", catalogo);
+
+        }
+        else {
+            catalogo = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveAll();
+            request.setAttribute("catalogo", catalogo);
+        }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/catalogo.jsp");
         dispatcher.forward(request, response);
     }

@@ -33,9 +33,8 @@ public class LoginServlet extends HttpServlet {
 
 
             // TODO: migliorare l'uso della sessione
-            session.setAttribute("connessione", true);
             session.setAttribute("UtenteConnesso",input);
-            address = "index";
+            address = "index.jsp";
 
         }else {
             address = getServletContext().getContextPath() + "/login.jsp?error=1";

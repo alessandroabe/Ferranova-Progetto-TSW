@@ -5,7 +5,8 @@
 <head>
     <title>Catalogo Ferranova</title>
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/loginStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/log_regStyle.css"/>
+
 </head>
 <body>
 
@@ -24,12 +25,12 @@
 <!-- TODO: levare le if e mettere il whose -->
 <c:if test="${UtenteConnesso != null }">
 
-<div>
-    <button id="logout" value="logout"
-            onclick="location.href='${pageContext.request.contextPath}/logout'">
-        logout
-    </button>
-</div>
+    <div>
+        <button id="logout" value="logout"
+                onclick="location.href='${pageContext.request.contextPath}/logout'">
+            logout
+        </button>
+    </div>
 
 </c:if>
 
@@ -38,16 +39,19 @@
 
     <c:forEach var="entry" items="${catalogo}">
 
-        ${entry.titolo}<br>
+        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${entry.id}">${entry.titolo}</a><br>
 
     </c:forEach>
 </div>
 
 <c:if test="${sessionScope.UtenteConnesso == null }">
-<div>
-    <a href="${pageContext.request.contextPath}/login.jsp">login</a>
-    <a href="${pageContext.request.contextPath}/registrazione.jsp">registrazione</a>
-</div>
+    <div>
+        <a href="${pageContext.request.contextPath}/login.jsp">login</a>
+        <a href="${pageContext.request.contextPath}/registrazione.jsp">registrazione</a>
+    </div>
 </c:if>
+<a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+
+
 </body>
 </html>

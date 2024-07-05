@@ -35,11 +35,14 @@ CREATE TABLE Promozione
     sconto      tinyint unsigned NOT NULL,
     CHECK (sconto <= 100)
 );
+/*FIXME: fare le sottocategorie, penso in maniera ricorsiva*/
 CREATE TABLE Categoria
 (
-    sigla       varchar(30) PRIMARY KEY NOT NULL,
-    descrizione text
+    macrocategoria varchar(30)             Not NULL,
+    sigla          varchar(30) PRIMARY KEY NOT NULL,
+    descrizione    text
 );
+
 CREATE TABLE Prodotto
 (
     id            INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -53,7 +56,7 @@ CREATE TABLE Prodotto
         REFERENCES Promozione (id),
     FOREIGN KEY (categoria)
         REFERENCES Categoria (sigla),
-    CHECK (quantità >= 0) /* TODO: non so se farlo negativa oppure basta 0*/
+    CHECK (quantità >= -1)
 
 );
 
@@ -61,12 +64,13 @@ CREATE TABLE Carrello
 (
     id_utente   INT          NOT NULL,
     id_prodotto INT          NOT NULL,
-    quantità  INT unsigned  NOT NULL,
+    quantità    INT unsigned NOT NULL,
     PRIMARY KEY (id_utente, id_prodotto),
     FOREIGN KEY (id_utente) references Utente (id),
     FOREIGN KEY (id_prodotto) references Prodotto (id),
     CHECK (quantità >= 0)
 );
+
 CREATE TABLE Ordine
 (
     id               INT primary key                                        NOT NULL AUTO_INCREMENT,
@@ -79,10 +83,10 @@ CREATE TABLE Ordine
     data_consegna    date,
     tipo_pagamento   varchar(40)                                            not null default 'carta di credito',
 
-    /* TODO: su questo non sono deciso, male che va facciamo come nell'esercizio birre,
-       cioè che c'è un credito interno all'applicazione per utente, un pò rustica ma efficace  */
     FOREIGN KEY (id_utente) references Utente (id)
 );
+
+
 CREATE TABLE Ordine_Prodotto
 (
     id_ordine     INT            NOT NULL,
@@ -139,7 +143,7 @@ VALUES ('Agricoltura', 'Utensili e prodotti agricoli'),
 
 
 INSERT INTO Prodotto (titolo, descrizione, quantità, id_promozione, categoria, prezzo)
-VALUES ('Cacciavite a stella', 'Cacciavite per viti a stella', 2, NULL, 'Ferramenta', 19.90),
+VALUES ('Cacciavite a stella', 'Cacciavite per viti a stella', 2, NULL, 'Edilizia', 19.90),
        ('Trapano a percussione', 'Trapano a percussione con kit di punte', 50, NULL, 'Ferramenta', 499.00);
 
 INSERT INTO Carrello (id_utente, id_prodotto, quantità)

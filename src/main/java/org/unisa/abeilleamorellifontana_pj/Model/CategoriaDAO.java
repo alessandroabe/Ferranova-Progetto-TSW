@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriaDAO {
-/*  TODO: vedi bene cosa ritornano, in teoria tutti ritornano null non viene trovato una tupla, invece le liste di oggetti ritornano una lista vuota   */
+/*  FIXME: vedi bene cosa ritornano, in teoria tutti ritornano null non viene trovato una tupla, invece le liste di oggetti ritornano una lista vuota   */
     public static Categoria doRetrieveBySigla(String sigla) {
         Categoria categoria = null;
         String query = "SELECT * FROM Categoria WHERE sigla = ?";

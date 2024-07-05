@@ -1,5 +1,7 @@
 package org.unisa.abeilleamorellifontana_pj.Model;
 
+import jakarta.servlet.ServletContext;
+
 import java.math.BigDecimal;
 
 public class Prodotto {
@@ -14,6 +16,7 @@ public class Prodotto {
     public Prodotto() {
         super();
     }
+
 
     public Prodotto(int id, String titolo, String descrizione, int quantita, int idPromozione, String categoria, BigDecimal prezzo) {
         this.id = id;
@@ -80,4 +83,5 @@ public class Prodotto {
     public void setPrezzo(BigDecimal prezzo) {
         this.prezzo = prezzo;
     }
+
 }

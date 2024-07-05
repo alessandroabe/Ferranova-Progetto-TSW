@@ -38,13 +38,13 @@
     <div class="catconteiner">
         <div class="catrow">
             <div class="categoria">
-                <a href=""><img src="images/Ferramenta.png" alt="ferramenta" width="400" height="400"></a>
+                <a href="catalogo?categoria=Ferramenta"><img src="images/Ferramenta.png" alt="ferramenta" width="400" height="400"></a>
             </div>
             <div class="categoria">
-                <a href=""><img src="images/Edilizia.png" alt="ferramenta" width="400" height="400"></a>
+                <a href="catalogo?categoria=Edilizia"><img src="images/Edilizia.png" alt="ferramenta" width="400" height="400"></a>
             </div>
             <div class="categoria">
-                <a href=""><img src="images/Giardinaggio.png" alt="ferramenta" width="400" height="400"></a>
+                <a href="catalogo?categoria=Agricoltura"><img src="images/Giardinaggio.png" alt="ferramenta" width="400" height="400"></a>
             </div>
         </div>
     </div>

@@ -1,12 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <title>Registrazione Ferranova</title>
-    <link rel="stylesheet" type="text/css" href="css/loginStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="css/log_regStyle.css"/>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-
 </head>
 
 <body>

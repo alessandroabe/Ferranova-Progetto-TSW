@@ -6,14 +6,12 @@
 <head>
     <title>Login Ferranova</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="stylesheet" type="text/css"   href="css/loginStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="css/log_regStyle.css"/>
 </head>
 
 <body>
 
-<%@ include file="./WEB-INF/navbar.jsp" %>
-
-
+<%@ include file="/WEB-INF/navbar.jsp" %>
 
 
 <div class="wrapper">
