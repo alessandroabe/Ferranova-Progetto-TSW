@@ -1,102 +1,72 @@
 footer {
-    width: 100%; /* Assicura che prenda tutta la larghezza */
-    background-color: #335e1e;
+    width: 100%; /* Ensure full width */
+    background-color: #335e1e; /* Dark green background to match saluto color */
     text-align: center;
     overflow: auto;
-    padding: 20px; /* Aggiunge padding per migliorare l'aspetto */
-    box-sizing: border-box; /* Include padding e bordi nell'altezza totale */
-    height: auto; /* Altezza automatica per adattarsi al contenuto */
-    margin-top: 27%;
+    padding: 20px; /* Adds padding for better appearance */
+    bottom: 0;
+    position: absolute;
+    box-sizing: border-box; /* Includes padding and borders in total height */
+    height: auto; /* Automatic height to fit content */
 }
 
-.row{
-    display: grid;  /*per affiancare le colonne*/
-    background-color: rgba(0, 255, 255, 0);
-    padding-bottom: 1.5rem; /*distanziare un po' dal fondo del footer (rem: root em, 1 rem = 10px*/
-    /*justify-content: space-between;
-    flex-direction: row;*/
-    grid-template-columns: 33% 33% 33%;
+.row {
+    display: grid; /* Align columns */
+    background-color: transparent;
+    padding-bottom: 1.5rem; /* Spacing from the bottom of the footer */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible column layout */
 }
 
-
-.footer-col{
+.footer-col {
     width: 100%;
-    background-color: rgba(250, 235, 215, 0);
+    background-color: transparent;
 }
 
-.footer-col h3{
+.footer-col h3 {
     font-size: 17px;
-    text-decoration:double;
-    padding: 10px 0 10px 0;
+    text-decoration: double;
+    padding: 10px 0;
     color: white;
-
 }
 
-.footer-col ul p  {
+.footer-col ul p,
+.footer-col li address {
     font-size: 12px;
     color: white;
 }
 
-.footer-col li a{
+.footer-col li a {
     padding: 4px;
     color: white;
+    text-decoration: none; /* Removes underline from links */
 }
 
-.footer-col li address{
-    padding: 4px;
-    color: white;
+.footer-col li a:hover {
+    text-decoration: underline; /* Adds underline on hover */
 }
 
-body{
-    margin: 0;
-    height: auto;
-}
+/* Responsive Design */
 
-/* Schermi piccoli (fino a 600px di larghezza) */
-@media (min-width: 100px) and (max-width: 600px) {
+/* Small Screens (up to 600px) */
+@media (max-width: 600px) {
     .row {
-        grid-template-columns: 32% 33% 32%; /* Una colonna singola */
+        grid-template-columns: 1fr; /* Single column */
         padding-top: 20px;
-        height: 1000px;
     }
 }
 
-/* Schermi medi (da 601px a 900px di larghezza) */
-@media (min-width: 600px) and (max-width: 900px) {
-    .row {
-        height: 800px;
-        padding-top: 15px;
-        grid-template-columns: repeat(2, 1fr); /* Due colonne */
-    }
-}
-
-/* Schermi grandi (oltre 900px di larghezza) */
-@media (min-width: 900px) and (max-width: 1507px) {
+/* Medium Screens (601px to 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
     .row {
         padding-top: 15px;
-        grid-template-columns: repeat(2, 1fr); /* Due colonne */
-        height: 600px;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
     }
 }
 
-    @media (min-width: 1507px) and (max-width: 1822px) {
-        .row {
-            grid-template-columns: repeat(3, 1fr); /* Tre colonne */
-            padding-top: 4%;
-            height: 400px;
-        }
-    }
-
-@media (min-width: 1822px) and (max-width: 1915px) {
+/* Large Screens (901px and up) */
+@media (min-width: 901px) {
     .row {
-        grid-template-columns: repeat(3, 1fr); /* Tre colonne */
-        height: 350px;
-    }
-}
-
-@media (min-width: 1915px) and (max-width: 1934px) {
-    .row {
-        grid-template-columns: repeat(3, 1fr); /* Tre colonne */
-        height: 300px;
+        padding-top: 15px;
+        grid-template-columns: repeat(3, 1fr); /* Three columns */
     }
 }

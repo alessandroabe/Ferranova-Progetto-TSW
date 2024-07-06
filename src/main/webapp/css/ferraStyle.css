@@ -1,52 +1,51 @@
-/*resetta i margini e i padding di tutti gli elementi, do un font unico e un colore unico*/
-*{
+/*TODO: cercare di rendere le restanti tre categorie responsive */
+
+* {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     color: white;
 }
 
-body{
-    margin: 0%;
+/* Style for main container categories */
+main {
+    width: 65%;
+    margin: 10% auto;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
-/*stile contenitore categorie*/
-main{
-    width: 80%;
-    margin: 10%  auto 10% auto;
-}
-
-#saluto{
+#saluto {
     margin-top: 100px;
     margin-left: 40px;
-    color:#335e1e;
+    color: #335e1e;
     font-size: large;
 }
 
-.catcontainer{
-    padding: 0 20px; /*spaziatura interna del contenitore*/
-    flex-direction: row; /*per disporre gli elementi (le foto) in riga*/
+.catcontainer {
+    padding: 0 20px; /* Internal spacing of the container */
+    flex-direction: row; /* Arrange elements (photos) in a row */
     justify-content: center;
 }
 
-.catrow{
+.catrow {
     margin-top: 15vh;
     display: flex;
     flex-wrap: wrap;
 }
 
-.categoria{
-    flex: 1; /*ogni categoria prende una parte uguale dello spazio disponibile */
-    margin: 10px; /*margine esterno di 10 px*/
-    transition: transform 0.3s ease-in-out /*tempo per animazione*/
+.categoria {
+    flex: 1; /* Each category takes an equal part of the available space */
+    margin: 10px; /* External margin of 10px */
+    transition: transform 0.3s ease-in-out; /* Animation time */
 }
 
-.categoria img{
+.categoria img {
     width: 100%;
     height: auto;
-    border-radius: 10px; /*bordi curvi*/
+    border-radius: 10px; /* Rounded borders */
 }
 
 .categoria:hover {
-    transform: scale(1.03); /* Ingrandisce l'elemento al 103% */
+    transform: scale(1.03); /* Enlarge the element to 103% */
 }
