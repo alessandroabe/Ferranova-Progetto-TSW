@@ -1,14 +1,13 @@
-footer{
-    position: absolute;
-    padding: 20px 0 0 0; /*dare un po' di spazio sopra*/
-    bottom: 0;
-    /*box-sizing: border-box;*/
-    width: 100%; /*in modo che prenda tutta la larghezza*/
-    background-color:#335e1e;
+footer {
+    width: 100%; /* Assicura che prenda tutta la larghezza */
+    background-color: #335e1e;
     text-align: center;
-    min-height: 5vh; /*altezza del footer (vh: percentuale altezza della porta di visualizzazione)*/
+    overflow: auto;
+    padding: 20px; /* Aggiunge padding per migliorare l'aspetto */
+    box-sizing: border-box; /* Include padding e bordi nell'altezza totale */
+    height: auto; /* Altezza automatica per adattarsi al contenuto */
+    margin-top: 27%;
 }
-
 
 .row{
     display: grid;  /*per affiancare le colonne*/
@@ -29,13 +28,75 @@ footer{
     font-size: 17px;
     text-decoration:double;
     padding: 10px 0 10px 0;
+    color: white;
 
 }
 
-.footer-col ul{
+.footer-col ul p  {
     font-size: 12px;
+    color: white;
 }
 
-.footer-col li{
+.footer-col li a{
     padding: 4px;
+    color: white;
+}
+
+.footer-col li address{
+    padding: 4px;
+    color: white;
+}
+
+body{
+    margin: 0;
+    height: auto;
+}
+
+/* Schermi piccoli (fino a 600px di larghezza) */
+@media (min-width: 100px) and (max-width: 600px) {
+    .row {
+        grid-template-columns: 32% 33% 32%; /* Una colonna singola */
+        padding-top: 20px;
+        height: 1000px;
+    }
+}
+
+/* Schermi medi (da 601px a 900px di larghezza) */
+@media (min-width: 600px) and (max-width: 900px) {
+    .row {
+        height: 800px;
+        padding-top: 15px;
+        grid-template-columns: repeat(2, 1fr); /* Due colonne */
+    }
+}
+
+/* Schermi grandi (oltre 900px di larghezza) */
+@media (min-width: 900px) and (max-width: 1507px) {
+    .row {
+        padding-top: 15px;
+        grid-template-columns: repeat(2, 1fr); /* Due colonne */
+        height: 600px;
+    }
+}
+
+    @media (min-width: 1507px) and (max-width: 1822px) {
+        .row {
+            grid-template-columns: repeat(3, 1fr); /* Tre colonne */
+            padding-top: 4%;
+            height: 400px;
+        }
+    }
+
+@media (min-width: 1822px) and (max-width: 1915px) {
+    .row {
+        grid-template-columns: repeat(3, 1fr); /* Tre colonne */
+        height: 350px;
+    }
+}
+
+@media (min-width: 1915px) and (max-width: 1934px) {
+    .row {
+        grid-template-columns: repeat(3, 1fr); /* Tre colonne */
+        height: 300px;
+    }
 }

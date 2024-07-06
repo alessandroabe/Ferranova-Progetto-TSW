@@ -36,9 +36,9 @@ CREATE TABLE Promozione
     CHECK (sconto <= 100)
 );
 /*FIXME: fare le sottocategorie, penso in maniera ricorsiva*/
+/*FIXME: metti macrocategoria*/
 CREATE TABLE Categoria
 (
-    macrocategoria varchar(30)             Not NULL,
     sigla          varchar(30) PRIMARY KEY NOT NULL,
     descrizione    text
 );

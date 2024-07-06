@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -10,10 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestione della Privacy</title>
 </head>
+<body>
 
 <%@ include file="./WEB-INF/navbar.jsp" %>
-
-<body>
 <h1>Avviso Legale: Gestione della Privacy</h1>
 
 <h2>Impostazioni di Privacy e Dati Personali</h2>

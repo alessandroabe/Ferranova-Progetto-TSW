@@ -44,6 +44,7 @@
     </c:forEach>
 </div>
 
+
 <c:if test="${sessionScope.UtenteConnesso == null }">
     <div>
         <a href="${pageContext.request.contextPath}/login.jsp">login</a>
@@ -52,6 +53,7 @@
 </c:if>
 <a href="${pageContext.request.contextPath}/index.jsp">Home</a>
 
+<%@ include file="footer.jsp" %>
 
 </body>
 </html>
