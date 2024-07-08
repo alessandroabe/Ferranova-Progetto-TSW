@@ -28,13 +28,11 @@
     <input type="number" id="quantity" name="quantity" min="1" value="1">
 </div>
 
-<!--TODO usare onclick per aggiungere al carrello-->
+<!--TODO mettere soltanto le jstl per iterare i prodotti in base al prodotto cliccato e inserirlo nell'ajax-->
 
 <button class="add-to-cart">Aggiungi al carrello</button>
 
 </div>
-
-
 
 </div>
 

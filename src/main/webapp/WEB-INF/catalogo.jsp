@@ -20,7 +20,7 @@
         <!-- FIXME: finisci e rendi dinamico con macrocategorie-->
         <h2>Ferramenta</h2>
         <ul>
-            <li onclick="location.href='search?parameter=Utensili'">Utensili</li>
+            <li>Utensili</li>
             <li>Viteria</li>
             <li>Oggettistica</li>
             <li>Elettronica</li>
@@ -41,6 +41,9 @@
                 <fmt:formatNumber value="${entry.prezzo}" type="currency" currencySymbol="€"/></div>
             <button onclick="location.href='#'" class="product-button">Aggiungi al carrello</button>
         </div>
+
+
+
 </c:forEach>
         <!-- Aggiungi altri prodotti qui -->
     </div>

@@ -1,14 +1,13 @@
 package org.unisa.abeilleamorellifontana_pj.Controller;
 
 import java.io.*;
+import java.sql.SQLException;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.unisa.abeilleamorellifontana_pj.Model.SHA1PasswordVerifier;
-import org.unisa.abeilleamorellifontana_pj.Model.Utente;
-import org.unisa.abeilleamorellifontana_pj.Model.UtenteDAO;
+import org.unisa.abeilleamorellifontana_pj.Model.*;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -18,32 +17,26 @@ public class LoginServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-
         HttpSession session = request.getSession();
         String mail = request.getParameter("email");
         String password = request.getParameter("password");
         String address;
+
         UtenteDAO U = new UtenteDAO();
         Utente input = U.doRetrieveByEmail(mail);
 
-
-
-        if(input.getEmail().equals(mail) && SHA1PasswordVerifier.verifyPassword(password,input.getPasswordhash())) {
-
-
-            // TODO: migliorare l'uso della sessione
-            session.setAttribute("UtenteConnesso",input);
+        if (input != null && input.getEmail().equals(mail) && SHA1PasswordVerifier.verifyPassword(password, input.getPasswordhash())) {
+            // Imposta l'utente connesso nella sessione
+            session.setAttribute("UtenteConnesso", input);
             address = "index.jsp";
-
-        }else {
+        } else {
             address = getServletContext().getContextPath() + "/login.jsp?error=1";
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
-
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

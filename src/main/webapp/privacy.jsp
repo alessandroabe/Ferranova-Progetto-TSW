@@ -12,6 +12,7 @@
 </head>
 <body>
 
+
 <%@ include file="./WEB-INF/navbar.jsp" %>
 <h1>Avviso Legale: Gestione della Privacy</h1>
 
