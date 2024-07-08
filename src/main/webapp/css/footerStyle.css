@@ -29,8 +29,7 @@ footer {
     color: white;
 }
 
-.footer-col ul p,
-.footer-col li address {
+.footer-col ul li{
     font-size: 12px;
     color: white;
 }

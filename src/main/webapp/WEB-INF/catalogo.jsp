@@ -39,7 +39,7 @@
             <div class="product-price">
                 <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                 <fmt:formatNumber value="${entry.prezzo}" type="currency" currencySymbol="€"/></div>
-            <a href="#" class="product-button">Aggiungi al carrello</a>
+            <button href="#" class="product-button">Aggiungi al carrello</button>
         </div>
 </c:forEach>
         <!-- Aggiungi altri prodotti qui -->
