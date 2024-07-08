@@ -20,7 +20,7 @@
         <!-- FIXME: finisci e rendi dinamico con macrocategorie-->
         <h2>Ferramenta</h2>
         <ul>
-            <li>Utensili</li>
+            <li onclick="location.href='search?parameter=Utensili'">Utensili</li>
             <li>Viteria</li>
             <li>Oggettistica</li>
             <li>Elettronica</li>
