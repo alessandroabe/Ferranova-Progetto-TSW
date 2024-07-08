@@ -1,3 +1,9 @@
+body{
+    min-height: 100vh; /*100 corrisponde alla grandezza dello schermo*/
+    padding-bottom: 15em;
+    position: relative;
+}
+
 footer {
     width: 100%; /* Ensure full width */
     background-color: #335e1e; /* Dark green background to match saluto color */
@@ -15,6 +21,7 @@ footer {
     background-color: transparent;
     padding-bottom: 1.5rem; /* Spacing from the bottom of the footer */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible column layout */
+    padding-top: 15px;
 }
 
 .footer-col {
@@ -44,9 +51,17 @@ footer {
     text-decoration: underline; /* Adds underline on hover */
 }
 
-/* Responsive Design */
 
-/* Small Screens (up to 600px) */
+
+/* Medium Screens (601px to 900px) */
+@media (max-width: 900px) {
+    .row {
+        padding-top: 15px;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 30px;
+    }
+}
+
 @media (max-width: 600px) {
     .row {
         grid-template-columns: 1fr; /* Single column */
@@ -54,18 +69,3 @@ footer {
     }
 }
 
-/* Medium Screens (601px to 900px) */
-@media (min-width: 601px) and (max-width: 900px) {
-    .row {
-        padding-top: 15px;
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
-    }
-}
-
-/* Large Screens (901px and up) */
-@media (min-width: 901px) {
-    .row {
-        padding-top: 15px;
-        grid-template-columns: repeat(3, 1fr); /* Three columns */
-    }
-}

@@ -17,15 +17,15 @@
 <div class="product-container">
 
 <div class="product-image">
-<img src="product_images/1/1.png" alt="Martello da Falegname">
+    <img src="product_images/1/1.png" alt="Martello da Falegname">
 </div>
 
 <div class="product-details">
-<h1 class="product-title">MARTELLO DA FALEGNAME CON MANICO LEGNO</h1>
-<p class="product-price">4,99 €</p>
+    <h1 class="product-title">MARTELLO DA FALEGNAME CON MANICO LEGNO</h1>
+    <p class="product-price">4,99 €</p>
 <div class="quantity-container">
-<label for="quantity">Quantità: </label>
-<input type="number" id="quantity" name="quantity" min="1" value="1">
+    <label for="quantity">Quantità: </label>
+    <input type="number" id="quantity" name="quantity" min="1" value="1">
 </div>
 
 <!--TODO usare onclick per aggiungere al carrello-->
@@ -43,9 +43,7 @@
     <p>TESTA ACCIAIO FORGIATO</p>
 </div>
 
-
+<%@ include file="WEB-INF/footer.jsp" %>
 
 </body>
-
-<%@ include file="WEB-INF/footer.jsp" %>
 </html>
