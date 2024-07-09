@@ -30,9 +30,7 @@ public class LogoutServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false); // ottieni la sessione solo se esiste
 
-        if (session != null) {
-            session.removeAttribute("UtenteConnesso"); // rimuovi solo l'utente connesso, non distruggere la sessione
-        }
+        session.invalidate();
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);

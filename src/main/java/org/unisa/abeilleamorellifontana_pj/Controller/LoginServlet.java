@@ -18,8 +18,14 @@ public class LoginServlet extends HttpServlet {
     public void init() {
 
     }
-
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+    }
+
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         HttpSession session = request.getSession();
         String mail = request.getParameter("email");
         String password = request.getParameter("password");
@@ -27,52 +33,17 @@ public class LoginServlet extends HttpServlet {
         UtenteDAO U = new UtenteDAO();
         Utente input = U.doRetrieveByEmail(mail);
 
-        ArrayList<Prodotto>prodotti = new ArrayList<>();
-        prodotti = (ArrayList<Prodotto>) session.getAttribute("prodotti_presi");
-
-        System.out.println(prodotti);
-        Map<Integer, Integer> idOccorrenzeMap = new HashMap<>();
-
-        //scarichiamo il carrello in sessione
-        for (Prodotto prodotto : prodotti) {
-            int id = prodotto.getId();
-            idOccorrenzeMap.put(id, idOccorrenzeMap.getOrDefault(id, 0) + 1);
-        }
-
-        for (Map.Entry<Integer, Integer> entry : idOccorrenzeMap.entrySet()) { //scarica tutto qui
-            Utente utenteConnesso = (Utente) session.getAttribute("UtenteConnesso");
-            try {
-                CarrelloDAO.insertCarrello(utenteConnesso.getId(),entry.getKey(), entry.getValue());
-            } catch (SQLException e) {
-                try {
-                    CarrelloDAO.updateCarrello(entry.getValue(), utenteConnesso.getId(), entry.getKey());
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        }
-
         if (input != null && input.getEmail().equals(mail) && SHA1PasswordVerifier.verifyPassword(password, input.getPasswordhash())) {
             // Imposta l'utente connesso nella sessione
 
             session.setAttribute("UtenteConnesso", input);
-            address = "index.jsp";
-        } else {
-            address = getServletContext().getContextPath() + "/login.jsp?error=1";
+            response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
+            return;
         }
 
 
-
-
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp?error=1");
         dispatcher.forward(request, response);
-    }
-
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
 
     }
 

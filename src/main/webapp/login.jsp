@@ -18,7 +18,7 @@
 
 
 <div class="wrapper">
-    <form action="login" method="post">
+    <form action="login" method="POST">
 
         <h3>Accedi al sito</h3>
 
