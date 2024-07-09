@@ -20,6 +20,7 @@ public class RegistrazioneServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 
+        System.out.println("wdvqwrvwefwefwqaefdcqae");
         HttpSession session = request.getSession();
         String address;
         String nome = request.getParameter("nome");
@@ -38,7 +39,7 @@ public class RegistrazioneServlet extends HttpServlet {
         if (!exist_nome) {
             session.setAttribute("connessione", true);
             session.setAttribute("UtenteConnesso", utente_da_inserire);
-            address = "index"; //ritorno alla homepage una volta registrato se non c'e' gia un account esistente
+            address = "index.jsp"; //ritorno alla homepage una volta registrato se non c'e' gia un account esistente
         } else {
 
             address = "registrazione.jsp";//ritorno alla jsp con errore
@@ -55,5 +56,6 @@ public class RegistrazioneServlet extends HttpServlet {
     }
 
     public void destroy() {
+
     }
 }

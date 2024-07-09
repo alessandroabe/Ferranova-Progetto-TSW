@@ -20,6 +20,7 @@ public class CatalogoServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
         ArrayList<Prodotto> catalogo;
 
         String categoria = request.getParameter("categoria");

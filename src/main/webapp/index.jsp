@@ -1,3 +1,10 @@
+<%@ page import="org.unisa.abeilleamorellifontana_pj.Model.Prodotto" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="org.unisa.abeilleamorellifontana_pj.Model.Utente" %>
+<%@ page import="org.unisa.abeilleamorellifontana_pj.Model.CarrelloDAO" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
