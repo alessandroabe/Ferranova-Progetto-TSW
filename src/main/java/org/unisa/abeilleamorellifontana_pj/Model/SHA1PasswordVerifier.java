@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class SHA1PasswordVerifier {
-
+//TODO: fai con becrypt
     public static String sha1Hash(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");

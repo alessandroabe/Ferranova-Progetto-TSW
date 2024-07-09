@@ -20,6 +20,7 @@ import java.util.Map;
 @WebServlet(name = "logout", value = "/logout")
 public class LogoutServlet extends HttpServlet {
 
+       //TODO: fare la insert nel database del carrello
 
     public void init() {
 

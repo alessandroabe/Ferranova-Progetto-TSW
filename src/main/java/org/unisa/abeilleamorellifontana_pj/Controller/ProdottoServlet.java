@@ -18,7 +18,7 @@ public class ProdottoServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String address = "prodotto.jsp";
+        String address = "WEB-INF/prodotto.jsp";
 
 
         String id_prodotto = request.getParameter("id_prodotto");
