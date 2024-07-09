@@ -18,6 +18,7 @@ public class CarrelloDAO {
         }
     }
 
+
     public static void updateCarrello(int nuovaQuantita, int utenteId, int prodottoId) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
