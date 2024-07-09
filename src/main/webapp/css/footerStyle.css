@@ -53,6 +53,9 @@ footer {
 
 
 @media (max-width: 900px) {
+    body{
+        padding-bottom: 20em;
+    }
     .row {
         padding-top: 15px;
         grid-template-columns: repeat(2, 1fr); /* Two columns */
@@ -61,6 +64,9 @@ footer {
 }
 
 @media (max-width: 600px) {
+    body{
+        padding-bottom: 30em;
+    }
     .row {
         grid-template-columns: 1fr; /* Single column */
         padding-top: 20px;
