@@ -77,7 +77,7 @@ public class Prodotto {
     }
 
     public BigDecimal getPrezzo() {
-        return prezzo;
+        return (prezzo);
     }
 
     public void setPrezzo(BigDecimal prezzo) {
