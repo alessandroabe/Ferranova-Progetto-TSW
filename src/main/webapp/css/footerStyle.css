@@ -5,22 +5,22 @@ body{
 }
 
 footer {
-    width: 100%; /* Ensure full width */
-    background-color: #335e1e; /* Dark green background to match saluto color */
+    width: 100%;
+    background-color: #335e1e;
     text-align: center;
     overflow: auto;
-    padding: 20px; /* Adds padding for better appearance */
+    padding: 20px;
     bottom: 0;
     position: absolute;
-    box-sizing: border-box; /* Includes padding and borders in total height */
-    height: auto; /* Automatic height to fit content */
+    box-sizing: border-box;
+    height: auto;
 }
 
 .row {
-    display: grid; /* Align columns */
+    display: grid;
     background-color: transparent;
-    padding-bottom: 1.5rem; /* Spacing from the bottom of the footer */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible column layout */
+    padding-bottom: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     padding-top: 15px;
 }
 
@@ -44,16 +44,14 @@ footer {
 .footer-col li a {
     padding: 4px;
     color: white;
-    text-decoration: none; /* Removes underline from links */
+    text-decoration: none;
 }
 
 .footer-col li a:hover {
-    text-decoration: underline; /* Adds underline on hover */
+    text-decoration: underline;
 }
 
 
-
-/* Medium Screens (601px to 900px) */
 @media (max-width: 900px) {
     .row {
         padding-top: 15px;
@@ -68,4 +66,3 @@ footer {
         padding-top: 20px;
     }
 }
-

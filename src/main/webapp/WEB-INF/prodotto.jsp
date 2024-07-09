@@ -8,7 +8,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${prodotto.titolo} Ferranova</title>
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prodottoStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footerStyle.css"/>
 </head>
 <body>
 
@@ -39,7 +42,7 @@
         <form action="" method="post">
 
         <div class="quantity-container">
-            <label for="quantity">Quantità: ${prodotto.quantita}</label><br>
+            <label for="quantity">Pezzi disponibili: ${prodotto.quantita}</label><br>
             <!-- FIXME: br penso da levare -->
             <input type="number" id="quantity" name="quantity" min="1" value="1" max="${prodotto.quantita}">
         </div>

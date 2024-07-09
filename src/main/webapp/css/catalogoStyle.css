@@ -29,7 +29,6 @@
 .sidebar ul li{
     color: #29451c;
     border: #29451c 1px solid;
-    border-radius: 1px;
     padding: 5px;
     border-radius: 4px;
     text-decoration: none;
@@ -97,6 +96,7 @@
     background-color: #335e1e;
     color: white;
     text-decoration: none;
+    border: none;
     border-radius: 5px;
 }
 

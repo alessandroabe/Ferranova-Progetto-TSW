@@ -1,9 +1,3 @@
-
-
-<head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footerStyle.css"/>
-</head>
-
 <footer>
     <div class="row">
         <div class="footer-col">

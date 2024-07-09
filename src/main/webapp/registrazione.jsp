@@ -4,8 +4,9 @@
 <html lang="it">
 <head>
     <title>Registrazione Ferranova</title>
-    <link rel="stylesheet" type="text/css" href="css/log_regStyle.css"/>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/log_regStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
 </head>
 
 <body>
