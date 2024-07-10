@@ -18,6 +18,13 @@
     text-align: center;
 }
 
+.product-image {
+    position: relative;
+    display: flex;
+    align-items: center; /* Centro verticale */
+    justify-content: center; /* Opzionale: centro orizzontale */
+}
+
 .product-image,
 .product-details {
     width: 50%;

@@ -43,6 +43,16 @@
 
 
 <%@ include file="./WEB-INF/footer.jsp" %>
+
+
+<!-- FIXME ridurre la distanza con catcontainer quando esce il saluto
+<script>
+    if(document.getElementById("saluto").style.display = "block"){
+        document.getElementsByTagName("main").style.marginTop = "0";
+    }
+</script>
+-->
+
 </body>
 
 </html>

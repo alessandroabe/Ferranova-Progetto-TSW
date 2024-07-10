@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${prodotto.titolo} Ferranova</title>
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prodottoStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/prodottoStyle.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/caroselloStyle.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footerStyle.css"/>
 </head>
@@ -20,18 +21,21 @@
 <div class="product-container">
 
 
-    <!--
-    FIXME: fare la versione con più immagini
-    <c:forEach var="i" begin="1" end="2">
-
-        <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/${i}.png"
-             alt="immagine ${prodotto.titolo}"><br>
-
-    </c:forEach>
-    -->
     <div class="product-image">
-        <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png"
-             alt="immagine ${prodotto.titolo}"><br>
+        <div class="mySlides">
+            <div class="numbertext">1 / 2</div>
+            <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png" style="width:100%"
+                 alt="immagine ${prodotto.titolo}"><br>
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext">2 / 2</div>
+            <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/2.png" style="width:100%"
+                 alt="immagine ${prodotto.titolo}"><br>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a> <!--il codice corrisponde al simbolo della freccetta-->
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
 
     <div class="product-details">
@@ -72,7 +76,6 @@
             }
         </script>
 
-
     </div>
 
 </div>
@@ -83,6 +86,8 @@
 </div>
 
 <%@ include file="footer.jsp" %>
+
+<script src="${pageContext.request.contextPath}/js/carousel.js"></script>
 
 </body>
 </html>
