@@ -5,6 +5,7 @@
 }
 
 .conteiner{
+    margin-top: 60px;
     display: flex;
 }
 
@@ -16,35 +17,25 @@
 }
 .sidebar h2 {
     font-size: 25px;
-}
-
-.sidebar ul {
-    list-style: none;
-}
-
-.sidebar li {
-    margin: 10px 0;
+    margin-bottom: 25px;
 }
 
 .sidebar ul li{
     color: #29451c;
-    border: #29451c 1px solid;
-    padding: 5px;
-    border-radius: 4px;
+    margin: 15px 0;
     text-decoration: none;
     cursor: pointer;
 }
 
 .sidebar ul li:hover{
-    outline: 4px solid #29451c;
-    border-radius: 4px;
-    transition: border 0.7ms;
+    text-decoration: underline;
 }
 
 .content {
     width: 80%;
-    padding: 20px;
+    padding: 40px 20px;
 }
+
 .product {
     display: inline-block;
     width: 220px;

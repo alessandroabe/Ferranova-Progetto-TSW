@@ -9,8 +9,7 @@
     gap: 60px;
     align-items: center;
     width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 10vh 10% 5vh 10%;
     padding: 80px 0;
     flex-direction: row;
 }
@@ -65,16 +64,14 @@
 
 .product-description {
     display: block;
-    margin-top: 30px;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 30px 10% auto 10%;
     width: 80%;
     text-align: justify;
 }
 
 .product-description h2 {
-    font-size: large;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 15px;
 }
 
 

@@ -1,8 +1,6 @@
-
-
 body{
     margin: 0;
-    padding-top:80px;
+    padding-top:0;
 }
 
 
@@ -39,18 +37,13 @@ nav ul li a {
 }
 
 
-/*per aggiustare il padding del logo*/
 nav ul li a.logo {
     padding: 20px;
 }
 
-
-
 nav ul li:hover {
-    background-color: #29451c; /* Cambia il colore del link quando si passa sopra col puntatore */
+    background-color: #29451c;
 }
-
-/*stile menù a tendina*/
 
 .dropdown {
     position: relative;
@@ -58,7 +51,7 @@ nav ul li:hover {
 }
 
 .dropdown-content {
-    display: none; /*rende non visibile il menu a tendina*/
+    display: none;
     position: absolute;
     background-color: #ffffff;
     top: 58px; /*altezza della navbar*/
