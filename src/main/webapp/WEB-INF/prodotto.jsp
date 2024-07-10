@@ -49,8 +49,29 @@
 
         <!--TODO mettere soltanto le jstl per iterare i prodotti in base al prodotto cliccato e inserirlo nell'ajax, adesso è con il form solo per testing-->
 
-        <input type="submit" class="add-to-cart" value="Aggiungi al carrello"/>
+        <button onclick="addToCart(${prodotto.id})" class="add-to-cart">Aggiungi al carrello</button>
         </form>
+
+        <script>
+            function addToCart(product_id){
+                var quantity = document.getElementById("quantity").value;
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "${pageContext.request.contextPath}/carrello?prod=" + product_id + "&quantity=" + quantity, true);
+                //se si vuole passare un parametro da una pagina jsp
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // La richiesta è stata completata con successo
+                            alert("Prodotto aggiunto con successo");
+                        }else{
+                            alert("errore");
+                        }
+                    }
+                };
+                xhr.send();
+            }
+        </script>
+
 
     </div>
 

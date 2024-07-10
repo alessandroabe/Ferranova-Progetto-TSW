@@ -42,13 +42,15 @@
             <div class="product-price">
                 <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                 <fmt:formatNumber value="${entry.prezzo}" type="currency" currencySymbol="€"/></div>
+            <input type="hidden" name="quantity" value="1" id="quantity">
             <button onclick="addToCart(${entry.id})" class="product-button">Aggiungi al carrello</button>
         </div>
 
     <script>
     function addToCart(product_id){
+        var quantity = document.getElementById("quantity").value;
         var xhr = new XMLHttpRequest();
-        xhr.open("GET","${pageContext.request.contextPath}/carrello?prod=" +product_id,true);//si scrive cosi un get
+        xhr.open("GET", "${pageContext.request.contextPath}/carrello?prod=" + product_id + "&quantity=" + quantity, true);
         //se si vuole passare un parametro da una pagina jsp
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {

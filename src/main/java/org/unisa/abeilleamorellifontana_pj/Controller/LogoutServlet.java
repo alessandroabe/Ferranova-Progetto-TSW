@@ -29,8 +29,7 @@ public class LogoutServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession(false); // ottieni la sessione solo se esiste
-
-        session.invalidate();
+        session.removeAttribute("UtenteConnesso");
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);

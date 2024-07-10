@@ -28,6 +28,9 @@ public class CarrelloServlet extends HttpServlet {
 
         HttpSession session = request.getSession(); //creiamo una nuova sessione
 
+        String resp = request.getParameter("quantity");
+        int quantity = Integer.parseInt(resp);
+
         String prod_id = request.getParameter("prod");
         int prod_id_d = Integer.parseInt(prod_id); //prende il parametro dalla richiesta ajax
 
@@ -38,7 +41,11 @@ public class CarrelloServlet extends HttpServlet {
         //la prima se non c è sessione e se non è presente un carrello gia all interno della sessione,mettiamo il prodotto e risettiamo l'attributo(lista dei prodotti
         if(session.getAttribute("prodotti_presi") == null && session.getAttribute("UtenteConnesso") == null) {
 
-            prodotti_presi_non_in_sessione.add(curr_product);
+                for(int i=0;i<quantity;i++) {
+                    prodotti_presi_non_in_sessione.add(curr_product);
+                }
+
+
             session.setAttribute("prodotti_presi",prodotti_presi_non_in_sessione);
 
 
@@ -46,7 +53,12 @@ public class CarrelloServlet extends HttpServlet {
             //il prodotto alla lista e risettiamo l attributo
         }else if(session.getAttribute("prodotti_presi") != null && session.getAttribute("UtenteConnesso") == null) {
             prodotti_presi_non_in_sessione = (ArrayList<Prodotto>) session.getAttribute("prodotti_presi");
-            prodotti_presi_non_in_sessione.add(curr_product);
+
+
+                for(int i=0;i<quantity;i++) {
+                    prodotti_presi_non_in_sessione.add(curr_product);
+                }
+
             session.setAttribute("prodotti_presi",prodotti_presi_non_in_sessione);
         }
 
@@ -54,9 +66,12 @@ public class CarrelloServlet extends HttpServlet {
         //Condizione in modo che quando si è loggati si scarica tutto
         if(session.getAttribute("UtenteConnesso") != null && session.getAttribute("prodotti_presi") == null) {
 
-            if(curr_product != null) {
-                prodotti_presi_non_in_sessione.add(curr_product);
-            }
+
+                    for(int i=0;i<quantity;i++) {
+                        prodotti_presi_non_in_sessione.add(curr_product);
+                    }
+
+            session.setAttribute("prodotti_presi",prodotti_presi_non_in_sessione);
 
             Map<Integer, Integer> idOccorrenzeMap = new HashMap<>();
 
@@ -86,9 +101,12 @@ public class CarrelloServlet extends HttpServlet {
 //caso in cui ci sono gia elementi nel carrello
         }else if(session.getAttribute("prodotti_presi") != null && session.getAttribute("UtenteConnesso") != null) {
             prodotti_presi_non_in_sessione = (ArrayList<Prodotto>) session.getAttribute("prodotti_presi"); //sostituisce la lista inizializzata con un carrello gia presente
-            if(curr_product != null) {
-                prodotti_presi_non_in_sessione.add(curr_product);
-            }
+
+                    for(int i=0;i<quantity;i++) {
+                        prodotti_presi_non_in_sessione.add(curr_product);
+                    }
+
+            session.setAttribute("prodotti_presi",prodotti_presi_non_in_sessione);
 
             //scarichiamo
 
