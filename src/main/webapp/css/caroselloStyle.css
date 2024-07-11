@@ -1,6 +1,7 @@
 /*per rendere l'immagine nascosta di default*/
 .mySlides {
     display: none;
+    margin: 20px;
 }
 
 .prev, .next {

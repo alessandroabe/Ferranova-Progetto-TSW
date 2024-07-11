@@ -9,7 +9,7 @@
     gap: 60px;
     align-items: center;
     width: 80%;
-    margin: 10vh 10% 5vh 10%;
+    margin: 0 10% 5vh 10%;
     padding: 80px 0;
     flex-direction: row;
 }
@@ -33,7 +33,6 @@
 .product-image img {
     width: 80%;
     height: auto;
-    margin: 0 10%; /**/
 }
 
 .product-title {

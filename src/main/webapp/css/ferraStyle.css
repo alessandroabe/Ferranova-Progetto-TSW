@@ -48,6 +48,10 @@ main {
 }
 
 @media(max-width: 600px) {
+    main{
+        margin: 10vh 10%;
+    }
+
     .catrow {
         margin-top: 5vh;
         flex-direction: column;
