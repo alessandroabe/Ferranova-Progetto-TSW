@@ -3,16 +3,17 @@
     padding: 0;
     font-family: sans-serif;
     color: black;
-    text-align: center;
 }
 
 .wrapper{
     background-color: rgb(255, 255, 255);
-    margin-top: 130px;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 20vh;
+    text-align: center;
     padding: 35px 20px 35px 20px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #3d5b2d;
+    border: solid 2px #3d5b2d;
     border-radius: 10px;
     display: inline-block;
 }
@@ -77,4 +78,20 @@ input#submit{
     font-size: smaller;
     color: red;
     margin-top: 10px;
+}
+
+@media (max-width: 600px){
+    .wrapper{
+        width: 70%;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 850px){
+    .wrapper{
+        width: 50%;
+        margin-left: 25%;
+        margin-right: 25%;
+    }
 }
