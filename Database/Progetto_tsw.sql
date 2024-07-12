@@ -12,6 +12,7 @@ CREATE TABLE Utente
     is_admin     BOOLEAN      NOT NULL DEFAULT FALSE
     /* potrebbe essere sostituita con enumerazione se si dovessero aggiungere altri ruoli*/
 );
+
 /*TODO: tenere conto che  defaul può avere solo un true per utente*/
 CREATE TABLE Indirizzo
 (
@@ -35,12 +36,14 @@ CREATE TABLE Promozione
     sconto      tinyint unsigned NOT NULL,
     CHECK (sconto <= 100)
 );
-/*FIXME: fare le sottocategorie, penso in maniera ricorsiva*/
-/*FIXME: metti macrocategoria*/
+
 CREATE TABLE Categoria
 (
+    macrocategoria varchar(30),
     sigla          varchar(30) PRIMARY KEY NOT NULL,
-    descrizione    text
+    descrizione    text,
+        FOREIGN KEY (macrocategoria) references Categoria (sigla)
+
 );
 
 CREATE TABLE Prodotto
@@ -86,7 +89,6 @@ CREATE TABLE Ordine
     FOREIGN KEY (id_utente) references Utente (id)
 );
 
-
 CREATE TABLE Ordine_Prodotto
 (
     id_ordine     INT            NOT NULL,
@@ -110,7 +112,6 @@ CREATE TABLE Recensione
     FOREIGN KEY (id_utente) references Utente (id),
     FOREIGN KEY (id_prodotto) references Prodotto (id)
 );
-
 
 INSERT INTO Utente (nome, email, passwordhash, telefono, is_admin)
 VALUES ('Domenico', 'Domenico.admin@unisa.com', sha1('c\'è poco da dire'), '1234567890', TRUE),
@@ -141,6 +142,12 @@ VALUES ('Agricoltura', 'Utensili e prodotti agricoli'),
        ('Edilizia', 'Utensili e prodotti per la costruzione di case, pavimentazioni e infissi'),
        ('Energia', 'Pannelli solari, pale eoliche domestiche e condensatori');
 
+/*FIXME: finire di mettere le categorie*/
+INSERT INTO Categoria (macrocategoria, sigla, descrizione)
+VALUES ('Agricoltura', 'Agricoltura_Utensili', 'Utensili per l\'agricoltura'),
+       ('Agricoltura', 'Agricoltura_Prodotti', 'Prodotti per l\'agricoltura'),
+       ('Ferramenta', 'Ferramenta_Utensili', 'Utensili di ferramenta'),
+       ('Ferramenta', 'Ferramenta_Prodotti', 'Prodotti di ferramenta');
 
 INSERT INTO Prodotto (titolo, descrizione, quantità, id_promozione, categoria, prezzo)
 VALUES ('Cacciavite a stella', 'Cacciavite per viti a stella', 2, NULL, 'Edilizia', 19.90),
@@ -156,8 +163,6 @@ VALUES (4, 'ordinato', 558.7, '2024-05-14');
 INSERT INTO Ordine_Prodotto (id_ordine, id_prodotto, quantità, prezzo_finale)
 VALUES (1, 1, 3, 39.80),
        (1, 2, 1, 499.00);
-
-
 
 INSERT INTO Recensione (id_utente, id_prodotto, voto, descrizione)
 VALUES (4, 1, 5, 'Ottimo prodotto! Spedizione veloce e prodotto conforme alla descrizione.'),
