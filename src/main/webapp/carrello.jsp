@@ -32,62 +32,11 @@
             <tr>
                 <td>
                     <div class="product-info">
-                        <img src="images/martello.jpg" alt="Martello">
+                        <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png" style="width:100%"
+                             alt="immagine ${prodotto.titolo}">
                         <div>
-                            <p>Martello</p>
-                            <span>Cod. prodotto: 706-3913</span>
-                        </div>
-                    </div>
-                </td>
-                <td>1 Pz.</td>
-                <td>10,00€</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="product-info">
-                        <img src="images/trapanoPercussione.jpg" alt="Trapano a percussione">
-                        <div>
-                            <p>Trapano a percussione</p>
-                            <span>Cod. prodotto: 421-0460</span>
-                        </div>
-                    </div>
-                </td>
-                <td>1 Pz.</td>
-                <td>40,00€</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="product-info">
-                        <img src="images/cacciaviteCroce.jpg" alt="cacciavite a croce">
-                        <div>
-                            <p>Cacciavite a croce</p>
-                            <span>Cod. prodotto: 973-0161</span>
-                        </div>
-                    </div>
-                </td>
-                <td>1 Pz.</td>
-                <td>10,00€</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="product-info">
-                        <img src="images/cacciaviteCroce.jpg" alt="cacciavite a croce">
-                        <div>
-                            <p>Cacciavite a croce</p>
-                            <span>Cod. prodotto: 973-0161</span>
-                        </div>
-                    </div>
-                </td>
-                <td>1 Pz.</td>
-                <td>10,00€</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="product-info">
-                        <img src="images/cacciaviteCroce.jpg" alt="cacciavite a croce">
-                        <div>
-                            <p>Cacciavite a croce</p>
-                            <span>Cod. prodotto: 973-0161</span>
+                            <p>${prodotto.titolo}</p>
+                            <span>Cod. prodotto: ${prodotto.id}</span>
                         </div>
                     </div>
                 </td>

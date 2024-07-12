@@ -44,8 +44,6 @@ public class CarrelloServlet extends HttpServlet {
                 for(int i=0;i<quantity;i++) {
                     prodotti_presi_non_in_sessione.add(curr_product);
                 }
-
-
             session.setAttribute("prodotti_presi",prodotti_presi_non_in_sessione);
 
 

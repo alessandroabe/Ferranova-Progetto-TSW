@@ -2,7 +2,10 @@ package org.unisa.abeilleamorellifontana_pj.Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CarrelloDAO {
 
@@ -38,5 +41,27 @@ public class CarrelloDAO {
                 conn.close();
             }
         }
+    }
+
+    public static Map<Integer, Integer> getCarrelloByUtenteId(int idUtente) {
+        Map<Integer, Integer> carrello = new HashMap<>();
+
+        String query = "SELECT id_prodotto, quantità FROM Carrello WHERE id_utente = ?";
+
+        try (PreparedStatement preparedStatement = ConPool.getConnection().prepareStatement(query)) {
+            preparedStatement.setInt(1, idUtente);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int idProdotto = resultSet.getInt("id_prodotto");
+                    int quantita = resultSet.getInt("quantità");
+                    carrello.put(idProdotto, quantita);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return carrello;
     }
 }
