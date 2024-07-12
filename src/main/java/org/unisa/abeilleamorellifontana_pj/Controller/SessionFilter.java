@@ -15,6 +15,8 @@ public class SessionFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
+
+        //FIXME serve per fa entrare subito loggato o comunque creare la sessione ad ogni iterazione
         if (req.getSession(false) == null) {
             req.getSession().setAttribute("SessionManager", new SessionManager());
             SessionManager s = new SessionManager();

@@ -8,7 +8,7 @@
                                                                        height="16"></a></li>
 
         <!--questo a destra-->
-        <li><a href="carrello.jsp"><img src="images/carrello.png" alt="carrello" width="15" height="15"></a></li>
+        <li><a href="${pageContext.request.contextPath}/carrello"><img src="images/carrello.png" alt="carrello" width="15" height="15"></a></li>
 
         <li class="dropdown">
             <a href="#"><img src="images/utente.png" alt="area utente" width="15" height="15"></a>

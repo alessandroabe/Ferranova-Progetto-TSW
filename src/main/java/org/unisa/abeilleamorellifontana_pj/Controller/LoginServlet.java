@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 
 
 
-            if((Object) session.getAttribute("Carrello") == null){
+            if(session.getAttribute("Carrello") == null){
                 carrello= new Carrello(input.getId());
                 session.setAttribute("Carrello", carrello);
             }

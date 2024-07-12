@@ -10,6 +10,7 @@
 
 <div class="wrapper" style="margin-top: 200px">
 
+    <!-- TODO; fare che ci sono codici promozionali-->
 
     ${utente.idutente}<br>
 

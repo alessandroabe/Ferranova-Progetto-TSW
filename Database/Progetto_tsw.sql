@@ -114,10 +114,10 @@ CREATE TABLE Recensione
 
 INSERT INTO Utente (nome, email, passwordhash, telefono, is_admin)
 VALUES ('Domenico', 'Domenico.admin@unisa.com', sha1('c\'è poco da dire'), '1234567890', TRUE),
-       ('Alesssandro', 'Alessandro.admin@unisa.com', sha1('c\'è tanto da fare'), '3210987654', TRUE),
+       ('Alessandro', 'Alessandro.admin@unisa.com', sha1('c\'è tanto da fare'), '3210987654', TRUE),
        ('Christian', 'Christian.admin@unisa.com', sha1('bullo'), '3210987654', TRUE),
        ('Domenico', 'Domenico.user@unisa.com', sha1('c\'è poco da dire'), '1234567890', FALSE),
-       ('Alesssandro', 'Alessandro.user@unisa.com', sha1('c\'è tanto da fare'), '3210987654', FALSE),
+       ('Alessandro', 'Alessandro.user@unisa.com', sha1('c\'è tanto da fare'), '3210987654', FALSE),
        ('Christian', 'Christian.user@unisa.com', sha1('bullo'), '3210987654', FALSE);
 
 

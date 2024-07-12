@@ -14,8 +14,8 @@
 </head>
 
 <body>
-
-<%@ include file="WEB-INF/navbar.jsp" %>
+<!--TODO: -->
+<%@ include file="navbar.jsp" %>
 
 <div class="container">
     <div class="cart">
@@ -29,24 +29,31 @@
             </tr>
             </thead>
             <tbody>
+            <c:set var="mappa" value="${Carrello.prodottiQuantita}" />
+            <c:set var="lista" value="${lista}" />
+            <c:forEach var="elemento" items="${lista}">
+                <!-- TODO: fare in modo, penso con ajax, che si aggiorna la cosa con un input type numebr tipo nella pag dispositivi-->
             <tr>
                 <td>
                     <div class="product-info">
-                        <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png" style="width:100%"
-                             alt="immagine ${prodotto.titolo}">
+                        <img src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png"
+                             alt="immagine ${elemento.titolo}">
                         <div>
-                            <p>${prodotto.titolo}</p>
-                            <span>Cod. prodotto: ${prodotto.id}</span>
+                            <p>${elemento.titolo}</p>
+                            <span>Cod. prodotto: ${elemento.id}</span>
                         </div>
                     </div>
                 </td>
-                <td>1 Pz.</td>
-                <td>10,00€</td>
+                <td> ${mappa[elemento.id]} Pz.</td>
+                <td><fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                    <fmt:formatNumber value="${elemento.prezzo}" type="currency" currencySymbol="€"/></td>
             </tr>
+            </c:forEach>
             </tbody>
         </table>
     </div>
     <div class="summary">
+        <!-- TODO: conviene farlo in js sotto una certa cifra l'importo è gratis-->
         <h2>Riassunto</h2>
         <p>Subtotale: <span>280,37 €</span></p>
         <p>Costi di spedizione: <span>0,00 €</span></p>
@@ -55,7 +62,7 @@
     </div>
 </div>
 
-<%@ include file="WEB-INF/footer.jsp" %>
+<%@ include file="footer.jsp" %>
 
 </body>
 </html>

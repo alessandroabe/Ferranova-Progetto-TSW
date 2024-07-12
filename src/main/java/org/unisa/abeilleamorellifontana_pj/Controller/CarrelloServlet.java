@@ -26,38 +26,22 @@ public class CarrelloServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        String referer = request.getHeader("Referer");
 
         HttpSession session = request.getSession(); //creiamo una nuova sessione
-        Carrello c = (Carrello) session.getAttribute("Carrello");
-        if(referer != null && (referer.contains("prodotto")|| referer.contains("catalogo"))){//faccio con ajax si spera
-                String resp = request.getParameter("quantity");
-                int quantity = Integer.parseInt(resp);
-
-                String prod_id = request.getParameter("prod");
-                int prod_id_d = Integer.parseInt(prod_id); //prende il parametro dalla richiesta ajax
-
-
-
-                c.aggiungiProdotto(prod_id_d, quantity);
-                return;
-
-            }
-        else{
-//TODO: mettere controlli
-        ArrayList<Prodotto> prodotti_carrelo= new ArrayList<>();
-        for ( Map.Entry<Integer, Integer>  entry : c.getProdottiQuantita().entrySet()){
-           prodotti_carrelo.add( ProdottoDAO.doRetrieveById(entry.getKey()));
+        Carrello carrello = (Carrello) session.getAttribute("Carrello");
+        //TODO: mettere controlli
+        ArrayList<Prodotto> lista = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : carrello.getProdottiQuantita().entrySet()) {
+            lista.add(ProdottoDAO.doRetrieveById(entry.getKey()));
         }
 
-        request.setAttribute("prodotti_carrelo", prodotti_carrelo);
+        request.setAttribute("lista", lista);
 
 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/carrello.jsp");
+        dispatcher.forward(request, response);
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/carrello.jsp");
-                dispatcher.forward(request, response);
-            }
-        }
+    }
 
 
     @Override

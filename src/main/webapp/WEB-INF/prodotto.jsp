@@ -60,7 +60,7 @@
             function addToCart(product_id){
                 var quantity = document.getElementById("quantity").value;
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "${pageContext.request.contextPath}/carrello?prod=" + product_id + "&quantity=" + quantity, true);
+                xhr.open("GET", "${pageContext.request.contextPath}/carrelloAjax?prod=" + product_id + "&quantity=" + quantity, true);
                 //se si vuole passare un parametro da una pagina jsp
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
