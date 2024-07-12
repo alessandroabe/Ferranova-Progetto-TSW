@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.unisa.abeilleamorellifontana_pj.Model.Carrello;
 import org.unisa.abeilleamorellifontana_pj.Model.CarrelloDAO;
 import org.unisa.abeilleamorellifontana_pj.Model.Prodotto;
 import org.unisa.abeilleamorellifontana_pj.Model.Utente;
@@ -29,6 +30,8 @@ public class LogoutServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession(false); // ottieni la sessione solo se esiste
+        CarrelloDAO.doDeleteAll();
+        CarrelloDAO.doInsert((Carrello) session.getAttribute("Carrello"));
         session.invalidate();
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");

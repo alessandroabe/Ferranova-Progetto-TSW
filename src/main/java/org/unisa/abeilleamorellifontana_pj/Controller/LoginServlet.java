@@ -1,16 +1,15 @@
 package org.unisa.abeilleamorellifontana_pj.Controller;
 
-import java.io.*;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.unisa.abeilleamorellifontana_pj.Model.*;
+
+import java.io.IOException;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -34,12 +33,26 @@ public class LoginServlet extends HttpServlet {
         UtenteDAO U = new UtenteDAO();
         Utente input = U.doRetrieveByEmail(mail);
 
+        Carrello carrello = null;
         if (input != null && input.getEmail().equals(mail) && SHA1PasswordVerifier.verifyPassword(password, input.getPasswordhash())) {
             // Imposta l'utente connesso nella sessione
 
+
+
+
             session.setAttribute("UtenteConnesso", input);
 
-            //scarichiamo
+
+
+
+            if((Object) session.getAttribute("Carrello") == null){
+                carrello= new Carrello(input.getId());
+                session.setAttribute("Carrello", carrello);
+            }
+
+            if (carrello != null) {
+                carrello.mergeProdotti(CarrelloDAO.doRetrieve(input.getId()));
+            }
 
                if(session.getAttribute("prodotti_presi") != null) {
                        Map<Integer, Integer> idOccorrenzeMap = new HashMap<>();

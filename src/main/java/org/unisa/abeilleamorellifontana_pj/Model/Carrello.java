@@ -46,4 +46,13 @@ public class Carrello {
             }
         }
     }
+
+
+    public void mergeProdotti( Carrello c ){
+
+        for ( Map.Entry<Integer, Integer>  entry : c.getProdottiQuantita().entrySet()) {
+            aggiungiProdotto(entry.getKey(), entry.getValue());
+        }
+
+    }
 }
