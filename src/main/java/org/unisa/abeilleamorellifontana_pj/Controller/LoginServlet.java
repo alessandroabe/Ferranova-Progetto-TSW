@@ -54,29 +54,6 @@ public class LoginServlet extends HttpServlet {
                 carrello.mergeProdotti(CarrelloDAO.doRetrieve(input.getId()));
             }
 
-               if(session.getAttribute("prodotti_presi") != null) {
-                       Map<Integer, Integer> idOccorrenzeMap = new HashMap<>();
-                       ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) session.getAttribute("prodotti_presi_prima_del_logout");
-                       // Popolazione della Map con le occorrenze degli ID prodotto
-                       for (Prodotto prodotto : prodotti) {
-                           int id = prodotto.getId();
-                           idOccorrenzeMap.put(id, idOccorrenzeMap.getOrDefault(id, 0) + 1);
-                       }
-
-                       for (Map.Entry<Integer, Integer> entry : idOccorrenzeMap.entrySet()) { //scarica tutto qui
-                           Utente utenteConnesso = (Utente) session.getAttribute("UtenteConnesso");
-
-                           try {
-                               CarrelloDAO.insertCarrello(utenteConnesso.getId(), entry.getKey(), entry.getValue());
-                           } catch (SQLException e) {
-                               try {
-                                   CarrelloDAO.updateCarrello(entry.getValue(), utenteConnesso.getId(), entry.getKey());
-                               } catch (SQLException ex) {
-                                   throw new RuntimeException(ex);
-                               }
-                           }
-                       }
-                   }
 
             response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
             return;
