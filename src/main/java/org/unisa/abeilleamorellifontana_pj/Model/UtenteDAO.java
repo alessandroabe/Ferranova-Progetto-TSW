@@ -6,7 +6,7 @@ import static org.unisa.abeilleamorellifontana_pj.Model.SHA1PasswordVerifier.sha
 
 public class  UtenteDAO {
 
-
+//TODO: se c'è tempo rendere statico
         public Utente doRetrieveByEmail(String mail) {
             Utente utente = null;
 

@@ -19,9 +19,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-
-        System.out.println("wdvqwrvwefwefwqaefdcqae");
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         String address;
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
@@ -37,15 +35,14 @@ public class RegistrazioneServlet extends HttpServlet {
 
 
         if (!exist_nome) {
-            session.setAttribute("connessione", true);
             session.setAttribute("UtenteConnesso", utente_da_inserire);
-            address = "index.jsp"; //ritorno alla homepage una volta registrato se non c'e' gia un account esistente
+
         } else {
 
-            address = "registrazione.jsp";//ritorno alla jsp con errore
+           response.sendRedirect("registrazione.jsp?error=1");//ritorno alla jsp con errore
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");//ritorno alla homepage una volta registrato se non c'e' gia un account esistente
         dispatcher.forward(request, response);
 
     }

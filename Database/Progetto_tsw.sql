@@ -37,6 +37,7 @@ CREATE TABLE Promozione
     CHECK (sconto <= 100)
 );
 
+/*TODO: fare con id, per permettere ripetizioni di nome*/
 CREATE TABLE Categoria
 (
     macrocategoria varchar(30),

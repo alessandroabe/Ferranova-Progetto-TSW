@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import org.unisa.abeilleamorellifontana_pj.Model.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class CarrelloServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 
-        HttpSession session = request.getSession(); //creiamo una nuova sessione
+        HttpSession session = request.getSession(false); //creiamo una nuova sessione
         Carrello carrello = (Carrello) session.getAttribute("Carrello");
         //TODO: mettere controlli
         ArrayList<Prodotto> lista = new ArrayList<>();
@@ -36,6 +37,12 @@ public class CarrelloServlet extends HttpServlet {
         }
 
         request.setAttribute("lista", lista);
+        BigDecimal sum = BigDecimal.ZERO;
+        for (Prodotto p : lista) {
+            BigDecimal b = p.getPrezzo();
+            sum = sum.add(b.multiply(BigDecimal.valueOf(carrello.getProdottiQuantita().get(p.getId()))));
+        }
+        request.setAttribute("sum", sum);
 
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/carrello.jsp");

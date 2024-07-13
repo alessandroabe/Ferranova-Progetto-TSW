@@ -24,14 +24,6 @@ public class CarrelloDAO {
         }
         return carrello;
     }
-    public static void doDeleteAll() {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Carrello");
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static void doDelete(int idUtente) {
         try (Connection con = ConPool.getConnection()) {

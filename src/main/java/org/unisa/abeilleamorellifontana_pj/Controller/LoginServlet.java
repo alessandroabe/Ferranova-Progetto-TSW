@@ -33,28 +33,12 @@ public class LoginServlet extends HttpServlet {
         UtenteDAO U = new UtenteDAO();
         Utente input = U.doRetrieveByEmail(mail);
 
-        Carrello carrello = null;
+        Carrello carrello = (Carrello) session.getAttribute("Carrello");
         if (input != null && input.getEmail().equals(mail) && SHA1PasswordVerifier.verifyPassword(password, input.getPasswordhash())) {
             // Imposta l'utente connesso nella sessione
-
-
-
-
             session.setAttribute("UtenteConnesso", input);
-
-
-
-
-            if(session.getAttribute("Carrello") == null){
-                carrello= new Carrello(input.getId());
-                session.setAttribute("Carrello", carrello);
-            }
-
-            if (carrello != null) {
+                carrello.setIdUtente(input.getId());
                 carrello.mergeProdotti(CarrelloDAO.doRetrieve(input.getId()));
-            }
-
-
             response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
             return;
         }

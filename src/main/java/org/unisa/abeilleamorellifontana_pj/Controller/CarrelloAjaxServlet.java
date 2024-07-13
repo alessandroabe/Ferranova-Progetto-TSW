@@ -15,7 +15,7 @@ public class CarrelloAjaxServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         Carrello carrello = (Carrello) session.getAttribute("Carrello");
 
         String resp = request.getParameter("quantity");

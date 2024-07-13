@@ -21,7 +21,6 @@ import java.util.Map;
 @WebServlet(name = "logout", value = "/logout")
 public class LogoutServlet extends HttpServlet {
 
-       //TODO: fare la insert nel database del carrello
 
     public void init() {
 
@@ -30,9 +29,12 @@ public class LogoutServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession(false); // ottieni la sessione solo se esiste
-        CarrelloDAO.doDeleteAll();
+        Utente u =(Utente) (session.getAttribute("UtenteConnesso"));
+        CarrelloDAO.doDelete(u.getId());
         CarrelloDAO.doInsert((Carrello) session.getAttribute("Carrello"));
         session.invalidate();
+        HttpSession s = request.getSession();
+        s.setAttribute("Carrello", new Carrello());
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);

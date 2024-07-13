@@ -10,7 +10,6 @@ import java.util.List;
 
 public class ProdottoDAO {
 
-    //FIXME: decidire se aggiungere l'attributo al database oppure sfruttare id univoco per nominare media/ cartelle che contengono media
     public static List<Prodotto> doRetrieveAll() {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM Prodotto");

@@ -18,7 +18,8 @@ public class CategoriaDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     String descrizione = resultSet.getString("descrizione");
-                    categoria = new Categoria(sigla, descrizione);
+                    String macrocategoria = resultSet.getString("macrocategoria");
+                    categoria = new Categoria(sigla, descrizione, macrocategoria);
                 }
             }
         } catch (SQLException e) {
@@ -29,14 +30,15 @@ public class CategoriaDAO {
     }
 
     public static boolean doInsert(Categoria categoria) {
-        String query = "INSERT INTO Categoria (sigla, descrizione) VALUES (?, ?)";
+        String query = "INSERT INTO Categoria (macrocategoria, sigla, descrizione, ) VALUES (?, ?, ?)";
         boolean inserito = false;
 
         try (Connection conn = ConPool.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setString(1, categoria.getSigla());
-            pstmt.setString(2, categoria.getDescrizione());
+            pstmt.setString(1, categoria.getMacrocategoria());
+            pstmt.setString(2, categoria.getSigla());
+            pstmt.setString(3, categoria.getDescrizione());
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
@@ -63,6 +65,28 @@ public class CategoriaDAO {
             while (resultSet.next()) {
                 String sigla = resultSet.getString("sigla");
                 String descrizione = resultSet.getString("descrizione");
+                String macrocategoria = resultSet.getString("macrocategoria");
+                Categoria categoria = new Categoria(sigla, descrizione, macrocategoria);
+                categorie.add(categoria);
+            }
+        } catch (SQLException e) {
+            System.err.println("Errore durante il recupero di tutte le categorie: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return categorie;
+    }
+    public static List<Categoria> doRetrieveAllRoot() {
+        List<Categoria> categorie = new ArrayList<>();
+        String query = "SELECT * FROM Categoria where macrocategoria = NULL";
+
+        try (Connection conn = ConPool.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query);
+             ResultSet resultSet = pstmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                String sigla = resultSet.getString("sigla");
+                String descrizione = resultSet.getString("descrizione");
                 Categoria categoria = new Categoria(sigla, descrizione);
                 categorie.add(categoria);
             }
@@ -73,7 +97,7 @@ public class CategoriaDAO {
 
         return categorie;
     }
-
+//TODO: finire di modificare
     public static boolean doUpdate(Categoria categoria) {
         String query = "UPDATE Categoria SET descrizione = ? WHERE sigla = ?";
         boolean aggiornato = false;

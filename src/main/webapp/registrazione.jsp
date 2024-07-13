@@ -20,7 +20,7 @@
 
         <h3>Registrati al sito</h3>
 
-        <!-- TODO: devi mettere i label perchè servono per l'accessibilità -->
+
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" required><br>
 

@@ -22,7 +22,7 @@ public class CatalogoServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         ArrayList<Prodotto> catalogo;
-
+//TODO: spostare tutto nell'init forse, così da avere tutto nella servletcontext
         String categoria = request.getParameter("categoria");
 
         if (categoria != null) {

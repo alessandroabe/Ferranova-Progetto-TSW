@@ -7,6 +7,10 @@ public class Carrello {
     private int idUtente;
     private final Map<Integer, Integer> prodottiQuantita; // Mappa di idProdotto e quantità
 
+    public Carrello() {
+        this.prodottiQuantita = new HashMap<>();
+    }
+
     public Carrello(int idUtente) {
         this.idUtente = idUtente;
         this.prodottiQuantita = new HashMap<>();
@@ -39,8 +43,8 @@ public class Carrello {
     }
 
     public void abbassaQuantitaProdotto(int idProdotto, int quantitaDiminuita) {
-        aggiungiProdotto(idProdotto, -quantitaDiminuita);
         if (prodottiQuantita.containsKey(idProdotto)) {
+        aggiungiProdotto(idProdotto, -quantitaDiminuita);
             if (quantitaDiminuita <= 0) {
                 prodottiQuantita.remove(idProdotto);
             }
@@ -50,6 +54,7 @@ public class Carrello {
 
     public void mergeProdotti( Carrello c ){
 
+        //TODO:tieni conto degli id
         for ( Map.Entry<Integer, Integer>  entry : c.getProdottiQuantita().entrySet()) {
             aggiungiProdotto(entry.getKey(), entry.getValue());
         }

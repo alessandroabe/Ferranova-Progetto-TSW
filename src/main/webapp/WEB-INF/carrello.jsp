@@ -14,7 +14,6 @@
 </head>
 
 <body>
-<!--TODO: -->
 <%@ include file="navbar.jsp" %>
 
 <div class="container">
@@ -29,35 +28,44 @@
             </tr>
             </thead>
             <tbody>
-            <c:set var="mappa" value="${Carrello.prodottiQuantita}" />
-            <c:set var="lista" value="${lista}" />
+            <c:set var="mappa" value="${Carrello.prodottiQuantita}"/>
+            <c:set var="lista" value="${lista}"/>
             <c:forEach var="elemento" items="${lista}">
                 <!-- TODO: fare in modo, penso con ajax, che si aggiorna la cosa con un input type numebr tipo nella pag dispositivi-->
-            <tr>
-                <td>
-                    <div class="product-info">
-                        <img src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png"
-                             alt="immagine ${elemento.titolo}">
-                        <div>
-                            <p>${elemento.titolo}</p>
-                            <span>Cod. prodotto: ${elemento.id}</span>
+                <tr>
+                    <td>
+                        <div class="product-info">
+                            <img src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png"
+                                 alt="immagine ${elemento.titolo}">
+                            <div>
+                                <p>${elemento.titolo}</p>
+                                <span>Cod. prodotto: ${elemento.id}</span>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td> ${mappa[elemento.id]} Pz.</td>
-                <td><fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                    <fmt:formatNumber value="${elemento.prezzo}" type="currency" currencySymbol="€"/></td>
-            </tr>
+                    </td>
+                    <td> ${mappa[elemento.id]} Pz.</td>
+                    <td><fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                        <fmt:formatNumber value="${elemento.prezzo * mappa[elemento.id] }" type="currency"
+                                          currencySymbol="€"/></td>
+                </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
     <div class="summary">
         <!-- TODO: conviene farlo in js sotto una certa cifra l'importo è gratis-->
+
+        <c:set var="spedizione" value="${ sum <= 100 ? 10 : 0  }"/>
         <h2>Riassunto</h2>
-        <p>Subtotale: <span>280,37 €</span></p>
-        <p>Costi di spedizione: <span>0,00 €</span></p>
-        <p class="total">Totale: <span>280,37 €</span></p>
+        <p>Subtotale: <span><fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                    <fmt:formatNumber value="${sum }" type="currency" currencySymbol="€"/></span></p>
+        <p>Costi di spedizione: <span><fmt:setLocale value="fr_FR"/>
+            <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                    <fmt:formatNumber value="${spedizione }" type="currency" currencySymbol="€"/>
+         </span></p>
+        <p class="total">Totale: <span><fmt:setLocale value="fr_FR"/>
+            <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                    <fmt:formatNumber value="${sum + spedizione}" type="currency" currencySymbol="€"/></span></p>
         <button>ACQUISTA</button>
     </div>
 </div>
