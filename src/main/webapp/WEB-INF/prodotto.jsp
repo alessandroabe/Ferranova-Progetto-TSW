@@ -22,17 +22,14 @@
 
 
     <div class="product-image">
-        <div class="mySlides">
-            <div class="numbertext">1 / 2</div>
-            <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png" style="width:100%"
-                 alt="immagine ${prodotto.titolo}"><br>
-        </div>
+        <c:forEach var="i" begin="1" end="${num_foto}">
 
-        <div class="mySlides">
-            <div class="numbertext">2 / 2</div>
-            <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/2.png" style="width:100%"
-                 alt="immagine ${prodotto.titolo}"><br>
-        </div>
+            <div class="mySlides">
+                <div class="numbertext">${i} / ${num_foto}</div>
+                <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/${i}.png" style="width:100%"
+                     alt="immagine ${prodotto.titolo}"><br>
+            </div>
+        </c:forEach>
 
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a> <!--il codice corrisponde al simbolo della freccetta-->
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -45,29 +42,29 @@
             <fmt:formatNumber value="${prodotto.prezzo}" type="currency" currencySymbol="€"/></div>
         <form action="" method="post">
 
-        <div class="quantity-container">
-            <label for="quantity">Pezzi disponibili: ${prodotto.quantita}</label><br>
-            <!-- FIXME: br penso da levare -->
-            <input type="number" id="quantity" name="quantity" min="1" value="1" max="${prodotto.quantita}">
-        </div>
+            <div class="quantity-container">
+                <label for="quantity">Pezzi disponibili: ${prodotto.quantita}</label><br>
+                <!-- FIXME: br penso da levare -->
+                <input type="number" id="quantity" name="quantity" min="1" value="1" max="${prodotto.quantita}">
+            </div>
 
-        <!--TODO mettere soltanto le jstl per iterare i prodotti in base al prodotto cliccato e inserirlo nell'ajax, adesso è con il form solo per testing-->
+            <!--TODO mettere soltanto le jstl per iterare i prodotti in base al prodotto cliccato e inserirlo nell'ajax, adesso è con il form solo per testing-->
 
-        <button onclick="addToCart(${prodotto.id})" class="add-to-cart">Aggiungi al carrello</button>
+            <button onclick="addToCart(${prodotto.id})" class="add-to-cart">Aggiungi al carrello</button>
         </form>
 
         <script>
-            function addToCart(product_id){
+            function addToCart(product_id) {
                 var quantity = document.getElementById("quantity").value;
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", "${pageContext.request.contextPath}/carrelloAjax?prod=" + product_id + "&quantity=" + quantity, true);
                 //se si vuole passare un parametro da una pagina jsp
-                xhr.onreadystatechange = function() {
+                xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
                             // La richiesta è stata completata con successo
                             alert("Prodotto aggiunto con successo");
-                        }else{
+                        } else {
                             alert("errore");
                         }
                     }

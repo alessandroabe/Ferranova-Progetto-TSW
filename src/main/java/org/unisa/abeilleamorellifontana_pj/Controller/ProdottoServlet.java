@@ -26,6 +26,7 @@ public class ProdottoServlet extends HttpServlet {
 
         if (id_prodotto != null && Integer.parseInt(id_prodotto) > 0) {
             Prodotto input = ProdottoDAO.doRetrieveById(Integer.parseInt(id_prodotto));
+            request.setAttribute("num_foto", PhotoManager.countPhotosInDirectory(input.getId(), getServletContext().getRealPath("/")));
             request.setAttribute("prodotto", input);
         }
 
