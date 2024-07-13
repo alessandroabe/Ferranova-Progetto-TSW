@@ -22,6 +22,7 @@
 
 
     <div class="product-image">
+        <!--todo fare if nel caso ci sia una solo foto togliere lo slider-->
         <c:forEach var="i" begin="1" end="${num_foto}">
 
             <div class="mySlides">
