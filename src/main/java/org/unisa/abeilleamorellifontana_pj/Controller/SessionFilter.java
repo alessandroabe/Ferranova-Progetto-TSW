@@ -20,20 +20,17 @@ public class SessionFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
 
         //FIXME serve per fa entrare subito loggato o comunque creare la sessione ad ogni iterazione
-        if (req.getSession(false) == null) {//caso in cui la sessione manca
-            HttpSession s = req.getSession();
+        HttpSession s = req.getSession();
+        if ((s.getAttribute("Carrello")) == null)
             s.setAttribute("Carrello", new Carrello());
-        } else {//caso in cui la sessione è presente controllo se è admin
-            HttpSession s = req.getSession(false);
-            Utente u = (Utente) s.getAttribute("UtenteConnesso");//TODO: sarà utente e basta
-            if (u != null) {
-                if (u.isAdmin()) //TODO: implementare logica admin
-                    System.out.println("sei admin. anche cose");
 
-            }
+        Utente u = (Utente) s.getAttribute("UtenteConnesso");
+        //caso in cui la sessione è presente controllo se è admin
+        //TODO: sarà utente e basta
+        if (u != null && u.isAdmin()) //TODO: implementare logica admin
+            System.out.println("sei admin");
 
 
-            chain.doFilter(req, res);
-        }
+        chain.doFilter(req, res);
     }
 }

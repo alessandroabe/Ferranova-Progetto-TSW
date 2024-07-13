@@ -33,8 +33,7 @@ public class LogoutServlet extends HttpServlet {
         CarrelloDAO.doDelete(u.getId());
         CarrelloDAO.doInsert((Carrello) session.getAttribute("Carrello"));
         session.invalidate();
-        HttpSession s = request.getSession();
-        s.setAttribute("Carrello", new Carrello());
+
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
