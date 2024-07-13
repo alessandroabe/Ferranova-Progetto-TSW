@@ -6,9 +6,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.unisa.abeilleamorellifontana_pj.Model.SHA1PasswordVerifier;
-import org.unisa.abeilleamorellifontana_pj.Model.Utente;
-import org.unisa.abeilleamorellifontana_pj.Model.UtenteDAO;
+import org.unisa.abeilleamorellifontana_pj.Model.*;
 
 @WebServlet(name = "registrazione", value = "/registrazione")
 public class RegistrazioneServlet extends HttpServlet {
@@ -29,17 +27,19 @@ public class RegistrazioneServlet extends HttpServlet {
 
         UtenteDAO utenteDAO = new UtenteDAO();
 
+        //TODO: fare controlli
+        Utente utente = new Utente(0, nome, email, SHA1PasswordVerifier.sha1Hash(password), telefono, false);
 
-        Utente utente_da_inserire = new Utente(1, nome, email, SHA1PasswordVerifier.sha1Hash(password), telefono, !(admin == null));
-        boolean exist_nome = utenteDAO.doInsert(utente_da_inserire);
 
-
-        if (!exist_nome) {
-            session.setAttribute("UtenteConnesso", utente_da_inserire);
-
+        int id;
+        if ((id = utenteDAO.doInsert(utente)) > 0) {
+            utente.setId(id);
+            session.setAttribute("UtenteConnesso", utente);
+            Carrello carrello = (Carrello) session.getAttribute("Carrello");
+            carrello.setIdUtente(utente.getId());
         } else {
 
-           response.sendRedirect("registrazione.jsp?error=1");//ritorno alla jsp con errore
+            response.sendRedirect("registrazione.jsp?error=1");//ritorno alla jsp con errore
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");//ritorno alla homepage una volta registrato se non c'e' gia un account esistente
