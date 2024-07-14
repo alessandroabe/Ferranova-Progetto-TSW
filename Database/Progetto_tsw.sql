@@ -151,8 +151,8 @@ VALUES ('Agricoltura', 'Agricoltura_Utensili', 'Utensili per l\'agricoltura'),
        ('Ferramenta', 'Ferramenta_Prodotti', 'Prodotti di ferramenta');
 
 INSERT INTO Prodotto (titolo, descrizione, quantità, id_promozione, categoria, prezzo)
-VALUES ('Cacciavite a stella', 'Cacciavite per viti a stella', 2, NULL, 'Edilizia', 19.90),
-       ('Trapano a percussione', 'Trapano a percussione con kit di punte', 50, NULL, 'Ferramenta', 499.00);
+VALUES ('Cacciavite a stella', 'Il cacciavite a stella Pro 210 di Vales è un cacciavite professionale a croce con testa philipps e realizzato in acciaio cromo vanadio.</br>La punta è magnetica e brunita. Grazie all''impugnatura morbida bimateriale con punti di appoggio per il pollice la presa sarà sempre salda. sicura e forte.</br>Lunghezza totale: 210 mm</br>Punta: PH2', 2, NULL, 'Edilizia', 9.00),
+       ('Trapano a percussione', 'La linea Easy Bosch – un comodo aiuto in tutti i tuoi progetti.</br>Compatto, leggero ed ergonomico per lavorare in comodità e forare senza fatica nella muratura fino a 13 mm e nel legno fino a 25 mm.</br>Levetta di regolazione elettronica per gestire il numero di giri durante la foratura.</br>Mandrino autoserrante a doppia bussola, per sostituire la punta in modo semplice e veloce.</br>Dotazione: EasyImpact 630, valigetta', 50, NULL, 'Ferramenta', 59.00);
 
 INSERT INTO Carrello (id_utente, id_prodotto, quantità)
 VALUES (4, 1, 3),
