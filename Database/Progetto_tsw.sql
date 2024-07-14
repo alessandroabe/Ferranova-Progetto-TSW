@@ -137,23 +137,42 @@ VALUES ('Natale 2023', 'Sconto del 10% su tutti i prodotti', 10),
 
 
 INSERT INTO Categoria (sigla, descrizione)
-VALUES ('Agricoltura', 'Utensili e prodotti agricoli'),
-       ('Falegnameria', 'Utensili e prodotti per la lavorazione del legno'),
+VALUES ('Giardinaggio', 'Utensili e prodotti agricoli'),
        ('Ferramenta', 'Utensili e prodotti di ferramanta'),
-       ('Edilizia', 'Utensili e prodotti per la costruzione di case, pavimentazioni e infissi'),
-       ('Energia', 'Pannelli solari, pale eoliche domestiche e condensatori');
+       ('Edilizia', 'Utensili e prodotti per la costruzione di case, pavimentazioni e infissi');
 
 /*FIXME: finire di mettere le categorie*/
 INSERT INTO Categoria (macrocategoria, sigla, descrizione)
-VALUES ('Agricoltura', 'Agricoltura_Utensili', 'Utensili per l\'agricoltura'),
-       ('Agricoltura', 'Agricoltura_Prodotti', 'Prodotti per l\'agricoltura'),
+VALUES ('Giardinaggio', 'Agricoltura_Utensili', 'Utensili per l\'agricoltura'),
+       ('Giardinaggio', 'Agricoltura_Prodotti', 'Prodotti per l\'agricoltura'),
        ('Ferramenta', 'Ferramenta_Utensili', 'Utensili di ferramenta'),
        ('Ferramenta', 'Ferramenta_Prodotti', 'Prodotti di ferramenta');
 
 INSERT INTO Prodotto (titolo, descrizione, quantità, id_promozione, categoria, prezzo)
-VALUES ('Cacciavite a stella', 'Il cacciavite a stella Pro 210 di Vales è un cacciavite professionale a croce con testa philipps e realizzato in acciaio cromo vanadio.</br>La punta è magnetica e brunita. Grazie all''impugnatura morbida bimateriale con punti di appoggio per il pollice la presa sarà sempre salda. sicura e forte.</br>Lunghezza totale: 210 mm</br>Punta: PH2', 2, NULL, 'Edilizia', 9.00),
-       ('Trapano a percussione', 'La linea Easy Bosch – un comodo aiuto in tutti i tuoi progetti.</br>Compatto, leggero ed ergonomico per lavorare in comodità e forare senza fatica nella muratura fino a 13 mm e nel legno fino a 25 mm.</br>Levetta di regolazione elettronica per gestire il numero di giri durante la foratura.</br>Mandrino autoserrante a doppia bussola, per sostituire la punta in modo semplice e veloce.</br>Dotazione: EasyImpact 630, valigetta', 50, NULL, 'Ferramenta', 59.00);
-
+VALUES ('Cacciavite a stella', 'Il cacciavite a stella Pro 210 di Vales è un cacciavite professionale a croce con testa philipps e realizzato in acciaio cromo vanadio.</br>La punta è magnetica e brunita.</br>Grazie all''impugnatura morbida bimateriale con punti di appoggio per il pollice la presa sarà sempre salda, sicura e forte.</br>Lunghezza totale: 210 mm</br>Punta: PH2', 2, NULL, 'Ferramenta', 9.00),
+       ('Trapano a percussione', 'La linea Easy Bosch – un comodo aiuto in tutti i tuoi progetti.</br>Compatto, leggero ed ergonomico per lavorare in comodità e forare senza fatica nella muratura fino a 13 mm e nel legno fino a 25 mm.</br>Levetta di regolazione elettronica per gestire il numero di giri durante la foratura.</br>Mandrino autoserrante a doppia bussola, per sostituire la punta in modo semplice e veloce.</br>Dotazione: EasyImpact 630, valigetta', 50, NULL, 'Ferramenta', 59.00),
+		('Martello', 'Martello da carpentiere con testa in acciaio forgiato e manico in legno resistente.</br>Peso: 500 g</br>Manico: 300 mm', 30, NULL, 'Ferramenta', 15.00),
+		('Cesoie per lamiera', 'Cesoie per lamiera con lama in acciaio temprato e manici ergonomici.</br>Taglio fino a 1.2 mm di spessore', 20, NULL, 'Ferramenta', 25.00),
+		('Sega circolare', 'Sega circolare elettrica con lama da 185 mm.</br>Potenza: 1200 W</br>Velocità: 5000 giri/min</br>Profondità di taglio: 65 mm', 15, NULL, 'Ferramenta', 79.00),
+		('Livella laser', 'Livella laser autolivellante con portata fino a 15 metri.</br>Precisione: ±0.3 mm/m</br>Durata batteria: 20 ore</br>Dotazione: custodia', 25, NULL, 'Edilizia', 99.00),
+		('Trapano avvitatore', 'Trapano avvitatore a batteria 18V con due batterie al litio e caricabatterie.</br>Coppia di serraggio: 40 Nm</br>Velocità: 0-1500 giri/min', 40, NULL, 'Ferramenta', 89.00),
+		('Pala da neve', 'Pala da neve in plastica resistente con manico in alluminio.</br>Larghezza: 50 cm</br>Lunghezza manico: 130 cm', 50, NULL, 'Giardinaggio', 19.00),
+		('Decespugliatore', 'Decespugliatore a benzina con motore da 25cc e lama a doppio filo.</br>Lunghezza asta: 180 cm</br>Impugnatura regolabile', 10, NULL, 'Giardinaggio', 149.00),
+		('Tosaerba elettrico', 'Tosaerba elettrico con motore da 1600 W e larghezza di taglio di 38 cm.</br>Regolazione altezza: 20-70 mm</br>Capacità sacco raccolta: 45 L', 12, NULL, 'Giardinaggio', 129.00),
+		('Forbici per potatura', 'Forbici per potatura con lama in acciaio inox e manico ergonomico.</br>Lunghezza lama: 60 mm', 100, NULL, 'Giardinaggio', 12.00),
+		('Carriola', 'Carriola da giardino con struttura in acciaio e vasca in plastica resistente.</br>Capacità: 80 L</br>Ruota pneumatica', 20, NULL, 'Giardinaggio', 39.00),
+		('Punte per trapano', 'Set di punte per trapano in acciaio HSS per metallo, legno e muratura.</br>Include 10 punte di varie dimensioni', 50, NULL, 'Ferramenta', 15.00),
+		('Tagliapiastrelle', 'Tagliapiastrelle manuale con lama in tungsteno.</br>Capacità di taglio: fino a 600 mm</br>Base antiscivolo', 5, NULL, 'Edilizia', 45.00),
+		('Cemento rapido', 'Cemento rapido per piccole riparazioni e fissaggi.</br>Sacchetto da 5 kg</br>Tempo di presa: 15 minuti', 80, NULL, 'Edilizia', 7.00),
+		('Scala telescopica', 'Scala telescopica in alluminio con 12 gradini.</br>Altezza massima: 3.8 m</br>Portata: 150 kg', 8, NULL, 'Edilizia', 99.00),
+		('Saldatrice a filo', 'Saldatrice a filo continuo per lavori di saldatura su acciaio e acciaio inox.</br>Potenza: 140 A</br>Include maschera e guanti', 4, NULL, 'Ferramenta', 199.00),
+		('Guanti da lavoro', 'Guanti da lavoro in pelle con rinforzi su palmo e dita.</br>Taglia: universale', 150, NULL, 'Edilizia', 5.00),
+		('Rastrello', 'Rastrello da giardino con denti in acciaio e manico in legno.</br>Larghezza: 40 cm</br>Lunghezza manico: 150 cm', 60, NULL, 'Giardinaggio', 14.00),
+		('Vanga', 'Vanga da giardino in acciaio con manico in legno ergonomico.</br>Lunghezza lama: 25 cm</br>Lunghezza manico: 120 cm', 40, NULL, 'Giardinaggio', 18.00),
+		('Secchiello per malta', 'Secchiello in plastica resistente per miscelare malta e cemento.</br>Capacità: 20 L', 70, NULL, 'Edilizia', 8.00),
+		('Tagliasiepi', 'Tagliasiepi elettrico con lama da 55 cm e motore da 600 W.</br>Impugnatura ergonomica e sistema anti-vibrazione', 15, NULL, 'Giardinaggio', 89.00);
+        
+        
 INSERT INTO Carrello (id_utente, id_prodotto, quantità)
 VALUES (4, 1, 3),
        (4, 2, 1);
