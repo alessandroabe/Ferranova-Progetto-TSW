@@ -25,9 +25,8 @@
 
 </c:if>
 
-<main>
-    <div class="catconteiner">
-        <div class="catrow">
+<div class="container">
+    <div class="catcontainer">
             <div class="categoria">
                 <a href="catalogo?categoria=Ferramenta"><img src="images/Ferramenta.png" alt="ferramenta" width="400" height="400"></a>
             </div>
@@ -37,9 +36,8 @@
             <div class="categoria">
                 <a href="catalogo?categoria=Giardinaggio"><img src="images/Giardinaggio.png" alt="agricoltura" width="400" height="400"></a>
             </div>
-        </div>
     </div>
-</main>
+</div>
 
 
 <%@ include file="./WEB-INF/footer.jsp" %>

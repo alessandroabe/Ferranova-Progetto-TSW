@@ -9,8 +9,8 @@
     gap: 60px;
     align-items: center;
     width: 80%;
-    margin: 10vh 10% 10vh 10%;
-    padding: 80px 0;
+    margin: 5vh 10% 10vh 10%;
+    padding: 0;
     flex-direction: row;
 }
 
@@ -88,7 +88,7 @@
 @media (max-width: 600px) {
     .product-container {
         flex-direction: column;
-        margin: 5vh 10% 5vh 10%;
+        margin: 2vh 10% 5vh 10%;
     }
 
     .product-image,

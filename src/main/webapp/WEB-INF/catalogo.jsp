@@ -18,11 +18,11 @@
 
 <%@ include file="navbar.jsp" %>
 
-<div class="conteiner">
+<div class="container-catalogo">
     <div class="sidebar">
         <!-- FIXME: finisci e rendi dinamico con macrocategorie-->
         <h2>Ferramenta</h2>
-        <ul>
+        <ul class="ul-sottocategorie">
             <li>Utensili</li>
             <li>Viteria</li>
             <li>Oggettistica</li>

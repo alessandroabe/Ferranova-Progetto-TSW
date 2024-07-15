@@ -15,6 +15,7 @@
     color: rgb(0, 70, 28);
     font-weight: bold;
     font-size: 18px;
+    border: 0;
     border-radius: 0 3px 3px 0;
     background-color: rgba(255, 255, 255, 0.5);
     cursor: pointer;

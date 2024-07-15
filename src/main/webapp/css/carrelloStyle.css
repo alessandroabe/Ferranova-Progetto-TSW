@@ -4,12 +4,15 @@
     font-family: sans-serif;
 }
 
+body{
+    padding-top: 60px !important;
+}
+
 .container {
     display: flex;
     flex-direction: row;
     gap: 20px;
     background: #fff;
-    margin-top: 7vh;
 }
 
 .cart {
@@ -59,21 +62,23 @@ th {
     display: flex;
 }
 
-.minus{
+.minus, .plus{
     margin: 0 15px 0 0;
     font-size: 20px;
+    background-color: transparent;
+    border: 0;
     cursor: pointer;
 }
 
 .plus{
     margin: 0 15px;
-    font-size: 20px;
-    cursor: pointer;
 }
 
 .delete{
     margin-left: 30px;
     font-size: 15px;
+    background-color: transparent;
+    border: 0;
     color: red;
     cursor: pointer;
 }
@@ -120,7 +125,7 @@ th {
 @media(max-width: 600px) {
     .container {
         width: 90%;
-        margin: 70px auto;
+        margin: 0 auto 70px auto;
         flex-direction: column;
     }
 

@@ -32,8 +32,8 @@
             </div>
         </c:forEach>
 
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a> <!--il codice corrisponde al simbolo della freccetta-->
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <button class="prev" onclick="plusSlides(-1)">&#10094;</button> <!--il codice corrisponde al simbolo della freccetta-->
+        <button class="next" onclick="plusSlides(1)">&#10095;</button>
     </div>
 
     <div class="product-details">

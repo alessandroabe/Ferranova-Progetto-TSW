@@ -27,6 +27,7 @@ footer {
 .footer-col {
     width: 100%;
     background-color: transparent;
+    text-align: center;
 }
 
 .footer-col h3 {
@@ -36,7 +37,12 @@ footer {
     color: white;
 }
 
-.footer-col ul li{
+.footer-col .ul-link{
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col .ul-link li{
     font-size: 12px;
     margin-bottom: 4px;
     color: white;

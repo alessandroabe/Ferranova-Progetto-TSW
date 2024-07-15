@@ -47,10 +47,10 @@
                     <td>
                         <!--todo implemtare le funzioni di incremento decremento e delete-->
                         <div class="quantity-container">
-                            <a class="minus" onclick="">&minus;</a>
+                            <button class="minus" onclick="">&minus;</button>
                             <p>${mappa[elemento.id]} Pz.</p>
-                            <a class="plus" onclick="">&plus;</a>
-                            <a class="delete" onclick="">rimuovi</a>
+                            <button class="plus" onclick="">&plus;</button>
+                            <button class="delete" onclick="">rimuovi</button>
                         </div>
 
                     </td>

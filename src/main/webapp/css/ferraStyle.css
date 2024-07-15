@@ -1,59 +1,69 @@
 * {
     margin: 0;
-    padding: 0;
     font-family: sans-serif;
     color: white;
 }
 
-main {
-    width: 80%;
-    margin: 20vh 10%;
-
+#saluto {
+    margin-top: 0;
+    margin-left: calc(10% + 20px);
+    color: black;
+    font-size: 23px;
 }
 
-#saluto {
-    margin-top: 15vh;
-    margin-left: 10%;
-    color: black;
-    font-size: 25px;
+.container{
+    margin-top: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .catcontainer {
-    width: 80%;
-    margin: 0 10%;
+    width: calc(80% - 40px);
+    margin: 10vh 10%;
     padding: 0 20px;
     justify-content: center;
-}
-
-.catrow {
-    margin-top: 10vh;
     display: flex;
-    flex-wrap: wrap;
+    gap: 16px;
 }
 
 .categoria {
-    flex: 1; /* Each category takes an equal part of the available space */
-    margin: 10px; /* External margin of 10px */
-    transition: transform 0.3s ease-in-out; /* Animation time */
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
 }
 
 .categoria img {
     width: 100%;
     height: auto;
-    border-radius: 10px; /* Rounded borders */
+    border-radius: 10px;
 }
 
 .categoria:hover {
-    transform: scale(1.03); /* Enlarge the element to 103% */
+    transform: scale(1.03);
 }
 
 @media(max-width: 600px) {
-    main{
-        margin: 10vh 10%;
+
+    .container{
+        margin: 5vh 0 20vh 0;
+        scrollbar-color: transparent transparent;
+        overflow: scroll;
     }
 
-    .catrow {
-        margin-top: 5vh;
-        flex-direction: column;
+    .catcontainer{
+        width: 300%;
+        margin: 5vh 0 10vh 0;
+        padding: 0;
+        overflow: auto;
+        flex-direction: row;
+        gap: 0;
+    }
+
+    .categoria{
+        width: 100%;
+    }
+
+    .categoria img{
+        width: 80%;
+        margin: 0 10%;
     }
 }

@@ -4,8 +4,11 @@
     font-family: sans-serif;
 }
 
-.conteiner{
-    margin-top: 60px;
+body{
+    padding-top: 60px !important;
+}
+
+.container-catalogo{
     display: flex;
 }
 
@@ -20,14 +23,18 @@
     margin-bottom: 25px;
 }
 
-.sidebar ul li{
+.sidebar .ul-sottocategorie{
+    list-style: none;
+}
+
+.sidebar .ul-sottocategorie li{
     color: #29451c;
     margin: 15px 0;
     text-decoration: none;
     cursor: pointer;
 }
 
-.sidebar ul li:hover{
+.sidebar .ul-sottocategorie li:hover{
     text-decoration: underline;
 }
 
@@ -96,7 +103,7 @@
 }
 
 @media (max-width: 600px) {
-    .conteiner{
+    .container-catalogo{
         flex-direction: column;
     }
     .sidebar {

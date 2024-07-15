@@ -3,12 +3,11 @@
 
 <nav>
 
-    <ul>
-        <li style="float: left;"><a class="logo" href="index.jsp"><img src="images/logo.png" alt="home" width="111"
+    <ul class="ul-navbar">
+        <li><a class="logo" href="index.jsp"><img src="images/logo.png" alt="home" width="111"
                                                                        height="16"></a></li>
+        <div class="dropdown-link">
 
-        <!--questo a destra-->
-        <li><a href="${pageContext.request.contextPath}/carrello"><img src="images/carrello.png" alt="carrello" width="15" height="15"></a></li>
 
         <li class="dropdown">
             <a href="#"><img src="images/utente.png" alt="area utente" width="15" height="15"></a>
@@ -26,5 +25,9 @@
                 </c:if>
             </div>
         </li>
+
+            <li><a href="${pageContext.request.contextPath}/carrello"><img src="images/carrello.png" alt="carrello" width="15" height="15"></a></li>
+
+        </div>
     </ul>
 </nav>
