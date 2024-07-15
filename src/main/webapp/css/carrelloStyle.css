@@ -51,6 +51,33 @@ th {
     margin-right: 10px;
 }
 
+.quantity-title{
+    transform: translateX(15px);
+}
+
+.quantity-container{
+    display: flex;
+}
+
+.minus{
+    margin: 0 15px 0 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.plus{
+    margin: 0 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.delete{
+    margin-left: 30px;
+    font-size: 15px;
+    color: red;
+    cursor: pointer;
+}
+
 .summary {
     display: flex;
     flex: 1;
@@ -111,5 +138,47 @@ th {
 
     .summary button{
         margin-top: 15px;
+    }
+
+    table {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody, tr, td {
+        display: block;
+        width: 100%;
+    }
+
+    td {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    .product-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-info img {
+        margin: 0 0 10px 0;
+    }
+
+    .quantity-container {
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .minus, .plus, .delete {
+        margin: 0;
+    }
+
+    .quantity-container p {
+        margin: 0 10px;
     }
 }

@@ -23,7 +23,7 @@
             <thead>
             <tr>
                 <th>Prodotto</th>
-                <th>Quantità</th>
+                <th class="quantity-title">Quantità</th>
                 <th>Prezzo</th>
             </tr>
             </thead>
@@ -35,15 +35,25 @@
                 <tr>
                     <td>
                         <div class="product-info">
-                            <img src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png"
-                                 alt="immagine ${elemento.titolo}">
+                            <a href="${pageContext.request.contextPath}/prod?id_prodotto=${elemento.id}"><img src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png"
+                                                                           alt="immagine ${elemento.titolo}"></a>
+
                             <div>
                                 <p>${elemento.titolo}</p>
                                 <span>Cod. prodotto: ${elemento.id}</span>
                             </div>
                         </div>
                     </td>
-                    <td> ${mappa[elemento.id]} Pz.</td>
+                    <td>
+                        <!--todo implemtare le funzioni di incremento decremento e delete-->
+                        <div class="quantity-container">
+                            <a class="minus" onclick="">&minus;</a>
+                            <p>${mappa[elemento.id]} Pz.</p>
+                            <a class="plus" onclick="">&plus;</a>
+                            <a class="delete" onclick="">rimuovi</a>
+                        </div>
+
+                    </td>
                     <td><fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                         <fmt:formatNumber value="${elemento.prezzo * mappa[elemento.id] }" type="currency"
                                           currencySymbol="€"/></td>
@@ -66,7 +76,7 @@
         <p class="total">Totale: <span><fmt:setLocale value="fr_FR"/>
             <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                     <fmt:formatNumber value="${sum + spedizione}" type="currency" currencySymbol="€"/></span></p>
-        <button>ACQUISTA</button>
+        <button>Procedi</button>
     </div>
 </div>
 
