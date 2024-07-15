@@ -9,7 +9,7 @@
     gap: 60px;
     align-items: center;
     width: 80%;
-    margin: 0 10% 5vh 10%;
+    margin: 10vh 10% 10vh 10%;
     padding: 80px 0;
     flex-direction: row;
 }
@@ -28,16 +28,19 @@
 .product-image,
 .product-details {
     width: 50%;
+    height: 350px;
 }
 
 .product-image img {
     width: 80%;
-    height: auto;
+    height: 80%;
+    object-fit: contain;
 }
 
 .product-title {
-    font-size: larger;
-    margin: 10px 0;
+    font-size: 25px;
+    margin: 5% 0;
+    font-weight: bold;
 }
 
 .product-price {
@@ -47,7 +50,7 @@
 
 .quantity-container {
     font-size: 15px ;
-    margin: 35px 0;
+    margin: 90px 0 25px 0;
 }
 
 #quantity{
@@ -60,6 +63,7 @@
     color: #fff;
     border: none;
     border-radius: 5px;
+    margin-top: 20px;
     padding: 10px 20px;
     cursor: pointer;
 }
@@ -84,6 +88,7 @@
 @media (max-width: 600px) {
     .product-container {
         flex-direction: column;
+        margin: 5vh 10% 5vh 10%;
     }
 
     .product-image,
