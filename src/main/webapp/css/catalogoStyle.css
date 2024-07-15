@@ -100,15 +100,15 @@
         flex-direction: column;
     }
     .sidebar {
-        width: 100%;
+        width: calc(100% - 20px);
         padding: 10px;
     }
     .content {
-        width: 100%;
+        width: calc(100% - 20px);
         padding: 20px 10px;
     }
     .product {
-        width: 42%;
+        width: calc(48% - 24px);
         margin: 1%;
     }
 }

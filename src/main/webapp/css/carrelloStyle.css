@@ -98,7 +98,8 @@ th {
     }
 
     .cart{
-        padding-top: 0;
+        padding-top: 15px;
+        margin-left: 0;
     }
 
     .summary {

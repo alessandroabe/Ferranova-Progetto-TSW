@@ -7,7 +7,7 @@
 
 .wrapper{
     background-color: rgb(255, 255, 255);
-    width: 30%;
+    width: calc(30% - 40px);
     margin-left: 35%;
     margin-right: 35%;
     margin-top: 20vh;
@@ -82,16 +82,18 @@ input#submit{
 
 @media (max-width: 600px){
     .wrapper{
-        width: 70%;
+        width: calc(70% - 40px);
         margin-left: 15%;
         margin-right: 15%;
+        margin-top: 10vh;
     }
 }
 
 @media (min-width: 601px) and (max-width: 850px){
     .wrapper{
-        width: 50%;
+        width: calc(50% - 40px);
         margin-left: 25%;
         margin-right: 25%;
+        margin-top: 10vh;
     }
 }
