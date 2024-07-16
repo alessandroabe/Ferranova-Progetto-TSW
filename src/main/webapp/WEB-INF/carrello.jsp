@@ -16,71 +16,110 @@
 <body>
 <%@ include file="navbar.jsp" %>
 
-<div class="container">
-    <div class="cart">
-        <h2>Carrello</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Prodotto</th>
-                <th class="quantity-title">Quantità</th>
-                <th>Prezzo</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:set var="mappa" value="${Carrello.prodottiQuantita}"/>
-            <c:set var="lista" value="${lista}"/>
-            <c:forEach var="elemento" items="${lista}">
-                <!-- TODO: fare in modo, penso con ajax, che si aggiorna la cosa con un input type numebr tipo nella pag dispositivi-->
-                <tr>
-                    <td>
-                        <div class="product-info">
-                            <a href="${pageContext.request.contextPath}/prod?id_prodotto=${elemento.id}"><img src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png"
-                                                                           alt="immagine ${elemento.titolo}"></a>
+<c:set var="mappa" value="${Carrello.prodottiQuantita}"/>
+<c:set var="lista" value="${lista}"/>
 
-                            <div>
-                                <p>${elemento.titolo}</p>
-                                <span>Cod. prodotto: ${elemento.id}</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <!--todo implemtare le funzioni di incremento decremento e delete-->
-                        <div class="quantity-container">
-                            <button class="minus" onclick="">&minus;</button>
-                            <p>${mappa[elemento.id]} Pz.</p>
-                            <button class="plus" onclick="">&plus;</button>
-                            <button class="delete" onclick="">rimuovi</button>
-                        </div>
+<c:choose>
 
-                    </td>
-                    <td><fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                        <fmt:formatNumber value="${elemento.prezzo * mappa[elemento.id] }" type="currency"
-                                          currencySymbol="€"/></td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
-    <div class="summary">
-        <!-- TODO: conviene farlo in js sotto una certa cifra l'importo è gratis-->
+    <c:when test="${not empty lista}">
+        <div class="container">
+            <div class="cart">
+                <h2>Carrello</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Prodotto</th>
+                        <th class="quantity-title">Quantità</th>
+                        <th>Prezzo</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-        <c:set var="spedizione" value="${ sum <= 100 ? 10 : 0  }"/>
-        <h2>Riassunto</h2>
-        <p>Subtotale: <span><fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                    <fmt:formatNumber value="${sum }" type="currency" currencySymbol="€"/></span></p>
-        <p>Costi di spedizione: <span><fmt:setLocale value="fr_FR"/>
-            <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                    <fmt:formatNumber value="${spedizione }" type="currency" currencySymbol="€"/>
-         </span></p>
-        <p class="total">Totale: <span><fmt:setLocale value="fr_FR"/>
-            <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                    <fmt:formatNumber value="${sum + spedizione}" type="currency" currencySymbol="€"/></span></p>
-        <button>Procedi</button>
-    </div>
-</div>
+                    <c:forEach var="elemento" items="${lista}">
+                        <!-- TODO: fare in modo, penso con ajax, che si aggiorna la cosa con un input type numebr tipo nella pag dispositivi-->
+                        <tr id="product-row-${elemento.id}">
+                            <td>
+                                <div class="product-info">
+                                    <a href="${pageContext.request.contextPath}/prod?id_prodotto=${elemento.id}"><img
+                                            src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png"
+                                            alt="immagine ${elemento.titolo}"></a>
+
+                                    <div>
+                                        <p>${elemento.titolo}</p>
+                                        <span>Cod. prodotto: ${elemento.id}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <!--todo implemtare le funzioni di incremento decremento e delete-->
+                                <div class="quantity-container">
+                                    <button class="minus" onclick="updateCart(${elemento.id}, 'update', -1)">&minus;</button>
+                                    <p id="quantity-${elemento.id}">${mappa[elemento.id]} Pz.</p>
+                                    <button class="plus" onclick="updateCart(${elemento.id}, 'update', 1)">&plus;</button>
+                                    <button class="delete" onclick="updateCart(${elemento.id}, 'remove', 0)">rimuovi</button>
+                                </div>
+
+                            </td>
+                            <td><fmt:setLocale value="fr_FR"/>
+                                <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                                <fmt:formatNumber value="${elemento.prezzo * mappa[elemento.id] }" type="currency"
+                                                  currencySymbol="€"/></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <div class="summary">
+                <!-- TODO: conviene farlo in js sotto una certa cifra l'importo è gratis-->
+
+                <c:set var="spedizione" value="${ sum <= 100 ? 10 : 0  }"/>
+                <h2>Riassunto</h2>
+                <p>Subtotale: <span><fmt:setLocale value="fr_FR"/>
+                    <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                        <fmt:formatNumber value="${sum }" type="currency" currencySymbol="€"/></span></p>
+                <p>Costi di spedizione: <span><fmt:setLocale value="fr_FR"/>
+                    <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                        <fmt:formatNumber value="${spedizione }" type="currency" currencySymbol="€"/>
+             </span></p>
+                <p class="total">Totale: <span><fmt:setLocale value="fr_FR"/>
+                    <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                        <fmt:formatNumber value="${sum + spedizione}" type="currency" currencySymbol="€"/></span></p>
+                <button>Procedi</button>
+            </div>
+        </div>
+    </c:when>
+
+    <c:otherwise>
+        <div class="cart-empty">
+            <img src="${pageContext.request.contextPath}/images/CarrelloVuoto.png" alt="carrello vuoto">
+        </div>
+    </c:otherwise>
+</c:choose>
 
 <%@ include file="footer.jsp" %>
+
+
+<script>
+    function updateCart(productId, action, quantity) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "${pageContext.request.contextPath}/carrelloAjax", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    if (action === 'update') {
+                        document.getElementById("quantity-" + productId).textContent = xhr.responseText + " Pz.";
+                    } else if (action === 'remove') {
+                        const row = document.getElementById("product-row-"+ productId);
+                        row.parentNode.removeChild(row);
+                    }
+            }
+        };
+        xhr.send("prod=" + productId + "&action=" + action +"&quantity=" + quantity);
+    }
+
+
+
+</script>
 
 </body>
 </html>

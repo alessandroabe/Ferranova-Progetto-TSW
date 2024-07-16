@@ -29,8 +29,14 @@ public class Carrello {
     }
 
     public void aggiungiProdotto(int idProdotto, int quantita) {
-        if (idProdotto > 0 && quantita > 0) {
+        if (idProdotto > 0) {
             prodottiQuantita.merge(idProdotto, quantita, Integer::sum);
+        }
+
+        if (prodottiQuantita.containsKey(idProdotto)) {
+            if (this.prodottiQuantita.get(idProdotto) <= 0) {
+                prodottiQuantita.remove(idProdotto);
+            }
         }
     }
 
@@ -40,15 +46,6 @@ public class Carrello {
 
     public void rimuoviProdotto(int idProdotto) {
         prodottiQuantita.remove(idProdotto);
-    }
-
-    public void abbassaQuantitaProdotto(int idProdotto, int quantitaDiminuita) {
-        if (prodottiQuantita.containsKey(idProdotto)) {
-        aggiungiProdotto(idProdotto, -quantitaDiminuita);
-            if (quantitaDiminuita <= 0) {
-                prodottiQuantita.remove(idProdotto);
-            }
-        }
     }
 
 
