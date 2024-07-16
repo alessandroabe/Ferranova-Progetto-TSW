@@ -20,7 +20,6 @@
                 <c:if test="${not empty UtenteConnesso}">
                     <a href="profilo.jsp">Profilo</a>
                     <a href="ordini.jsp">Ordini</a>
-                    <a href="preferiti.jsp">Preferiti</a>
                     <a href="logout">Logout</a>
                 </c:if>
             </div>

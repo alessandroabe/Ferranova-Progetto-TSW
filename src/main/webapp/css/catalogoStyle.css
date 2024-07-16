@@ -53,6 +53,7 @@ body{
     border-radius: 5px;
     text-align: center;
     transition: border-color 0.3s;
+    position: relative;
 }
 
 /*contain serve ad tenerèl'immagine di una buona qualità e ridimensionare*/
@@ -100,6 +101,13 @@ body{
 
 .product-button:hover{
     background-color: #29451c;
+}
+
+.product .alert{
+    position: absolute;
+    font-size: 15px;
+    left: 0;
+    width: 100%;
 }
 
 @media (max-width: 600px) {

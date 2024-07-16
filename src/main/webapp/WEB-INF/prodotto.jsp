@@ -22,7 +22,6 @@
 
 
     <div class="product-image">
-        <!--todo fare if nel caso ci sia una solo foto togliere lo slider-->
         <c:forEach var="i" begin="1" end="${num_foto}">
 
             <div class="mySlides">
@@ -41,7 +40,7 @@
         <div class="product-price">
             <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
             <fmt:formatNumber value="${prodotto.prezzo}" type="currency" currencySymbol="€"/></div>
-        <form action="" method="post">
+
 
             <div class="quantity-container">
                 <label for="quantity">Pezzi disponibili: ${prodotto.quantita}</label><br>
@@ -52,7 +51,10 @@
             <!--TODO mettere soltanto le jstl per iterare i prodotti in base al prodotto cliccato e inserirlo nell'ajax, adesso è con il form solo per testing-->
 
             <button onclick="addToCart(${prodotto.id})" class="add-to-cart">Aggiungi al carrello</button>
-        </form>
+
+            <p id="alert" class="alert"></p>
+
+
 
         <script>
             function addToCart(product_id) {
@@ -62,11 +64,33 @@
                 //se si vuole passare un parametro da una pagina jsp
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
-                        if (xhr.status === 200) {
-                            // La richiesta è stata completata con successo
-                            alert("Prodotto aggiunto con successo");
-                        } else {
-                            alert("errore");
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            var alertElement = document.getElementById("alert");
+                            if (xhr.status === 200) {
+                                alertElement.innerHTML = "Aggiunto al carrello";
+                                alertElement.style.color = "#335e1e";
+                            } else {
+                                alertElement.innerHTML = "Errore";
+                                alertElement.style.color = "red";
+                            }
+
+                            alertElement.style.opacity = 0;
+                            alertElement.style.transform = "translateY(-20px)";
+                            alertElement.style.display = "block";
+                            alertElement.offsetHeight; // Forza il reflow per applicare le nuove proprietà
+                            alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                            alertElement.style.opacity = 1;
+                            alertElement.style.transform = "translateY(20px)";
+
+                            setTimeout(function() {
+                                alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                                alertElement.style.opacity = 0;
+                                alertElement.style.transform = "translateY(-20px)";
+                            }, 2000); //dopo 3 secondi scompare
+
+                            setTimeout(function() {
+                                alertElement.style.display = "none";
+                            }, 2500); //dopo 4 secondi scompare
                         }
                     }
                 };

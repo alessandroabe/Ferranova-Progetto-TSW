@@ -36,7 +36,6 @@
                     <tbody>
 
                     <c:forEach var="elemento" items="${lista}">
-                        <!-- TODO: fare in modo, penso con ajax, che si aggiorna la cosa con un input type numebr tipo nella pag dispositivi-->
                         <tr id="product-row-${elemento.id}">
                             <td>
                                 <div class="product-info">
@@ -51,7 +50,6 @@
                                 </div>
                             </td>
                             <td>
-                                <!--todo implemtare le funzioni di incremento decremento e delete-->
                                 <div class="quantity-container">
                                     <button class="minus" onclick="updateCart(${elemento.id}, 'update', -1)">&minus;</button>
                                     <p id="quantity-${elemento.id}">${mappa[elemento.id]} Pz.</p>
@@ -117,7 +115,7 @@
         xhr.send("prod=" + productId + "&action=" + action +"&quantity=" + quantity);
     }
 
-
+    <!--TODO: aggiungere funzione ajax per aggiornare i prezzi real time-->
 
 </script>
 

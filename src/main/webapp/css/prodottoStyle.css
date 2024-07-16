@@ -72,6 +72,10 @@
     background-color: #29451c;
 }
 
+.alert {
+     font-size: 15px;
+ }
+
 .product-description {
     display: block;
     margin: 30px 10% 20vh 10%;

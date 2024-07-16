@@ -43,34 +43,55 @@
                 <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                 <fmt:formatNumber value="${entry.prezzo}" type="currency" currencySymbol="€"/></div>
             <button onclick="addToCart(${entry.id})" class="product-button">Aggiungi al carrello</button>
+            <p id="alert-${entry.id}" class="alert"></p>
         </div>
 
+
+
     <script>
-    function addToCart(product_id){
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "${pageContext.request.contextPath}/carrelloAjax?prod=" + product_id + "&quantity=" + 1, true);
-        //se si vuole passare un parametro da una pagina jsp
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    // La richiesta è stata completata con successo
-                    alert("Prodotto aggiunto con successo");
-                }else{
-                    alert("errore");
+        function addToCart(product_id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "${pageContext.request.contextPath}/carrelloAjax?prod=" + product_id + "&quantity=" + 1, true);
+            //se si vuole passare un parametro da una pagina jsp
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        var alertElement = document.getElementById("alert-" + product_id);
+                        if (xhr.status === 200) {
+                            alertElement.innerHTML = "Aggiunto al carrello";
+                            alertElement.style.color = "#335e1e";
+                        } else {
+                            alertElement.innerHTML = "Errore";
+                            alertElement.style.color = "red";
+                        }
+
+                        alertElement.style.opacity = 0;
+                        alertElement.style.transform = "translateY(-10px)";
+                        alertElement.style.display = "block";
+                        alertElement.offsetHeight; // Forza il reflow per applicare le nuove proprietà
+                        alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                        alertElement.style.opacity = 1;
+                        alertElement.style.transform = "translateY(10px)";
+
+                        setTimeout(function() {
+                            alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                            alertElement.style.opacity = 0;
+                            alertElement.style.transform = "translateY(-10px)";
+                        }, 2000); //dopo 3 secondi scompare
+
+                        setTimeout(function() {
+                            alertElement.style.display = "none";
+                        }, 2500); //dopo 4 secondi scompare
+                    }
                 }
-            }
-        };
-        xhr.send();
-    }
-
-
-
+            };
+            xhr.send();
+        }
     </script>
 
 
 
 </c:forEach>
-        <!-- Aggiungi altri prodotti qui -->
     </div>
 </div>
 
