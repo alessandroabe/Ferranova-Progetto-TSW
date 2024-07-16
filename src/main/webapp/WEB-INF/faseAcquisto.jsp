@@ -62,6 +62,7 @@
         <input type="text" id="cvv" placeholder="CVV" required><br>
 
 
+        <!--todo attraverso una funzione ajax che dopo che clicchi enter applica lo sconto al prezzo totale se nel db c'è il coupon scritto-->
         <h5>Hai un coupon?</h5>
 
         <label for="coupon">Codice promozionale:</label>
