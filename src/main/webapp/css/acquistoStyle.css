@@ -6,42 +6,48 @@
 }
 
 .wrapper{
-    width: calc(30% - 40px);
-    margin-left: 35%;
-    margin-right: 35%;
+    width: calc(70% - 40px);
+    margin-left: 15%;
+    margin-right: 15%;
     margin-top: 10vh;
     text-align: center;
-    padding: 35px 20px;
+    padding: 80px 20px;
     border: solid 2px #3d5b2d;
     border-radius: 10px;
     display: inline-block;
 }
 
 
-form h3{
+form h4{
     font-size: 25px;
-    padding-bottom: 25px;
+    margin: 35px 0 20px 0;
+}
+
+form h5{
+    font-size: 20px;
+    margin: 35px 0 20px 0;
 }
 
 
 label{
     font-size: small;
     display: block;
-    text-align: center;
+    text-align: left;
+    transform: translateX(10%);
     margin-top: 8px;
 }
 
 input{
-    width: 250px;
-    height: 30px;
+    width: 80%;
+    margin: 20px 10%;
+    height: 35px;
     border-width: 1px;
     border-radius: 15px;
     text-align: center;
-    margin-bottom: 15px;
 }
 
 input#submit{
-    margin-top: 10px;
+    margin-top: 2px;
     font-size: medium;
     color:white;
     background-color: #335e1e;
@@ -55,42 +61,34 @@ input#submit{
     background-color: #29451c;
 }
 
-.registrazione{
-    color: #121212;
-    margin-top: 35px;
-    font-size:smaller;
+.total-price{
+    text-align: left;
+    width: 80%;
+    margin: 15px 10%;
+    border-top: solid 1px black;
 }
 
-.registrazione a{
-    color: #335e1e;
-    text-decoration: none;
-}
-
-.registrazione a:hover{
-    text-decoration: underline;
-}
-
-/*Style dell'alert*/
-.alert {
-    font-size: smaller;
-    color: red;
-    margin-top: 10px;
+.total-price p{
+    margin-top: 15px;
+    font-size: 25px;
 }
 
 @media (max-width: 850px){
     .wrapper{
-        width: calc(50% - 40px);
-        margin-left: 25%;
-        margin-right: 25%;
+        padding-top: 30px;
+        width: calc(76% - 40px);
+        margin-left: 12%;
+        margin-right: 12%;
         margin-top: 10vh;
     }
 }
 
 @media (max-width: 600px){
     .wrapper{
-        width: calc(70% - 40px);
-        margin-left: 15%;
-        margin-right: 15%;
+        padding-top: 30px;
+        width: calc(84% - 40px);
+        margin-left: 8%;
+        margin-right: 8%;
         margin-top: 10vh;
     }
 }
@@ -98,6 +96,7 @@ input#submit{
 
 @media (max-width: 400px){
     .wrapper{
+        padding-top: 30px;
         width: calc(90% - 40px);
         margin-left: 5%;
         margin-right: 5%;
