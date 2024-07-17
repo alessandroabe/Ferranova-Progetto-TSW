@@ -22,6 +22,7 @@ nav {
 /*rimuovo i puntini di default delle liste*/
 .ul-navbar{
     padding: 0;
+    margin: 0;
     list-style: none;
     display: flex;
     justify-content: space-between;

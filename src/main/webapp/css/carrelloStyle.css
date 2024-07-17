@@ -104,17 +104,16 @@ th {
 }
 
 .summary a {
-    width: calc(50% - 20px);
-    height: 35px;
-    margin: auto 25% 0 25%;
-    padding: 5px 10px;
+    width: calc(50% - 40px);
+    margin: 40px 25% 0 25%;
+    padding: 10px 20px;
     display: inline-block;
     position: relative;
     background-color: #335e1e;
     color: white;
     text-decoration: none;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 20px;
     border: none;
     cursor: pointer;
 }

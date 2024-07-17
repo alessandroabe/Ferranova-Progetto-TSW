@@ -1,0 +1,85 @@
+body {
+    font-family: sans-serif;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 5vh auto 15vh auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.subparagraph {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.profile-section {
+    margin-top: 20px;
+}
+
+.profile-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-item:last-child {
+    border-bottom: none;
+}
+
+.icon {
+    font-size: 20px;
+    margin-right: 20px;
+    transform: translateY(13px);
+    color: #333;
+}
+
+.info {
+    flex-grow: 1; /*per riempire tutto lo spazio*/
+    margin-right: 20px;
+}
+
+.info label {
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+    font-size: 16px;
+}
+
+.info input {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.edit-button {
+    background-color: #335e1e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    height: fit-content;
+    transform: translateY(12px);
+}
+
+.edit-button:hover {
+    background-color: #29451c;
+}

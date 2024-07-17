@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 <nav>
 
     <ul class="ul-navbar">
@@ -10,7 +13,7 @@
 
 
         <li class="dropdown">
-            <a href="#"><img src="images/utente.png" alt="area utente" width="15" height="15"></a>
+            <a href="#"><i class="fa-solid fa-user" style="color: white"></i></a>
             <div class="dropdown-content">
                 <c:if test="${ empty UtenteConnesso }">
                     <a href="${pageContext.request.contextPath}/login.jsp">Login</a>
@@ -25,7 +28,7 @@
             </div>
         </li>
 
-            <li><a href="${pageContext.request.contextPath}/carrello"><img src="images/carrello.png" alt="carrello" width="15" height="15"></a></li>
+            <li><a href="${pageContext.request.contextPath}/carrello"><i class="fa-solid fa-cart-shopping" style="color: white"></i></a></li>
 
         </div>
     </ul>
