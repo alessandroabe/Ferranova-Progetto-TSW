@@ -33,6 +33,10 @@ public class Utente {
         return nome;
     }
 
+    public String getCognome() {
+        return cognome;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -55,6 +59,10 @@ public class Utente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 
     public void setEmail(String email) {

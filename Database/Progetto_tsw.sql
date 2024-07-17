@@ -6,6 +6,7 @@ CREATE TABLE Utente
 (
     id           INT PRIMARY KEY AUTO_INCREMENT,
     nome         VARCHAR(30)  NOT NULL,
+    cognome      VARCHAR(30)  NOT NULL,
     email        VARCHAR(255) NOT NULL UNIQUE,
     passwordhash VARCHAR(100) NOT NULL,
     telefono     VARCHAR(13)  NOT NULL,

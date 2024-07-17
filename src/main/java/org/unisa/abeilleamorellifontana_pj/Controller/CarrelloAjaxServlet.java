@@ -48,6 +48,8 @@ public class CarrelloAjaxServlet extends HttpServlet {
             System.out.println(newQuantity);
             response.getWriter().write(String.valueOf(newQuantity));
         } else if (action.equals("remove")) {
+            int newQuantity = carrello.getProdottiQuantita().get(productId);
+            response.getWriter().write(String.valueOf(newQuantity));
             carrello.rimuoviProdotto(productId);
             response.setStatus(HttpServletResponse.SC_OK);
         }

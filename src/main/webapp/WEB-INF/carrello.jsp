@@ -51,14 +51,14 @@
                             </td>
                             <td>
                                 <div class="quantity-container">
-                                    <button class="minus" onclick="updateCart(${elemento.id}, 'update', -1)">&minus;</button>
+                                    <button class="minus" onclick="updateCart(${elemento.id}, 'update', -1, ${elemento.prezzo} )">&minus;</button>
                                     <p id="quantity-${elemento.id}">${mappa[elemento.id]} Pz.</p>
-                                    <button class="plus" onclick="updateCart(${elemento.id}, 'update', 1)">&plus;</button>
-                                    <button class="delete" onclick="updateCart(${elemento.id}, 'remove', 0)">rimuovi</button>
+                                    <button class="plus" onclick="updateCart(${elemento.id}, 'update', 1, ${elemento.prezzo})">&plus;</button>
+                                    <button class="delete" onclick="updateCart(${elemento.id}, 'remove', 0, ${elemento.prezzo})">rimuovi</button>
                                 </div>
 
                             </td>
-                            <td><fmt:setLocale value="fr_FR"/>
+                            <td id="price-${elemento.id}"><fmt:setLocale value="fr_FR"/>
                                 <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                                 <fmt:formatNumber value="${elemento.prezzo * mappa[elemento.id] }" type="currency"
                                                   currencySymbol="€"/></td>
@@ -75,11 +75,11 @@
                 <p>Subtotale: <span id="sub_totale" prezzo-tot = "${sum}"><fmt:setLocale value="fr_FR"/>
                     <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                         <fmt:formatNumber value="${sum }" type="currency" currencySymbol="€"/></span></p>
-                <p>Costi di spedizione: <span><fmt:setLocale value="fr_FR"/>
+                <p id="spedizione">Costi di spedizione: <span><fmt:setLocale value="fr_FR"/>
                     <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                         <fmt:formatNumber value="${spedizione }" type="currency" currencySymbol="€"/>
              </span></p>
-                <p class="total">Totale: <span><fmt:setLocale value="fr_FR"/>
+                <p class="total" id="total">Totale: <span><fmt:setLocale value="fr_FR"/>
                     <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                         <fmt:formatNumber value="${sum + spedizione}" type="currency" currencySymbol="€"/></span></p>
                 <a href="${pageContext.request.contextPath}/preAcquisto">Procedi</a>
@@ -98,7 +98,7 @@
 
 
 <script>
-    function updateCart(productId, action, quantity) {
+    function updateCart(productId, action, quantity, price) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "${pageContext.request.contextPath}/carrelloAjax", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -154,6 +154,7 @@
         };
         xhr.send("prod=" + productId + "&action=" + action +"&quantity=" + quantity);
     }
+
 
     <!--TODO: aggiungere funzione ajax per aggiornare i prezzi real time-->
 

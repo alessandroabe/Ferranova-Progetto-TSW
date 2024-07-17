@@ -103,22 +103,23 @@ th {
     font-size: 20px;
 }
 
-.summary button {
-    width: 100%;
+.summary a {
+    width: calc(50% - 20px);
     height: 35px;
-    margin-top: auto;
+    margin: auto 25% 0 25%;
+    padding: 5px 10px;
     display: inline-block;
     position: relative;
-    padding: 5px 10px;
     background-color: #335e1e;
     color: white;
     text-decoration: none;
+    text-align: center;
     border-radius: 5px;
     border: none;
     cursor: pointer;
 }
 
-.summary button:hover {
+.summary a:hover {
     background: #29451c;
 }
 

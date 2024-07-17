@@ -9,6 +9,14 @@
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/log_regStyle.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script>
+        function initAutocomplete() {
+            var input = document.getElementById('indirizzo');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.setFields(['address_component', 'geometry']);
+        }
+    </script>
 </head>
 
 <body>
@@ -24,6 +32,9 @@
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" required><br>
 
+        <label for="cognome">Nome</label>
+        <input type="text" id="cognome" name="cognome" required><br>
+
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required><br>
 
@@ -32,6 +43,9 @@
 
         <label for="telefono">Telefono</label>
         <input type="tel" id="telefono" name="telefono" required><br>
+
+        <label for="indirizzo">Telefono</label>
+        <input type="text" id="indirizzo" name="indirizzo" required><br>
 
 
         <c:if test="${param.error == 1}">

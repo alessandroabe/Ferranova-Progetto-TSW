@@ -50,8 +50,9 @@ public class UtenteDAO {
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, utente.getNome());
-            pstmt.setString(2, utente.getEmail());
-            pstmt.setString(3, utente.getPasswordhash());// Cripta la password prima di inserirla con sha1Hash che abbiamo creato nella classe verifier ce la spostiamo
+            pstmt.setString(2, utente.getCognome());
+            pstmt.setString(3, utente.getEmail());
+            pstmt.setString(4, utente.getPasswordhash());// Cripta la password prima di inserirla con sha1Hash che abbiamo creato nella classe verifier ce la spostiamo
             //nel dao per comodita'
             pstmt.setString(5, utente.getTelefono());
             pstmt.setBoolean(6, utente.isAdmin());

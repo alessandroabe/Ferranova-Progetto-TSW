@@ -46,7 +46,7 @@ input{
     text-align: center;
 }
 
-input#submit{
+button{
     margin-top: 2px;
     font-size: medium;
     color:white;
@@ -57,7 +57,7 @@ input#submit{
     height: 40px;
 }
 
-#submit:hover{
+button :hover{
     background-color: #29451c;
 }
 

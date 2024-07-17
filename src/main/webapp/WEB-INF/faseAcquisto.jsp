@@ -26,25 +26,16 @@
         <h4>Nominativo</h4>
 
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" placeholder="nome" name="nome" required><br>
+        <input type="text" id="nome" placeholder="nome" value="${UtenteConnesso.nome}" name="nome" required><br>
 
         <label for="cognome">Cognome:</label>
-        <input type="text" id="cognome" placeholder="cognome" required><br>
+        <input type="text" id="cognome" placeholder="cognome" value="${UtenteConnesso.cognome}" name="cognome" required><br>
 
 
         <h4>Indirizzo</h4>
 
-        <label for="citta">Città:</label>
-        <input type="text" id="citta" placeholder="città" required><br>
-
-        <label for="cap">CAP:</label>
-        <input type="text" id="cap" placeholder="CAP" required><br>
-
-        <label for="via">Via:</label>
-        <input type="text" id="via" placeholder="via" required><br>
-
-        <label for="n_civico">Numero civico:</label>
-        <input type="text" id="n_civico" placeholder="numero civico" required><br>
+        <label for="indirizzo">Indirizzo:</label>
+        <input type="text" id="indirizzo" placeholder="indirizzo" value="${UtenteConnesso.indirizzo}" name="indirizzo" required><br>
 
 
         <h4>Dati carta</h4>
@@ -75,7 +66,7 @@
         </div>
 
 
-        <input type="submit" id="submit" value="Acquista"/>
+        <a href="${pageContext.request.contextPath}/ordineServlet">Acquista</a>
     </form>
 </div>
 
