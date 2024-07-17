@@ -11,9 +11,9 @@
                                                                        height="16"></a></li>
         <div class="dropdown-link">
 
-
+            <li><p class="nomeUtente">${UtenteConnesso.nome}</p></li>
         <li class="dropdown">
-            <a href="#"><i class="fa-solid fa-user" style="color: white"></i></a>
+            <a href="#"><i class="fa-solid fa-user" style="color: white; font-size: 16px"></i></a>
             <div class="dropdown-content">
                 <c:if test="${ empty UtenteConnesso }">
                     <a href="${pageContext.request.contextPath}/login.jsp">Login</a>
@@ -28,7 +28,7 @@
             </div>
         </li>
 
-            <li><a href="${pageContext.request.contextPath}/carrello"><i class="fa-solid fa-cart-shopping" style="color: white"></i></a></li>
+            <li><a href="${pageContext.request.contextPath}/carrello"><i class="fa-solid fa-cart-shopping" style="color: white; font-size: 16px"></i></a></li>
 
         </div>
     </ul>

@@ -4,13 +4,6 @@
     color: white;
 }
 
-#saluto {
-    margin-top: 0;
-    margin-left: calc(10% + 20px);
-    color: black;
-    font-size: 23px;
-}
-
 .container{
     margin-top: 0;
     width: 100%;

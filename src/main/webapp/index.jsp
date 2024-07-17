@@ -19,12 +19,6 @@
 <%@ include file="/WEB-INF/navbar.jsp" %>
 
 
-<c:if test="${not empty UtenteConnesso }">
-
-    <h2 id="saluto">Ciao ${UtenteConnesso.nome}, scegli in che categoria acquistare...</h2>
-
-</c:if>
-
 <div class="container">
     <div class="catcontainer">
             <div class="categoria">

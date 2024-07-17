@@ -1,15 +1,17 @@
 body {
     font-family: sans-serif;
     padding: 0;
+    margin: 0;
 }
 
 .container {
     max-width: 600px;
-    margin: 5vh auto 15vh auto;
+    margin: 5vh auto;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -43,7 +45,6 @@ h1 {
 .icon {
     font-size: 20px;
     margin-right: 20px;
-    transform: translateY(13px);
     color: #333;
 }
 
@@ -76,10 +77,80 @@ h1 {
     padding: 5px 15px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
-    height: fit-content;
-    transform: translateY(12px);
 }
 
 .edit-button:hover {
     background-color: #29451c;
+}
+
+/* Media Queries */
+@media (max-width: 850px) {
+    .container {
+        padding: 15px;
+        margin: 0 auto 10em auto;
+    }
+
+    .profile-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+
+    .icon {
+        margin-bottom: 10px;
+        transform: none;
+    }
+
+    .info {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .edit-button {
+        width: 100%;
+        margin-top: 10px;
+        transform: none;
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 22px;
+    }
+
+    .subparagraph {
+        font-size: 13px;
+    }
+
+    .info label, .info input {
+        font-size: 15px;
+    }
+
+    .edit-button {
+        padding: 5px 12px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .subparagraph {
+        font-size: 12px;
+    }
+
+    .info label, .info input {
+        font-size: 14px;
+    }
+
+    .edit-button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
 }
