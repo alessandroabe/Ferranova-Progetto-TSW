@@ -25,13 +25,15 @@ public class UtenteDAO {
 
                     int id = resultSet.getInt("id");
                     String nome = resultSet.getString("nome");
+                    String cognome = resultSet.getString("cognome");
                     String email = resultSet.getString("email");
                     String passwordhash = resultSet.getString("passwordhash");
                     String telefono = resultSet.getString("telefono");
                     boolean isAdmin = resultSet.getBoolean("is_admin");
+                    String indirizzo = resultSet.getString("indirizzo");
 
 
-                    utente = new Utente(id, nome, email, passwordhash, telefono, isAdmin);
+                    utente = new Utente(id, nome, cognome, email, passwordhash, telefono, isAdmin, indirizzo);
                 }
             }
         } catch (SQLException e) {
@@ -42,7 +44,7 @@ public class UtenteDAO {
     }
 
     public int doInsert(Utente utente) {
-        String query = "INSERT INTO Utente (nome, email, passwordhash, telefono, is_admin) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Utente (nome, cognome, email, passwordhash, telefono, is_admin, indirizzo) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConPool.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -51,8 +53,9 @@ public class UtenteDAO {
             pstmt.setString(2, utente.getEmail());
             pstmt.setString(3, utente.getPasswordhash());// Cripta la password prima di inserirla con sha1Hash che abbiamo creato nella classe verifier ce la spostiamo
             //nel dao per comodita'
-            pstmt.setString(4, utente.getTelefono());
-            pstmt.setBoolean(5, utente.isAdmin());
+            pstmt.setString(5, utente.getTelefono());
+            pstmt.setBoolean(6, utente.isAdmin());
+            pstmt.setString(7, utente.getIndirizzo());
             pstmt.executeUpdate();
             System.out.println("Utente inserito con successo!");
 

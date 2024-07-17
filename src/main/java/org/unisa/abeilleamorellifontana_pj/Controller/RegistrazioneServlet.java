@@ -20,15 +20,17 @@ public class RegistrazioneServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         String address;
         String nome = request.getParameter("nome");
+        String cognome = request.getParameter("cognome");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String telefono = request.getParameter("telefono");
         String admin = request.getParameter("is_admin");
+        String indirizzo = request.getParameter("indirizzo");
 
         UtenteDAO utenteDAO = new UtenteDAO();
 
         //TODO: fare controlli
-        Utente utente = new Utente(0, nome, email, SHA1PasswordVerifier.sha1Hash(password), telefono, false);
+        Utente utente = new Utente(0, nome, cognome,email, SHA1PasswordVerifier.sha1Hash(password), telefono, false,indirizzo);
 
 
         int id;

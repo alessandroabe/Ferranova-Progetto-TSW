@@ -72,7 +72,7 @@
 
                 <c:set var="spedizione" value="${ sum <= 100 ? 10 : 0  }"/>
                 <h2>Riassunto</h2>
-                <p>Subtotale: <span><fmt:setLocale value="fr_FR"/>
+                <p>Subtotale: <span id="sub_totale" prezzo-tot = "${sum}"><fmt:setLocale value="fr_FR"/>
                     <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                         <fmt:formatNumber value="${sum }" type="currency" currencySymbol="€"/></span></p>
                 <p>Costi di spedizione: <span><fmt:setLocale value="fr_FR"/>
@@ -82,7 +82,7 @@
                 <p class="total">Totale: <span><fmt:setLocale value="fr_FR"/>
                     <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                         <fmt:formatNumber value="${sum + spedizione}" type="currency" currencySymbol="€"/></span></p>
-                <button>Procedi</button>
+                <a href="${pageContext.request.contextPath}/preAcquisto">Procedi</a>
             </div>
         </div>
     </c:when>
@@ -104,12 +104,52 @@
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    if (action === 'update') {
-                        document.getElementById("quantity-" + productId).textContent = xhr.responseText + " Pz.";
-                    } else if (action === 'remove') {
-                        const row = document.getElementById("product-row-"+ productId);
-                        row.parentNode.removeChild(row);
+                if (action === 'update') {
+                    document.getElementById("quantity-" + productId).textContent = xhr.responseText + " Pz.";
+                    let newPrice = xhr.responseText * price;
+                    // Formatta il prezzo con simbolo dell'euro e due decimali
+                    let formattedPrice = newPrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                    document.getElementById("price-" + productId).textContent = formattedPrice;
+                    const prezzo_totale = document.getElementById("sub_totale").getAttribute("prezzo-tot");
+                    let sub_tot = 0;
+                    if(quantity === 1) {
+                        sub_tot = parseFloat(prezzo_totale) + parseFloat(price);
+                    }else if(quantity === -1) {
+                        sub_tot = parseFloat(prezzo_totale) - parseFloat(price);
                     }
+                    document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                    document.getElementById("sub_totale").setAttribute("prezzo-tot",sub_tot);
+                    let costSpedizione = 10;
+                    let totaleFinale = 0;
+                    if(sub_tot <= 100){
+                        totaleFinale = sub_tot + costSpedizione;
+                    }else if(sub_tot > 100){
+                        costSpedizione = 0;
+                        totaleFinale = sub_tot + costSpedizione;
+                    }
+                    document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                    document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+
+
+                } else if (action === 'remove') {
+                    const row = document.getElementById("product-row-"+ productId);
+                    const prezzo_totale = document.getElementById("sub_totale").getAttribute("prezzo-tot");
+                    row.parentNode.removeChild(row);
+                    const sub_tot = parseFloat(prezzo_totale) - (parseFloat(price) * xhr.responseText);
+                    document.getElementById("sub_totale").setAttribute("prezzo-tot",sub_tot);
+                    document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+
+                    let costSpedizione = 10;
+                    let totaleFinale = 0;
+                    if(sub_tot <= 100){
+                        totaleFinale = sub_tot + costSpedizione;
+                    }else if(sub_tot > 100){
+                        costSpedizione = 0;
+                        totaleFinale = sub_tot + costSpedizione;
+                    }
+                    document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                    document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                }
             }
         };
         xhr.send("prod=" + productId + "&action=" + action +"&quantity=" + quantity);

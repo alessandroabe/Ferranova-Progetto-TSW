@@ -1,27 +1,30 @@
 package org.unisa.abeilleamorellifontana_pj.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Utente {
 
     private int id;
     private String nome;
+    private String cognome;
     private String email;
     private String passwordhash;
     private String telefono;
     private boolean isAdmin;
 
-    public Utente(int id, String nome, String email, String passwordhash, String telefono, boolean isAdmin) {
+    private String indirizzo;
+
+    public Utente(int id, String nome, String cognome,String email, String passwordhash, String telefono, boolean isAdmin, String indirizzo) {
         this.id = id;
         this.nome = nome;
+        this.cognome = cognome;
         this.email = email;
         this.passwordhash = passwordhash;
         this.telefono = telefono;
         this.isAdmin = isAdmin;
+        this.indirizzo = indirizzo;
     }
-
-    public Utente() {
-        super();
-    }
-
     public int getId() {
         return id;
     }
@@ -30,12 +33,12 @@ public class Utente {
         return nome;
     }
 
-    public String getPasswordhash() {
-        return passwordhash;
-    }
-
     public String getEmail() {
         return email;
+    }
+
+    public String getPasswordhash() {
+        return passwordhash;
     }
 
     public String getTelefono() {
@@ -54,10 +57,6 @@ public class Utente {
         this.nome = nome;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -69,4 +68,17 @@ public class Utente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
 }
+

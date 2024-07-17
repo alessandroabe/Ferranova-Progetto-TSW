@@ -69,7 +69,9 @@
         <input type="text" id="coupon" placeholder="Codice promozionale"><br>
 
         <div class="total-price">
-            <p>Totale: 100€</p>
+            <p>Totale: <span><fmt:setLocale value="fr_FR"/>
+                <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                        <fmt:formatNumber value="${sum}" type="currency" currencySymbol="€"/></span></p>
         </div>
 
 
