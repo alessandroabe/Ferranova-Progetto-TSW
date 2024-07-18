@@ -72,12 +72,11 @@ CREATE TABLE Ordine
 
 CREATE TABLE Ordine_Prodotto
 (
-    id            INT            NOT NULL auto_increment,
     id_ordine     INT            NOT NULL,
     id_prodotto   INT            NOT NULL,
     quantità      int unsigned   not null,
     prezzo_finale decimal(13, 2) not null,
-    PRIMARY KEY (id),
+    PRIMARY KEY (id_ordine,id_prodotto),
     FOREIGN KEY (id_ordine) references Ordine (id),
     FOREIGN KEY (id_prodotto) references Prodotto (id)
 );
@@ -183,10 +182,6 @@ VALUES (4, 1, 3),
 
 INSERT INTO Ordine (id_utente, stato_ordine, prezzo_totale, data_ordine)
 VALUES (4, 'ordinato', 558.7, '2024-05-14');
-
-INSERT INTO Ordine_Prodotto (id_ordine, id_prodotto, quantità, prezzo_finale)
-VALUES (1, 1, 3, 39.80),
-       (1, 2, 1, 499.00);
 
 INSERT INTO Recensione (id_utente, id_prodotto, voto, descrizione)
 VALUES (4, 1, 5, 'Ottimo prodotto! Spedizione veloce e prodotto conforme alla descrizione.'),
