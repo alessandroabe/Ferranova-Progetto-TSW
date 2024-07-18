@@ -51,8 +51,6 @@ public class FaseAcquistoServlet extends HttpServlet {
         if(sum.compareTo(new BigDecimal("100.00")) <= 0) {
             sum = sum.add(spedizione);
             request.setAttribute("sum", sum);
-            boolean effettua_spedizione = true;
-            session.setAttribute("spedizione_eff",effettua_spedizione);
         }else {
             request.setAttribute("sum", sum);
         }

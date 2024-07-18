@@ -72,6 +72,7 @@ CREATE TABLE Ordine
 
 CREATE TABLE Ordine_Prodotto
 (
+    id            INT            NOT NULL,
     id_ordine     INT            NOT NULL,
     id_prodotto   INT            NOT NULL,
     quantità      int unsigned   not null,

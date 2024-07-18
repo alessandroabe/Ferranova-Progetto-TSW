@@ -6,16 +6,18 @@ import java.util.Map;
 
 public class Ordine {
 
-    private int idUtente;
     private int idOrdine;
-    private Map<Integer, Integer> prodottiQuantitaOrdine;
+    private int idUtente;
     private StatoOrdine statoOrdine;
+
+    private BigDecimal prezzoOrdine;
+
+    private BigDecimal prezzoSpedizione;
+    private Map<Integer, Integer> prodottiQuantitaOrdine;
     private LocalDate dataOrdine;
     private LocalDate dataSpedizione;
     private LocalDate dataConsegna;
     private String tipoPagamento;
-    private BigDecimal prezzoOrdine;
-    private BigDecimal prezzoSpedizione;
 
     public Ordine(int id, Map<Integer, Integer> prodottiQuantitaOrdine, BigDecimal prezzoOrdine) {
         this.idOrdine = id;
@@ -23,6 +25,36 @@ public class Ordine {
         this.statoOrdine = StatoOrdine.ORDINATO;
         this.dataOrdine = LocalDate.now();
         this.prezzoOrdine = prezzoOrdine;
+    }
+
+    public Ordine(int id_utente,int id, Map<Integer, Integer> prodottiQuantitaOrdine, BigDecimal prezzoOrdine) {
+        this.idUtente = id_utente;
+        this.idOrdine = id;
+        this.prodottiQuantitaOrdine = prodottiQuantitaOrdine;
+        this.statoOrdine = StatoOrdine.ORDINATO;
+        this.dataOrdine = LocalDate.now();
+        this.prezzoOrdine = prezzoOrdine;
+    }
+
+    public Ordine(int idUtente, BigDecimal prezzoOrdine, BigDecimal prezzoSpedizione) {
+        this.idUtente = idUtente;
+        this.statoOrdine = StatoOrdine.ORDINATO;
+        this.prezzoOrdine = prezzoOrdine;
+        this.prezzoSpedizione = prezzoSpedizione;
+        this.dataOrdine = LocalDate.now();
+        this.dataSpedizione = null;
+        this.dataConsegna = null;
+        this.tipoPagamento = "carta di credito";
+    }
+
+
+
+    public int getIdUtente() {
+        return idUtente;
+    }
+
+    public void setIdUtente(int idUtente) {
+        this.idUtente = idUtente;
     }
 
     public int getIdOrdine() {
@@ -113,48 +145,6 @@ public class Ordine {
         @Override
         public String toString() {
             return this.stato;
-        }
-    }
-
-    public class ProdottoOrdinato{
-        private int quantita;
-        private BigDecimal prezzo;
-        private int idProdotto;
-
-        public ProdottoOrdinato() {
-            this.quantita = 0;
-            this.prezzo = BigDecimal.ZERO;
-            this.idProdotto = 0;
-        }
-
-        public ProdottoOrdinato(int quantita, BigDecimal prezzo, int idProdotto) {
-            this.quantita = quantita;
-            this.prezzo = prezzo;
-            this.idProdotto = idProdotto;
-        }
-
-        public int getQuantita() {
-            return quantita;
-        }
-
-        public void setQuantita(int quantita) {
-            this.quantita = quantita;
-        }
-
-        public BigDecimal getPrezzo() {
-            return prezzo;
-        }
-
-        public void setPrezzo(BigDecimal prezzo) {
-            this.prezzo = prezzo;
-        }
-
-        public int getIdProdotto() {
-            return idProdotto;
-        }
-
-        public void setIdProdotto(int idProdotto) {
-            this.idProdotto = idProdotto;
         }
     }
 }

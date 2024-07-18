@@ -41,10 +41,10 @@
         <h4>Dati carta</h4>
 
         <label for="intestatario">Intestatario della carta:</label>
-        <input type="text" id="intestatario" placeholder="intestatario della carta" required><br>
+        <input type="text" id="intestatario" name="intestatario" placeholder="intestatario della carta" required><br>
 
         <label for="n_carta">Numero carta:</label>
-        <input type="text" id="n_carta" placeholder="numero della carta" required><br>
+        <input type="text" id="n_carta" name="intestatario" placeholder="numero della carta" required><br>
 
         <label for="scadenza">Scadenza:</label>
         <input type="text" id="scadenza" placeholder="scadenza" required><br>
