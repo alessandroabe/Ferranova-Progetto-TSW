@@ -7,28 +7,29 @@
 <nav>
 
     <ul class="ul-navbar">
-        <li><a class="logo" href="index.jsp"><img src="images/logo.png" alt="home" width="111"
-                                                                       height="16"></a></li>
+        <li class="logo"><a href="${pageContext.request.contextPath}/index.jsp"><img src="images/logo.png" alt="home" width="111" height="16"></a></li>
+
         <div class="dropdown-link">
 
-            <li><p class="nomeUtente">${UtenteConnesso.nome}</p></li>
+        <li class="nomeUtente"><p>${UtenteConnesso.nome}</p></li>
+
         <li class="dropdown">
             <a href="#"><i class="fa-solid fa-user" style="color: white; font-size: 16px"></i></a>
             <div class="dropdown-content">
-                <c:if test="${ empty UtenteConnesso }">
+                <c:if test="${ empty UtenteConnesso}">
                     <a href="${pageContext.request.contextPath}/login.jsp">Login</a>
                     <a href="${pageContext.request.contextPath}/registrazione.jsp">Registrazione</a>
                 </c:if>
 
                 <c:if test="${not empty UtenteConnesso}">
-                    <a href="profilo.jsp">Profilo</a>
-                    <a href="ordini.jsp">Ordini</a>
-                    <a href="logout">Logout</a>
+                    <a href="${pageContext.request.contextPath}/profilo.jsp">Profilo</a>
+                    <a href="${pageContext.request.contextPath}/ordineServlet">Ordini</a>
+                    <a href="${pageContext.request.contextPath}/logout">Logout</a>
                 </c:if>
             </div>
         </li>
 
-            <li><a href="${pageContext.request.contextPath}/carrello"><i class="fa-solid fa-cart-shopping" style="color: white; font-size: 16px"></i></a></li>
+        <li class="cart"><a href="${pageContext.request.contextPath}/carrello"><i class="fa-solid fa-cart-shopping" style="color: white; font-size: 16px"></i></a></li>
 
         </div>
     </ul>

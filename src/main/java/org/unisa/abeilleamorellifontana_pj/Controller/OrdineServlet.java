@@ -46,50 +46,11 @@ public class OrdineServlet extends HttpServlet {
             sum = sum.add(b.multiply(BigDecimal.valueOf(carrello.getProdottiQuantita().get(p.getId()))));
         }
 
-        //prendiamo l utente dalla sessione
         Utente u = (Utente) session.getAttribute("UtenteConnesso");
 
-        //Fare un controllo sul fatto se ci sia la spedizione o meno
-
-        BigDecimal spedizione = new BigDecimal("10.00");
-        BigDecimal no_spedizione = new BigDecimal("0.00");
-        if(sum.compareTo(new BigDecimal("100.00")) <= 0) {
-            sum = sum.add(spedizione);
-            OrdineDAO.inserisciOrdine(new Ordine(u.getId(),sum,spedizione));
-        }else {
-            OrdineDAO.inserisciOrdine(new Ordine(u.getId(),sum,no_spedizione));
-        }
-
-
-
-
-
-
-
-
-    // Ottieni l'ID dell'ordine appena inserito :la query va a prendersi l ultimo ordine che abbiamo inserito
-        try {
-            ordid = OrdineDAO.getIdOrdineByIdUtente(u.getId());
-        } catch (SQLException e) {
-            throw new RuntimeException("Errore nel recuperare l'ID ordine per l'utente", e);
-        }
-
-// Aggiungi i prodotti all'ordine nella tabella Ordine_Prodotto
-        for (Map.Entry<Integer, Integer> entry : carrello.getProdottiQuantita().entrySet()) {
-            int idProdotto = entry.getKey();
-            int quantita = entry.getValue();
-
-            // Recupera il prodotto dal database
-            Prodotto p = ProdottoDAO.doRetrieveById(idProdotto);
-            BigDecimal prezzoUnitario = p.getPrezzo();
-
-            // Calcola il prezzo finale per la quantità specificata
-            BigDecimal prezzoFinale = prezzoUnitario.multiply(BigDecimal.valueOf(quantita));
-
-            // Inserisci il prodotto nell'ordine corrente
-            OrdineProdotto ordineProdotto = new OrdineProdotto(ordid, idProdotto, quantita, prezzoFinale);
-            OrdineDAO.insert(ordineProdotto);
-        }
+        Ordine ordine= new Ordine(u.getId());
+        ordine.addCarrello( carrello, lista );
+   OrdineDAO.inserisciOrdine(ordine);
 
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/AcquistoConSuccesso.jsp");

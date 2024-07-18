@@ -58,6 +58,10 @@ nav .ul-navbar li:hover {
     background-color: #29451c;
 }
 
+nav .ul-navbar .nomeUtente:hover {
+    background-color: #335e1e;
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
