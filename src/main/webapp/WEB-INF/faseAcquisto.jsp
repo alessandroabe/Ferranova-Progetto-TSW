@@ -65,8 +65,9 @@
                         <fmt:formatNumber value="${sum}" type="currency" currencySymbol="€"/></span></p>
         </div>
 
-
-        <a href="${pageContext.request.contextPath}/ordineServlet">Acquista</a>
+        <div class="divAcquista-button">
+            <a class="acquista-button" href="${pageContext.request.contextPath}/ordineServlet">Acquista</a>
+        </div>
     </form>
 </div>
 

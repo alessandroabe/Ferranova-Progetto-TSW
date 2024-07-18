@@ -27,14 +27,16 @@ body{
 .back-home{
     width: 170px;
     height: 40px;
-    margin: 10px;
-    font-size: medium;
+    padding: 12px 30px;
+    font-size: 15px;
     color:white;
     background-color: #335e1e;
     border: none;
     border-radius: 20px;
+    text-decoration: none;
+
 }
 
-.back-home :hover{
+.back-home:hover{
     background-color: #29451c;
 }

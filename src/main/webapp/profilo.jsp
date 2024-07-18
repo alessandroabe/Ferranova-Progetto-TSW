@@ -20,8 +20,8 @@
 
 <div class="container">
     <h1>Dati personali</h1>
-    <p class="subparagraph">Visualizza i miei dati di login e spedizione.</p>
-
+    <p class="subparagraph">Visualizza i dati di login e spedizione.</p>
+    <form>
     <div class="profile-section">
         <div class="profile-item">
             <div class="icon"><i class="fas fa-user"></i></div>
@@ -29,7 +29,6 @@
                 <label for="nome"><strong>Nome</strong></label>
                 <input type="text" id="nome" value="${UtenteConnesso.nome}">
             </div>
-            <button class="edit-button">Modifica</button>
         </div>
         <div class="profile-item">
             <div class="icon"><i class="fas fa-user"></i></div>
@@ -37,7 +36,6 @@
                 <label for="cognome"><strong>Cognome</strong></label>
                 <input type="text" id="cognome" value="${UtenteConnesso.cognome}">
             </div>
-            <button class="edit-button">Modifica</button>
         </div>
         <div class="profile-item">
             <div class="icon"><i class="fas fa-mobile-alt"></i></div>
@@ -45,7 +43,6 @@
                 <label for="telefono"><strong>Numero di telefono</strong></label>
                 <input type="text" id="telefono" value="${UtenteConnesso.telefono}">
             </div>
-            <button class="edit-button">Modifica</button>
         </div>
         <div class="profile-item">
             <div class="icon"><i class="fas fa-envelope"></i></div>
@@ -53,15 +50,6 @@
                 <label for="email"><strong>Email</strong></label>
                 <input type="email" id="email" value="${UtenteConnesso.email}">
             </div>
-            <button class="edit-button">Modifica</button>
-        </div>
-        <div class="profile-item">
-            <div class="icon"><i class="fas fa-lock"></i></div>
-            <div class="info">
-                <label for="password"><strong>La tua password</strong></label>
-                <input type="password" id="password" value="password">
-            </div>
-            <button class="edit-button">Modifica</button>
         </div>
         <div class="profile-item">
             <div class="icon"><i class="fas fa-home"></i></div>
@@ -69,9 +57,18 @@
                 <label for="indirizzo"><strong>Indirizzo</strong></label>
                 <input type="text" id="indirizzo" value="${UtenteConnesso.indirizzo}">
             </div>
-            <button class="edit-button">Modifica</button>
+        </div>
+
+        <button class="edit-button">Modifica</button>
+
+        <div class="cambio-password">
+            <p>Vuoi cambiare password?</p>
+            <a href="cambioPassword.jsp">cambia password</a>
         </div>
     </div>
+
+
+    </form>
 </div>
 
 <%@ include file="/WEB-INF/footer.jsp" %>

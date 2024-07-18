@@ -9,11 +9,12 @@
     width: calc(30% - 40px);
     margin-left: 35%;
     margin-right: 35%;
-    margin-top: 10vh;
+    margin-top: 3vh;
     text-align: center;
     padding: 35px 20px;
-    border: solid 2px #3d5b2d;
-    border-radius: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: inline-block;
 }
 

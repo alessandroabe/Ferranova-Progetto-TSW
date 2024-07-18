@@ -29,7 +29,7 @@
             </div>
         </li>
 
-        <li class="cart"><a href="${pageContext.request.contextPath}/carrello"><i class="fa-solid fa-cart-shopping" style="color: white; font-size: 16px"></i></a></li>
+        <li class="cartIcon"><a href="${pageContext.request.contextPath}/carrello"><i class="fa-solid fa-cart-shopping" style="color: white; font-size: 16px"></i></a></li>
 
         </div>
     </ul>

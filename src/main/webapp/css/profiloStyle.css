@@ -1,14 +1,13 @@
-body {
-    font-family: sans-serif;
-    padding: 0;
+* {
     margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 .container {
     max-width: 600px;
-    margin: 5vh auto;
+    margin: 3vh auto;
     padding: 20px;
-    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -45,6 +44,7 @@ h1 {
 .icon {
     font-size: 20px;
     margin-right: 20px;
+    transform: translateY(15px);
     color: #333;
 }
 
@@ -71,17 +71,39 @@ h1 {
 
 .edit-button {
     background-color: #335e1e;
+    width: calc(30% - 30px);
+    margin: 10px 35%;
     color: white;
     border: none;
-    border-radius: 5px;
-    padding: 5px 15px;
+    border-radius: 20px;
+    padding: 10px 10px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    transform: translateY(13px);
+    text-align: center;
 }
 
 .edit-button:hover {
     background-color: #29451c;
 }
+
+.cambio-password{
+    color: #121212;
+    width: calc(50% - 30px);
+    margin: 30px 25%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.cambio-password a{
+    color: #335e1e;
+    text-decoration: none;
+}
+
+.cambio-password a:hover{
+    text-decoration: underline;
+}
+
 
 /* Media Queries */
 @media (max-width: 850px) {

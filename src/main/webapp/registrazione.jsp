@@ -44,7 +44,7 @@
         <label for="telefono">Telefono</label>
         <input type="tel" id="telefono" name="telefono" required><br>
 
-        <label for="indirizzo">Telefono</label>
+        <label for="indirizzo">Indirizzo</label>
         <input type="text" id="indirizzo" name="indirizzo" required><br>
 
 
