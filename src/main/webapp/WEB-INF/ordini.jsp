@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -17,112 +18,53 @@
 
 <h1>Ordini Effettuati</h1>
 <div class="orders-container">
+
+    <c:forEach var="Ordine" items="${Ordini}">
     <div class="order">
         <div class="order-header">
-            <p class="dataOrdine"><strong>28.04.2024</strong></p>
+            <p class="dataOrdine"><strong>${Ordine.dataOrdine}</strong></p>
             <div class=" order-details">
-                <p><strong>ID ordine:</strong> 10401180320751</p>
-                <p><strong>Stato:</strong> ordinato</p>
-                <p><strong>Totale:</strong> 69,98 €</p>
-                <p class="dataSpedizione"><strong>Data spedizione:</strong> 28.04.2024</p>
-                <p><strong>Costo spedizione:</strong> 10,00 €</p>
-                <p class="dataConsegna"><strong>Data consegna:</strong> -</p>
+                <p><strong>ID ordine:</strong>${Ordine.idOrdine}</p>
+                <p><strong>Stato:</strong>${Ordine.statoOrdine}</p>
+                <p><strong>Subtotale:</strong><fmt:setLocale value="fr_FR"/>
+                    <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                    <fmt:formatNumber value="${Ordine.prezzoOrdine}" type="currency"
+                                      currencySymbol="€"/></p>
+                <p class="dataSpedizione"><strong>Data spedizione:</strong> - </p>
+                <p><strong>Costo spedizione:</strong><fmt:setLocale value="fr_FR"/>
+                    <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                    <fmt:formatNumber value="${Ordine.prezzoSpedizione}" type="currency"
+                                      currencySymbol="€"/></p>
+
+                <c:if test="${ empty Ordine.dataSpedizione}">
+                    <p class="dataConsegna"><strong>Data consegna:</strong> - </p>
+                </c:if>
+
+                <c:if test="${Ordine.dataSpedizione}">
+                    <p class="dataConsegna"><strong>Data consegna:</strong>${Ordine.dataSpedizione}</p>
+                </c:if>
 
             </div>
         </div>
         <div class="order-products">
-            <div class="product">
-                <a href="prodotto.html"><img src="/images/cacciaviteCroce.jpg" alt="cacciavite a croce"></a>
-                <p>cacciavite a croce</p>
-                <p>2 Pz.</p>
-                <p>50 €</p>
-            </div>
-            <div class="product">
-                <img src="/images/martello.jpg" alt="martello">
-                <p>Martello</p>
-                <p>5 Pz.</p>
-                <p>50 €</p>
-            </div>
-            <div class="product">
-                <img src="/images/trapanoPercussione.jpg" alt="trapano a percussione">
-                <p>Trapano a percussione</p>
-                <p>1 Pz.</p>
-                <p>50 €</p>
-            </div>
-            <div class="product">
-                <img src="/images/trapanoPercussione.jpg" alt="trapano a percussione">
-                <p>Trapano a percussione</p>
-                <p>1 Pz.</p>
-                <p>50 €</p>
-            </div>
-            <div class="product">
-                <img src="/images/trapanoPercussione.jpg" alt="trapano a percussione">
-                <p>Trapano a percussione</p>
-                <p>1 Pz.</p>
-                <p>50 €</p>
-            </div>
-            <div class="product">
-                <img src="/images/trapanoPercussione.jpg" alt="trapano a percussione">
-                <p>Trapano a percussione</p>
-                <p>1 Pz.</p>
-                <p>50 €</p>
-            </div>
-        </div>
 
-    </div>
-    <!-- Repeat similar blocks for other orders -->
-    <div class="order">
-        <div class="order-header">
-            <p class="dataOrdine"><strong>28.04.2024</strong></p>
-            <div class=" order-details">
-                <p><strong>ID ordine:</strong> 10401180320751</p>
-                <p><strong>Stato:</strong> ordinato</p>
-                <p><strong>Totale:</strong> 69,98 €</p>
-                <p class="dataSpedizione"><strong>Data spedizione:</strong> 28.04.2024</p>
-                <p><strong>Costo spedizione:</strong> 10,00 €</p>
-                <p class="dataConsegna"><strong>Data consegna:</strong> -</p>
+            <c:forEach var="entry" items="${listaProdottiOrine}">
 
-            </div>
-        </div>
-        <div class="order-products">
             <div class="product">
-                <a href="prodotto.html"><img src="/images/cacciaviteCroce.jpg" alt="cacciavite a croce"></a>
-                <p>cacciavite a croce</p>
-                <p>2 Pz.</p>
-                <p>50 €</p>
+                <a href="prodotto.html"><img src="${pageContext.request.contextPath}/product_images/${entry.id}/1.png" alt="${entry.nome}"></a>
+                <p>${entry.nome}</p>
+                <p>${(mappa[elemento.id]).quantita} Pz.</p>
+                <p><fmt:setLocale value="fr_FR"/>
+                    <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                    <fmt:formatNumber value="${(mappa[elemento.id]).prezzo}" type="currency"
+                                      currencySymbol="€"/></p>
             </div>
-            <div class="product">
-                <img src="/images/martello.jpg" alt="martello">
-                <p>Martello</p>
-                <p>5 Pz.</p>
-                <p>50 €</p>
-            </div>
-            <div class="product">
-                <img src="/images/trapanoPercussione.jpg" alt="trapano a percussione">
-                <p>Trapano a percussione</p>
-                <p>1 Pz.</p>
-                <p>50 €</p>
-            </div>
-            <div class="product">
-                <img src="/images/trapanoPercussione.jpg" alt="trapano a percussione">
-                <p>Trapano a percussione</p>
-                <p>1 Pz.</p>
-                <p>50 €</p>
-            </div>
-            <div class="product">
-                <img src="/images/trapanoPercussione.jpg" alt="trapano a percussione">
-                <p>Trapano a percussione</p>
-                <p>1 Pz.</p>
-                <p>50 €</p>
-            </div>
-            <div class="product">
-                <img src="/images/trapanoPercussione.jpg" alt="trapano a percussione">
-                <p>Trapano a percussione</p>
-                <p>1 Pz.</p>
-                <p>50 €</p>
-            </div>
+            </c:forEach>
+
         </div>
     </div>
+    </c:forEach>
+
 </div>
 
 <%@ include file="footer.jsp" %>

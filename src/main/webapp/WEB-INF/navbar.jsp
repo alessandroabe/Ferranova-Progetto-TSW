@@ -23,7 +23,7 @@
 
                 <c:if test="${not empty UtenteConnesso}">
                     <a href="${pageContext.request.contextPath}/profilo.jsp">Profilo</a>
-                    <a href="${pageContext.request.contextPath}/ordineServlet">Ordini</a>
+                    <a href="#">Ordini</a>
                     <a href="${pageContext.request.contextPath}/logout">Logout</a>
                 </c:if>
             </div>
