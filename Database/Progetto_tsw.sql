@@ -72,12 +72,12 @@ CREATE TABLE Ordine
 
 CREATE TABLE Ordine_Prodotto
 (
-    id            INT            NOT NULL,
+    id            INT            NOT NULL auto_increment,
     id_ordine     INT            NOT NULL,
     id_prodotto   INT            NOT NULL,
     quantità      int unsigned   not null,
     prezzo_finale decimal(13, 2) not null,
-    PRIMARY KEY (id_ordine, id_prodotto),
+    PRIMARY KEY (id),
     FOREIGN KEY (id_ordine) references Ordine (id),
     FOREIGN KEY (id_prodotto) references Prodotto (id)
 );
