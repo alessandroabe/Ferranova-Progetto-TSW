@@ -10,7 +10,9 @@ public class Prodotto {
     private String descrizione;
     private int quantita;
     private int idPromozione;
-    private String categoria;
+    private String macrocategoria;
+    private String sottocategoria;
+
     private BigDecimal prezzo;
 
     public Prodotto() {
@@ -18,13 +20,14 @@ public class Prodotto {
     }
 
 
-    public Prodotto(int id, String titolo, String descrizione, int quantita, int idPromozione, String categoria, BigDecimal prezzo) {
+    public Prodotto(int id, String titolo, String descrizione, int quantita, int idPromozione, String macrocategoria, String sottocategoria , BigDecimal prezzo) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.quantita = quantita;
         this.idPromozione = idPromozione;
-        this.categoria = categoria;
+        this.macrocategoria = macrocategoria;
+        this.sottocategoria = sottocategoria;
         this.prezzo = prezzo;
     }
 
@@ -68,12 +71,20 @@ public class Prodotto {
         this.idPromozione = idPromozione;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getMacrocategoria() {
+        return macrocategoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setMacrocategoria(String macrocategoria) {
+        this.macrocategoria = macrocategoria;
+    }
+
+    public String getSottocategoria() {
+        return sottocategoria;
+    }
+
+    public void setSottocategoria(String sottocategoria) {
+        this.sottocategoria = sottocategoria;
     }
 
     public BigDecimal getPrezzo() {
