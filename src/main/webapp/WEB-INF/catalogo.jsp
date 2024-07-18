@@ -21,7 +21,7 @@
 <div class="container-catalogo">
     <div class="sidebar">
         <!-- FIXME: finisci e rendi dinamico con macrocategorie-->
-        <h2>Ferramenta</h2>
+        <h2>${param.categoria}</h2>
         <ul class="ul-sottocategorie">
             <c:forEach var="subCategoria" items="${subCategorie}">
                 <li>${subCategoria}</li>
