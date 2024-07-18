@@ -2,6 +2,8 @@ package org.unisa.abeilleamorellifontana_pj.Model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Ordine {
@@ -9,34 +11,34 @@ public class Ordine {
     private int idOrdine;
     private int idUtente;
     private StatoOrdine statoOrdine;
-
-    private BigDecimal prezzoOrdine;
-
-    private BigDecimal prezzoSpedizione;
-    private Map<Integer, Integer> prodottiQuantitaOrdine;
+    private BigDecimal prezzoOrdine = BigDecimal.ZERO;
+    private BigDecimal prezzoSpedizione = BigDecimal.ZERO;
+    private Map<Integer, OrdineProdotto> ordiniProdotti;
     private LocalDate dataOrdine;
     private LocalDate dataSpedizione;
     private LocalDate dataConsegna;
     private String tipoPagamento;
 
-    public Ordine(int id, Map<Integer, Integer> prodottiQuantitaOrdine, BigDecimal prezzoOrdine) {
-        this.idOrdine = id;
-        this.prodottiQuantitaOrdine = prodottiQuantitaOrdine;
-        this.statoOrdine = StatoOrdine.ORDINATO;
-        this.dataOrdine = LocalDate.now();
-        this.prezzoOrdine = prezzoOrdine;
-    }
-
-    public Ordine(int id_utente,int id, Map<Integer, Integer> prodottiQuantitaOrdine, BigDecimal prezzoOrdine) {
+    public Ordine(int idOrdine, int id_utente, Map<Integer, OrdineProdotto> prodottiQuantitaOrdine, BigDecimal prezzoOrdine, BigDecimal prezzoSpedizione) {
+        this.idOrdine = idOrdine;
         this.idUtente = id_utente;
-        this.idOrdine = id;
-        this.prodottiQuantitaOrdine = prodottiQuantitaOrdine;
+        this.ordiniProdotti = prodottiQuantitaOrdine;
         this.statoOrdine = StatoOrdine.ORDINATO;
         this.dataOrdine = LocalDate.now();
         this.prezzoOrdine = prezzoOrdine;
+        this.prezzoSpedizione = prezzoSpedizione;
     }
 
-    public Ordine(int idUtente, BigDecimal prezzoOrdine, BigDecimal prezzoSpedizione) {
+    public Ordine(int id_utente, Map<Integer, OrdineProdotto> prodottiQuantitaOrdine, BigDecimal prezzoOrdine, BigDecimal prezzoSpedizione) {
+        this.idUtente = id_utente;
+        this.ordiniProdotti = prodottiQuantitaOrdine;
+        this.statoOrdine = StatoOrdine.ORDINATO;
+        this.dataOrdine = LocalDate.now();
+        this.prezzoOrdine = prezzoOrdine;
+        this.prezzoSpedizione = prezzoSpedizione;
+    }
+
+    public Ordine(int idUtente, BigDecimal prezzoOrdine,BigDecimal prezzoSpedizione) {
         this.idUtente = idUtente;
         this.statoOrdine = StatoOrdine.ORDINATO;
         this.prezzoOrdine = prezzoOrdine;
@@ -47,6 +49,14 @@ public class Ordine {
         this.tipoPagamento = "carta di credito";
     }
 
+    public Ordine(int idUtente) {
+        this.idUtente = idUtente;
+        this.statoOrdine = StatoOrdine.ORDINATO;
+        this.dataOrdine = LocalDate.now();
+        this.dataSpedizione = null;
+        this.dataConsegna = null;
+        this.tipoPagamento = "carta di credito";
+    }
 
 
     public int getIdUtente() {
@@ -65,8 +75,8 @@ public class Ordine {
         this.idOrdine = idOrdine;
     }
 
-    public Map<Integer, Integer> getProdottiQuantitaOrdine() {
-        return prodottiQuantitaOrdine;
+    public Map<Integer, OrdineProdotto> getProdottiQuantitaOrdine() {
+        return ordiniProdotti;
     }
 
     public StatoOrdine getStatoOrdine(){
@@ -121,9 +131,26 @@ public class Ordine {
         return prezzoSpedizione;
     }
 
-    public void setPrezzoSpedizione(BigDecimal prezzoSpedizione) {
-        this.prezzoSpedizione = prezzoSpedizione;
+    public void setPrezzoSpedizione() {
+        if(this.prezzoOrdine.compareTo(new BigDecimal("100")) <= 0)
+            this.prezzoSpedizione = new BigDecimal("10");
     }
+
+    public  void addCarrello(Carrello carrello, List<Prodotto> prodottoList){
+HashMap<Integer, Integer> prodottiQuantita = (HashMap<Integer, Integer>) carrello.getProdottiQuantita();
+
+        if(this.ordiniProdotti == null)
+            this.ordiniProdotti = new HashMap<>();
+        for(Prodotto p : prodottoList) {
+//TODO: gestire promozione
+           OrdineProdotto ordineProdotto=  new OrdineProdotto(prodottiQuantita.get(p.getId()), p.getPrezzo());
+           this.prezzoOrdine = this.prezzoOrdine.add(p.getPrezzo().multiply(new BigDecimal(ordineProdotto.getQuantita())));
+          this.setPrezzoSpedizione();
+              this.ordiniProdotti.put(p.getId(), ordineProdotto);
+            }
+        }
+
+
 
     // Enum StatoOrdine definito all'interno della classe Ordine
     public enum StatoOrdine {
