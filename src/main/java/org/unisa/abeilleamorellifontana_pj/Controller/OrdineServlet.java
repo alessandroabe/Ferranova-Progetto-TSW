@@ -50,7 +50,7 @@ public class OrdineServlet extends HttpServlet {
 
         Ordine ordine= new Ordine(u.getId());
         ordine.addCarrello( carrello, lista );
-   OrdineDAO.inserisciOrdine(ordine);
+        OrdineDAO.inserisciOrdine(ordine);
 
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/AcquistoConSuccesso.jsp");

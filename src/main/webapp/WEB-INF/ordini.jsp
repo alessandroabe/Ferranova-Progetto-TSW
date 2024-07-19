@@ -48,18 +48,20 @@
         </div>
         <div class="order-products">
 
-            <c:forEach var="entry" items="${listaProdottiOrine}">
-
-            <div class="product">
-                <a href="prodotto.html"><img src="${pageContext.request.contextPath}/product_images/${entry.id}/1.png" alt="${entry.nome}"></a>
-                <p>${entry.nome}</p>
-                <p>${(mappa[elemento.id]).quantita} Pz.</p>
-                <p><fmt:setLocale value="fr_FR"/>
-                    <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                    <fmt:formatNumber value="${(mappa[elemento.id]).prezzo}" type="currency"
-                                      currencySymbol="€"/></p>
-            </div>
-            </c:forEach>
+                <c:forEach var="entry" items="${Ordine.prodottiQuantitaOrdine}">
+                    <c:set var="prodotto" value="${mappaProdotti[entry.key]}"/>
+                    <div class="product">
+                        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${prodotto.id}">
+                            <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png"
+                                 alt="immagine ${prodotto.titolo}"><br>
+                            <p>${prodotto.titolo}</p>
+                        </a>
+                        <p>${entry.value.quantita} Pz.</p>
+                        <p><fmt:setLocale value="it_IT"/>
+                            <fmt:formatNumber value="${entry.value.prezzoFinale}" type="currency" currencySymbol="€"/>
+                        </p>
+                    </div>
+                </c:forEach>
 
         </div>
     </div>
