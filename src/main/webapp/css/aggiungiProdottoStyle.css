@@ -1,0 +1,88 @@
+body {
+    font-family: sans-serif;
+}
+
+.container {
+    width: calc(40% - 40px);
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 3vh;
+    text-align: center;
+    padding: 35px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+}
+
+h1 {
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: small;
+    display: block;
+    text-align: left;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+input, textarea, button, select {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    font-size: medium;
+    color:white;
+    background-color: #335e1e;
+    border: none;
+    border-radius: 20px;
+    width: calc(50% - 40px);
+    height: 40px;
+    margin: 10px 25%;
+    padding: 10px 25px;
+}
+
+button:hover {
+    background-color: #29451c;
+}
+
+
+@media (max-width: 850px){
+    .wrapper{
+        width: calc(50% - 40px);
+        margin-left: 25%;
+        margin-right: 25%;
+        margin-top: 10vh;
+    }
+}
+
+@media (max-width: 600px){
+    .wrapper{
+        width: calc(70% - 40px);
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-top: 10vh;
+    }
+}
+
+
+@media (max-width: 400px){
+    .wrapper{
+        width: calc(90% - 40px);
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 10vh;
+    }
+}
