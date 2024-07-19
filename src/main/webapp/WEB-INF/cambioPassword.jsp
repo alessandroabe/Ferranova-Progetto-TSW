@@ -28,17 +28,17 @@
 
 
                 <label for="currentPassword">Password Corrente:</label>
-                <input type="password" id="currentPassword" name="currentPassword" required /><br/><br/>
+                <input type="password" id="currentPassword" name="currentPassword" required /><br/>
+
+                <label for="newPassword">Nuova Password:</label>
+                <input type="password" id="newPassword" name="newPassword" required /><br/>
 
                 <c:if test="${param.error == 1}">
                     <div id="alert" class="alert">Vecchia password errata</div>
                     <br>
                 </c:if>
 
-                <label for="newPassword">Nuova Password:</label>
-                <input type="password" id="newPassword" name="newPassword" required /><br/><br/>
-
-                <input type="submit" value="Cambia Password" />
+                <input id="submit" type="submit" value="Cambia Password" />
 
 
         </div>

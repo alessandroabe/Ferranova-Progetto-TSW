@@ -42,6 +42,11 @@ nav {
     margin: 0;
 }
 
+.nomeUtente p{
+    color: white;
+    margin: 0;
+}
+
 nav .ul-navbar li a {
     display: block; /* Rende i link dei blocchi, così che il padding sia applicato correttamente */
     padding: 20px; /* Dimensioni dei pulsanti */

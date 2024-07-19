@@ -4,58 +4,50 @@
     font-family: sans-serif;
 }
 
-body {
-    font-family: sans-serif;
-    background-color: #fff;
-    margin: 0;
-    padding: 20px;
-}
-
-.buttons-container{
+.buttons-container {
     width: 40%;
-    margin: 1vh 30%;
+    margin: 1vh auto;
     display: flex;
     justify-content: space-between;
 }
 
-.productsManage-button, .ordersManage-button{
+.productsManage-button, .ordersManage-button {
     font-size: 15px;
     width: 170px;
     height: 45px;
     padding: 10px;
-    color:#335e1e;
+    color: #335e1e;
     background-color: white;
     border: 1px solid #335e1e;
     border-radius: 20px;
+    cursor: pointer;
 }
 
-.productsManage-button:hover, .ordersManage-button:hover{
-    color:white;
+.productsManage-button:hover, .ordersManage-button:hover {
+    color: white;
     background-color: #29451c;
 }
 
-
-#productsManage-container{
+#productsManage-container, #ordersManage-container {
     width: 70%;
-    margin: 5vh 15%;
+    margin: 5vh auto;
+}
+
+#productsManage-container {
     display: block;
 }
 
-#ordersManage-container{
-    width: 70%;
-    margin: 5vh 15%;
+#ordersManage-container {
     display: none;
 }
 
-/*Stile parte gestione prodotti*/
-
-.headContainer{
-    margin: 15px 0 20px 0;
+.headContainer {
+    margin: 15px 0 20px;
     display: flex;
     justify-content: space-between;
 }
 
-.addProduct a{
+.addProduct a {
     padding: 10px 20px;
     color: white;
     background-color: #335e1e;
@@ -63,8 +55,8 @@ body {
     border-radius: 15px;
 }
 
-.addProduct a:hover{
-    background-color: #29451c
+.addProduct a:hover {
+    background-color: #29451c;
 }
 
 table {
@@ -96,69 +88,54 @@ th {
     margin-right: 10px;
 }
 
-.quantity-title{
-    transform: translateX(-30px);
-}
-
-.price-title{
-    transform: translateX(-12px);
-}
-
-.quantity-container{
+.quantity-container, .price-container {
     display: flex;
 }
 
-.price-container{
-    display: flex;
-}
-
-.minus, .plus{
-    margin: 0 15px 0 0;
-    font-size: 20px;
+.minus, .plus, .delete {
     background-color: transparent;
     border: 0;
     cursor: pointer;
 }
 
-.plus{
+.minus, .plus {
+    font-size: 20px;
     margin: 0 15px;
 }
 
-.delete{
+.delete {
     margin-left: 30px;
     font-size: 15px;
-    background-color: transparent;
-    border: 0;
     color: red;
-    cursor: pointer;
 }
 
-@media(max-width: 600px) {
-    .container {
+@media (max-width: 600px) {
+    .buttons-container, .orders-container, table {
         width: 90%;
-        margin: 0 auto 70px auto;
+        margin: 0 auto;
+    }
+
+    .product-info {
         flex-direction: column;
+        align-items: flex-start;
     }
 
-    .cart{
-        padding-top: 15px;
-        margin-left: 0;
+    .product-info img {
+        margin-bottom: 10px;
     }
 
-    .summary {
-        border-top: 1px solid #ddd;
-        border-left:0;
-        margin-left: 0;
-        margin-top: 20px;
+    .quantity-container, .price-container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
     }
 
-    .summary button{
-        margin-top: 15px;
+    .minus, .plus, .delete {
+        margin: 0;
     }
 
     table {
         display: block;
-        width: 100%;
     }
 
     thead {
@@ -175,42 +152,11 @@ th {
         padding: 10px 0;
     }
 
-    .product-info {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .product-info img {
-        margin: 0 0 10px 0;
-    }
-
-    .quantity-container {
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-    }
-
-    .minus, .plus, .delete {
-        margin: 0;
-    }
-
-    .quantity-container p {
-        margin: 0 10px;
-    }
-
-    /*se il carrello è vuoto*/
-    .cart-empty{
+    .cart-empty {
         width: 76%;
-        margin: 15vh 12%;
-        height: auto;
+        margin: 15vh auto;
     }
-
 }
-
-
-
-/*Stile parte gestione ordini clienti*/
-
 
 h1 {
     font-size: 24px;
@@ -219,8 +165,8 @@ h1 {
 }
 
 .orders-container {
-    max-width: calc(60% - 40px);
-    margin: 5vh auto 10vh auto;
+    max-width: 60%;
+    margin: 5vh auto 10vh;
 }
 
 .order {
@@ -229,7 +175,7 @@ h1 {
 }
 
 .dataOrdine {
-    margin: 5px 0 15px 0;
+    margin: 5px 0 15px;
     font-size: 20px;
 }
 
@@ -251,22 +197,18 @@ h1 {
     gap: 35px;
     margin-top: 50px;
     overflow-x: scroll;
-    scrollbar-color: rgba(14, 58, 27, 0.075) transparent;
 }
 
 .product {
-    flex: 1;
     max-width: 120px;
     text-align: center;
 }
 
 .product img {
     width: 120px;
-    height: auto;
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 10px;
-    cursor: pointer;
 }
 
 .product p {
@@ -277,31 +219,31 @@ h1 {
     text-overflow: ellipsis;
 }
 
-.modificaOrdine{
+.modificaOrdine {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-input#submit{
+input#submit {
     margin-top: 10px;
     font-size: 15px;
     padding: 10px 20px;
-    color:white;
+    color: white;
     background-color: #335e1e;
     border: none;
     border-radius: 20px;
+    cursor: pointer;
 }
 
-#submit:hover{
+#submit:hover {
     background-color: #29451c;
 }
 
-/* Responsive styles for screens under 850px */
 @media (max-width: 850px) {
     .orders-container {
-        max-width: calc(80% - 40px);
+        max-width: 80%;
     }
 
     .order-details p {
@@ -325,10 +267,9 @@ input#submit{
     }
 }
 
-/* Responsive styles for screens under 600px */
 @media (max-width: 600px) {
     .orders-container {
-        max-width: calc(90% - 40px);
+        max-width: 90%;
     }
 
     .order-details {
@@ -352,18 +293,12 @@ input#submit{
     }
 }
 
-/* Responsive styles for screens under 400px */
 @media (max-width: 400px) {
     .orders-container {
-        max-width: calc(100% - 40px);
-    }
-
-    .order-details {
-        display: block;
+        max-width: 100%;
     }
 
     .order-details p {
-        flex: 100%;
         font-size: 14px;
     }
 
