@@ -65,6 +65,29 @@ public class UtenteDAO {
         }
         return (doRetrieveByEmail(utente.getEmail())).getId();
     }
+
+    //todo fare la validazione con regex
+
+    public void doUpdate(Utente utente) {
+        String query = "UPDATE Utente SET nome = ?, cognome = ?, email = ?, passwordhash = ?, telefono = ?, indirizzo = ? WHERE id = ?";
+
+        try (Connection connection = ConPool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, utente.getNome());
+            preparedStatement.setString(2, utente.getCognome());
+            preparedStatement.setString(3, utente.getEmail());
+            preparedStatement.setString(4, utente.getPasswordhash());
+            preparedStatement.setString(5, utente.getTelefono());
+            preparedStatement.setString(6, utente.getIndirizzo());
+            preparedStatement.setInt(7, utente.getId());
+
+            preparedStatement.executeUpdate();
+            System.out.println("Utente aggiornato con successo!");
+
+        } catch (SQLException e) {
+            System.err.println("Errore durante l'aggiornamento dell'utente: " + e.getMessage());
+        }
+    }
 }
 
 

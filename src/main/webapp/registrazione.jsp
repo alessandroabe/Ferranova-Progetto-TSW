@@ -32,7 +32,7 @@
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" required><br>
 
-        <label for="cognome">Nome</label>
+        <label for="cognome">Cognome</label>
         <input type="text" id="cognome" name="cognome" required><br>
 
         <label for="email">Email</label>
