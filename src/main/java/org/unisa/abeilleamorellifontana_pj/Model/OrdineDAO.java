@@ -1,21 +1,19 @@
 package org.unisa.abeilleamorellifontana_pj.Model;
 
-import java.math.BigDecimal;
 import java.sql.*;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class OrdineDAO {
 
-    public static int  inserisciOrdine(Ordine ordine) {
-        int id=-1;
-        ResultSet rs= null;
+    public static int inserisciOrdine(Ordine ordine) {
+        int id = -1;
+        ResultSet rs = null;
         String insertOrderSQL = "INSERT INTO Ordine (id_utente, stato_ordine, prezzo_totale, spese_spedizione, data_ordine, data_spedizione, data_consegna, tipo_pagamento) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
         String insertProdottoOrdineSQL = "INSERT INTO Ordine_Prodotto(id_ordine,id_prodotto,quantità,prezzo_finale) VALUES (?, ?, ?, ?)";
         try (Connection conn = ConPool.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(insertOrderSQL, PreparedStatement.RETURN_GENERATED_KEYS) ){
+             PreparedStatement pstmt = conn.prepareStatement(insertOrderSQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setInt(1, ordine.getIdUtente());
             pstmt.setString(2, ordine.getStatoOrdine().toString());
@@ -28,7 +26,7 @@ public class OrdineDAO {
             pstmt.executeUpdate();
 
             rs = pstmt.getGeneratedKeys();
-            if(rs.next()) {
+            if (rs.next()) {
 
                 id = rs.getInt(1);
             }
@@ -58,6 +56,72 @@ public class OrdineDAO {
         return id;
     }
 
+    public static ArrayList<Ordine> doRetrieveAll() {
+        ArrayList<Ordine> ordini = new ArrayList<>();
+        String retrieveAllOrdersSQL = "SELECT * FROM Ordine";
+        String retrieveProductsByOrderSQL = "SELECT * FROM Ordine_Prodotto WHERE id_ordine = ?";
+
+        try (Connection conn = ConPool.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(retrieveAllOrdersSQL);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                Ordine ordine = new Ordine(rs.getInt("id"), rs.getInt("id_utente"), Ordine.StatoOrdine.valueOf(rs.getString("stato_ordine")), rs.getBigDecimal("prezzo_totale"), rs.getBigDecimal("spese_spedizione"), rs.getDate("data_ordine").toLocalDate(), rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null, rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null, rs.getString("tipo_pagamento"));
+
+                ordine.setProdottiQuantitaOrdine(retrieveProductsByOrder(ordine.getIdOrdine()));
+                ordini.add(ordine);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ordini;
+    }
+
+    // Metodo per ottenere tutti gli ordini di un utente specifico
+    public static ArrayList<Ordine> doRetrieveByUserId(int idUtente) {
+        ArrayList<Ordine> ordini = new ArrayList<>();
+        String retrieveOrdersByUserSQL = "SELECT * FROM Ordine WHERE id_utente = ?";
+        String retrieveProductsByOrderSQL = "SELECT * FROM Ordine_Prodotto WHERE id_ordine = ?";
+
+        try (Connection conn = ConPool.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(retrieveOrdersByUserSQL)) {
+
+            pstmt.setInt(1, idUtente);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    System.out.println(Ordine.StatoOrdine.fromString(rs.getString("stato_ordine") )+ rs.getString("stato_ordine"));
+                    Ordine ordine = new Ordine(rs.getInt("id"), rs.getInt("id_utente"), Ordine.StatoOrdine.fromString(rs.getString("stato_ordine")), rs.getBigDecimal("prezzo_totale"), rs.getBigDecimal("spese_spedizione"), rs.getDate("data_ordine").toLocalDate(), rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null, rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null, (rs.getString("tipo_pagamento")));
+
+                    ordine.setProdottiQuantitaOrdine(retrieveProductsByOrder(ordine.getIdOrdine()));
+                    ordini.add(ordine);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ordini;
+    }
+
+
+    // Metodo helper per ottenere i prodotti di un ordine
+    private static HashMap<Integer, OrdineProdotto> retrieveProductsByOrder(int idOrdine) throws SQLException {
+        Connection conn = ConPool.getConnection();
+        HashMap<Integer, OrdineProdotto> prodottiQuantitaOrdine = new HashMap<>();
+        String retrieveProductsByOrderSQL = "SELECT * FROM Ordine_Prodotto WHERE id_ordine = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(retrieveProductsByOrderSQL)) {
+            pstmt.setInt(1, idOrdine);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int idProdotto = rs.getInt("id_prodotto");
+                    OrdineProdotto ordineProdotto = new OrdineProdotto(rs.getInt("quantità"), rs.getBigDecimal("prezzo_finale"));
+                    prodottiQuantitaOrdine.put(idProdotto, ordineProdotto);
+                }
+            }
+        }
+        return prodottiQuantitaOrdine;
+    }
 
 }
 

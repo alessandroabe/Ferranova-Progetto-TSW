@@ -1,3 +1,4 @@
+<%@ page import="com.google.gson.Gson" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -36,6 +37,7 @@
                     <tbody>
 
                     <c:forEach var="elemento" items="${lista}">
+
                         <tr id="product-row-${elemento.id}">
                             <td>
                                 <div class="product-info">
@@ -51,10 +53,21 @@
                             </td>
                             <td>
                                 <div class="quantity-container">
-                                    <button class="minus" onclick="updateCart(${elemento.id}, 'update', -1, ${elemento.prezzo} )">&minus;</button>
+                                    <button class="minus" aria-label="minus" tabindex="0"
+                                            onkeydown="updateCart(${elemento.id}, 'update', -1, ${elemento.prezzo} )"
+                                            onclick="updateCart(${elemento.id}, 'update', -1, ${elemento.prezzo} )">
+                                        &minus;
+                                    </button>
                                     <p id="quantity-${elemento.id}">${mappa[elemento.id]} Pz.</p>
-                                    <button class="plus" onclick="updateCart(${elemento.id}, 'update', 1, ${elemento.prezzo})">&plus;</button>
-                                    <button class="delete" onclick="updateCart(${elemento.id}, 'remove', 0, ${elemento.prezzo})">rimuovi</button>
+                                    <button class="plus" aria-label="plus" tabindex="0"
+                                            onkeydown="updateCart(${elemento.id}, 'update', 1, ${elemento.prezzo})"
+                                            onclick="updateCart(${elemento.id}, 'update', 1, ${elemento.prezzo})">&plus;
+                                    </button>
+                                    <button class="delete" aria-label="delete" tabindex="0"
+                                            onkeydown="updateCart(${elemento.id}, 'remove', 0, ${elemento.prezzo})"
+                                            onclick="updateCart(${elemento.id}, 'remove', 0, ${elemento.prezzo})">
+                                        rimuovi
+                                    </button>
                                 </div>
 
                             </td>
@@ -68,11 +81,10 @@
                 </table>
             </div>
             <div class="summary">
-                <!-- TODO: conviene farlo in js sotto una certa cifra l'importo è gratis-->
-
                 <c:set var="spedizione" value="${ sum <= 100 ? 10 : 0  }"/>
                 <h2>Riassunto</h2>
-                <p>Subtotale: <span id="sub_totale" prezzo-tot = "${sum}"><fmt:setLocale value="fr_FR"/>
+                <p>Subtotale: <span id="sub_totale"  prezzo-tot="${sum}">
+                    <fmt:setLocale value="fr_FR"/>
                     <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                         <fmt:formatNumber value="${sum }" type="currency" currencySymbol="€"/></span></p>
                 <p id="spedizione">Costi di spedizione: <span><fmt:setLocale value="fr_FR"/>
@@ -108,51 +120,69 @@
                     document.getElementById("quantity-" + productId).textContent = xhr.responseText + " Pz.";
                     let newPrice = xhr.responseText * price;
                     // Formatta il prezzo con simbolo dell'euro e due decimali
-                    let formattedPrice = newPrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                    let formattedPrice = newPrice.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'});
                     document.getElementById("price-" + productId).textContent = formattedPrice;
                     const prezzo_totale = document.getElementById("sub_totale").getAttribute("prezzo-tot");
                     let sub_tot = 0;
-                    if(quantity === 1) {
+                    if (quantity === 1) {
                         sub_tot = parseFloat(prezzo_totale) + parseFloat(price);
-                    }else if(quantity === -1) {
+                    } else if (quantity === -1) {
                         sub_tot = parseFloat(prezzo_totale) - parseFloat(price);
                     }
-                    document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
-                    document.getElementById("sub_totale").setAttribute("prezzo-tot",sub_tot);
+                    document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', {
+                        style: 'currency',
+                        currency: 'EUR'
+                    });
+                    document.getElementById("sub_totale").setAttribute("prezzo-tot", sub_tot);
                     let costSpedizione = 10;
                     let totaleFinale = 0;
-                    if(sub_tot <= 100){
+                    if (sub_tot <= 100) {
                         totaleFinale = sub_tot + costSpedizione;
-                    }else if(sub_tot > 100){
+                    } else if (sub_tot > 100) {
                         costSpedizione = 0;
                         totaleFinale = sub_tot + costSpedizione;
                     }
-                    document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
-                    document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                    document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', {
+                        style: 'currency',
+                        currency: 'EUR'
+                    });
+                    document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', {
+                        style: 'currency',
+                        currency: 'EUR'
+                    });
 
 
                 } else if (action === 'remove') {
-                    const row = document.getElementById("product-row-"+ productId);
+                    const row = document.getElementById("product-row-" + productId);
                     const prezzo_totale = document.getElementById("sub_totale").getAttribute("prezzo-tot");
                     row.parentNode.removeChild(row);
                     const sub_tot = parseFloat(prezzo_totale) - (parseFloat(price) * xhr.responseText);
-                    document.getElementById("sub_totale").setAttribute("prezzo-tot",sub_tot);
-                    document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                    document.getElementById("sub_totale").setAttribute("prezzo-tot", sub_tot);
+                    document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', {
+                        style: 'currency',
+                        currency: 'EUR'
+                    });
 
                     let costSpedizione = 10;
                     let totaleFinale = 0;
-                    if(sub_tot <= 100){
+                    if (sub_tot <= 100) {
                         totaleFinale = sub_tot + costSpedizione;
-                    }else if(sub_tot > 100){
+                    } else if (sub_tot > 100) {
                         costSpedizione = 0;
                         totaleFinale = sub_tot + costSpedizione;
                     }
-                    document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
-                    document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                    document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', {
+                        style: 'currency',
+                        currency: 'EUR'
+                    });
+                    document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', {
+                        style: 'currency',
+                        currency: 'EUR'
+                    });
                 }
             }
         };
-        xhr.send("prod=" + productId + "&action=" + action +"&quantity=" + quantity);
+        xhr.send("prod=" + productId + "&action=" + action + "&quantity=" + quantity);
     }
 
 

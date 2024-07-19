@@ -7,15 +7,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
 import org.unisa.abeilleamorellifontana_pj.Model.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "ordineServlet", value = "/ordineServlet")
@@ -30,9 +26,8 @@ public class OrdineServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
-        int ordid=0;
-        //ORDINE
 
+        //TODO: fare che elimina carrello
         //riprendere il prezzo totale
         Carrello carrello = (Carrello) session.getAttribute("Carrello");
         ArrayList<Prodotto> lista = new ArrayList<>();

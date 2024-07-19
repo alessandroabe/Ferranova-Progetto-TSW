@@ -12,7 +12,6 @@ public class Utente {
     private String passwordhash;
     private String telefono;
     private boolean isAdmin;
-
     private String indirizzo;
 
     public Utente(int id, String nome, String cognome,String email, String passwordhash, String telefono, boolean isAdmin, String indirizzo) {

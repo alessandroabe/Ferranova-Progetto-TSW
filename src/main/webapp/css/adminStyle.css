@@ -1,0 +1,389 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 20px;
+}
+
+.buttons-container{
+    width: 40%;
+    margin: 1vh 30%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.productsManage-button, .ordersManage-button{
+    font-size: 15px;
+    width: 170px;
+    height: 45px;
+    padding: 10px;
+    color:#335e1e;
+    background-color: white;
+    border: 1px solid #335e1e;
+    border-radius: 20px;
+}
+
+.productsManage-button:hover, .ordersManage-button:hover{
+    color:white;
+    background-color: #29451c;
+}
+
+
+#productsManage-container{
+    width: 70%;
+    margin: 5vh 15%;
+    display: block;
+}
+
+#ordersManage-container{
+    width: 70%;
+    margin: 5vh 15%;
+    display: none;
+}
+
+/*Stile parte gestione prodotti*/
+
+.headContainer{
+    margin: 15px 0 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.addProduct a{
+    padding: 10px 20px;
+    color: white;
+    background-color: #335e1e;
+    text-decoration: none;
+    border-radius: 15px;
+}
+
+.addProduct a:hover{
+    background-color: #29451c
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background: #f4f4f4;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+}
+
+.product-info img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.quantity-title{
+    transform: translateX(-30px);
+}
+
+.price-title{
+    transform: translateX(-12px);
+}
+
+.quantity-container{
+    display: flex;
+}
+
+.price-container{
+    display: flex;
+}
+
+.minus, .plus{
+    margin: 0 15px 0 0;
+    font-size: 20px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.plus{
+    margin: 0 15px;
+}
+
+.delete{
+    margin-left: 30px;
+    font-size: 15px;
+    background-color: transparent;
+    border: 0;
+    color: red;
+    cursor: pointer;
+}
+
+@media(max-width: 600px) {
+    .container {
+        width: 90%;
+        margin: 0 auto 70px auto;
+        flex-direction: column;
+    }
+
+    .cart{
+        padding-top: 15px;
+        margin-left: 0;
+    }
+
+    .summary {
+        border-top: 1px solid #ddd;
+        border-left:0;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .summary button{
+        margin-top: 15px;
+    }
+
+    table {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody, tr, td {
+        display: block;
+        width: 100%;
+    }
+
+    td {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    .product-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-info img {
+        margin: 0 0 10px 0;
+    }
+
+    .quantity-container {
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .minus, .plus, .delete {
+        margin: 0;
+    }
+
+    .quantity-container p {
+        margin: 0 10px;
+    }
+
+    /*se il carrello è vuoto*/
+    .cart-empty{
+        width: 76%;
+        margin: 15vh 12%;
+        height: auto;
+    }
+
+}
+
+
+
+/*Stile parte gestione ordini clienti*/
+
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.orders-container {
+    max-width: calc(60% - 40px);
+    margin: 5vh auto 10vh auto;
+}
+
+.order {
+    border-bottom: 1px solid #ddd;
+    padding: 40px 0;
+}
+
+.dataOrdine {
+    margin: 5px 0 15px 0;
+    font-size: 20px;
+}
+
+.order-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-details p {
+    margin: 5px 0;
+    flex: 50%;
+}
+
+.order-products {
+    display: flex;
+    justify-content: left;
+    gap: 35px;
+    margin-top: 50px;
+    overflow-x: scroll;
+    scrollbar-color: rgba(14, 58, 27, 0.075) transparent;
+}
+
+.product {
+    flex: 1;
+    max-width: 120px;
+    text-align: center;
+}
+
+.product img {
+    width: 120px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.product p {
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modificaOrdine{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input#submit{
+    margin-top: 10px;
+    font-size: 15px;
+    padding: 10px 20px;
+    color:white;
+    background-color: #335e1e;
+    border: none;
+    border-radius: 20px;
+}
+
+#submit:hover{
+    background-color: #29451c;
+}
+
+/* Responsive styles for screens under 850px */
+@media (max-width: 850px) {
+    .orders-container {
+        max-width: calc(80% - 40px);
+    }
+
+    .order-details p {
+        flex: 100%;
+    }
+
+    .order-products {
+        gap: 20px;
+    }
+
+    .product {
+        max-width: 100px;
+    }
+
+    .product img {
+        width: 100px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+}
+
+/* Responsive styles for screens under 600px */
+@media (max-width: 600px) {
+    .orders-container {
+        max-width: calc(90% - 40px);
+    }
+
+    .order-details {
+        display: block;
+    }
+
+    .order-products {
+        gap: 15px;
+    }
+
+    .product {
+        max-width: 80px;
+    }
+
+    .product img {
+        width: 80px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
+
+/* Responsive styles for screens under 400px */
+@media (max-width: 400px) {
+    .orders-container {
+        max-width: calc(100% - 40px);
+    }
+
+    .order-details {
+        display: block;
+    }
+
+    .order-details p {
+        flex: 100%;
+        font-size: 14px;
+    }
+
+    .order-products {
+        gap: 10px;
+    }
+
+    .product {
+        max-width: 60px;
+    }
+
+    .product img {
+        width: 60px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    .dataOrdine {
+        font-size: 16px;
+    }
+}
