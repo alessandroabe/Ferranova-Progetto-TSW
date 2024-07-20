@@ -91,5 +91,16 @@ public class ProdottoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public static void aggiornaQuantitaProdotto(int idProdotto, int nuovaQuantita) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE Prodotto SET quantità = ? WHERE id = ?");
+            ps.setInt(1, nuovaQuantita);
+            ps.setInt(2, idProdotto);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 

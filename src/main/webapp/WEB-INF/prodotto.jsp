@@ -53,51 +53,6 @@
             <button onclick="addToCart(${prodotto.id})" class="add-to-cart">Aggiungi al carrello</button>
 
             <p id="alert" class="alert"></p>
-
-
-
-        <script>
-            function addToCart(product_id) {
-                var quantity = document.getElementById("quantity").value;
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "${pageContext.request.contextPath}/carrelloAjax?prod=" + product_id + "&quantity=" + quantity, true);
-                //se si vuole passare un parametro da una pagina jsp
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                        if (xhr.readyState === XMLHttpRequest.DONE) {
-                            var alertElement = document.getElementById("alert");
-                            if (xhr.status === 200) {
-                                alertElement.innerHTML = "Aggiunto al carrello";
-                                alertElement.style.color = "#335e1e";
-                            } else {
-                                alertElement.innerHTML = "Errore";
-                                alertElement.style.color = "red";
-                            }
-
-                            alertElement.style.opacity = 0;
-                            alertElement.style.transform = "translateY(-20px)";
-                            alertElement.style.display = "block";
-                            alertElement.offsetHeight; // Forza il reflow per applicare le nuove proprietà
-                            alertElement.style.transition = "opacity 0.5s, transform 0.5s";
-                            alertElement.style.opacity = 1;
-                            alertElement.style.transform = "translateY(20px)";
-
-                            setTimeout(function() {
-                                alertElement.style.transition = "opacity 0.5s, transform 0.5s";
-                                alertElement.style.opacity = 0;
-                                alertElement.style.transform = "translateY(-20px)";
-                            }, 2000); //dopo 3 secondi scompare
-
-                            setTimeout(function() {
-                                alertElement.style.display = "none";
-                            }, 2500); //dopo 4 secondi scompare
-                        }
-                    }
-                };
-                xhr.send();
-            }
-        </script>
-
     </div>
 
 </div>
@@ -110,6 +65,50 @@
 <%@ include file="footer.jsp" %>
 
 <script src="${pageContext.request.contextPath}/js/carousel.js"></script>
+
+<script>
+    function addToCart(product_id) {
+        var quantity = document.getElementById("quantity").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "${pageContext.request.contextPath}/carrelloAjax?prod=" + product_id + "&quantity=" + quantity, true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var alertElement = document.getElementById("alert");
+                if (xhr.status === 200) {
+                    alertElement.innerHTML = "Aggiunto al carrello";
+                    alertElement.style.color = "#335e1e";
+                } else if (xhr.status === 400) {
+                    alertElement.innerHTML = "Quantità richiesta non disponibile";
+                    alertElement.style.color = "red";
+                } else {
+                    alertElement.innerHTML = "Errore";
+                    alertElement.style.color = "red";
+                }
+
+                alertElement.style.opacity = 0;
+                alertElement.style.transform = "translateY(-20px)";
+                alertElement.style.display = "block";
+                alertElement.offsetHeight; // Forza il reflow per applicare le nuove proprietà
+                alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                alertElement.style.opacity = 1;
+                alertElement.style.transform = "translateY(20px)";
+
+                setTimeout(function() {
+                    alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                    alertElement.style.opacity = 0;
+                    alertElement.style.transform = "translateY(-20px)";
+                }, 2000); //dopo 2 secondi scompare
+
+                setTimeout(function() {
+                    alertElement.style.display = "none";
+                }, 2500); //dopo 2.5 secondi scompare
+            }
+        };
+        xhr.send();
+    }
+</script>
+
 
 </body>
 </html>

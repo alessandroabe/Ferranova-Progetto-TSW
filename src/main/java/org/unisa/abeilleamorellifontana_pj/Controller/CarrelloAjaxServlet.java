@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.unisa.abeilleamorellifontana_pj.Model.Carrello;
+import org.unisa.abeilleamorellifontana_pj.Model.Prodotto;
+import org.unisa.abeilleamorellifontana_pj.Model.ProdottoDAO;
 
 import java.io.IOException;
 
@@ -16,7 +18,7 @@ public class CarrelloAjaxServlet extends HttpServlet {
     public void init() {
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
         HttpSession session = request.getSession(false);
         Carrello carrello = (Carrello) session.getAttribute("Carrello");
 
@@ -26,7 +28,14 @@ public class CarrelloAjaxServlet extends HttpServlet {
         String prod_id = request.getParameter("prod");
         int prod_id_d = Integer.parseInt(prod_id);
 
-        carrello.aggiungiProdotto(prod_id_d, quantity);
+        Prodotto prodotto = ProdottoDAO.doRetrieveById(prod_id_d);
+
+        if (quantity <= prodotto.getQuantita()) {
+            carrello.aggiungiProdotto(prod_id_d, quantity);
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
 
 
     }

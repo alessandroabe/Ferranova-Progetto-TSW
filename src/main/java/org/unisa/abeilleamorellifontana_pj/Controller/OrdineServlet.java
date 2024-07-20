@@ -26,13 +26,26 @@ public class OrdineServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
-
-        //TODO: fare che elimina carrello
-        //riprendere il prezzo totale
         Carrello carrello = (Carrello) session.getAttribute("Carrello");
+
+        // Verifica se il carrello è vuoto
+        if (carrello == null || carrello.getProdottiQuantita().isEmpty()) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/carrello.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
+
+        //riprende il prezzo totale
         ArrayList<Prodotto> lista = new ArrayList<>();
         for (Map.Entry<Integer, Integer> entry : carrello.getProdottiQuantita().entrySet()) {
             lista.add(ProdottoDAO.doRetrieveById(entry.getKey()));
+        }
+
+        // Aggiornare le quantità dei prodotti nel database
+        for (Prodotto p : lista) {
+            int quantitaAcquistata = carrello.getProdottiQuantita().get(p.getId());
+            int nuovaQuantita = p.getQuantita() - quantitaAcquistata;
+            ProdottoDAO.aggiornaQuantitaProdotto(p.getId(), nuovaQuantita);
         }
 
         BigDecimal sum = BigDecimal.ZERO;
@@ -46,6 +59,9 @@ public class OrdineServlet extends HttpServlet {
         Ordine ordine= new Ordine(u.getId());
         ordine.addCarrello( carrello, lista );
         OrdineDAO.inserisciOrdine(ordine);
+
+        CarrelloDAO.doDelete(u.getId());
+        session.removeAttribute("Carrello");
 
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/AcquistoConSuccesso.jsp");

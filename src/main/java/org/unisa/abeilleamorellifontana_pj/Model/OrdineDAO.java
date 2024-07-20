@@ -78,10 +78,11 @@ public class OrdineDAO {
         return ordini;
     }
 
+
     // Metodo per ottenere tutti gli ordini di un utente specifico
     public static ArrayList<Ordine> doRetrieveByUserId(int idUtente) {
         ArrayList<Ordine> ordini = new ArrayList<>();
-        String retrieveOrdersByUserSQL = "SELECT * FROM Ordine WHERE id_utente = ?";
+        String retrieveOrdersByUserSQL = "SELECT * FROM Ordine WHERE id_utente = ? ORDER BY id DESC";  //messo order by id desc per visualizzare gli ordini per id ordine decrescente
         String retrieveProductsByOrderSQL = "SELECT * FROM Ordine_Prodotto WHERE id_ordine = ?";
 
         try (Connection conn = ConPool.getConnection();
