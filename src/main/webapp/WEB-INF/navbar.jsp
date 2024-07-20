@@ -28,7 +28,7 @@
                         <a href="${pageContext.request.contextPath}/profilo">Profilo</a>
                         <a href="${pageContext.request.contextPath}/listaOrdini">Ordini</a>
                         <c:if test="${ UtenteConnesso.admin}">
-                            <a href="${pageContext.request.contextPath}/Admin.jsp">Pagina admin</a>
+                            <a href="${pageContext.request.contextPath}/admin">Pagina admin</a>
                         </c:if>
                         <a href="${pageContext.request.contextPath}/logout">Logout</a>
                     </c:if>

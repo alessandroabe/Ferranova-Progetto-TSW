@@ -1,6 +1,7 @@
 package org.unisa.abeilleamorellifontana_pj.Model;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class OrdineDAO {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                Ordine ordine = new Ordine(rs.getInt("id"), rs.getInt("id_utente"), Ordine.StatoOrdine.valueOf(rs.getString("stato_ordine")), rs.getBigDecimal("prezzo_totale"), rs.getBigDecimal("spese_spedizione"), rs.getDate("data_ordine").toLocalDate(), rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null, rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null, rs.getString("tipo_pagamento"));
+                Ordine ordine = new Ordine(rs.getInt("id"), rs.getInt("id_utente"), Ordine.StatoOrdine.valueOf(rs.getString("stato_ordine").toUpperCase()), rs.getBigDecimal("prezzo_totale"), rs.getBigDecimal("spese_spedizione"), rs.getDate("data_ordine").toLocalDate(), rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null, rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null, rs.getString("tipo_pagamento"));
 
                 ordine.setProdottiQuantitaOrdine(retrieveProductsByOrder(ordine.getIdOrdine()));
                 ordini.add(ordine);
@@ -90,7 +91,7 @@ public class OrdineDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    System.out.println(Ordine.StatoOrdine.fromString(rs.getString("stato_ordine") )+ rs.getString("stato_ordine"));
+                    System.out.println(Ordine.StatoOrdine.fromString(rs.getString("stato_ordine")) + rs.getString("stato_ordine"));
                     Ordine ordine = new Ordine(rs.getInt("id"), rs.getInt("id_utente"), Ordine.StatoOrdine.fromString(rs.getString("stato_ordine")), rs.getBigDecimal("prezzo_totale"), rs.getBigDecimal("spese_spedizione"), rs.getDate("data_ordine").toLocalDate(), rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null, rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null, (rs.getString("tipo_pagamento")));
 
                     ordine.setProdottiQuantitaOrdine(retrieveProductsByOrder(ordine.getIdOrdine()));
@@ -123,9 +124,53 @@ public class OrdineDAO {
         return prodottiQuantitaOrdine;
     }
 
+    public static void updateOrderStatus(int orderId, Ordine.StatoOrdine status) {
+        String query = "UPDATE Ordine SET stato_ordine = ? WHERE id = ?";
+        try (Connection connection = ConPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, status.getStato());
+            statement.setInt(2, orderId);
+
+            statement.executeUpdate();
+            System.out.println("Ordine aggiornato con successo!");
+
+        } catch (SQLException e) {
+            System.err.println("Errore durante l'aggiornamento dell'ordine: " + e.getMessage());
+        }
+    }
+
+
+    public static void updateShipmentDate(int orderId, LocalDate shipmentDate) throws SQLException {
+        try (Connection connection = ConPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement("UPDATE Ordine SET data_spedizione = ? WHERE id = ?")) {
+
+            statement.setDate(1, Date.valueOf(shipmentDate));
+            statement.setInt(2, orderId);
+
+
+            statement.executeUpdate();
+            System.out.println("Ordine aggiornato con successo!");
+
+        } catch (SQLException e) {
+            System.err.println("Errore durante l'aggiornamento dell'ordine: " + e.getMessage());
+        }
+    }
+
+    public static void updateDeliveryDate(int orderId,  LocalDate deliveryDate) throws SQLException {
+        String query = "UPDATE Ordine SET data_consegna = ? WHERE id = ?";
+        try (Connection connection = ConPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setDate(1, Date.valueOf(deliveryDate));
+            statement.setInt(2, orderId);
+
+            statement.executeUpdate();
+            System.out.println("Ordine aggiornato con successo!");
+
+        } catch (SQLException e) {
+            System.err.println("Errore durante l'aggiornamento dell'ordine: " + e.getMessage());
+        }
+    }
 }
-
-
-
-
 

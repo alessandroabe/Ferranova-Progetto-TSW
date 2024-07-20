@@ -1,4 +1,4 @@
-package org.unisa.abeilleamorellifontana_pj.Controller.Admin;
+package org.unisa.abeilleamorellifontana_pj.Controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,7 +29,7 @@ public class AdminServlet extends HttpServlet {
             }
 
             ArrayList<Ordine> ordini = OrdineDAO.doRetrieveAll();
-            req.setAttribute("ordini", ordini);
+            req.setAttribute("Ordini", ordini);
 
            ArrayList<Prodotto> prodottoArrayList = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveAll();
             HashMap <Integer, Prodotto> prodottoHashMap = new HashMap<>();
@@ -37,7 +37,7 @@ public class AdminServlet extends HttpServlet {
                 prodottoHashMap.put(prodotto.getId(), prodotto);
             }
             req.setAttribute("prodottoHashMap", prodottoHashMap);
-            req.getRequestDispatcher("admin.jsp").forward(req, resp);
+            req.getRequestDispatcher("Admin.jsp").forward(req, resp);
 
 
         }

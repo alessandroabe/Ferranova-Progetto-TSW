@@ -21,7 +21,7 @@
 <%@ include file="navbar.jsp" %>
 
 <div class="wrapper">
-    <form action="acquisto" method="post">
+    <form action="ordineServlet" method="post">
 
         <h4>Nominativo</h4>
 
@@ -66,7 +66,7 @@
         </div>
 
         <div class="divAcquista-button">
-            <a class="acquista-button" href="${pageContext.request.contextPath}/ordineServlet">Acquista</a>
+            <input type="submit" class="acquista-button" value="Acquista">
         </div>
     </form>
 </div>

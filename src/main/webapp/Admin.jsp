@@ -37,9 +37,9 @@
         <div class="select-categoryDiv">
             <form action="select-category">
                 <label for="select-category">Seleziona categoria</label>
-                <select name="languages" id="select-category">
-                    <option value="all">All</option>
-                    <option value="ferramenta">ferramenta</option>
+                <select name="categoria" id="select-category">
+                    <option value="all" >All</option>
+                    <option value="ferramenta" >ferramenta</option>
                     <option value="edilizia">edilizia</option>
                     <option value="giardinaggio">giardinaggio</option>
                 </select>
@@ -65,15 +65,15 @@
                     <div class="product-info">
                         <a href="${pageContext.request.contextPath}/prod?id_prodotto=${elemento.id}"><img src="images/cacciaviteCroce.jpg" alt="immagine ${elemento.titolo}"></a>
                         <div>
-                            <p>cacciavite a croce</p>
-                            <span>Cod. prodotto: 2</span>
+                            <p>${elemento.titolo}</p>
+                            <span>${elemento.id}</span>
                         </div>
                     </div>
                 </td>
                 <td>
                     <div class="quantity-container">
                         <button class="minus" aria-label="minus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', -1)" onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;</button>
-                        <p id="quantity-${elemento.id}">2 Pz.</p>
+                        <p id="quantity-${elemento.quantita}"> Pz.</p>
                         <button class="plus" aria-label="plus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 1)" onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;</button>
                         <button class="delete" aria-label="delete" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 0)" onclick="updateQuantity(${elemento.id}, 'update', 0)">rimuovi prodotto</button>
                     </div>
@@ -81,7 +81,7 @@
                 <td id="price-${elemento.id}">
                     <div class="price-container">
                         <button class="minus" aria-label="minus" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'update', -1)" onclick="updatePrice(${elemento.id}, 'update', -1)">&minus;</button>
-                        <p id="price-${elemento.id}">5,00 €</p>
+                        <p id="price-${elemento.prezzo}"> €</p>
                         <button class="plus" aria-label="plus" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'update', 1)" onclick="updatePrice(${elemento.id}, 'update', 1)">&plus;</button>
                     </div>
                 </td>
@@ -99,8 +99,9 @@
             <div class="order-header">
                 <p class="dataOrdine"><strong>${Ordine.dataOrdine}</strong></p>
                 <div class="order-details">
-                    <p><strong>ID ordine:</strong>1</p>
-                    <p><strong>Stato:</strong>ordinato</p>
+                    <p><strong>ID ordine:</strong>${Ordine.idOrdine}</p>
+                    <p><strong>ID cliente:</strong>${Ordine.idUtente}</p>
+                    <p><strong>Stato:</strong>${Ordine.statoOrdine}</p>
                     <p><strong>Subtotale:</strong><fmt:setLocale value="fr_FR"/>
                         <fmt:formatNumber value="${Ordine.prezzoOrdine}" type="currency" currencySymbol="€"/>
                     </p>
@@ -109,22 +110,24 @@
                         <fmt:formatNumber value="${Ordine.prezzoSpedizione}" type="currency" currencySymbol="€"/>
                     </p>
                     <p class="dataConsegna"><strong>Data consegna:</strong> - </p>
-                    <form class="modificaOrdine">
+                    <form action="modificaOrdine" method="get">
                         <div>
                             <label for="statoOrdine">Modifica Stato ordine</label>
-                            <select name="languages" id="statoOrdine">
+                            <select name="stato" id="statoOrdine" required>
                                 <option value="ordinato">ordinato</option>
                                 <option value="spedito">spedito</option>
                                 <option value="consegnato">consegnato</option>
                             </select>
+                            <!-- Campo nascosto per l'ID ordine -->
+                            <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}">
                         </div>
                         <div>
                             <label for="dataSpedizione">Modifica data di spedizione:</label>
-                            <input type="date" id="dataSpedizione" name="dataSpedizione">
+                            <input type="date" id="dataSpedizione" name="dataSpedizione" required>
                         </div>
                         <div>
                             <label for="birthday">Modifica data di consegna:</label>
-                            <input type="date" id="birthday" name="dataSpedizione">
+                            <input type="date" id="birthday" name="dataConsegna" required>
                         </div>
                         <input type="submit" id="submit" value="Modifica"/>
                     </form>
