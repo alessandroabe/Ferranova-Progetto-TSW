@@ -115,80 +115,89 @@
         xhr.open("POST", "${pageContext.request.contextPath}/carrelloAjax", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                if (action === 'update') {
-                    document.getElementById("quantity-" + productId).textContent = xhr.responseText + " Pz.";
-                    let newPrice = xhr.responseText * price;
-                    // Formatta il prezzo con simbolo dell'euro e due decimali
-                    let formattedPrice = newPrice.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'});
-                    document.getElementById("price-" + productId).textContent = formattedPrice;
-                    const prezzo_totale = document.getElementById("sub_totale").getAttribute("prezzo-tot");
-                    let sub_tot = 0;
-                    if (quantity === 1) {
-                        sub_tot = parseFloat(prezzo_totale) + parseFloat(price);
-                    } else if (quantity === -1) {
-                        sub_tot = parseFloat(prezzo_totale) - parseFloat(price);
-                    }
-                    document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', {
-                        style: 'currency',
-                        currency: 'EUR'
-                    });
-                    document.getElementById("sub_totale").setAttribute("prezzo-tot", sub_tot);
-                    let costSpedizione = 10;
-                    let totaleFinale = 0;
-                    if (sub_tot <= 100) {
-                        totaleFinale = sub_tot + costSpedizione;
-                    } else if (sub_tot > 100) {
-                        costSpedizione = 0;
-                        totaleFinale = sub_tot + costSpedizione;
-                    }
-                    document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', {
-                        style: 'currency',
-                        currency: 'EUR'
-                    });
-                    document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', {
-                        style: 'currency',
-                        currency: 'EUR'
-                    });
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    if (action === 'update') {
+                        document.getElementById("quantity-" + productId).textContent = xhr.responseText + " Pz.";
+                        let newPrice = xhr.responseText * price;
+                        let formattedPrice = newPrice.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'});
+                        document.getElementById("price-" + productId).textContent = formattedPrice;
+                        const prezzo_totale = document.getElementById("sub_totale").getAttribute("prezzo-tot");
+                        let sub_tot = 0;
+                        if (quantity === 1) {
+                            sub_tot = parseFloat(prezzo_totale) + parseFloat(price);
+                        } else if (quantity === -1) {
+                            sub_tot = parseFloat(prezzo_totale) - parseFloat(price);
+                        }
+                        document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', {
+                            style: 'currency',
+                            currency: 'EUR'
+                        });
+                        document.getElementById("sub_totale").setAttribute("prezzo-tot", sub_tot);
+                        let costSpedizione = 10;
+                        let totaleFinale = 0;
+                        if (sub_tot <= 100) {
+                            totaleFinale = sub_tot + costSpedizione;
+                        } else if (sub_tot > 100) {
+                            costSpedizione = 0;
+                            totaleFinale = sub_tot + costSpedizione;
+                        }
+                        document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', {
+                            style: 'currency',
+                            currency: 'EUR'
+                        });
+                        document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', {
+                            style: 'currency',
+                            currency: 'EUR'
+                        });
+                    } else if (action === 'remove') {
+                        const row = document.getElementById("product-row-" + productId);
+                        const prezzo_totale = document.getElementById("sub_totale").getAttribute("prezzo-tot");
+                        row.parentNode.removeChild(row);
+                        const sub_tot = parseFloat(prezzo_totale) - (parseFloat(price) * xhr.responseText);
+                        document.getElementById("sub_totale").setAttribute("prezzo-tot", sub_tot);
+                        document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', {
+                            style: 'currency',
+                            currency: 'EUR'
+                        });
 
+                        let costSpedizione = 10;
+                        let totaleFinale = 0;
+                        if (sub_tot <= 100) {
+                            totaleFinale = sub_tot + costSpedizione;
+                        } else if (sub_tot > 100) {
+                            costSpedizione = 0;
+                            totaleFinale = sub_tot + costSpedizione;
+                        }
+                        document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', {
+                            style: 'currency',
+                            currency: 'EUR'
+                        });
+                        document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', {
+                            style: 'currency',
+                            currency: 'EUR'
+                        });
 
-                } else if (action === 'remove') {
-                    const row = document.getElementById("product-row-" + productId);
-                    const prezzo_totale = document.getElementById("sub_totale").getAttribute("prezzo-tot");
-                    row.parentNode.removeChild(row);
-                    const sub_tot = parseFloat(prezzo_totale) - (parseFloat(price) * xhr.responseText);
-                    document.getElementById("sub_totale").setAttribute("prezzo-tot", sub_tot);
-                    document.getElementById("sub_totale").innerHTML = sub_tot.toLocaleString('fr-FR', {
-                        style: 'currency',
-                        currency: 'EUR'
-                    });
-
-                    let costSpedizione = 10;
-                    let totaleFinale = 0;
-                    if (sub_tot <= 100) {
-                        totaleFinale = sub_tot + costSpedizione;
-                    } else if (sub_tot > 100) {
-                        costSpedizione = 0;
-                        totaleFinale = sub_tot + costSpedizione;
+                        if (sub_tot === 0) {
+                            location.reload();
+                        }
                     }
-                    document.getElementById("spedizione").innerHTML = "Costo di spedizione: " + costSpedizione.toLocaleString('fr-FR', {
-                        style: 'currency',
-                        currency: 'EUR'
-                    });
-                    document.getElementById("total").innerHTML = "Totale: " + totaleFinale.toLocaleString('fr-FR', {
-                        style: 'currency',
-                        currency: 'EUR'
-                    });
                 }
+
+                if (xhr.status === 400) {
+                    if (action === "update") {
+                        alert("quantità selezionata maggiore della quantità disponibile");
+                    } else if (action === "remove") {
+                        location.reload();
+                    }
+                }
+
             }
         };
         xhr.send("prod=" + productId + "&action=" + action + "&quantity=" + quantity);
     }
-
-
-    <!--TODO: aggiungere funzione ajax per aggiornare i prezzi real time-->
-
 </script>
+
 
 </body>
 </html>

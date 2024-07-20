@@ -57,7 +57,10 @@
                                 if (xhr.status === 200) {
                                     alertElement.innerHTML = "Aggiunto al carrello";
                                     alertElement.style.color = "#335e1e";
-                                } else {
+                                } else if(xhr.status === 400){
+                                    alertElement.innerHTML = "Quantità non disponibile";
+                                    alertElement.style.color = "red";
+                                }else{
                                     alertElement.innerHTML = "Errore";
                                     alertElement.style.color = "red";
                                 }

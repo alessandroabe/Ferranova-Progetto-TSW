@@ -29,14 +29,20 @@ public class CarrelloAjaxServlet extends HttpServlet {
         int prod_id_d = Integer.parseInt(prod_id);
 
         Prodotto prodotto = ProdottoDAO.doRetrieveById(prod_id_d);
+        int disponibilita = prodotto.getQuantita();
+        int attuale = 0;
 
-        if (quantity <= prodotto.getQuantita()) {
-            carrello.aggiungiProdotto(prod_id_d, quantity);
-            response.setStatus(HttpServletResponse.SC_OK);
-        } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        if(carrello.getProdottiQuantita().containsKey(prod_id_d)){
+            attuale = carrello.getProdottiQuantita().get(prod_id_d);
         }
 
+
+        if (attuale + quantity > disponibilita) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }else{
+            carrello.aggiungiProdotto(prod_id_d, quantity);
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
 
     }
 
@@ -50,17 +56,29 @@ public class CarrelloAjaxServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Carrello carrello = (Carrello) session.getAttribute("Carrello");
 
+        Prodotto prodotto = ProdottoDAO.doRetrieveById(productId);
+        int disponibilita = prodotto.getQuantita();
+        int attuale = carrello.getProdottiQuantita().get(productId);
 
         if (action.equals("update")) {
+            if(attuale + quantity > disponibilita) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Quantità richiesta superiore alla disponibilità");
+                return;
+            }
             carrello.aggiungiProdotto(productId, quantity);
             int newQuantity = carrello.getProdottiQuantita().get(productId);
             System.out.println(newQuantity);
             response.getWriter().write(String.valueOf(newQuantity));
+
         } else if (action.equals("remove")) {
             int newQuantity = carrello.getProdottiQuantita().get(productId);
             response.getWriter().write(String.valueOf(newQuantity));
             carrello.rimuoviProdotto(productId);
             response.setStatus(HttpServletResponse.SC_OK);
+
+            if (carrello.getProdottiQuantita().isEmpty()) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
         }
     }
 
