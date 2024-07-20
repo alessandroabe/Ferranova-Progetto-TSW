@@ -23,10 +23,10 @@
 
 <div class="buttons-container">
     <div>
-        <button class="productsManage-button" aria-label="productsManage-button" tabindex="0" onclick="toggleView('products')">Gestione Prodotti</button>
+        <button class="productsManage-button" aria-label="productsManage-button" tabindex="0" onkeydown="toggleView('products')" onclick="toggleView('products')">Gestione Prodotti</button>
     </div>
     <div>
-        <button class="ordersManage-button" aria-label="ordersManage-button" tabindex="0" onclick="toggleView('orders')">Gestione ordini clienti</button>
+        <button class="ordersManage-button" aria-label="ordersManage-button" tabindex="0" onkeydown="toggleView('orders')" onclick="toggleView('orders')">Gestione ordini clienti</button>
     </div>
 </div>
 
@@ -72,17 +72,17 @@
                 </td>
                 <td>
                     <div class="quantity-container">
-                        <button class="minus" aria-label="minus" tabindex="0" onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;</button>
+                        <button class="minus" aria-label="minus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', -1)" onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;</button>
                         <p id="quantity-${elemento.id}">2 Pz.</p>
-                        <button class="plus" aria-label="plus" tabindex="0" onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;</button>
-                        <button class="delete" aria-label="delete" tabindex="0" onclick="updateQuantity(${elemento.id}, 'update', 0)">rimuovi prodotto</button>
+                        <button class="plus" aria-label="plus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 1)" onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;</button>
+                        <button class="delete" aria-label="delete" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 0)" onclick="updateQuantity(${elemento.id}, 'update', 0)">rimuovi prodotto</button>
                     </div>
                 </td>
                 <td id="price-${elemento.id}">
                     <div class="price-container">
-                        <button class="minus" aria-label="minus" tabindex="0" onclick="updatePrice(${elemento.id}, 'update', -1)">&minus;</button>
+                        <button class="minus" aria-label="minus" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'update', -1)" onclick="updatePrice(${elemento.id}, 'update', -1)">&minus;</button>
                         <p id="price-${elemento.id}">5,00 €</p>
-                        <button class="plus" aria-label="plus" tabindex="0" onclick="updatePrice(${elemento.id}, 'update', 1)">&plus;</button>
+                        <button class="plus" aria-label="plus" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'update', 1)" onclick="updatePrice(${elemento.id}, 'update', 1)">&plus;</button>
                     </div>
                 </td>
             </tr>

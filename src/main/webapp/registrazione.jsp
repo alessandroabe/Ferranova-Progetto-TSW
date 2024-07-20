@@ -39,7 +39,10 @@
         <input type="email" id="email" name="email" required><br>
 
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required><br>
+        <div class="password-container">
+            <input type="password" id="password" name="password" required><br>
+            <button type="button" class="mostraPassword" id="mostraPassword" aria-label="mostraPassword" tabindex="0" onkeydown="togglePassword()" onclick="togglePassword()"><i class="fa-regular fa-eye"></i></button>
+        </div>
 
         <label for="telefono">Telefono</label>
         <input type="tel" id="telefono" name="telefono" required><br>
@@ -62,6 +65,7 @@
     </div>
 </div>
 
+<script src="${pageContext.request.contextPath}/js/viewPassword.js"></script>
 
 </body>
 </html>

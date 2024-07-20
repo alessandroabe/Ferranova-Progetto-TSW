@@ -41,6 +41,20 @@ input{
     margin-bottom: 15px;
 }
 
+.password-container{
+    display: flex;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mostraPassword{
+    background-color: transparent;
+    position: absolute;
+    border: none;
+    transform: translateX(225px)  translateY(8px);
+}
+
 input#submit{
     margin-top: 10px;
     font-size: medium;

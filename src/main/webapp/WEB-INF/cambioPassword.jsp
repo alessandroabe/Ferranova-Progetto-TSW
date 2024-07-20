@@ -28,10 +28,17 @@
 
 
                 <label for="currentPassword">Password Corrente:</label>
-                <input type="password" id="currentPassword" name="currentPassword" required /><br/>
+                <div class="password-container">
+                    <input type="password" id="currentPassword" name="password" required><br>
+                    <button type="button" class="mostraPassword" id="viewCurrentPassword" aria-label="mostraPassword" tabindex="0" onkeydown="toggleCurrentPassword()" onclick="toggleCurrentPassword()"><i class="fa-regular fa-eye"></i></button>
+                </div>
+
 
                 <label for="newPassword">Nuova Password:</label>
-                <input type="password" id="newPassword" name="newPassword" required /><br/>
+                <div class="password-container">
+                    <input type="password" id="newPassword" name="password" required><br>
+                    <button type="button" class="mostraPassword" id="viewNewPassword" aria-label="mostraPassword" tabindex="0" onkeydown="toggleNewPassword()" onclick="toggleNewPassword()"><i class="fa-regular fa-eye"></i></button>
+                </div>
 
                 <c:if test="${param.error == 1}">
                     <div id="alert" class="alert">Vecchia password errata</div>
@@ -46,6 +53,36 @@
     </form>
 
 </div>
+
+<script>
+    function toggleCurrentPassword() {
+        var currentPasswordField = document.getElementById("currentPassword");
+
+        var viewCurrentPasswordButton = document.getElementById("viewCurrentPassword").querySelector("i");
+
+        if (currentPasswordField.type === "password") {
+            currentPasswordField.type = "text";
+            viewCurrentPasswordButton.className = "fa-regular fa-eye-slash";
+        }else{
+            currentPasswordField.type = "password";
+            viewCurrentPasswordButton.className = "fa-regular fa-eye";
+        }
+    }
+
+    function toggleNewPassword(){
+        var newPasswordField = document.getElementById("newPassword");
+        var viewNewPasswordButton = document.getElementById("viewNewPassword").querySelector("i");
+
+        if (newPasswordField.type === "password") {
+            newPasswordField.type = "text";
+            viewNewPasswordButton.className = "fa-regular fa-eye-slash";
+        }else{
+            newPasswordField.type = "password";
+            viewNewPasswordButton.className = "fa-regular fa-eye";
+        }
+
+    }
+</script>
 
 </body>
 </html>
