@@ -36,18 +36,41 @@
     <div class="headContainer">
         <div class="select-categoryDiv">
             <form action="select-category">
-                <label for="select-category">Seleziona categoria</label>
+                <label for="ricerca" >Cerca: </label>
+                <input type="text" id="ricerca" name="ricerca" <c:if test="${ not empty param.ricerca }">
+                       value="${param.ricerca}" </c:if>">
+                <label for="select-category">Categoria:</label>
                 <select name="categoria" id="select-category">
-                    <option value="all" >All</option>
-                    <option value="ferramenta" >ferramenta</option>
-                    <option value="edilizia">edilizia</option>
-                    <option value="giardinaggio">giardinaggio</option>
+                    <optgroup label="ferramenta">
+                        <option value="ferramenta-utensili">utensili</option>
+                        <option value="ferramenta-prodotti">prodotti</option>
+                        <option value="ferramenta-viteria">viteria</option>
+                        <option value="ferramenta-elettronica">elettronica</option>
+                        <option value="ferramenta-abbigliamento">abbigliamento</option>
+                    </optgroup>
+
+                    <optgroup label="edilizia">
+                        <option value="edilizia-utensili">utensili</option>
+                        <option value="edilizia-materiali">materiali</option>
+                        <option value="edilizia-prodotti">prodotti</option>
+                        <option value="edilizia-viteria">viteria</option>
+                        <option value="edilizia-abbigliamento">abbigliamento</option>
+                    </optgroup>
+
+                    <optgroup label="giardinaggio">
+                        <option value="giardinaggio-utensili">utensili</option>
+                        <option value="giardinaggio-prodotti">prodotti</option>
+                        <option value="giardinaggio-semi-piante">semi/piante</option>
+                        <option value="giardinaggio-fertilizzanti">fertilizzanti</option>
+                        <option value="giardinaggio-abbigliamento">abbigliamento</option>
+                    </optgroup>
+
                 </select>
                 <input type="submit" id="submit-categoria" value="Seleziona"/>
             </form>
         </div>
         <div class="addProduct">
-            <a href="">&plus; Aggiungi un nuovo prodotto</a>
+            <a href="aggiungiProdotto.jsp">&plus; Aggiungi un nuovo prodotto</a>
         </div>
     </div>
     <table>
@@ -59,11 +82,11 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="elemento" items="${lista}">
+        <c:forEach var="elemento" items="${prodotti}">
             <tr id="product-row-${elemento.id}">
                 <td>
                     <div class="product-info">
-                        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${elemento.id}"><img src="images/cacciaviteCroce.jpg" alt="immagine ${elemento.titolo}"></a>
+                        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${elemento.id}"><img src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png" alt="immagine ${elemento.titolo}"></a>
                         <div>
                             <p>${elemento.titolo}</p>
                             <span>${elemento.id}</span>
@@ -73,16 +96,18 @@
                 <td>
                     <div class="quantity-container">
                         <button class="minus" aria-label="minus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', -1)" onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;</button>
-                        <p id="quantity-${elemento.quantita}"> Pz.</p>
+                        <p id="quantity-${elemento.id}">${elemento.quantita} Pz.</p>
                         <button class="plus" aria-label="plus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 1)" onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;</button>
                         <button class="delete" aria-label="delete" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 0)" onclick="updateQuantity(${elemento.id}, 'update', 0)">rimuovi prodotto</button>
                     </div>
                 </td>
                 <td id="price-${elemento.id}">
                     <div class="price-container">
-                        <button class="minus" aria-label="minus" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'update', -1)" onclick="updatePrice(${elemento.id}, 'update', -1)">&minus;</button>
-                        <p id="price-${elemento.prezzo}"> €</p>
-                        <button class="plus" aria-label="plus" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'update', 1)" onclick="updatePrice(${elemento.id}, 'update', 1)">&plus;</button>
+                        <input type="number" step="0.01" min="0" value="${elemento.prezzo}" id="newPrice-${elemento.id}">
+                        <p><fmt:setLocale value="fr_FR"/>
+                            <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                            <fmt:formatNumber value="${sum }" type="currency" currencySymbol="€"/></p>
+                        <button class="plus" aria-label="plus" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'updatePrice')" onclick="updatePrice(${elemento.id}, 'updatePrice')">cambia prezzo</button>
                     </div>
                 </td>
             </tr>
@@ -165,6 +190,45 @@
             orderContainer.style.display = 'block';
         }
     }
+
+
+    function updateQuantity(productId, action, quantity) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "${pageContext.request.contextPath}/adminAjax", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    document.getElementById("quantity-" + productId).innerText = response.newQuantity + ' Pz.';
+                } else {
+                    alert("Errore durante l'aggiornamento della quantità.");
+                }
+            }
+        };
+        xhr.send("prod=" + productId + "&action=" + action + "&quantity=" + quantity);
+    }
+
+
+    function updatePrice(productId, action) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "${pageContext.request.contextPath}/adminAjax", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        let price = document.getElementById("newPrice-" + productId).value;
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    document.getElementById("newPrice-" + productId).value = response.newPrice;
+                    alert("Prezzo cambiato con succeso");
+                } else {
+                    alert("Errore durante l\'aggiornamento del prezzo.");
+                }
+            }
+        };
+        xhr.send("prod=" + productId + "&action=" + action + "&price=" + price);
+    }
+
 </script>
 
 </body>

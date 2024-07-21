@@ -34,7 +34,7 @@ public class CatalogoServlet extends HttpServlet {
             String categoria = request.getParameter("categoria");
 
 
-            //TODO: forse mettiamo la ricerca
+
             if ((request.getParameter("ricerca") != null) || (request.getParameter("sottocategoria") != null) || (request.getParameter("prezzoMin") != null) || (request.getParameter("prezzoMax") != null)) {
                 //TODO: controllo valori subcategoria, forse
                 String ricerca = !request.getParameter("ricerca").equalsIgnoreCase("") ? request.getParameter("ricerca") : null;

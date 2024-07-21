@@ -156,5 +156,18 @@ public class ProdottoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public static void aggiornaPrezzoProdotto(int idProdotto, BigDecimal nuovoPrezzo) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE Prodotto SET prezzo = ? WHERE id = ?");
+            ps.setBigDecimal(1, nuovoPrezzo);
+            ps.setInt(2, idProdotto);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
+
 
