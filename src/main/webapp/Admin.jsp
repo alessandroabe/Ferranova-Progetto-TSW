@@ -98,7 +98,7 @@
                         <button class="minus" aria-label="minus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', -1)" onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;</button>
                         <p id="quantity-${elemento.id}">${elemento.quantita} Pz.</p>
                         <button class="plus" aria-label="plus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 1)" onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;</button>
-                        <button class="delete" aria-label="delete" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 0)" onclick="updateQuantity(${elemento.id}, 'update', 0)">rimuovi prodotto</button>
+                        <button class="delete" aria-label="delete" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'azzera', 0)" onclick="updateQuantity(${elemento.id}, 'azzera', 0)">azzera quantità</button>
                     </div>
                 </td>
                 <td id="price-${elemento.id}">
