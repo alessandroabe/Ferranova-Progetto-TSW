@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <!DOCTYPE html>
@@ -29,36 +30,33 @@
                            value="${param.ricerca}" </c:if>">
                 </label>
                 <c:forEach var="subCategoria" items="${subCategorie}">
-
-                    <li><label><input type="radio" name="sottocategoria" value="${subCategoria}"  <c:if
-                            test="${param.sottocategoria == subCategoria}"> checked </c:if>   />${subCategoria}
-                    </label></li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="sottocategorie" value="${subCategoria.key}"
+                            <c:if test="${subCategoria.value}"> checked</c:if>>
+                                ${subCategoria.key}
+                        </label>
+                    </li>
                 </c:forEach>
             </ul>
-            <label> Prezzo Minimo:
+
+            <label>Prezzo Minimo:
                 <input type="range" name="prezzoMin" step="1" min="0" max="1000"
-                       <c:if test="${ not empty param.prezzoMin }">value="${param.prezzoMin }" </c:if>
-                       <c:if test="${empty param.prezzoMin }">value="0" </c:if>
-                       oninput="this.nextElementSibling.value = this.value">
-                <output><c:if test="${ not empty param.prezzoMin }"> ${param.prezzoMin } </c:if> <c:if
-                        test="${empty param.prezzoMin }">0 </c:if></output>
+                       value="${ not empty param.prezzoMin ? param.prezzoMin : '0'}" oninput="this.nextElementSibling.value = this.value">
+                <output>${not empty param.prezzoMin ? param.prezzoMin : '0'}</output>
             </label>
             <br>
-            <label> Prezzo Massimo:
+            <label>Prezzo Massimo:
                 <input type="range" name="prezzoMax" step="1" min="0" max="1000"
-                       <c:if test="${ not empty param.prezzoMax }">value="${param.prezzoMax }" </c:if>
-                       <c:if test="${empty param.prezzoMax }">value="1000" </c:if>
-                       oninput="this.nextElementSibling.value = this.value">
-                <output><c:if test="${ not empty param.prezzoMax }"> ${param.prezzoMax } </c:if> <c:if
-                        test="${empty param.prezzoMax }">1000 </c:if></output>
+                       value="${not empty param.prezzoMax ? param.prezzoMax : '1000'}" oninput="this.nextElementSibling.value = this.value">
+                <output>${not empty param.prezzoMax ? param.prezzoMax : '1000'}</output>
             </label>
             <br>
             <input type="hidden" name="categoria" value="${param.categoria}">
-
-            <button type="submit" value="filtro">Filtra</button>
+            <button type="submit" class="redirect-button">Filtra</button>
         </form>
         <button class="redirect-button"
-                onclick="window.location.href='${pageContext.request.contextPath}/catalogo?categoria=${param.categoria}'">
+                onclick="window.location.replace('${pageContext.request.contextPath}/catalogo?categoria=${param.categoria}');">
             Pulisci
         </button>
     </div>
@@ -81,13 +79,13 @@
 
             <script>
                 function addToCart(product_id) {
-                    var xhr = new XMLHttpRequest();
+                    let xhr = new XMLHttpRequest();
                     xhr.open("GET", "${pageContext.request.contextPath}/carrelloAjax?prod=" + product_id + "&quantity=" + 1, true);
                     //se si vuole passare un parametro da una pagina jsp
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === XMLHttpRequest.DONE) {
                             if (xhr.readyState === XMLHttpRequest.DONE) {
-                                var alertElement = document.getElementById("alert-" + product_id);
+                                let alertElement = document.getElementById("alert-" + product_id);
                                 if (xhr.status === 200) {
                                     alertElement.innerHTML = "Aggiunto al carrello";
                                     alertElement.style.color = "#335e1e";

@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.unisa.abeilleamorellifontana_pj.Model.ProdottoDAO.*;
 
@@ -33,19 +34,29 @@ public class CatalogoServlet extends HttpServlet {
         if (request.getParameter("categoria") != null) {
             String categoria = request.getParameter("categoria");
 
+            List<String> sottocategorie = null;
 
 
             if ((request.getParameter("ricerca") != null) || (request.getParameter("sottocategoria") != null) || (request.getParameter("prezzoMin") != null) || (request.getParameter("prezzoMax") != null)) {
                 //TODO: controllo valori subcategoria, forse
-                String ricerca = !request.getParameter("ricerca").equalsIgnoreCase("") ? request.getParameter("ricerca") : null;
-                String sottocategoria = request.getParameter("sottocategoria");
-                BigDecimal prezzoMin = new BigDecimal(request.getParameter("prezzoMin")).equals(BigDecimal.ZERO) ? null : new BigDecimal(request.getParameter("prezzoMin"));
-                BigDecimal prezzoMax = new BigDecimal(request.getParameter("prezzoMax")).equals(BigDecimal.valueOf(1000)) ? null : new BigDecimal(request.getParameter("prezzoMax"));
+                String ricerca = !request.getParameter("ricerca").equalsIgnoreCase("")
+                        ? request.getParameter("ricerca")
+                        : null;
 
-                catalogo = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveByCriteria(ricerca, prezzoMin, prezzoMax, categoria, sottocategoria);
+                sottocategorie = (request.getParameterValues("sottocategorie") != null && request.getParameterValues("sottocategorie").length > 0)
+                        ? List.of(request.getParameterValues("sottocategorie"))
+                        : new ArrayList<>();
+                BigDecimal prezzoMin = new BigDecimal(request.getParameter("prezzoMin")).equals(BigDecimal.ZERO)
+                        ? null
+                        : new BigDecimal(request.getParameter("prezzoMin"));
+                BigDecimal prezzoMax = new BigDecimal(request.getParameter("prezzoMax")).equals(BigDecimal.valueOf(1000))
+                        ? null
+                        : new BigDecimal(request.getParameter("prezzoMax"));
+
+                catalogo = (ArrayList<Prodotto>) doRetrieveByCriteria(ricerca, prezzoMin, prezzoMax, categoria, sottocategorie);
 
             } else
-                catalogo = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveAllByMacrocategoria(categoria);
+                catalogo = (ArrayList<Prodotto>) doRetrieveAllByMacrocategoria(categoria);
             request.setAttribute("catalogo", catalogo);
 
             ServletContext context = request.getServletContext();
@@ -53,7 +64,11 @@ public class CatalogoServlet extends HttpServlet {
                 HashMap<String, ArrayList<String>> categorie;
                 categorie = (HashMap<String, ArrayList<String>>) context.getAttribute("Categorie");
                 List<String> subCategorie = categorie.get(categoria);
-                request.setAttribute("subCategorie", subCategorie);
+                HashMap<String, Boolean> hashcategorie = new HashMap<>();
+                for (String s : subCategorie) {
+                    hashcategorie.put(s, (sottocategorie != null) ? sottocategorie.contains(s) : false);
+                }
+                request.setAttribute("subCategorie", hashcategorie);
             } else {
 
                 catalogo = (ArrayList<Prodotto>) doRetrieveAll();

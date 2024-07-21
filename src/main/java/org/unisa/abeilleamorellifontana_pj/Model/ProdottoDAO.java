@@ -157,6 +157,77 @@ public class ProdottoDAO {
         }
     }
 
+    public static List<Prodotto> doRetrieveByCriteria(String searchString, BigDecimal minPrice, BigDecimal maxPrice, String macrocategoria, List<String> sottocategorie) {
+        StringBuilder query = new StringBuilder("SELECT * FROM Prodotto WHERE 1=1");
+
+        List<Object> parameters = new ArrayList<>();
+
+        if (minPrice != null) {
+            query.append(" AND prezzo >= ?");
+            parameters.add(minPrice);
+        }
+
+        if (maxPrice != null) {
+            query.append(" AND prezzo <= ?");
+            parameters.add(maxPrice);
+        }
+
+        if (macrocategoria != null && !macrocategoria.isEmpty()) {
+            query.append(" AND macrocategoria = ?");
+            parameters.add(macrocategoria);
+        }
+
+        if (sottocategorie != null && !sottocategorie.isEmpty()) {
+            query.append(" AND sottocategoria IN (");
+            for (int i = 0; i < sottocategorie.size(); i++) {
+                query.append("?");
+                if (i < sottocategorie.size() - 1) {
+                    query.append(",");
+                }
+            }
+            query.append(")");
+            parameters.addAll(sottocategorie);
+        }
+
+        if (searchString != null && !searchString.isEmpty()) {
+            query.append(" AND (titolo LIKE ? OR descrizione LIKE ?)");
+            String searchPattern = "%" + searchString + "%";
+            parameters.add(searchPattern);
+            parameters.add(searchPattern);
+        }
+
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(query.toString());
+
+            for (int i = 0; i < parameters.size(); i++) {
+                if (parameters.get(i) instanceof BigDecimal) {
+                    ps.setBigDecimal(i + 1, (BigDecimal) parameters.get(i));
+                } else if (parameters.get(i) instanceof String) {
+                    ps.setString(i + 1, (String) parameters.get(i));
+                }
+            }
+
+            ResultSet rs = ps.executeQuery();
+            List<Prodotto> prodottoList = new ArrayList<>();
+            while (rs.next()) {
+                Prodotto p = new Prodotto(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getBigDecimal(8)
+                );
+                prodottoList.add(p);
+            }
+            return prodottoList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void aggiornaPrezzoProdotto(int idProdotto, BigDecimal nuovoPrezzo) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE Prodotto SET prezzo = ? WHERE id = ?");
@@ -169,5 +240,4 @@ public class ProdottoDAO {
     }
 
 }
-
 
