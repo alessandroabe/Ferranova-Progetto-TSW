@@ -21,12 +21,46 @@
 <div class="container-catalogo">
     <div class="sidebar">
         <!-- FIXME: finisci e rendi dinamico con macrocategorie-->
-        <h2>${param.categoria}</h2>
-        <ul class="ul-sottocategorie">
-            <c:forEach var="subCategoria" items="${subCategorie}">
-                <li>${subCategoria}</li>
-            </c:forEach>
-        </ul>
+        <form action="catalogo" method="get">
+            <h2>${param.categoria}</h2>
+            <ul class="ul-sottocategorie">
+                <label> Ricerca:
+                    <input type="text" name="ricerca" <c:if test="${ not empty param.ricerca }">
+                           value="${param.ricerca}" </c:if>">
+                </label>
+                <c:forEach var="subCategoria" items="${subCategorie}">
+
+                    <li><label><input type="radio" name="sottocategoria" value="${subCategoria}"  <c:if
+                            test="${param.sottocategoria == subCategoria}"> checked </c:if>   />${subCategoria}
+                    </label></li>
+                </c:forEach>
+            </ul>
+            <label> Prezzo Minimo:
+                <input type="range" name="prezzoMin" step="1" min="0" max="1000"
+                       <c:if test="${ not empty param.prezzoMin }">value="${param.prezzoMin }" </c:if>
+                       <c:if test="${empty param.prezzoMin }">value="0" </c:if>
+                       oninput="this.nextElementSibling.value = this.value">
+                <output><c:if test="${ not empty param.prezzoMin }"> ${param.prezzoMin } </c:if> <c:if
+                        test="${empty param.prezzoMin }">0 </c:if></output>
+            </label>
+            <br>
+            <label> Prezzo Massimo:
+                <input type="range" name="prezzoMax" step="1" min="0" max="1000"
+                       <c:if test="${ not empty param.prezzoMax }">value="${param.prezzoMax }" </c:if>
+                       <c:if test="${empty param.prezzoMax }">value="1000" </c:if>
+                       oninput="this.nextElementSibling.value = this.value">
+                <output><c:if test="${ not empty param.prezzoMax }"> ${param.prezzoMax } </c:if> <c:if
+                        test="${empty param.prezzoMax }">1000 </c:if></output>
+            </label>
+            <br>
+            <input type="hidden" name="categoria" value="${param.categoria}">
+
+            <button type="submit" value="filtro">Filtra</button>
+        </form>
+        <button class="redirect-button"
+                onclick="window.location.href='${pageContext.request.contextPath}/catalogo?categoria=${param.categoria}'">
+            Pulisci
+        </button>
     </div>
 
     <div class="content">
@@ -57,10 +91,10 @@
                                 if (xhr.status === 200) {
                                     alertElement.innerHTML = "Aggiunto al carrello";
                                     alertElement.style.color = "#335e1e";
-                                } else if(xhr.status === 400){
+                                } else if (xhr.status === 400) {
                                     alertElement.innerHTML = "Quantità non disponibile";
                                     alertElement.style.color = "red";
-                                }else{
+                                } else {
                                     alertElement.innerHTML = "Errore";
                                     alertElement.style.color = "red";
                                 }

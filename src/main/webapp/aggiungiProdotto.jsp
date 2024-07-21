@@ -42,17 +42,17 @@
             </optgroup>
 
             <optgroup label="edilizia">
+                <option value="edilizia-utensili">utensili</option>
                 <option value="edilizia-materiali">materiali</option>
                 <option value="edilizia-prodotti">prodotti</option>
                 <option value="edilizia-viteria">viteria</option>
-                <option value="edilizia-elettronica">elettronica</option>
                 <option value="edilizia-abbigliamento">abbigliamento</option>
             </optgroup>
 
             <optgroup label="giardinaggio">
                 <option value="giardinaggio-utensili">utensili</option>
                 <option value="giardinaggio-prodotti">prodotti</option>
-                <option value="giardinaggio-semipiante">semi/piante</option>
+                <option value="giardinaggio-semi-piante">semi/piante</option>
                 <option value="giardinaggio-fertilizzanti">fertilizzanti</option>
                 <option value="giardinaggio-abbigliamento">abbigliamento</option>
             </optgroup>

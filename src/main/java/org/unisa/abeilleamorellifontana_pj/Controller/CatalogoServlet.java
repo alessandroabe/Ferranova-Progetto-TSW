@@ -11,6 +11,7 @@ import org.unisa.abeilleamorellifontana_pj.Model.Prodotto;
 import org.unisa.abeilleamorellifontana_pj.Model.ProdottoDAO;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,11 +29,23 @@ public class CatalogoServlet extends HttpServlet {
 
         ArrayList<Prodotto> catalogo;
 //TODO: spostare tutto nell'init forse, così da avere tutto nella servletcontext
-//TODO: gestire il caso di errrore, in cui si mette una categoria che non esiste
+//TODO: gestire il caso di errore, in cui si mette una categoria che non esiste
         if (request.getParameter("categoria") != null) {
             String categoria = request.getParameter("categoria");
 
-            catalogo = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveAllByMacrocategoria(categoria);
+
+            //TODO: forse mettiamo la ricerca
+            if ((request.getParameter("ricerca") != null) || (request.getParameter("sottocategoria") != null) || (request.getParameter("prezzoMin") != null) || (request.getParameter("prezzoMax") != null)) {
+                //TODO: controllo valori subcategoria, forse
+                String ricerca = !request.getParameter("ricerca").equalsIgnoreCase("") ? request.getParameter("ricerca") : null;
+                String sottocategoria = request.getParameter("sottocategoria");
+                BigDecimal prezzoMin = new BigDecimal(request.getParameter("prezzoMin")).equals(BigDecimal.ZERO) ? null : new BigDecimal(request.getParameter("prezzoMin"));
+                BigDecimal prezzoMax = new BigDecimal(request.getParameter("prezzoMax")).equals(BigDecimal.valueOf(1000)) ? null : new BigDecimal(request.getParameter("prezzoMax"));
+
+                catalogo = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveByCriteria(ricerca, prezzoMin, prezzoMax, categoria, sottocategoria);
+
+            } else
+                catalogo = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveAllByMacrocategoria(categoria);
             request.setAttribute("catalogo", catalogo);
 
             ServletContext context = request.getServletContext();

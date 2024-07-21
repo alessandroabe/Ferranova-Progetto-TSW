@@ -19,9 +19,9 @@ public class InitServlet extends HttpServlet {
             HashMap<String, ArrayList<String>> categorie = new HashMap<>();
 
             //TODO: Inizializza le categorie
-            categorie.put("Ferramenta", new ArrayList<>(List.of("Utensili", "Prodotti", "Abbigliamento")));
-            categorie.put("Edilizia", new ArrayList<>(List.of("Utensili", "Prodotti", "Abbigliamento")));
-            categorie.put("Giardinaggio", new ArrayList<>(List.of("Utensili", "Prodotti", "Abbigliamento")));
+            categorie.put("Ferramenta", new ArrayList<>(List.of("Utensili", "Prodotti", "Viteria", "Elettronica", "Abbigliamento")));
+            categorie.put("Edilizia", new ArrayList<>(List.of("Utensili", " Materiali", "Prodotti", "Viteria", "Abbigliamento")));
+            categorie.put("Giardinaggio", new ArrayList<>(List.of("Utensili", "Prodotti","Semi-Piante", "Fertilizzanti",  "Abbigliamento")));
 
             ServletContext context = config.getServletContext();
             context.setAttribute("Categorie", categorie);
