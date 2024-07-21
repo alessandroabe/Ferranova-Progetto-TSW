@@ -134,13 +134,14 @@
                 </div>
             </div>
             <div class="order-products">
-                <c:forEach var="entry" items="${listaProdottiOrine}">
+                <c:forEach var="entry" items="${Ordine.prodottiQuantitaOrdine}">
+                    <c:set var="prodotto" value="${prodottoHashMap[entry.key]}"/>
                     <div class="product">
-                        <a href="prodotto.html"><img src="images/cacciaviteCroce.jpg" alt="${entry.nome}"></a>
-                        <p>cacciavite</p>
-                        <p>2 Pz.</p>
+                        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${prodotto.id}"><img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png" alt="${prodotto.titolo}"></a>
+                        <p>${prodotto.titolo}</p>
+                        <p>${entry.value.quantita} Pz.</p>
                         <p><fmt:setLocale value="fr_FR"/>
-                            <fmt:formatNumber value="${(mappa[elemento.id]).prezzo}" type="currency" currencySymbol="€"/>
+                            <fmt:formatNumber value="${prodotto.prezzo}" type="currency" currencySymbol="€"/>
                         </p>
                     </div>
                 </c:forEach>
