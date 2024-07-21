@@ -39,7 +39,7 @@
                 <label for="ricerca" >Cerca: </label>
                 <input type="text" id="ricerca" name="ricerca" <c:if test="${ not empty param.ricerca }">
                        value="${param.ricerca}" </c:if>">
-                <label for="select-category">Categoria:</label>
+                <label for="select-category" style="margin-left: 10px">Categoria:</label>
                 <select name="categoria" id="select-category">
                     <optgroup label="ferramenta">
                         <option value="ferramenta-utensili">utensili</option>
@@ -98,19 +98,19 @@
                         <button class="minus" aria-label="minus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', -1)" onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;</button>
                         <p id="quantity-${elemento.id}">${elemento.quantita} Pz.</p>
                         <button class="plus" aria-label="plus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 1)" onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;</button>
-                        <button class="delete" aria-label="delete" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'azzera', 0)" onclick="updateQuantity(${elemento.id}, 'azzera', 0)">azzera quantità</button>
+                        <button class="azzera" aria-label="azzera" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'azzera', 0)" onclick="updateQuantity(${elemento.id}, 'azzera', 0)">azzera quantità</button>
                     </div>
                 </td>
                 <td id="price-${elemento.id}">
                     <div class="price-container">
                         <input type="number" step="0.01" min="0" value="${elemento.prezzo}" id="newPrice-${elemento.id}">
-                        <p><fmt:setLocale value="fr_FR"/>
-                            <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                            <fmt:formatNumber value="${sum }" type="currency" currencySymbol="€"/></p>
-                        <button class="plus" aria-label="plus" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'updatePrice')" onclick="updatePrice(${elemento.id}, 'updatePrice')">cambia prezzo</button>
+                        <button class="changePrice" aria-label="changePrice" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'updatePrice')" onclick="updatePrice(${elemento.id}, 'updatePrice')">cambia prezzo</button>
+                        <p id="alert-${elemento.id}" class="alert"></p>
                     </div>
+
                 </td>
             </tr>
+
         </c:forEach>
         </tbody>
     </table>
@@ -123,39 +123,62 @@
         <div class="order">
             <div class="order-header">
                 <p class="dataOrdine"><strong>${Ordine.dataOrdine}</strong></p>
-                <div class="order-details">
-                    <p><strong>ID ordine:</strong>${Ordine.idOrdine}</p>
-                    <p><strong>ID cliente:</strong>${Ordine.idUtente}</p>
-                    <p><strong>Stato:</strong>${Ordine.statoOrdine}</p>
-                    <p><strong>Subtotale:</strong><fmt:setLocale value="fr_FR"/>
-                        <fmt:formatNumber value="${Ordine.prezzoOrdine}" type="currency" currencySymbol="€"/>
-                    </p>
-                    <p class="dataSpedizione"><strong>Data spedizione:</strong> - </p>
-                    <p><strong>Costo spedizione:</strong><fmt:setLocale value="fr_FR"/>
-                        <fmt:formatNumber value="${Ordine.prezzoSpedizione}" type="currency" currencySymbol="€"/>
-                    </p>
-                    <p class="dataConsegna"><strong>Data consegna:</strong> - </p>
-                    <form action="modificaOrdine" method="get">
-                        <div>
-                            <label for="statoOrdine">Modifica Stato ordine</label>
-                            <select name="stato" id="statoOrdine" required>
-                                <option value="ordinato">ordinato</option>
-                                <option value="spedito">spedito</option>
-                                <option value="consegnato">consegnato</option>
-                            </select>
-                            <!-- Campo nascosto per l'ID ordine -->
-                            <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}">
-                        </div>
-                        <div>
-                            <label for="dataSpedizione">Modifica data di spedizione:</label>
-                            <input type="date" id="dataSpedizione" name="dataSpedizione" required>
-                        </div>
-                        <div>
-                            <label for="birthday">Modifica data di consegna:</label>
-                            <input type="date" id="birthday" name="dataConsegna" required>
-                        </div>
-                        <input type="submit" id="submit" value="Modifica"/>
-                    </form>
+                <div class="orderDetails-container">
+                    <div class="order-details">
+                        <p><strong>ID ordine:</strong> ${Ordine.idOrdine}</p>
+                        <p><strong>ID cliente:</strong> ${Ordine.idUtente}</p>
+                        <p><strong>Stato:</strong> ${Ordine.statoOrdine}</p>
+                        <p><strong>Subtotale:</strong><fmt:setLocale value="fr_FR"/>
+                            <fmt:formatNumber value="${Ordine.prezzoOrdine}" type="currency" currencySymbol="€"/>
+                        </p>
+
+                        <c:if test="${ empty Ordine.dataSpedizione}">
+                        <p class="dataSpedizione"><strong>Data spedizione:</strong> - </p>
+                        </c:if>
+
+                        <c:if test="${ empty Ordine.dataSpedizione}">
+                            <p class="dataSpedizione"><strong>Data spedizione:</strong>${Ordine.dataSpedizione}</p>
+                        </c:if>
+
+                        <p><strong>Costo spedizione:</strong><fmt:setLocale value="fr_FR"/>
+                            <fmt:formatNumber value="${Ordine.prezzoSpedizione}" type="currency" currencySymbol="€"/>
+                        </p>
+
+                        <c:if test="${ empty Ordine.dataConsegna}">
+                            <p class="dataSpedizione"><strong>Data consegna:</strong> - </p>
+                        </c:if>
+
+                        <c:if test="${ empty Ordine.dataConsegna}">
+                            <p class="dataSpedizione"><strong>Data consegna:</strong>${Ordine.dataConsegna}</p>
+                        </c:if>
+
+                    </div>
+
+                    <div class="order-details-manage">
+                        <form action="modificaOrdine" method="get">
+
+                                <label for="statoOrdine">Modifica Stato ordine</label>
+                                <select name="stato" id="statoOrdine" required>
+                                    <option value="ordinato">ordinato</option>
+                                    <option value="spedito">spedito</option>
+                                    <option value="consegnato">consegnato</option>
+                                </select>
+
+                                <!-- Campo nascosto per l'ID ordine -->
+                                <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}"><br>
+
+                                <label for="dataSpedizione">Modifica data di spedizione:</label>
+                                <input type="date" id="dataSpedizione" name="dataSpedizione" required><br>
+
+                                <label for="birthday">Modifica data di consegna:</label>
+                                <input type="date" id="birthday" name="dataConsegna" required><br>
+
+                            <div class="inputOrderManage">
+                                <input type="submit" id="submit" value="Modifica"/>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="order-products">
@@ -197,17 +220,47 @@
         xhr.open("POST", "${pageContext.request.contextPath}/adminAjax", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                if (response.success) {
-                    document.getElementById("quantity-" + productId).innerText = response.newQuantity + ' Pz.';
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var alertElement = document.getElementById("alert-" + productId);
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        document.getElementById("quantity-" + productId).innerText = response.newQuantity + ' Pz.';
+                        alertElement.innerHTML = "Quantità modificata";
+                        alertElement.style.color = "#335e1e";
+                    } else {
+                        alertElement.innerHTML = "Errore";
+                        alertElement.style.color = "red";
+                    }
                 } else {
-                    alert("Errore durante l'aggiornamento della quantità.");
+                    alertElement.innerHTML = "Errore di connessione";
+                    alertElement.style.color = "red";
                 }
+                // Transizione
+                alertElement.style.opacity = 0;
+                alertElement.style.transform = "translateX(400px)";
+                alertElement.style.display = "block";
+                alertElement.offsetHeight; // Forza il reflow per applicare le nuove proprietà
+                alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                alertElement.style.opacity = 1;
+                alertElement.style.transform = "translateX(410px)";
+
+                setTimeout(function () {
+                    alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                    alertElement.style.opacity = 0;
+                    alertElement.style.transform = "translateX(400px)";
+                }, 2000); //dopo 3 secondi scompare
+
+                setTimeout(function () {
+                    alertElement.style.display = "none";
+                }, 2500); //dopo 4 secondi scompare
             }
         };
         xhr.send("prod=" + productId + "&action=" + action + "&quantity=" + quantity);
     }
+
+
+
 
 
     function updatePrice(productId, action) {
@@ -215,16 +268,41 @@
         xhr.open("POST", "${pageContext.request.contextPath}/adminAjax", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         let price = document.getElementById("newPrice-" + productId).value;
+        var alertElement = document.getElementById("alert-" + productId);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 if (response.success) {
                     document.getElementById("newPrice-" + productId).value = response.newPrice;
-                    alert("Prezzo cambiato con succeso");
+                    alertElement.innerHTML = "Prezzo modificato";
+                    alertElement.style.color = "#335e1e";
                 } else {
-                    alert("Errore durante l\'aggiornamento del prezzo.");
+                    alertElement.innerHTML = "Errore";
+                    alertElement.style.color = "red";
                 }
+            } else {
+            alertElement.innerHTML = "Errore di connessione";
+            alertElement.style.color = "red";
             }
+
+            // Transizione
+            alertElement.style.opacity = 0;
+            alertElement.style.transform = "translateX(400px)";
+            alertElement.style.display = "block";
+            alertElement.offsetHeight; // Forza il reflow per applicare le nuove proprietà
+            alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+            alertElement.style.opacity = 1;
+            alertElement.style.transform = "translateX(410px)";
+
+            setTimeout(function () {
+                alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                alertElement.style.opacity = 0;
+                alertElement.style.transform = "translateX(400px)";
+            }, 2000); //dopo 3 secondi scompare
+
+            setTimeout(function () {
+                alertElement.style.display = "none";
+            }, 2500); //dopo 4 sec
         };
         xhr.send("prod=" + productId + "&action=" + action + "&price=" + price);
     }

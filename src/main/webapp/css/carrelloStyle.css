@@ -44,6 +44,10 @@ th {
     font-weight: bold;
 }
 
+.product-title-tab{
+    width: 40%;
+}
+
 .product-info {
     display: flex;
     align-items: center;
@@ -81,6 +85,17 @@ th {
     border: 0;
     color: red;
     cursor: pointer;
+}
+
+
+.price-container{
+    position: absolute;
+    display: flex;
+}
+
+.alert {
+    position: absolute;
+    font-size: 15px;
 }
 
 .summary {
@@ -124,7 +139,7 @@ th {
 
 .cart-empty{
     width: 50%;
-    margin: 10vh 25%;
+    margin: 5vh 25%;
     height: auto;
 }
 

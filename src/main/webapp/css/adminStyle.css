@@ -4,6 +4,7 @@
     font-family: sans-serif;
 }
 
+/*bottoni selettori div*/
 .buttons-container {
     width: 40%;
     margin: 1vh auto;
@@ -85,15 +86,16 @@ th {
 
 .product-info img {
     width: 50px;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 .quantity-container, .price-container {
     display: flex;
 }
 
-.minus, .plus, .delete {
+.minus, .plus, .azzera {
     background-color: transparent;
+    position: absolute;
     border: 0;
     cursor: pointer;
 }
@@ -103,10 +105,37 @@ th {
     margin: 0 15px;
 }
 
-.delete {
+.minus{
+    transform: translatex(-50px);
+}
+
+.plus{
+    transform: translateX(+50px);
+}
+
+.azzera {
     margin-left: 30px;
     font-size: 15px;
-    color: red;
+    transform: translateX(70px) translateY(-2px);
+    background-color: rgba(158, 51, 51, 0.79);
+    color: white;
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+
+.changePrice{
+    margin-left: 30px;
+    font-size: 15px;
+    transform: translateX(70px);
+    background-color: rgba(51, 94, 30, 0.83);
+    color: white;
+    padding: 3px 5px;
+    border: none;
+    border-radius: 3px;
+}
+
+.alert {
+    position: absolute;
 }
 
 @media (max-width: 600px) {
@@ -179,16 +208,37 @@ h1 {
     font-size: 20px;
 }
 
+.orderDetails-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 20px;
+}
+
 .order-details {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
+    width: 60%;
+}
+
+.order-details-manage{
+    width: 35%;
+}
+
+.order-details-manage input{
+    margin-top: 10px;
+}
+
+.inputOrderManage{
+    width: 30%;
+    margin: 10px 35%;
 }
 
 .order-details p {
     margin: 5px 0;
     flex: 50%;
+    box-sizing: border-box;
 }
 
 .order-products {
@@ -200,12 +250,16 @@ h1 {
 }
 
 .product {
+    width: 80px;
+    flex: 1;
     max-width: 120px;
     text-align: center;
 }
 
 .product img {
-    width: 120px;
+    width: 100%;
+    height: 60%;
+    object-fit: contain;
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 10px;

@@ -25,11 +25,12 @@
     <c:when test="${not empty lista}">
         <div class="container">
             <div class="cart">
+
                 <h2>Carrello</h2>
                 <table>
                     <thead>
                     <tr>
-                        <th>Prodotto</th>
+                        <th class="product-title-tab">Prodotto</th>
                         <th class="quantity-title">Quantità</th>
                         <th>Prezzo</th>
                     </tr>
@@ -71,10 +72,15 @@
                                 </div>
 
                             </td>
-                            <td id="price-${elemento.id}"><fmt:setLocale value="fr_FR"/>
-                                <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                                <fmt:formatNumber value="${elemento.prezzo * mappa[elemento.id] }" type="currency"
-                                                  currencySymbol="€"/></td>
+                            <td id="price-${elemento.id}">
+                                <div class="price-container">
+                                        <fmt:setLocale value="fr_FR"/>
+                                    <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                                        <fmt:formatNumber value="${elemento.prezzo * mappa[elemento.id] }" type="currency"
+                                                  currencySymbol="€"/>
+                                    <p id="alert-${elemento.id}" class="alert"></p>
+                                </div>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -114,6 +120,7 @@
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "${pageContext.request.contextPath}/carrelloAjax", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        var alertElement = document.getElementById("alert-" + productId);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
@@ -186,10 +193,30 @@
 
                 if (xhr.status === 400) {
                     if (action === "update") {
-                        alert("quantità selezionata maggiore della quantità disponibile");
+                        alertElement.innerHTML = "Disponibilità conclusa";
+                        alertElement.style.color = "red";
                     } else if (action === "remove") {
                         location.reload();
                     }
+
+                    // Transizione
+                    alertElement.style.opacity = 0;
+                    alertElement.style.transform = "translateX(-200px) translateY(-20px)";
+                    alertElement.style.display = "block";
+                    alertElement.offsetHeight; // Forza il reflow per applicare le nuove proprietà
+                    alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                    alertElement.style.opacity = 1;
+                    alertElement.style.transform = "translateX(-190px) translateY(-20px)";
+
+                    setTimeout(function () {
+                        alertElement.style.transition = "opacity 0.5s, transform 0.5s";
+                        alertElement.style.opacity = 0;
+                        alertElement.style.transform = "translateX(-200px) translateY(-20px)";
+                    }, 2000); //dopo 3 secondi scompare
+
+                    setTimeout(function () {
+                        alertElement.style.display = "none";
+                    }, 2500); //dopo 4 sec
                 }
 
             }

@@ -50,6 +50,7 @@ h1 {
 
 
 .product {
+    width: 80px;
     flex: 1;
     max-width: 120px;
     text-align: center;
@@ -57,7 +58,7 @@ h1 {
 
 .product img {
     width: 100%;
-    height: 55%;
+    height: 45%;
     object-fit: contain;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -114,6 +115,12 @@ h1 {
     h1 {
         font-size: 22px;
     }
+
+    .orderList-empty{
+        width: 40%;
+        margin: 15vh 30%;
+        height: auto;
+    }
 }
 
 /* Responsive styles for screens under 600px */
@@ -141,6 +148,12 @@ h1 {
 
     .product img {
         width: 80px;
+    }
+
+    .orderList-empty{
+        width: 56%;
+        margin: 17vh 22%;
+        height: auto;
     }
 
 }
@@ -180,5 +193,11 @@ h1 {
 
     .dataOrdine {
         font-size: 16px;
+    }
+
+    .orderList-empty{
+        width: 60%;
+        margin: 17vh 20%;
+        height: auto;
     }
 }
