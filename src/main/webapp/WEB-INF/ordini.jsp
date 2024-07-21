@@ -16,58 +16,70 @@
 
 <%@ include file="navbar.jsp" %>
 
-<h1>Ordini Effettuati</h1>
-<div class="orders-container">
+<c:choose>
 
-    <c:forEach var="Ordine" items="${Ordini}">
-        <div class="order">
-            <div class="order-header">
-                <p class="dataOrdine"><strong>${Ordine.dataOrdine}</strong></p>
-                <div class=" order-details">
-                    <p><strong>ID ordine:</strong>${Ordine.idOrdine}</p>
-                    <p><strong>Stato:</strong>${Ordine.statoOrdine}</p>
-                    <p><strong>Subtotale:</strong><fmt:setLocale value="fr_FR"/>
-                        <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                        <fmt:formatNumber value="${Ordine.prezzoOrdine}" type="currency"
-                                          currencySymbol="€"/></p>
-                    <p class="dataSpedizione"><strong>Data spedizione:</strong> - </p>
-                    <p><strong>Costo spedizione:</strong><fmt:setLocale value="fr_FR"/>
-                        <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                        <fmt:formatNumber value="${Ordine.prezzoSpedizione}" type="currency"
-                                          currencySymbol="€"/></p>
+    <c:when test="${not empty Ordini}">
 
-                    <c:if test="${ empty Ordine.dataSpedizione}">
-                        <p class="dataConsegna"><strong>Data consegna:</strong> - </p>
-                    </c:if>
+    <h1>Ordini Effettuati</h1>
+    <div class="orders-container">
 
-                    <c:if test="${Ordine.dataSpedizione}">
-                        <p class="dataConsegna"><strong>Data consegna:</strong>${Ordine.dataSpedizione}</p>
-                    </c:if>
+        <c:forEach var="Ordine" items="${Ordini}">
+            <div class="order">
+                <div class="order-header">
+                    <p class="dataOrdine"><strong>${Ordine.dataOrdine}</strong></p>
+                    <div class=" order-details">
+                        <p><strong>ID ordine:</strong>${Ordine.idOrdine}</p>
+                        <p><strong>Stato:</strong>${Ordine.statoOrdine}</p>
+                        <p><strong>Subtotale:</strong><fmt:setLocale value="fr_FR"/>
+                            <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                            <fmt:formatNumber value="${Ordine.prezzoOrdine}" type="currency"
+                                              currencySymbol="€"/></p>
+                        <p class="dataSpedizione"><strong>Data spedizione:</strong> - </p>
+                        <p><strong>Costo spedizione:</strong><fmt:setLocale value="fr_FR"/>
+                            <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                            <fmt:formatNumber value="${Ordine.prezzoSpedizione}" type="currency"
+                                              currencySymbol="€"/></p>
+
+                        <c:if test="${ empty Ordine.dataSpedizione}">
+                            <p class="dataConsegna"><strong>Data consegna:</strong> - </p>
+                        </c:if>
+
+                        <c:if test="${Ordine.dataSpedizione}">
+                            <p class="dataConsegna"><strong>Data consegna:</strong>${Ordine.dataSpedizione}</p>
+                        </c:if>
+
+                    </div>
+                </div>
+                <div class="order-products">
+
+                    <c:forEach var="entry" items="${Ordine.prodottiQuantitaOrdine}">
+                        <c:set var="prodotto" value="${mappaProdotti[entry.key]}"/>
+                        <div class="product">
+                            <a href="${pageContext.request.contextPath}/prod?id_prodotto=${prodotto.id}">
+                                <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png"
+                                     alt="immagine ${prodotto.titolo}"><br>
+                                <p>${prodotto.titolo}</p>
+                            </a>
+                            <p>${entry.value.quantita} Pz.</p>
+                            <p><fmt:setLocale value="it_IT"/>
+                                <fmt:formatNumber value="${entry.value.prezzoFinale}" type="currency" currencySymbol="€"/>
+                            </p>
+                        </div>
+                    </c:forEach>
 
                 </div>
             </div>
-            <div class="order-products">
+        </c:forEach>
 
-                <c:forEach var="entry" items="${Ordine.prodottiQuantitaOrdine}">
-                    <c:set var="prodotto" value="${mappaProdotti[entry.key]}"/>
-                    <div class="product">
-                        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${prodotto.id}">
-                            <img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png"
-                                 alt="immagine ${prodotto.titolo}"><br>
-                            <p>${prodotto.titolo}</p>
-                        </a>
-                        <p>${entry.value.quantita} Pz.</p>
-                        <p><fmt:setLocale value="it_IT"/>
-                            <fmt:formatNumber value="${entry.value.prezzoFinale}" type="currency" currencySymbol="€"/>
-                        </p>
-                    </div>
-                </c:forEach>
+    </div>
+</c:when>
 
-            </div>
-        </div>
-    </c:forEach>
-
-</div>
+<c:otherwise>
+    <div class="orderList-empty">
+        <img src="${pageContext.request.contextPath}/images/ListaOrdiniVuota.png" alt="lista ordini vuota">
+    </div>
+</c:otherwise>
+</c:choose>
 
 <%@ include file="footer.jsp" %>
 
