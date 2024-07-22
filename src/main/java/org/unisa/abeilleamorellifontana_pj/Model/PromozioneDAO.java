@@ -133,4 +133,32 @@ public class PromozioneDAO {
 
         return cancellato;
     }
+
+    public static boolean doUpdateByFields(int id, String titolo, String descrizione, int sconto) {
+        String query = "UPDATE Promozione SET titolo = ?, descrizione = ?, sconto = ? WHERE id = ?";
+        boolean aggiornato = false;
+
+        try (Connection conn = ConPool.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, titolo);
+            pstmt.setString(2, descrizione);
+            pstmt.setInt(3, sconto);
+            pstmt.setInt(4, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                aggiornato = true;
+                System.out.println("Promozione aggiornata con successo!");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Errore durante l'aggiornamento della promozione con id: " + id);
+            e.printStackTrace();
+        }
+
+        return aggiornato;
+    }
+
+
 }

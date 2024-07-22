@@ -10,6 +10,7 @@ import org.unisa.abeilleamorellifontana_pj.Model.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "admin", urlPatterns = "/admin")
@@ -36,6 +37,12 @@ public class AdminServlet extends HttpServlet {
             for(Prodotto prodotto : prodottoArrayList) {
                 prodottoHashMap.put(prodotto.getId(), prodotto);
             }
+
+            List<Promozione> Promozioni = new ArrayList<>();
+            Promozioni = PromozioneDAO.doRetrieveAll();
+
+
+            req.setAttribute("Promozioni", Promozioni);
             req.setAttribute("prodottoHashMap", prodottoHashMap);
             req.getRequestDispatcher("Admin.jsp").forward(req, resp);
 
