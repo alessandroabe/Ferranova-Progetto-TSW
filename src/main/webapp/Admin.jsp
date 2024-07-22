@@ -28,6 +28,9 @@
     <div>
         <button class="ordersManage-button" aria-label="ordersManage-button" tabindex="0" onkeydown="toggleView('orders')" onclick="toggleView('orders')">Gestione ordini clienti</button>
     </div>
+    <div>
+        <button class="promoctionsManage-button" aria-label="promoctionsManage-button" tabindex="0" onkeydown="toggleView('promoctions')" onclick="toggleView('promoctions')">Gestione Promozioni</button>
+    </div>
 </div>
 
 <!--Parte della gestione prodotti-->
@@ -40,7 +43,7 @@
                 <input type="text" id="ricerca" name="ricerca" <c:if test="${ not empty param.ricerca }">
                        value="${param.ricerca}" </c:if>">
                 <label for="select-category" class="select-categoryLabel">Categoria:</label>
-                <select name="categoria" id="select-category">
+                <select name="categoria" id="select-category" value="all">
                     <optgroup label="ferramenta">
                         <option value="ferramenta-utensili">utensili</option>
                         <option value="ferramenta-prodotti">prodotti</option>
@@ -75,11 +78,12 @@
     </div>
     <table>
         <thead>
-        <tr>
-            <th>Prodotto</th>
-            <th class="quantity-title">Quantità disponibile</th>
-            <th class="price-title">Modifica prezzo</th>
-        </tr>
+            <tr>
+                <th>Prodotto</th>
+                <th class="quantity-title">Quantità disponibile</th>
+                <th class="price-title">Modifica prezzo</th>
+                <th class="promotion-title">Rimuovi promozione</th>
+            </tr>
         </thead>
         <tbody>
         <c:forEach var="elemento" items="${prodotti}">
@@ -105,6 +109,15 @@
                     <div class="price-container">
                         <input type="number" step="0.01" min="0" value="${elemento.prezzo}" id="newPrice-${elemento.id}">
                         <button class="changePrice" aria-label="changePrice" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'updatePrice')" onclick="updatePrice(${elemento.id}, 'updatePrice')">cambia prezzo</button>
+                    </div>
+
+                </td>
+                <td id="promotion-${elemento.id}">
+                    <div class="promotion-container">
+                        <form action="rimuovi-promozione" method="GET">
+                            <input type="hidden" name="idProdotto" value="${elemento.id}">
+                            <input type="submit" value="rimuovi promozione" class="removePromoction">
+                        </form>
                         <p id="alert-${elemento.id}" class="alert alertAnimationOFF"></p>
                     </div>
 
@@ -115,6 +128,7 @@
         </tbody>
     </table>
 </div>
+
 
 <!--Parte della gestione ordini-->
 <div id="ordersManage-container">
@@ -168,10 +182,10 @@
                                 <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}"><br>
 
                                 <label for="dataSpedizione">Modifica data di spedizione:</label>
-                                <input type="date" id="dataSpedizione" name="dataSpedizione" required><br>
-
+                                <input type="date" id="dataSpedizione" name="dataSpedizione"><br>
+                <!--fixme non funziona il post senza il required-->
                                 <label for="birthday">Modifica data di consegna:</label>
-                                <input type="date" id="birthday" name="dataConsegna" required><br>
+                                <input type="date" id="birthday" name="dataConsegna"><br>
 
                             <div class="inputOrderManage">
                                 <input type="submit" id="submit" value="Modifica"/>
@@ -198,19 +212,80 @@
     </c:forEach>
 </div>
 
+
+<!--Parte della gestione promozioni-->
+<div id="promoctionsManage-container">
+    <h2>Lista promozioni</h2>
+        <div class="addPromoction">
+            <a href="aggiungiPromozione.jsp">&plus; Aggiungi una promozione</a>
+        </div>
+    <table>
+    <thead>
+    <tr>
+        <th>Promozione</th>
+        <th class="quantity-title">Descrizione</th>
+        <th class="price-title">Sconto</th>
+        <th class="promotion-title">Modifica promozione</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="promozione" items="${Promozioni}">
+        <tr id="promoctions-row-${promozione.id}">
+            <td>
+                <div class="promotion-info">
+                    <div>
+                        <p>${promozione.titolo}</p>
+                        <span>ID: ${promozione.id}</span>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="description-container">
+                    <p>${promozione.descrizione}</p>
+                </div>
+            </td>
+            <td id="sconto-${promozione.id}">
+                <div class="sconto-container">
+                    <p>${promozione.sconto}%</p>
+                </div>
+
+            </td>
+            <td id="changePromotion-${promozione.id}">
+                <div class="changePromotion-container">
+                    <form action="modifica-promozione" method="GET">
+                        <input type="hidden" name="idPromozione" value="${promozione.id}">
+                        <input type="submit" value="modifica promozione" class="modificaPromotion">
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+    </c:forEach>
+    </tbody>
+</table>
+
+</div>
+
 <%@ include file="/WEB-INF/footer.jsp" %>
 
 <script>
     function toggleView(view) {
         var productContainer = document.getElementById('productsManage-container');
         var orderContainer = document.getElementById('ordersManage-container');
+        var promoctionsContainer = document.getElementById('promoctionsManage-container');
 
         if (view === 'products') {
             productContainer.style.display = 'block';
             orderContainer.style.display = 'none';
+            promoctionsContainer.style.display = 'none';
         } else if (view === 'orders') {
             productContainer.style.display = 'none';
             orderContainer.style.display = 'block';
+            promoctionsContainer.style.display = 'none';
+        } else if (view === 'promoctions'){
+            productContainer.style.display = 'none';
+            orderContainer.style.display = 'none';
+            promoctionsContainer.style.display = 'block';
         }
     }
 
@@ -226,7 +301,7 @@
                     const response = JSON.parse(xhr.responseText);
                     if (response.success) {
                         document.getElementById("quantity-" + productId).innerText = response.newQuantity + ' Pz.';
-                        alertElement.innerHTML = "Quantità modificata";
+                        alertElement.innerHTML = "DB modificato";
                         alertElement.style.color = "#335e1e";
                     } else {
                         alertElement.innerHTML = "Errore";
@@ -267,7 +342,7 @@
                 const response = JSON.parse(xhr.responseText);
                 if (response.success) {
                     document.getElementById("newPrice-" + productId).value = response.newPrice;
-                    alertElement.innerHTML = "Prezzo modificato";
+                    alertElement.innerHTML = "DB modificato";
                     alertElement.style.color = "#335e1e";
                 } else {
                     alertElement.innerHTML = "Errore";

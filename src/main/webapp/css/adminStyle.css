@@ -13,7 +13,7 @@
     justify-content: space-around;
 }
 
-.productsManage-button, .ordersManage-button {
+.productsManage-button, .ordersManage-button,  .promoctionsManage-button {
     font-size: 15px;
     width: 170px;
     height: 45px;
@@ -25,12 +25,12 @@
     cursor: pointer;
 }
 
-.productsManage-button:hover, .ordersManage-button:hover {
+.productsManage-button:hover, .ordersManage-button:hover, .promoctionsManage-button:hover {
     color: white;
     background-color: #29451c;
 }
 
-#productsManage-container, #ordersManage-container {
+#productsManage-container, #ordersManage-container, #promoctionsManage-container {
     width: 90%;
     max-width: 1200px;
     margin: 5vh auto;
@@ -44,7 +44,11 @@
     display: none;
 }
 
-/*Parte Gestione Prodotti*/
+#promoctionsManage-container{
+    display: none;
+}
+
+/*Parte Gestione Prodotti e Promozioni*/
 
 .headContainer {
     margin: 15px 0 20px;
@@ -57,15 +61,20 @@
     margin-left: 10px;
 }
 
-.addProduct a {
+.addProduct a, .addPromoction a{
     padding: 10px 20px;
     color: white;
     background-color: #335e1e;
     text-decoration: none;
+    text-align: center;
     border-radius: 15px;
 }
 
-.addProduct a:hover {
+.addPromoction{
+    margin-top: 20px;
+}
+
+.addProduct a:hover, .addPromoction a:hover {
     background-color: #29451c;
 }
 
@@ -88,22 +97,17 @@ th {
     font-weight: bold;
 }
 
-.product-info {
-    display: flex;
-    align-items: center;
-}
-
 .product-info img {
     width: 50px;
     margin-right: 15px;
 }
 
-.quantity-container, .price-container {
+.product-info, .promotion-info, .quantity-container, .price-container, .description-container, .sconto-container, .promotion-container{
     display: flex;
     align-items: center;
 }
 
-.minus, .plus, .azzera {
+.minus, .plus, .azzera, .removePromoction {
     background-color: transparent;
     border: 0;
     cursor: pointer;
@@ -114,7 +118,7 @@ th {
     margin: 0 15px;
 }
 
-.azzera {
+.azzera, .removePromoction {
     margin-left: 30px;
     font-size: 15px;
     background-color: rgba(158, 51, 51, 0.79);
@@ -123,7 +127,7 @@ th {
     border-radius: 3px;
 }
 
-.changePrice {
+.changePrice, .modificaPromotion {
     margin-left: 30px;
     font-size: 15px;
     background-color: rgba(51, 94, 30, 0.83);
@@ -141,18 +145,28 @@ th {
 
 .alertAnimationOFF{
     opacity: 0;
-    transform: translateX(350px);
+    transform: translateX(170px) translateY(-20px);
     visibility: hidden;
 }
 
 .alertAnimationON{
     visibility: visible;
     opacity: 1;
-    transform: translateX(360px);
+    transform: translateX(180px) translateY(-20px);
 }
 
 
 @media (max-width: 850px) {
+    .productsManage-button, .ordersManage-button,  .promoctionsManage-button {
+        width: 130px;
+        height: 55px;
+    }
+
+    .addProduct a, .addPromoction a{
+        width: 80%;
+        margin: 0 10%;
+    }
+
     .headContainer {
         flex-direction: column;
         align-items: flex-start;
@@ -162,9 +176,9 @@ th {
         margin-left: 0;
     }
 
-    .addProduct {
-        margin-top: 10px;
-        width: 100%;
+    .addProduct, .addPromoction{
+        width: 80%;
+        margin: 10px 10%;
         display: flex;
         justify-content: flex-end;
     }
@@ -174,7 +188,7 @@ th {
         align-items: flex-start;
     }
 
-    .minus, .plus, .azzera, .changePrice {
+    .minus, .plus, .azzera, .changePrice, .removePromoction {
         margin: 10px 0;
     }
 }
@@ -195,9 +209,8 @@ th {
         margin: 10px 5px 10px 0;
     }
 
-    .product-info {
-        flex-direction: column;
-        align-items: flex-start;
+    .product-info, .promotion-info {
+        margin-top: 25px;
     }
 
     .product-info img {
@@ -208,10 +221,6 @@ th {
         flex-direction: column;
         align-items: flex-start;
         margin-top: 10px;
-    }
-
-    .minus, .plus, .azzera, .changePrice {
-        margin: 10px 0;
     }
 
     table {
@@ -234,12 +243,22 @@ th {
     }
 
 
+    .price-container, .quantity-container, .promotion-container{
+        align-items: center;
+    }
+
+    .modificaPromotion{
+        width: 80%;
+        margin: 0 10%;
+    }
+
+
     .alertAnimationOFF{
-        transform: translateX(180px);
+        transform: translateX(180px) translateY(-28px);
     }
 
     .alertAnimationON{
-        transform: translateX(190px);
+        transform: translateX(190px)translateY(-28px);
     }
 }
 
