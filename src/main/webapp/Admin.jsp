@@ -132,11 +132,11 @@
                             <fmt:formatNumber value="${Ordine.prezzoOrdine}" type="currency" currencySymbol="€"/>
                         </p>
 
-                        <c:if test="${ empty Ordine.dataSpedizione}">
+                        <c:if test="${empty Ordine.dataSpedizione}">
                         <p class="dataSpedizione"><strong>Data spedizione:</strong> - </p>
                         </c:if>
 
-                        <c:if test="${ empty Ordine.dataSpedizione}">
+                        <c:if test="${not empty Ordine.dataSpedizione}">
                             <p class="dataSpedizione"><strong>Data spedizione:</strong>${Ordine.dataSpedizione}</p>
                         </c:if>
 
@@ -144,11 +144,11 @@
                             <fmt:formatNumber value="${Ordine.prezzoSpedizione}" type="currency" currencySymbol="€"/>
                         </p>
 
-                        <c:if test="${ empty Ordine.dataConsegna}">
+                        <c:if test="${empty Ordine.dataConsegna}">
                             <p class="dataSpedizione"><strong>Data consegna:</strong> - </p>
                         </c:if>
 
-                        <c:if test="${ empty Ordine.dataConsegna}">
+                        <c:if test="${not empty Ordine.dataConsegna}">
                             <p class="dataSpedizione"><strong>Data consegna:</strong>${Ordine.dataConsegna}</p>
                         </c:if>
 
