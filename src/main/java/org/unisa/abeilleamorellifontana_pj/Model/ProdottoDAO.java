@@ -239,5 +239,15 @@ public class ProdottoDAO {
         }
     }
 
+    public static void aggiornaRecensioneNulla(int idProdotto) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE Prodotto SET id_promozione = NULL WHERE id = ? ");
+            ps.setInt(1, idProdotto);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
 

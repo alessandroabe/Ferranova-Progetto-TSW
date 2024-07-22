@@ -133,7 +133,7 @@
                         </p>
 
                         <c:if test="${ empty Ordine.dataSpedizione}">
-                        <p class="dataSpedizione"><strong>Data spedizione:</strong> - </p>
+                            <p class="dataSpedizione"><strong>Data spedizione:</strong> - </p>
                         </c:if>
 
                         <c:if test="${ empty Ordine.dataSpedizione}">
@@ -157,21 +157,21 @@
                     <div class="order-details-manage">
                         <form action="modificaOrdine" method="get">
 
-                                <label for="statoOrdine">Modifica Stato ordine</label>
-                                <select name="stato" id="statoOrdine" required>
-                                    <option value="ordinato">ordinato</option>
-                                    <option value="spedito">spedito</option>
-                                    <option value="consegnato">consegnato</option>
-                                </select>
+                            <label for="statoOrdine">Modifica Stato ordine</label>
+                            <select name="stato" id="statoOrdine" required>
+                                <option value="ordinato">ordinato</option>
+                                <option value="spedito">spedito</option>
+                                <option value="consegnato">consegnato</option>
+                            </select>
 
-                                <!-- Campo nascosto per l'ID ordine -->
-                                <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}"><br>
+                            <!-- Campo nascosto per l'ID ordine -->
+                            <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}"><br>
 
-                                <label for="dataSpedizione">Modifica data di spedizione:</label>
-                                <input type="date" id="dataSpedizione" name="dataSpedizione" required><br>
+                            <label for="dataSpedizione">Modifica data di spedizione:</label>
+                            <input type="date" id="dataSpedizione" name="dataSpedizione" required><br>
 
-                                <label for="birthday">Modifica data di consegna:</label>
-                                <input type="date" id="birthday" name="dataConsegna" required><br>
+                            <label for="birthday">Modifica data di consegna:</label>
+                            <input type="date" id="birthday" name="dataConsegna" required><br>
 
                             <div class="inputOrderManage">
                                 <input type="submit" id="submit" value="Modifica"/>
@@ -274,8 +274,8 @@
                     alertElement.style.color = "red";
                 }
             } else {
-            alertElement.innerHTML = "Errore di connessione";
-            alertElement.style.color = "red";
+                alertElement.innerHTML = "Errore di connessione";
+                alertElement.style.color = "red";
             }
 
             // Transizione
