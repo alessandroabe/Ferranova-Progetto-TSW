@@ -279,23 +279,14 @@
             }
 
             // Transizione
-            alertElement.style.opacity = 0;
-            alertElement.style.transform = "translateX(400px)";
-            alertElement.style.display = "block";
-            alertElement.offsetHeight; // Forza il reflow per applicare le nuove proprietà
-            alertElement.style.transition = "opacity 0.5s, transform 0.5s";
-            alertElement.style.opacity = 1;
-            alertElement.style.transform = "translateX(410px)";
+            alertElement.classList.remove("alertAnimationOFF");
+            alertElement.classList.add("alertAnimationON");
+
 
             setTimeout(function () {
-                alertElement.style.transition = "opacity 0.5s, transform 0.5s";
-                alertElement.style.opacity = 0;
-                alertElement.style.transform = "translateX(400px)";
+                alertElement.classList.remove("alertAnimationON");
+                alertElement.classList.add("alertAnimationOFF");
             }, 2000); //dopo 3 secondi scompare
-
-            setTimeout(function () {
-                alertElement.style.display = "none";
-            }, 2500); //dopo 4 sec
         };
         xhr.send("prod=" + productId + "&action=" + action + "&price=" + price);
     }
