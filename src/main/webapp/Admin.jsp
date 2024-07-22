@@ -133,23 +133,23 @@
                         </p>
 
                         <c:if test="${empty Ordine.dataSpedizione}">
-                        <p class="dataSpedizione"><strong>Data spedizione:</strong> - </p>
+                        <p class="dataSpedizione"><strong>Data spedizione: </strong>- </p>
                         </c:if>
 
                         <c:if test="${not empty Ordine.dataSpedizione}">
-                            <p class="dataSpedizione"><strong>Data spedizione:</strong>${Ordine.dataSpedizione}</p>
+                            <p class="dataSpedizione"><strong>Data spedizione: </strong>${Ordine.dataSpedizione}</p>
                         </c:if>
 
-                        <p><strong>Costo spedizione:</strong><fmt:setLocale value="fr_FR"/>
+                        <p><strong>Costo spedizione: </strong><fmt:setLocale value="fr_FR"/>
                             <fmt:formatNumber value="${Ordine.prezzoSpedizione}" type="currency" currencySymbol="€"/>
                         </p>
 
                         <c:if test="${empty Ordine.dataConsegna}">
-                            <p class="dataSpedizione"><strong>Data consegna:</strong> - </p>
+                            <p class="dataSpedizione"><strong>Data consegna: </strong>- </p>
                         </c:if>
 
                         <c:if test="${not empty Ordine.dataConsegna}">
-                            <p class="dataSpedizione"><strong>Data consegna:</strong>${Ordine.dataConsegna}</p>
+                            <p class="dataSpedizione"><strong>Data consegna: </strong>${Ordine.dataConsegna}</p>
                         </c:if>
 
                     </div>

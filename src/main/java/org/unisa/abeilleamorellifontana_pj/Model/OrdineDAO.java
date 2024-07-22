@@ -59,7 +59,7 @@ public class OrdineDAO {
 
     public static ArrayList<Ordine> doRetrieveAll() {
         ArrayList<Ordine> ordini = new ArrayList<>();
-        String retrieveAllOrdersSQL = "SELECT * FROM Ordine";
+        String retrieveAllOrdersSQL = "SELECT * FROM Ordine ORDER BY id DESC";
         String retrieveProductsByOrderSQL = "SELECT * FROM Ordine_Prodotto WHERE id_ordine = ?";
 
         try (Connection conn = ConPool.getConnection();
