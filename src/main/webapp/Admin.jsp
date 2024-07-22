@@ -39,7 +39,7 @@
                 <label for="ricerca" >Cerca: </label>
                 <input type="text" id="ricerca" name="ricerca" <c:if test="${ not empty param.ricerca }">
                        value="${param.ricerca}" </c:if>">
-                <label for="select-category" style="margin-left: 10px">Categoria:</label>
+                <label for="select-category" class="select-categoryLabel">Categoria:</label>
                 <select name="categoria" id="select-category">
                     <optgroup label="ferramenta">
                         <option value="ferramenta-utensili">utensili</option>
@@ -105,7 +105,7 @@
                     <div class="price-container">
                         <input type="number" step="0.01" min="0" value="${elemento.prezzo}" id="newPrice-${elemento.id}">
                         <button class="changePrice" aria-label="changePrice" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'updatePrice')" onclick="updatePrice(${elemento.id}, 'updatePrice')">cambia prezzo</button>
-                        <p id="alert-${elemento.id}" class="alert"></p>
+                        <p id="alert-${elemento.id}" class="alert alertAnimationOFF"></p>
                     </div>
 
                 </td>
@@ -236,24 +236,17 @@
                     alertElement.innerHTML = "Errore di connessione";
                     alertElement.style.color = "red";
                 }
+
                 // Transizione
-                alertElement.style.opacity = 0;
-                alertElement.style.transform = "translateX(400px)";
-                alertElement.style.display = "block";
-                alertElement.offsetHeight; // Forza il reflow per applicare le nuove proprietà
-                alertElement.style.transition = "opacity 0.5s, transform 0.5s";
-                alertElement.style.opacity = 1;
-                alertElement.style.transform = "translateX(410px)";
+                alertElement.classList.remove("alertAnimationOFF");
+                alertElement.classList.add("alertAnimationON");
+
 
                 setTimeout(function () {
-                    alertElement.style.transition = "opacity 0.5s, transform 0.5s";
-                    alertElement.style.opacity = 0;
-                    alertElement.style.transform = "translateX(400px)";
+                    alertElement.classList.remove("alertAnimationON");
+                    alertElement.classList.add("alertAnimationOFF");
                 }, 2000); //dopo 3 secondi scompare
 
-                setTimeout(function () {
-                    alertElement.style.display = "none";
-                }, 2500); //dopo 4 secondi scompare
             }
         };
         xhr.send("prod=" + productId + "&action=" + action + "&quantity=" + quantity);

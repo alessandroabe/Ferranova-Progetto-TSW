@@ -25,10 +25,12 @@
         <form action="catalogo" method="get">
             <h2>${param.categoria}</h2>
             <ul class="ul-sottocategorie">
-                <label> Ricerca:
-                    <input type="text" name="ricerca" <c:if test="${ not empty param.ricerca }">
+                <label> Cerca: <br>
+                    <input type="text" class="ricerca" name="ricerca" placeholder="cerca articolo" <c:if test="${ not empty param.ricerca }">
                            value="${param.ricerca}" </c:if>">
                 </label>
+                <br><br>
+
                 <c:forEach var="subCategoria" items="${subCategorie}">
                     <li>
                         <label>
@@ -39,25 +41,28 @@
                     </li>
                 </c:forEach>
             </ul>
+            <br>
 
-            <label>Prezzo Minimo:
-                <input type="range" name="prezzoMin" step="1" min="0" max="1000"
+            <label>Prezzo minimo:<br>
+                <input class="rangePrice" type="range" name="prezzoMin" step="1" min="0" max="1000"
                        value="${ not empty param.prezzoMin ? param.prezzoMin : '0'}" oninput="this.nextElementSibling.value = this.value">
                 <output>${not empty param.prezzoMin ? param.prezzoMin : '0'}</output>
             </label>
-            <br>
-            <label>Prezzo Massimo:
-                <input type="range" name="prezzoMax" step="1" min="0" max="1000"
+            <br><br>
+            <label>Prezzo massimo:<br>
+                <input class="rangePrice" type="range" name="prezzoMax" step="1" min="0" max="1000"
                        value="${not empty param.prezzoMax ? param.prezzoMax : '1000'}" oninput="this.nextElementSibling.value = this.value">
                 <output>${not empty param.prezzoMax ? param.prezzoMax : '1000'}</output>
             </label>
-            <br>
+            <br><br>
             <input type="hidden" name="categoria" value="${param.categoria}">
             <button type="submit" class="redirect-button">Filtra</button>
         </form>
+        <br>
+
         <button class="redirect-button"
                 onclick="window.location.replace('${pageContext.request.contextPath}/catalogo?categoria=${param.categoria}');">
-            Pulisci
+            Resetta
         </button>
     </div>
 

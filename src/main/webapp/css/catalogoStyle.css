@@ -28,14 +28,43 @@ body{
 }
 
 .sidebar .ul-sottocategorie li{
-    color: #29451c;
     margin: 15px 0;
-    text-decoration: none;
-    cursor: pointer;
+    color: black;
 }
 
-.sidebar .ul-sottocategorie li:hover{
-    text-decoration: underline;
+.ricerca{
+    margin-top: 5px;
+    width: 95%;
+    padding: 5px 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.sidebar .ul-sottocategorie li input[type="checkbox"]:checked + label:before{
+    background-color: #335e1e;
+}
+
+.sidebar .ul-sottocategorie li input[type="checkbox"]:checked + label:after{
+    background-color: white;
+}
+
+.rangePrice{
+    width: 95%;
+}
+
+.redirect-button{
+    width: 50%;
+    margin: 10px 25%;
+    color: white;
+    padding: 5px 10px;
+    background-color: #335e1e;
+    border: none;
+    border-radius: 10px;
+}
+
+.redirect-button:hover{
+    background-color: #29451c;
 }
 
 .content {

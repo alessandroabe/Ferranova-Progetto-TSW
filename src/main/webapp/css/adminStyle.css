@@ -4,12 +4,13 @@
     font-family: sans-serif;
 }
 
-/*bottoni selettori div*/
+/* Bottoni selettori div */
 .buttons-container {
-    width: 40%;
+    width: 100%;
+    max-width: 600px;
     margin: 1vh auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .productsManage-button, .ordersManage-button {
@@ -30,7 +31,8 @@
 }
 
 #productsManage-container, #ordersManage-container {
-    width: 70%;
+    width: 90%;
+    max-width: 1200px;
     margin: 5vh auto;
 }
 
@@ -42,10 +44,17 @@
     display: none;
 }
 
+/*Parte Gestione Prodotti*/
+
 .headContainer {
     margin: 15px 0 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.select-categoryLabel{
+    margin-left: 10px;
 }
 
 .addProduct a {
@@ -63,7 +72,7 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 thead {
@@ -91,11 +100,11 @@ th {
 
 .quantity-container, .price-container {
     display: flex;
+    align-items: center;
 }
 
 .minus, .plus, .azzera {
     background-color: transparent;
-    position: absolute;
     border: 0;
     cursor: pointer;
 }
@@ -105,28 +114,18 @@ th {
     margin: 0 15px;
 }
 
-.minus{
-    transform: translatex(-50px);
-}
-
-.plus{
-    transform: translateX(+50px);
-}
-
 .azzera {
     margin-left: 30px;
     font-size: 15px;
-    transform: translateX(70px) translateY(-2px);
     background-color: rgba(158, 51, 51, 0.79);
     color: white;
     padding: 3px 5px;
     border-radius: 3px;
 }
 
-.changePrice{
+.changePrice {
     margin-left: 30px;
     font-size: 15px;
-    transform: translateX(70px);
     background-color: rgba(51, 94, 30, 0.83);
     color: white;
     padding: 3px 5px;
@@ -136,12 +135,64 @@ th {
 
 .alert {
     position: absolute;
+    transition: 0.5s;
+}
+
+
+.alertAnimationOFF{
+    opacity: 0;
+    transform: translateX(350px);
+    visibility: hidden;
+}
+
+.alertAnimationON{
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(360px);
+}
+
+
+@media (max-width: 850px) {
+    .headContainer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .select-categoryLabel{
+        margin-left: 0;
+    }
+
+    .addProduct {
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .quantity-container, .price-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .minus, .plus, .azzera, .changePrice {
+        margin: 10px 0;
+    }
 }
 
 @media (max-width: 600px) {
     .buttons-container, .orders-container, table {
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
+    }
+
+    .select-categoryDiv input[type="text"]{
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .select-categoryDiv select{
+        width: 80%;
+        margin: 10px 5px 10px 0;
     }
 
     .product-info {
@@ -159,12 +210,13 @@ th {
         margin-top: 10px;
     }
 
-    .minus, .plus, .delete {
-        margin: 0;
+    .minus, .plus, .azzera, .changePrice {
+        margin: 10px 0;
     }
 
     table {
         display: block;
+        overflow-x: auto;
     }
 
     thead {
@@ -181,11 +233,18 @@ th {
         padding: 10px 0;
     }
 
-    .cart-empty {
-        width: 76%;
-        margin: 15vh auto;
+
+    .alertAnimationOFF{
+        transform: translateX(180px);
+    }
+
+    .alertAnimationON{
+        transform: translateX(190px);
     }
 }
+
+
+/*Parte Ordini Clienti*/
 
 h1 {
     font-size: 24px;
@@ -194,7 +253,8 @@ h1 {
 }
 
 .orders-container {
-    max-width: 60%;
+    width: 90%;
+    max-width: 1200px;
     margin: 5vh auto 10vh;
 }
 
@@ -208,11 +268,11 @@ h1 {
     font-size: 20px;
 }
 
-.orderDetails-container{
+.orderDetails-container {
     display: flex;
-    justify-content: space-between;
     flex-direction: row;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .order-details {
@@ -222,17 +282,17 @@ h1 {
     width: 60%;
 }
 
-.order-details-manage{
+.order-details-manage {
     width: 35%;
 }
 
-.order-details-manage input{
+.order-details-manage input {
     margin-top: 10px;
 }
 
-.inputOrderManage{
+.inputOrderManage {
     width: 30%;
-    margin: 10px 35%;
+    margin: 10px auto;
 }
 
 .order-details p {
@@ -300,11 +360,20 @@ input#submit {
         max-width: 80%;
     }
 
+    .order-details{
+        width: 100%;
+    }
+
     .order-details p {
         flex: 100%;
     }
 
+    .order-details-manage{
+        width: 100%;
+    }
+
     .order-products {
+        height: 180px;
         gap: 20px;
     }
 

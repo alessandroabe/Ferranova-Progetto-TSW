@@ -129,8 +129,8 @@ h1 {
     }
 
     .edit-button {
-        width: 100%;
-        margin-top: 10px;
+        width: 90%;
+        margin: 20px 5% 10px 5%;
         transform: none;
     }
 }
@@ -149,7 +149,8 @@ h1 {
     }
 
     .edit-button {
-        padding: 5px 12px;
+        width: 90%;
+        margin: 20px 5% 10px 5%;
         font-size: 15px;
     }
 }
@@ -172,7 +173,8 @@ h1 {
     }
 
     .edit-button {
-        padding: 5px 10px;
+        width: 90%;
+        margin: 20px 5% 10px 5%;
         font-size: 14px;
     }
 }
