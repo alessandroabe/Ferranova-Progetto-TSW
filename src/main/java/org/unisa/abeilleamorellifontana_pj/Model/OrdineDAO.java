@@ -11,7 +11,7 @@ public class OrdineDAO {
     public static int inserisciOrdine(Ordine ordine) {
         int id = -1;
         ResultSet rs = null;
-        String insertOrderSQL = "INSERT INTO Ordine (id_utente, stato_ordine, prezzo_totale, spese_spedizione, data_ordine, data_spedizione, data_consegna, tipo_pagamento) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertOrderSQL = "INSERT INTO Ordine (id_utente, stato_ordine, prezzo_totale, spese_spedizione, data_ordine, data_spedizione, data_consegna, tipo_pagamento,indirizzo) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?,?)";
         String insertProdottoOrdineSQL = "INSERT INTO Ordine_Prodotto(id_ordine,id_prodotto,quantità,prezzo_finale) VALUES (?, ?, ?, ?)";
         try (Connection conn = ConPool.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(insertOrderSQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -24,6 +24,7 @@ public class OrdineDAO {
             pstmt.setDate(6, ordine.getDataSpedizione() != null ? java.sql.Date.valueOf(ordine.getDataSpedizione()) : null);
             pstmt.setDate(7, ordine.getDataConsegna() != null ? java.sql.Date.valueOf(ordine.getDataConsegna()) : null);
             pstmt.setString(8, ordine.getTipoPagamento());
+            pstmt.setString(9,ordine.getIndirizzo());
             pstmt.executeUpdate();
 
             rs = pstmt.getGeneratedKeys();

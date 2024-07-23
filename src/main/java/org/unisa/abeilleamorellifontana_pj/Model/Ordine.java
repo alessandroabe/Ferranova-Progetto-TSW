@@ -18,6 +18,7 @@ public class Ordine {
     private LocalDate dataSpedizione;
     private LocalDate dataConsegna;
     private String tipoPagamento;
+    private String indirizzo;
 
     public Ordine(int idOrdine, int id_utente, Map<Integer, OrdineProdotto> prodottiQuantitaOrdine, BigDecimal prezzoOrdine, BigDecimal prezzoSpedizione) {
         this.idOrdine = idOrdine;
@@ -61,6 +62,18 @@ public class Ordine {
         this.tipoPagamento = "carta di credito";
     }
 
+    public Ordine(int idUtente, BigDecimal prezzoOrdine, BigDecimal prezzoSpedizione,String indirizzo) {
+        this.idUtente = idUtente;
+        this.statoOrdine = StatoOrdine.ORDINATO;
+        this.prezzoOrdine = prezzoOrdine;
+        this.prezzoSpedizione = prezzoSpedizione;
+        this.dataOrdine = LocalDate.now();
+        this.dataSpedizione = null;
+        this.dataConsegna = null;
+        this.tipoPagamento = "carta di credito";
+        this.indirizzo = indirizzo;
+    }
+
     public Ordine(int idUtente) {
         this.idUtente = idUtente;
         this.statoOrdine = StatoOrdine.ORDINATO;
@@ -70,6 +83,15 @@ public class Ordine {
         this.tipoPagamento = "carta di credito";
     }
 
+    public Ordine(int idUtente,String indirizzo) {
+        this.idUtente = idUtente;
+        this.statoOrdine = StatoOrdine.ORDINATO;
+        this.dataOrdine = LocalDate.now();
+        this.dataSpedizione = null;
+        this.dataConsegna = null;
+        this.tipoPagamento = "carta di credito";
+        this.indirizzo = indirizzo;
+    }
 
     public int getIdUtente() {
         return idUtente;
@@ -199,5 +221,13 @@ public class Ordine {
             }
             throw new IllegalArgumentException("No enum constant for string: " + text);
         }
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
     }
 }

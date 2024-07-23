@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aggiungi Prodotti Ferranova</title>
+    <title>Modifica Promozioni Ferranova</title>
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aggiungiProdottoStyle.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
