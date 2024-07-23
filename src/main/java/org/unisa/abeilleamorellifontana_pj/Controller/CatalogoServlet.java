@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.unisa.abeilleamorellifontana_pj.Model.Prodotto;
 import org.unisa.abeilleamorellifontana_pj.Model.ProdottoDAO;
+import org.unisa.abeilleamorellifontana_pj.Model.Promozione;
+import org.unisa.abeilleamorellifontana_pj.Model.PromozioneDAO;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -69,14 +71,22 @@ public class CatalogoServlet extends HttpServlet {
                     hashcategorie.put(s, (sottocategorie != null) ? sottocategorie.contains(s) : false);
                 }
                 request.setAttribute("subCategorie", hashcategorie);
-            } else {
-
-                catalogo = (ArrayList<Prodotto>) doRetrieveAll();
-                request.setAttribute("catalogo", catalogo);
             }
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/catalogo.jsp");
-            dispatcher.forward(request, response);
+
+            ArrayList<Promozione> promozioni= (ArrayList<Promozione>) PromozioneDAO.doRetrieveAll();
+            HashMap<Integer, Integer> promozioneHashMap = new HashMap<>();
+            for (Promozione p : promozioni) {
+                promozioneHashMap.put(p.getId(), p.getSconto());
+            }
+            request.setAttribute("promozioni", promozioneHashMap);
         }
+        else {
+
+            catalogo = (ArrayList<Prodotto>) doRetrieveAll();
+            request.setAttribute("catalogo", catalogo);
+        }
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/catalogo.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override

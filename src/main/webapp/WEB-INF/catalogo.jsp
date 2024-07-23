@@ -23,35 +23,39 @@
     <div class="sidebar">
         <!-- FIXME: finisci e rendi dinamico con macrocategorie-->
         <form action="catalogo" method="get">
-            <h2>${param.categoria}</h2>
-            <ul class="ul-sottocategorie">
-                <label> Cerca: <br>
-                    <input type="text" class="ricerca" name="ricerca" placeholder="cerca articolo" <c:if test="${ not empty param.ricerca }">
-                           value="${param.ricerca}" </c:if>">
-                </label>
-                <br><br>
+            <c:if test="${ not empty param.categoria}">
+                <h2>${param.categoria}</h2>
+                <ul class="ul-sottocategorie">
+                    <label> Cerca: <br>
+                        <input type="text" class="ricerca" name="ricerca" placeholder="cerca articolo" <c:if
+                                test="${ not empty param.ricerca }">
+                               value="${param.ricerca}" </c:if>">
+                    </label>
+                    <br><br>
 
-                <c:forEach var="subCategoria" items="${subCategorie}">
-                    <li>
-                        <label>
-                            <input type="checkbox" name="sottocategorie" value="${subCategoria.key}"
-                            <c:if test="${subCategoria.value}"> checked</c:if>>
-                                ${subCategoria.key}
-                        </label>
-                    </li>
-                </c:forEach>
-            </ul>
-            <br>
-
+                    <c:forEach var="subCategoria" items="${subCategorie}">
+                        <li>
+                            <label>
+                                <input type="checkbox" name="sottocategorie" value="${subCategoria.key}"
+                                <c:if test="${subCategoria.value}"> checked</c:if>>
+                                    ${subCategoria.key}
+                            </label>
+                        </li>
+                    </c:forEach>
+                </ul>
+                <br>
+            </c:if>
             <label>Prezzo minimo:<br>
                 <input class="rangePrice" type="range" name="prezzoMin" step="1" min="0" max="1000"
-                       value="${ not empty param.prezzoMin ? param.prezzoMin : '0'}" oninput="this.nextElementSibling.value = this.value">
+                       value="${ not empty param.prezzoMin ? param.prezzoMin : '0'}"
+                       oninput="this.nextElementSibling.value = this.value">
                 <output>${not empty param.prezzoMin ? param.prezzoMin : '0'}</output>
             </label>
             <br><br>
             <label>Prezzo massimo:<br>
                 <input class="rangePrice" type="range" name="prezzoMax" step="1" min="0" max="1000"
-                       value="${not empty param.prezzoMax ? param.prezzoMax : '1000'}" oninput="this.nextElementSibling.value = this.value">
+                       value="${not empty param.prezzoMax ? param.prezzoMax : '1000'}"
+                       oninput="this.nextElementSibling.value = this.value">
                 <output>${not empty param.prezzoMax ? param.prezzoMax : '1000'}</output>
             </label>
             <br><br>
@@ -75,8 +79,10 @@
                     <div class="product-title">${entry.titolo}</div>
                 </a>
                 <div class="product-price">
+                  <c:if test="${entry.idPromozione >0 || not empty promozioni[entry.idPromozione]}">  <p>${ promozioni[entry.idPromozione]}%</p></c:if>
                     <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                    <fmt:formatNumber value="${entry.prezzo}" type="currency" currencySymbol="€"/></div>
+                    <fmt:formatNumber value="${entry.prezzo * (1 - ( promozioni[entry.idPromozione] / 100))} " type="currency"
+                                      currencySymbol="€"/></div>
                 <button onclick="addToCart(${entry.id})" class="product-button">Aggiungi al carrello</button>
                 <p id="alert-${entry.id}" class="alert"></p>
             </div>
