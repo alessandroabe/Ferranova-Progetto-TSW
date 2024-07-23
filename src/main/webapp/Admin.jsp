@@ -181,7 +181,7 @@
                     <div class="order-details-manage">
                         <form action="modificaOrdine" method="get">
 
-                            <label for="statoOrdine">Modifica Stato ordine</label>
+                            <label for="statoOrdine">Modifica Stato ordine </label>
                             <select name="stato" id="statoOrdine" required>
                                 <option value="ordinato">ordinato</option>
                                 <option value="spedito">spedito</option>
@@ -191,11 +191,11 @@
                             <!-- Campo nascosto per l'ID ordine -->
                             <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}"><br>
 
-                            <label for="dataSpedizione">Modifica data di spedizione:</label>
+                            <label for="dataSpedizione">Modifica data di spedizione: </label>
                             <input type="date" id="dataSpedizione" name="dataSpedizione"><br>
                             <!--fixme non funziona il post senza il required-->
-                            <label for="birthday">Modifica data di consegna:</label>
-                            <input type="date" id="birthday" name="dataConsegna"><br>
+                            <label for="dataConsegna">Modifica data di consegna: </label>
+                            <input type="date" id="dataConsegna" name="dataConsegna"><br>
 
                             <div class="inputOrderManage">
                                 <input type="submit" id="submit" value="Modifica"/>

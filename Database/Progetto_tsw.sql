@@ -173,7 +173,21 @@ VALUES ('Cacciavite a stella',
         70, NULL, 'Edilizia', 'Utensili', 8.00),
        ('Tagliasiepi',
         'Tagliasiepi elettrico con lama da 55 cm e motore da 600 W.</br>Impugnatura ergonomica e sistema anti-vibrazione',
-        15, NULL, 'Giardinaggio', 'Utensili', 89.00);
+        15, NULL, 'Giardinaggio', 'Utensili', 89.00),
+       ('Pittura murale bianca', 'Pittura murale bianca opaca per interni.</br>Capacità: 10 L</br>Copertura: 100 m²</br>Tempo di asciugatura: 2 ore', 30, NULL, 'Edilizia', 'Prodotti' ,25.00),
+       ('Cacciavite a taglio', 'Cacciavite a taglio Pro 150 di Vales con testa piatta e realizzato in acciaio cromo vanadio.</br>Punta magnetica e brunita.</br>Impugnatura morbida bimateriale con punti di appoggio per il pollice.</br>Lunghezza totale: 150 mm</br>Punta: SL5', 5, NULL, 'Ferramenta',  'Utensili' ,7.00),
+       ('Maschera di protezione', 'Maschera di protezione per occhi con lente antiappannamento e antigraffio.</br>Regolabile e confortevole.', 50, NULL, 'Ferramenta', 'Abbigliamento' ,12.00),
+       ('Compressore d\'aria', 'Compressore d\'aria portatile con serbatoio da 24 L e motore da 2 HP.</br>Pressione massima: 8 bar', 8, NULL, 'Ferramenta', 'Utensili', 129.00),
+       ('Chiave inglese', 'Chiave inglese regolabile con apertura massima di 30 mm.</br>Manico ergonomico per una presa confortevole.</br>Lunghezza: 250 mm', 25, NULL, 'Ferramenta', 'Utensili' ,15.00),
+       ('Corda da giardino', 'Corda da giardino in polipropilene resistente agli agenti atmosferici.</br>Lunghezza: 50 m</br>Diametro: 10 mm', 40, NULL, 'Giardinaggio', 'Prodotti',10.00),
+       ('Batteria al litio', 'Batteria al litio ricaricabile da 18V per utensili elettrici.</br>Capacità: 4.0 Ah</br>Tempo di ricarica: 60 minuti', 30, NULL, 'Ferramenta', 'Elettronica',49.00),
+       ('Avvitatore a impulsi', 'Avvitatore a impulsi con motore brushless e batteria da 18V.</br>Coppia di serraggio: 180 Nm</br>Include 2 batterie e caricabatterie', 10, NULL, 'Ferramenta', 'Utensili' ,179.00),
+       ('Tagliasiepi a batteria', 'Tagliasiepi a batteria con lama da 50 cm e motore da 18V.</br>Include batteria e caricabatterie', 15, NULL, 'Giardinaggio', 'Utensili' ,99.00),
+       ('Tubo da giardino', 'Tubo da giardino estensibile fino a 30 m con pistola a spruzzo regolabile.', 50, NULL, 'Giardinaggio', 'Prodotti' ,29.00),
+       ('Martello demolitore', 'Martello demolitore elettrico con potenza di 1500 W.</br>Include scalpello e punta', 7, NULL, 'Edilizia', 'Utensili' ,299.00),
+       ('Carrello portautensili', 'Carrello portautensili con 5 cassetti e ruote girevoli.</br>Struttura in acciaio resistente', 3, NULL, 'Ferramenta', 'Prodotti', 199.00),
+       ('Rullo per pittura', 'Rullo per pittura con manico telescopico e rullo intercambiabile.</br>Larghezza rullo: 25 cm</br>Include 2 rulli di ricambio', 60, NULL, 'Edilizia', 'Utensili' ,14.00),
+       ('Trapano a colonna', 'Trapano a colonna da banco con motore da 500 W.</br>Velocità regolabile</br>Include morsa', 4, NULL, 'Ferramenta', 'Utensili' ,249.00);
 
 
 INSERT INTO Carrello (id_utente, id_prodotto, quantità)
