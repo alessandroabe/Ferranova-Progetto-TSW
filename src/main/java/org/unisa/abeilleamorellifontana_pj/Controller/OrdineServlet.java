@@ -56,7 +56,9 @@ public class OrdineServlet extends HttpServlet {
 
         Utente u = (Utente) session.getAttribute("UtenteConnesso");
 
-        Ordine ordine= new Ordine(u.getId());
+        String indirizzo = request.getParameter("indirizzo");
+
+        Ordine ordine= new Ordine(u.getId(),indirizzo);
         ordine.addCarrello( carrello, lista );
         OrdineDAO.inserisciOrdine(ordine);
 
