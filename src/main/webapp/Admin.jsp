@@ -206,7 +206,7 @@
 
                             <label for="statoOrdine">Modifica Stato ordine </label>
                             <select name="stato" id="statoOrdine" required>
-                                <option value="ordinato">ordinato</option>
+                                <option value="ordinato" >ordinato</option>
                                 <option value="spedito">spedito</option>
                                 <option value="consegnato">consegnato</option>
                             </select>
@@ -215,10 +215,10 @@
                             <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}"><br>
 
                             <label for="dataSpedizione">Modifica data di spedizione: </label>
-                            <input type="date" id="dataSpedizione" name="dataSpedizione"><br>
+                            <input type="date" id="dataSpedizione" name="dataSpedizione" <c:if test="${not empty Ordine.dataSpedizione}"> value="${Ordine.dataSpedizione}" </c:if> ><br>
                             <!--fixme non funziona il post senza il required-->
                             <label for="dataConsegna">Modifica data di consegna: </label>
-                            <input type="date" id="dataConsegna" name="dataConsegna"><br>
+                            <input type="date" id="dataConsegna" name="dataConsegna" <c:if test="${not empty Ordine.dataConsegna}"> value="${Ordine.dataConsegna}" </c:if> ><br>
 
                             <div class="inputOrderManage">
                                 <input type="submit" id="submit" value="Modifica"/>
