@@ -25,7 +25,8 @@ public class AdminAddproduct extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
-//TODO: eventualmente fondere co la parte principale di admin
+
+    //TODO: eventualmente fondere co la parte principale di admin
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //TODO: controllare che sia admin
@@ -53,14 +54,14 @@ public class AdminAddproduct extends HttpServlet {
             List<Part> fileParts = req.getParts().stream()
                     .filter(part -> "immagini".equals(part.getName()) && part.getSize() > 0)
                     .collect(Collectors.toList());
-            if (!PhotoManager.PhotosUpload(fileParts, 40 + prodotto.getId(), getServletContext().getRealPath(""))) {
+            if (!PhotoManager.PhotosUpload(fileParts, prodotto.getId(), getServletContext().getRealPath(""))) {
                 req.setAttribute("errorMessage", "Puoi caricare un massimo di " + MAX_PHOTO_COUNT + " foto per prodotto.");
                 req.getRequestDispatcher("/aggiungiProdotto.jsp").forward(req, resp);
                 return;
             }
 
             // Reindirizzare alla pagina di amministrazione o visualizzare un messaggio di successo
-            resp.sendRedirect("Admin.jsp");
+            resp.sendRedirect(getServletContext().getContextPath() + "/admin");
         }
     }
 

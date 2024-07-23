@@ -66,7 +66,7 @@ CREATE TABLE Ordine
     data_spedizione  date,
     data_consegna    date,
     tipo_pagamento   varchar(40)                                            not null default 'carta di credito',
-    indirizzo        varchar(255)                                           not null ,
+    indirizzo        varchar(255)                                           not null,
 
     FOREIGN KEY (id_utente) references Utente (id)
 );
@@ -77,7 +77,7 @@ CREATE TABLE Ordine_Prodotto
     id_prodotto   INT            NOT NULL,
     quantità      int unsigned   not null,
     prezzo_finale decimal(13, 2) not null,
-    PRIMARY KEY (id_ordine,id_prodotto),
+    PRIMARY KEY (id_ordine, id_prodotto),
     FOREIGN KEY (id_ordine) references Ordine (id),
     FOREIGN KEY (id_prodotto) references Prodotto (id)
 );
@@ -96,12 +96,18 @@ CREATE TABLE Recensione
 );
 
 INSERT INTO Utente (nome, cognome, email, passwordhash, telefono, is_admin, indirizzo)
-VALUES ('Domenico', 'Amorelli','Domenico.admin@unisa.com', sha1('c\'è poco da dire'), '1234567890', TRUE, 'Policastro, Via Franceschini n.'),
-       ('Alessandro', 'Abeille','Alessandro.admin@unisa.com', sha1('c\'è tanto da fare'), '3210987654', TRUE,'Avellino, via Tuoro Cappuccini n. 45'),
-       ('Christian', 'Fontana','Christian.admin@unisa.com', sha1('bullo'), '3210987654', TRUE, 'Nocera Inferiore, via Gerardo Palma n. 11'),
-       ('Domenico', 'Amorelli','Domenico.user@unisa.com', sha1('c\'è poco da dire'), '1234567890', FALSE, 'Policastro, Via Franceschini n.'),
-       ('Alessandro', 'Abeille','Alessandro.user@unisa.com', sha1('c\'è tanto da fare'), '3210987654', FALSE, 'Avellino, via Tuoro Cappuccini n. 45'),
-       ('Christian', 'Fontana','Christian.user@unisa.com', sha1('bullo'), '3210987654', FALSE, 'Nocera Inferiore, via Gerardo Palma n. 11');
+VALUES ('Domenico', 'Amorelli', 'Domenico.admin@unisa.com', sha1('c\'è poco da dire'), '1234567890', TRUE,
+        'Policastro, Via Franceschini n.'),
+       ('Alessandro', 'Abeille', 'Alessandro.admin@unisa.com', sha1('c\'è tanto da fare'), '3210987654', TRUE,
+        'Avellino, via Tuoro Cappuccini n. 45'),
+       ('Christian', 'Fontana', 'Christian.admin@unisa.com', sha1('bullo'), '3210987654', TRUE,
+        'Nocera Inferiore, via Gerardo Palma n. 11'),
+       ('Domenico', 'Amorelli', 'Domenico.user@unisa.com', sha1('c\'è poco da dire'), '1234567890', FALSE,
+        'Policastro, Via Franceschini n.'),
+       ('Alessandro', 'Abeille', 'Alessandro.user@unisa.com', sha1('c\'è tanto da fare'), '3210987654', FALSE,
+        'Avellino, via Tuoro Cappuccini n. 45'),
+       ('Christian', 'Fontana', 'Christian.user@unisa.com', sha1('bullo'), '3210987654', FALSE,
+        'Nocera Inferiore, via Gerardo Palma n. 11');
 
 INSERT INTO Promozione (titolo, descrizione, sconto)
 VALUES ('Natale 2023', 'Sconto del 10% su tutti i prodotti', 10),
@@ -175,28 +181,54 @@ VALUES ('Cacciavite a stella',
        ('Tagliasiepi',
         'Tagliasiepi elettrico con lama da 55 cm e motore da 600 W.</br>Impugnatura ergonomica e sistema anti-vibrazione',
         15, NULL, 'Giardinaggio', 'Utensili', 89.00),
-       ('Pittura murale bianca', 'Pittura murale bianca opaca per interni.</br>Capacità: 10 L</br>Copertura: 100 m²</br>Tempo di asciugatura: 2 ore', 30, NULL, 'Edilizia', 'Prodotti' ,25.00),
-       ('Cacciavite a taglio', 'Cacciavite a taglio Pro 150 di Vales con testa piatta e realizzato in acciaio cromo vanadio.</br>Punta magnetica e brunita.</br>Impugnatura morbida bimateriale con punti di appoggio per il pollice.</br>Lunghezza totale: 150 mm</br>Punta: SL5', 5, NULL, 'Ferramenta',  'Utensili' ,7.00),
-       ('Maschera di protezione', 'Maschera di protezione per occhi con lente antiappannamento e antigraffio.</br>Regolabile e confortevole.', 50, NULL, 'Ferramenta', 'Abbigliamento' ,12.00),
-       ('Compressore d\'aria', 'Compressore d\'aria portatile con serbatoio da 24 L e motore da 2 HP.</br>Pressione massima: 8 bar', 8, NULL, 'Ferramenta', 'Utensili', 129.00),
-       ('Chiave inglese', 'Chiave inglese regolabile con apertura massima di 30 mm.</br>Manico ergonomico per una presa confortevole.</br>Lunghezza: 250 mm', 25, NULL, 'Ferramenta', 'Utensili' ,15.00),
-       ('Corda da giardino', 'Corda da giardino in polipropilene resistente agli agenti atmosferici.</br>Lunghezza: 50 m</br>Diametro: 10 mm', 40, NULL, 'Giardinaggio', 'Prodotti',10.00),
-       ('Batteria al litio', 'Batteria al litio ricaricabile da 18V per utensili elettrici.</br>Capacità: 4.0 Ah</br>Tempo di ricarica: 60 minuti', 30, NULL, 'Ferramenta', 'Elettronica',49.00),
-       ('Avvitatore a impulsi', 'Avvitatore a impulsi con motore brushless e batteria da 18V.</br>Coppia di serraggio: 180 Nm</br>Include 2 batterie e caricabatterie', 10, NULL, 'Ferramenta', 'Utensili' ,179.00),
-       ('Tagliasiepi a batteria', 'Tagliasiepi a batteria con lama da 50 cm e motore da 18V.</br>Include batteria e caricabatterie', 15, NULL, 'Giardinaggio', 'Utensili' ,99.00),
-       ('Tubo da giardino', 'Tubo da giardino estensibile fino a 30 m con pistola a spruzzo regolabile.', 50, NULL, 'Giardinaggio', 'Prodotti' ,29.00),
-       ('Martello demolitore', 'Martello demolitore elettrico con potenza di 1500 W.</br>Include scalpello e punta', 7, NULL, 'Edilizia', 'Utensili' ,299.00),
-       ('Carrello portautensili', 'Carrello portautensili con 5 cassetti e ruote girevoli.</br>Struttura in acciaio resistente', 3, NULL, 'Ferramenta', 'Prodotti', 199.00),
-       ('Rullo per pittura', 'Rullo per pittura con manico telescopico e rullo intercambiabile.</br>Larghezza rullo: 25 cm</br>Include 2 rulli di ricambio', 60, NULL, 'Edilizia', 'Utensili' ,14.00),
-       ('Trapano a colonna', 'Trapano a colonna da banco con motore da 500 W.</br>Velocità regolabile</br>Include morsa', 4, NULL, 'Ferramenta', 'Utensili' ,249.00);
+       ('Pittura murale bianca',
+        'Pittura murale bianca opaca per interni.</br>Capacità: 10 L</br>Copertura: 100 m²</br>Tempo di asciugatura: 2 ore',
+        30, NULL, 'Edilizia', 'Prodotti', 25.00),
+       ('Cacciavite a taglio',
+        'Cacciavite a taglio Pro 150 di Vales con testa piatta e realizzato in acciaio cromo vanadio.</br>Punta magnetica e brunita.</br>Impugnatura morbida bimateriale con punti di appoggio per il pollice.</br>Lunghezza totale: 150 mm</br>Punta: SL5',
+        5, NULL, 'Ferramenta', 'Utensili', 7.00),
+       ('Maschera di protezione',
+        'Maschera di protezione per occhi con lente antiappannamento e antigraffio.</br>Regolabile e confortevole.', 50,
+        NULL, 'Ferramenta', 'Abbigliamento', 12.00),
+       ('Compressore d\'aria',
+        'Compressore d\'aria portatile con serbatoio da 24 L e motore da 2 HP.</br>Pressione massima: 8 bar', 8, NULL,
+        'Ferramenta', 'Utensili', 129.00),
+       ('Chiave inglese',
+        'Chiave inglese regolabile con apertura massima di 30 mm.</br>Manico ergonomico per una presa confortevole.</br>Lunghezza: 250 mm',
+        25, NULL, 'Ferramenta', 'Utensili', 15.00),
+       ('Corda da giardino',
+        'Corda da giardino in polipropilene resistente agli agenti atmosferici.</br>Lunghezza: 50 m</br>Diametro: 10 mm',
+        40, NULL, 'Giardinaggio', 'Prodotti', 10.00),
+       ('Batteria al litio',
+        'Batteria al litio ricaricabile da 18V per utensili elettrici.</br>Capacità: 4.0 Ah</br>Tempo di ricarica: 60 minuti',
+        30, NULL, 'Ferramenta', 'Elettronica', 49.00),
+       ('Avvitatore a impulsi',
+        'Avvitatore a impulsi con motore brushless e batteria da 18V.</br>Coppia di serraggio: 180 Nm</br>Include 2 batterie e caricabatterie',
+        10, NULL, 'Ferramenta', 'Utensili', 179.00),
+       ('Tagliasiepi a batteria',
+        'Tagliasiepi a batteria con lama da 50 cm e motore da 18V.</br>Include batteria e caricabatterie', 15, NULL,
+        'Giardinaggio', 'Utensili', 99.00),
+       ('Tubo da giardino', 'Tubo da giardino estensibile fino a 30 m con pistola a spruzzo regolabile.', 50, NULL,
+        'Giardinaggio', 'Prodotti', 29.00),
+       ('Martello demolitore', 'Martello demolitore elettrico con potenza di 1500 W.</br>Include scalpello e punta', 7,
+        NULL, 'Edilizia', 'Utensili', 299.00),
+       ('Carrello portautensili',
+        'Carrello portautensili con 5 cassetti e ruote girevoli.</br>Struttura in acciaio resistente', 3, NULL,
+        'Ferramenta', 'Prodotti', 199.00),
+       ('Rullo per pittura',
+        'Rullo per pittura con manico telescopico e rullo intercambiabile.</br>Larghezza rullo: 25 cm</br>Include 2 rulli di ricambio',
+        60, NULL, 'Edilizia', 'Utensili', 14.00),
+       ('Trapano a colonna',
+        'Trapano a colonna da banco con motore da 500 W.</br>Velocità regolabile</br>Include morsa', 4, NULL,
+        'Ferramenta', 'Utensili', 249.00);
 
 
 INSERT INTO Carrello (id_utente, id_prodotto, quantità)
 VALUES (4, 1, 3),
        (4, 2, 1);
 
-INSERT INTO Ordine (id_utente, stato_ordine, prezzo_totale, data_ordine)
-VALUES (4, 'ordinato', 558.7, '2024-05-14');
+INSERT INTO Ordine (id_utente, stato_ordine, prezzo_totale, data_ordine, indirizzo)
+VALUES (4, 'ordinato', 558.7, '2024-05-14', 'Nocera inferiore, via roma 44');
 
 INSERT INTO Ordine_Prodotto (id_ordine, id_prodotto, quantità, prezzo_finale)
 VALUES (1, 1, 3, 39.80),

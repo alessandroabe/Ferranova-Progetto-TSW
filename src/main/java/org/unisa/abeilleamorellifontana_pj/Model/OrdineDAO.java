@@ -11,7 +11,7 @@ public class OrdineDAO {
     public static int inserisciOrdine(Ordine ordine) {
         int id = -1;
         ResultSet rs = null;
-        String insertOrderSQL = "INSERT INTO Ordine (id_utente, stato_ordine, prezzo_totale, spese_spedizione, data_ordine, data_spedizione, data_consegna, tipo_pagamento,indirizzo) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        String insertOrderSQL = "INSERT INTO Ordine (id_utente, stato_ordine, prezzo_totale, spese_spedizione, data_ordine, data_spedizione, data_consegna, tipo_pagamento, indirizzo) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?,?)";
         String insertProdottoOrdineSQL = "INSERT INTO Ordine_Prodotto(id_ordine,id_prodotto,quantità,prezzo_finale) VALUES (?, ?, ?, ?)";
         try (Connection conn = ConPool.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(insertOrderSQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -24,7 +24,7 @@ public class OrdineDAO {
             pstmt.setDate(6, ordine.getDataSpedizione() != null ? java.sql.Date.valueOf(ordine.getDataSpedizione()) : null);
             pstmt.setDate(7, ordine.getDataConsegna() != null ? java.sql.Date.valueOf(ordine.getDataConsegna()) : null);
             pstmt.setString(8, ordine.getTipoPagamento());
-            pstmt.setString(9,ordine.getIndirizzo());
+            pstmt.setString(9, ordine.getIndirizzo());
             pstmt.executeUpdate();
 
             rs = pstmt.getGeneratedKeys();
@@ -68,7 +68,7 @@ public class OrdineDAO {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                Ordine ordine = new Ordine(rs.getInt("id"), rs.getInt("id_utente"), Ordine.StatoOrdine.valueOf(rs.getString("stato_ordine").toUpperCase()), rs.getBigDecimal("prezzo_totale"), rs.getBigDecimal("spese_spedizione"), rs.getDate("data_ordine").toLocalDate(), rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null, rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null, rs.getString("tipo_pagamento"));
+                Ordine ordine = new Ordine(rs.getInt("id"), rs.getInt("id_utente"), Ordine.StatoOrdine.valueOf(rs.getString("stato_ordine").toUpperCase()), rs.getBigDecimal("prezzo_totale"), rs.getBigDecimal("spese_spedizione"), rs.getDate("data_ordine").toLocalDate(), rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null, rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null, rs.getString("tipo_pagamento"), rs.getString("indirizzo"));
 
                 ordine.setProdottiQuantitaOrdine(retrieveProductsByOrder(ordine.getIdOrdine()));
                 ordini.add(ordine);
@@ -94,7 +94,7 @@ public class OrdineDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     System.out.println(Ordine.StatoOrdine.fromString(rs.getString("stato_ordine")) + rs.getString("stato_ordine"));
-                    Ordine ordine = new Ordine(rs.getInt("id"), rs.getInt("id_utente"), Ordine.StatoOrdine.fromString(rs.getString("stato_ordine")), rs.getBigDecimal("prezzo_totale"), rs.getBigDecimal("spese_spedizione"), rs.getDate("data_ordine").toLocalDate(), rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null, rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null, (rs.getString("tipo_pagamento")));
+                    Ordine ordine = new Ordine(rs.getInt("id"), rs.getInt("id_utente"), Ordine.StatoOrdine.fromString(rs.getString("stato_ordine")), rs.getBigDecimal("prezzo_totale"), rs.getBigDecimal("spese_spedizione"), rs.getDate("data_ordine").toLocalDate(), rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null, rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null, (rs.getString("tipo_pagamento")), rs.getString("indirizzo"));
 
                     ordine.setProdottiQuantitaOrdine(retrieveProductsByOrder(ordine.getIdOrdine()));
                     ordini.add(ordine);
@@ -159,7 +159,7 @@ public class OrdineDAO {
         }
     }
 
-    public static void updateDeliveryDate(int orderId,  LocalDate deliveryDate) throws SQLException {
+    public static void updateDeliveryDate(int orderId, LocalDate deliveryDate) throws SQLException {
         String query = "UPDATE Ordine SET data_consegna = ? WHERE id = ?";
         try (Connection connection = ConPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {

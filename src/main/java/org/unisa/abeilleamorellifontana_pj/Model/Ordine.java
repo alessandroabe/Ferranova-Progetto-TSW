@@ -42,6 +42,18 @@ public class Ordine {
         this.tipoPagamento = tipoPagamento;
     }
 
+    public Ordine(int idOrdine, int idUtente, StatoOrdine statoOrdine, BigDecimal prezzoOrdine, BigDecimal prezzoSpedizione, LocalDate dataOrdine, LocalDate dataSpedizione, LocalDate dataConsegna, String tipoPagamento, String indirizzo) {
+        this.idOrdine = idOrdine;
+        this.idUtente = idUtente;
+        this.statoOrdine = statoOrdine;
+        this.prezzoOrdine = prezzoOrdine;
+        this.prezzoSpedizione = prezzoSpedizione;
+        this.dataOrdine = dataOrdine;
+        this.dataSpedizione = dataSpedizione;
+        this.dataConsegna = dataConsegna;
+        this.tipoPagamento = tipoPagamento;
+        this.indirizzo = indirizzo;
+    }
     public Ordine(int id_utente, Map<Integer, OrdineProdotto> prodottiQuantitaOrdine, BigDecimal prezzoOrdine, BigDecimal prezzoSpedizione) {
         this.idUtente = id_utente;
         this.ordiniProdotti = prodottiQuantitaOrdine;
