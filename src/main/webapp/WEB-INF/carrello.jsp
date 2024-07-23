@@ -76,7 +76,7 @@
                                 <div class="price-container">
                                         <fmt:setLocale value="fr_FR"/>
                                     <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                                        <fmt:formatNumber value="${elemento.prezzo * mappa[elemento.id] }" type="currency"
+                                        <fmt:formatNumber value="${(elemento.prezzo * (1 - ( promozioni[elemento.idPromozione] / 100))) * mappa[elemento.id] }" type="currency"
                                                   currencySymbol="€"/>
                                     <p id="alert-${elemento.id}" class="alert"></p>
                                 </div>

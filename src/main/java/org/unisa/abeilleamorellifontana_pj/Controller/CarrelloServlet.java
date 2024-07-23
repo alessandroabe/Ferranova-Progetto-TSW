@@ -11,10 +11,9 @@ import org.unisa.abeilleamorellifontana_pj.Model.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.SQLException;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "carrello", value = "/carrello")
@@ -36,11 +35,26 @@ public class CarrelloServlet extends HttpServlet {
             lista.add(ProdottoDAO.doRetrieveById(entry.getKey()));
         }
 
+        ArrayList<Promozione> promozioni = (ArrayList<Promozione>) PromozioneDAO.doRetrieveAll();
+        HashMap<Integer, Integer> promozioneHashMap = new HashMap<>();
+        for (Promozione p : promozioni) {
+            promozioneHashMap.put(p.getId(), p.getSconto());
+        }
+        request.setAttribute("promozioni", promozioneHashMap);
+
+
         request.setAttribute("lista", lista);
         BigDecimal sum = BigDecimal.ZERO;
         for (Prodotto p : lista) {
             BigDecimal b = p.getPrezzo();
-            sum = sum.add(b.multiply(BigDecimal.valueOf(carrello.getProdottiQuantita().get(p.getId()))));
+            BigDecimal sconto = BigDecimal.ZERO;
+            if( p.getIdPromozione()>0  && promozioneHashMap.get(p.getIdPromozione()) != null) {
+                sconto  = new BigDecimal(promozioneHashMap.get(p.getIdPromozione())).divide(BigDecimal.valueOf(100));
+            }
+            b = b.multiply(BigDecimal.ONE.subtract(sconto));
+            b = b.setScale(2, RoundingMode.HALF_EVEN);
+            BigDecimal quantita = BigDecimal.valueOf(carrello.getProdottiQuantita().get(p.getId()));
+            sum = sum.add(b.multiply(quantita));
         }
         request.setAttribute("sum", sum);
 

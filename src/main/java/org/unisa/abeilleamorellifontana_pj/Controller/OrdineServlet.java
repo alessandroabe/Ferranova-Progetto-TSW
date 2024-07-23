@@ -11,7 +11,9 @@ import org.unisa.abeilleamorellifontana_pj.Model.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "ordineServlet", value = "/ordineServlet")
@@ -41,11 +43,26 @@ public class OrdineServlet extends HttpServlet {
             lista.add(ProdottoDAO.doRetrieveById(entry.getKey()));
         }
 
+
+        ArrayList<Promozione> promozioni = (ArrayList<Promozione>) PromozioneDAO.doRetrieveAll();
+        HashMap<Integer, Integer> promozioneHashMap = new HashMap<>();
+        for (Promozione p : promozioni) {
+            promozioneHashMap.put(p.getId(), p.getSconto());
+        }
+
+
         // Aggiornare le quantità dei prodotti nel database
         for (Prodotto p : lista) {
             int quantitaAcquistata = carrello.getProdottiQuantita().get(p.getId());
             int nuovaQuantita = p.getQuantita() - quantitaAcquistata;
             ProdottoDAO.aggiornaQuantitaProdotto(p.getId(), nuovaQuantita);
+            BigDecimal b = p.getPrezzo();
+            BigDecimal sconto = BigDecimal.ZERO;
+            if (p.getIdPromozione() > 0 && promozioneHashMap.get(p.getIdPromozione()) != null) {
+                sconto = new BigDecimal(promozioneHashMap.get(p.getIdPromozione())).divide(BigDecimal.valueOf(100));
+            }
+            b = b.multiply(BigDecimal.ONE.subtract(sconto));
+            b = b.setScale(2, RoundingMode.HALF_EVEN);
         }
 
         BigDecimal sum = BigDecimal.ZERO;
@@ -58,8 +75,8 @@ public class OrdineServlet extends HttpServlet {
 
         String indirizzo = request.getParameter("indirizzo");
 
-        Ordine ordine= new Ordine(u.getId(),indirizzo);
-        ordine.addCarrello( carrello, lista );
+        Ordine ordine = new Ordine(u.getId(), indirizzo);
+        ordine.addCarrello(carrello, lista);
         OrdineDAO.inserisciOrdine(ordine);
 
         CarrelloDAO.doDelete(u.getId());
