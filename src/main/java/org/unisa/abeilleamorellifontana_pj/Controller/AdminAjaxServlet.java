@@ -28,6 +28,10 @@ public class AdminAjaxServlet extends HttpServlet {
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 newQuantity = updateProductQuantity(prodId, quantity);
                 jsonResponse = "{ \"success\": true, \"newQuantity\": " + newQuantity + " }";
+            } else if ("updateIdPromo".equals(action)) {
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                newQuantity = updateIdPromoProduct(prodId, quantity);
+                jsonResponse = "{ \"success\": true, \"newQuantity\": " + newQuantity + " }";
             } else if ("azzera".equals(action)) {
                 newQuantity = azzeraProductQuantity(prodId);
                 jsonResponse = "{ \"success\": true, \"newQuantity\": " + newQuantity + " }";
@@ -81,6 +85,21 @@ public class AdminAjaxServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Errore durante l'aggiornamento del prezzo del prodotto", e);
+        }
+    }
+
+    private int updateIdPromoProduct(int prodId, int quantityChange) {
+        try {
+            int currentIdPromo = ProdottoDAO.doRetrieveById(prodId).getIdPromozione();
+            int newIdPromo = currentIdPromo + quantityChange;
+            if (newIdPromo <= 0) {
+                throw new IllegalArgumentException("L'id del prodotto non può <=0");
+            }
+            ProdottoDAO.aggiornaIdPromoProdotto(prodId, newIdPromo);
+            return newIdPromo;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Errore durante l'aggiornamento l'id Promo del prodotto", e);
         }
     }
 }

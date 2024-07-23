@@ -102,7 +102,7 @@ th {
     margin-right: 15px;
 }
 
-.product-info, .promotion-info, .quantity-container, .price-container, .description-container, .sconto-container, .promotion-container{
+.product-info, .promotion-info, .quantity-container, .price-container, .description-container, .sconto-container, .promotion-container, .quantity-containerMP, .promotion-containerMP{
     display: flex;
     align-items: center;
 }
@@ -115,7 +115,7 @@ th {
 
 .minus, .plus {
     font-size: 20px;
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
 .azzera, .removePromoction {
@@ -145,14 +145,14 @@ th {
 
 .alertAnimationOFF{
     opacity: 0;
-    transform: translateX(170px) translateY(-20px);
+    transform: translateX(240px);
     visibility: hidden;
 }
 
 .alertAnimationON{
     visibility: visible;
     opacity: 1;
-    transform: translateX(180px) translateY(-20px);
+    transform: translateX(250px);
 }
 
 
@@ -183,13 +183,13 @@ th {
         justify-content: flex-end;
     }
 
-    .quantity-container, .price-container {
+    .quantity-container, .price-container, .promotion-container {
         flex-direction: column;
         align-items: flex-start;
     }
 
     .minus, .plus, .azzera, .changePrice, .removePromoction {
-        margin: 10px 0;
+        margin: 10px 10px;
     }
 }
 
@@ -210,7 +210,7 @@ th {
     }
 
     .product-info, .promotion-info {
-        margin-top: 25px;
+        margin-top: 50px;
     }
 
     .product-info img {
@@ -254,11 +254,11 @@ th {
 
 
     .alertAnimationOFF{
-        transform: translateX(180px) translateY(-28px);
+        transform: translateX(140px) translateY(55px);
     }
 
     .alertAnimationON{
-        transform: translateX(190px)translateY(-28px);
+        transform: translateX(150px)translateY(55px);
     }
 }
 

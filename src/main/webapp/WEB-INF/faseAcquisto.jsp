@@ -53,12 +53,6 @@
         <input type="text" id="cvv" placeholder="CVV" required><br>
 
 
-        <!--todo attraverso una funzione ajax che dopo che clicchi enter applica lo sconto al prezzo totale se nel db c'è il coupon scritto-->
-        <h5>Hai un coupon?</h5>
-
-        <label for="coupon">Codice promozionale:</label>
-        <input type="text" id="coupon" placeholder="Codice promozionale"><br>
-
         <div class="total-price">
             <p>Totale: <span><fmt:setLocale value="fr_FR"/>
                 <!-- Imposta la localizzazione su Francia che usa l'Euro -->

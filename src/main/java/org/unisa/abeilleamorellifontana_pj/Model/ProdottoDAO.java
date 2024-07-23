@@ -87,6 +87,17 @@ public class ProdottoDAO {
         }
     }
 
+    public static void aggiornaIdPromoProdotto(int idProdotto, int nuovoIdPromo) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE Prodotto SET id_promozione = ? WHERE id = ?");
+            ps.setInt(1, nuovoIdPromo);
+            ps.setInt(2, idProdotto);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static List<Prodotto> doRetrieveByCriteria(String searchString, BigDecimal minPrice, BigDecimal maxPrice, String macrocategoria, String sottocategoria) {
         StringBuilder query = new StringBuilder("SELECT * FROM Prodotto WHERE 1=1");
 

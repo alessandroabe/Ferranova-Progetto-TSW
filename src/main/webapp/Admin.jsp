@@ -77,7 +77,7 @@
             <th>Prodotto</th>
             <th class="quantity-title">Quantità disponibile</th>
             <th class="price-title">Modifica prezzo</th>
-            <th class="promotion-title">Rimuovi promozione</th>
+            <th class="promotion-title">Modifica idPromozione</th>
         </tr>
         </thead>
         <tbody>
@@ -90,25 +90,31 @@
                                 alt="immagine ${elemento.titolo}"></a>
                         <div>
                             <p>${elemento.titolo}</p>
-                            <span>${elemento.id}</span>
+                            <span>id: ${elemento.id}</span>
                         </div>
                     </div>
                 </td>
                 <td>
                     <div class="quantity-container">
-                        <button class="minus" aria-label="minus" tabindex="0"
-                                onkeydown="updateQuantity(${elemento.id}, 'update', -1)"
-                                onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;
-                        </button>
-                        <p id="quantity-${elemento.id}">${elemento.quantita} Pz.</p>
-                        <button class="plus" aria-label="plus" tabindex="0"
-                                onkeydown="updateQuantity(${elemento.id}, 'update', 1)"
-                                onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;
-                        </button>
-                        <button class="azzera" aria-label="azzera" tabindex="0"
-                                onkeydown="updateQuantity(${elemento.id}, 'azzera', 0)"
-                                onclick="updateQuantity(${elemento.id}, 'azzera', 0)">azzera quantità
-                        </button>
+                        <div class="quantity-containerMP">
+                            <button class="minus" aria-label="minus" tabindex="0"
+                                    onkeydown="updateQuantity(${elemento.id}, 'update', -1)"
+                                    onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;
+                            </button>
+                            <p id="quantity-${elemento.id}">${elemento.quantita} Pz.</p>
+                            <button class="plus" aria-label="plus" tabindex="0"
+                                    onkeydown="updateQuantity(${elemento.id}, 'update', 1)"
+                                    onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;
+                            </button>
+                        </div>
+
+                        <div>
+                            <button class="azzera" aria-label="azzera" tabindex="0"
+                                    onkeydown="updateQuantity(${elemento.id}, 'azzera', 0)"
+                                    onclick="updateQuantity(${elemento.id}, 'azzera', 0)">azzera quantità
+                            </button>
+                        </div>
+
                     </div>
                 </td>
                 <td id="price-${elemento.id}">
@@ -120,16 +126,33 @@
                                 onclick="updatePrice(${elemento.id}, 'updatePrice')">cambia prezzo
                         </button>
                     </div>
-
                 </td>
-                <td id="promotion-${elemento.id}">
+                <td id="promotionProd-${elemento.id}">
                     <div class="promotion-container">
-                        <form action="rimuovi-promozione" method="GET">
-                            <input type="hidden" name="idProdotto" value="${elemento.id}">
-                            <input type="submit" value="rimuovi promozione" class="removePromoction">
-                        </form>
+                        <div class="promotion-containerMP">
+                            <button class="minus" aria-label="minus" tabindex="0"
+                                    onkeydown="updateIdPromotion(${elemento.id}, 'updateIdPromo', -1)"
+                                    onclick="updateIdPromotion(${elemento.id}, 'updateIdPromo', -1)">&minus;
+                            </button>
+
+                            <p id="promoIDProduct-${elemento.id}">${elemento.idPromozione} </p>
+
+                            <button class="plus" aria-label="plus" tabindex="0"
+                                    onkeydown="updateIdPromotion(${elemento.id}, 'updateIdPromo', 1)"
+                                    onclick="updateIdPromotion(${elemento.id}, 'updateIdPromo', 1)">&plus;
+                            </button>
+                        </div>
+
+                        <div>
+                            <form action="rimuovi-promozione" method="GET">
+                                <input type="hidden" name="idProdotto" value="${elemento.id}">
+                                <input type="submit" value="rimuovi promozione" class="removePromoction">
+                            </form>
+                        </div>
                         <p id="alert-${elemento.id}" class="alert alertAnimationOFF"></p>
                     </div>
+
+
 
                 </td>
             </tr>
@@ -373,6 +396,43 @@
             }, 2000); //dopo 3 secondi scompare
         };
         xhr.send("prod=" + productId + "&action=" + action + "&price=" + price);
+    }
+
+    function updateIdPromotion(productId, action, quantity){
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "${pageContext.request.contextPath}/adminAjax", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var alertElement = document.getElementById("alert-" + productId);
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        document.getElementById("promoIDProduct-" + productId).innerText = response.newQuantity;
+                        alertElement.innerHTML = "DB modificato";
+                        alertElement.style.color = "#335e1e";
+                    } else {
+                        alertElement.innerHTML = "Errore";
+                        alertElement.style.color = "red";
+                    }
+                } else {
+                    alertElement.innerHTML = "Errore di connessione";
+                    alertElement.style.color = "red";
+                }
+
+                // Transizione
+                alertElement.classList.remove("alertAnimationOFF");
+                alertElement.classList.add("alertAnimationON");
+
+
+                setTimeout(function () {
+                    alertElement.classList.remove("alertAnimationON");
+                    alertElement.classList.add("alertAnimationOFF");
+                }, 2000); //dopo 3 secondi scompare
+
+            }
+        };
+        xhr.send("prod=" + productId + "&action=" + action + "&quantity=" + quantity);
     }
 
 </script>
