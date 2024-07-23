@@ -18,54 +18,42 @@
 
 <div class="container">
     <h1>Aggiungi Prodotto</h1>
-    <form action="aggiungi-prodotto" method="post">
+    <form action="${pageContext.request.contextPath}/addProduct" method="post" enctype="multipart/form-data">
         <label for="titolo">Titolo:</label>
-        <input type="text" id="titolo" name="titolo" required>
+        <input type="text" id="titolo" name="titolo"
+        <c:if test="${not empty param.titolo}"> value="${param.titolo}" </c:if> required>
 
         <label for="descrizione">Descrizione:</label>
-        <textarea id="descrizione" name="descrizione"></textarea>
+        <textarea id="descrizione" name="descrizione"><c:if
+                test="${not empty param.descrizione}">${param.descrizione}</c:if></textarea>
 
-        <label for="quantità">Quantità:</label>
-        <input type="number" id="quantità" name="quantità" required>
+        <label for="quantita">Quantità:</label>
+        <input type="number" id="quantita" min="1" name="quantita"
+        <c:if test="${not empty param.quantita}"> value="${param.quantita}" </c:if> required>
 
         <label for="id_promozione">ID Promozione:</label>
-        <input type="number" id="id_promozione" name="id_promozione">
-
+        <input type="number" id="id_promozione" name="id_promozione"
+        <c:if test="${not empty param.id_promozione}"> value="${param.id_promozione}" </c:if> >
+        <!--TODO: fare con le jstl-->
         <label for="select-category">Categoria:</label>
         <select name="categoria" id="select-category">
-            <optgroup label="ferramenta">
-                <option value="ferramenta-utensili">utensili</option>
-                <option value="ferramenta-prodotti">prodotti</option>
-                <option value="ferramenta-viteria">viteria</option>
-                <option value="ferramenta-elettronica">elettronica</option>
-                <option value="ferramenta-abbigliamento">abbigliamento</option>
-            </optgroup>
-
-            <optgroup label="edilizia">
-                <option value="edilizia-utensili">utensili</option>
-                <option value="edilizia-materiali">materiali</option>
-                <option value="edilizia-prodotti">prodotti</option>
-                <option value="edilizia-viteria">viteria</option>
-                <option value="edilizia-abbigliamento">abbigliamento</option>
-            </optgroup>
-
-            <optgroup label="giardinaggio">
-                <option value="giardinaggio-utensili">utensili</option>
-                <option value="giardinaggio-prodotti">prodotti</option>
-                <option value="giardinaggio-semi-piante">semi/piante</option>
-                <option value="giardinaggio-fertilizzanti">fertilizzanti</option>
-                <option value="giardinaggio-abbigliamento">abbigliamento</option>
-            </optgroup>
-
+            <c:forEach var="entry" items="${Categorie}">
+                <optgroup label="${entry.key}">
+                    <c:forEach var="sottocategoria" items="${entry.value}">
+                    <option value="${entry.key}-${sottocategoria}">${sottocategoria}</option>
+                    </c:forEach>
+                </optgroup>
+            </c:forEach>
         </select>
 
 
         <label for="prezzo">Prezzo:</label>
-        <input type="number" step="0.01" id="prezzo" name="prezzo" required>
+        <input type="number" step="0.001" min="0" id="prezzo" name="prezzo"
+        <c:if test="${not empty param.prezzo}"> value="${param.prezzo}" </c:if> required>
 
         <label for="immagini">Immagini:</label>
-        <input type="file" id="immagini" name="immagini[]" accept="image/*" multiple>
-
+        <input type="file" id="immagini" name="immagini" accept=".png" multiple maxlength="10"
+               value="Seleziona file la prima foto sarà la foto di facciata del prodotto PNG Max 10">
         <button type="submit">Aggiungi Prodotto</button>
     </form>
 </div>

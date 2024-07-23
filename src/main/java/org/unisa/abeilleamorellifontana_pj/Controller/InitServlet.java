@@ -21,7 +21,7 @@ public class InitServlet extends HttpServlet {
             //TODO: Inizializza le categorie
             categorie.put("Ferramenta", new ArrayList<>(List.of("Utensili", "Prodotti", "Viteria", "Elettronica", "Abbigliamento")));
             categorie.put("Edilizia", new ArrayList<>(List.of("Utensili", " Materiali", "Prodotti", "Viteria", "Abbigliamento")));
-            categorie.put("Giardinaggio", new ArrayList<>(List.of("Utensili", "Prodotti","Semi-Piante", "Fertilizzanti",  "Abbigliamento")));
+            categorie.put("Giardinaggio", new ArrayList<>(List.of("Utensili", "Prodotti","Semi/Piante", "Fertilizzanti",  "Abbigliamento")));
 
             ServletContext context = config.getServletContext();
             context.setAttribute("Categorie", categorie);

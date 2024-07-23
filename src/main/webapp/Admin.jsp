@@ -23,13 +23,19 @@
 
 <div class="buttons-container">
     <div>
-        <button class="productsManage-button" aria-label="productsManage-button" tabindex="0" onkeydown="toggleView('products')" onclick="toggleView('products')">Gestione Prodotti</button>
+        <button class="productsManage-button" aria-label="productsManage-button" tabindex="0"
+                onkeydown="toggleView('products')" onclick="toggleView('products')">Gestione Prodotti
+        </button>
     </div>
     <div>
-        <button class="ordersManage-button" aria-label="ordersManage-button" tabindex="0" onkeydown="toggleView('orders')" onclick="toggleView('orders')">Gestione ordini clienti</button>
+        <button class="ordersManage-button" aria-label="ordersManage-button" tabindex="0"
+                onkeydown="toggleView('orders')" onclick="toggleView('orders')">Gestione ordini clienti
+        </button>
     </div>
     <div>
-        <button class="promoctionsManage-button" aria-label="promoctionsManage-button" tabindex="0" onkeydown="toggleView('promoctions')" onclick="toggleView('promoctions')">Gestione Promozioni</button>
+        <button class="promoctionsManage-button" aria-label="promoctionsManage-button" tabindex="0"
+                onkeydown="toggleView('promoctions')" onclick="toggleView('promoctions')">Gestione Promozioni
+        </button>
     </div>
 </div>
 
@@ -39,35 +45,24 @@
     <div class="headContainer">
         <div class="select-categoryDiv">
             <form action="select-category">
-                <label for="ricerca" >Cerca: </label>
+                <label for="ricerca">Cerca: </label>
                 <input type="text" id="ricerca" name="ricerca" <c:if test="${ not empty param.ricerca }">
                        value="${param.ricerca}" </c:if>">
                 <label for="select-category" class="select-categoryLabel">Categoria:</label>
                 <select name="categoria" id="select-category" value="all">
-                    <optgroup label="ferramenta">
-                        <option value="ferramenta-utensili">utensili</option>
-                        <option value="ferramenta-prodotti">prodotti</option>
-                        <option value="ferramenta-viteria">viteria</option>
-                        <option value="ferramenta-elettronica">elettronica</option>
-                        <option value="ferramenta-abbigliamento">abbigliamento</option>
-                    </optgroup>
-
-                    <optgroup label="edilizia">
-                        <option value="edilizia-utensili">utensili</option>
-                        <option value="edilizia-materiali">materiali</option>
-                        <option value="edilizia-prodotti">prodotti</option>
-                        <option value="edilizia-viteria">viteria</option>
-                        <option value="edilizia-abbigliamento">abbigliamento</option>
-                    </optgroup>
-
-                    <optgroup label="giardinaggio">
-                        <option value="giardinaggio-utensili">utensili</option>
-                        <option value="giardinaggio-prodotti">prodotti</option>
-                        <option value="giardinaggio-semi-piante">semi/piante</option>
-                        <option value="giardinaggio-fertilizzanti">fertilizzanti</option>
-                        <option value="giardinaggio-abbigliamento">abbigliamento</option>
-                    </optgroup>
-
+                    <option value="all"
+                            <c:if test="${ empty param.categoria || param.categoria.equals('all')}">
+                                selected
+                            </c:if>>------
+                    </option>
+                    <c:forEach var="entry" items="${Categorie}">
+                        <optgroup label="${entry.key}">
+                            <c:forEach var="sottocategoria" items="${entry.value}">
+                                <option value="${entry.key}-${sottocategoria}"
+                                        <c:if test="${ not empty param.categoria && param.categoria.contains(entry.key) &&  param.categoria.contains(sottocategoria)}">selected </c:if>> ${sottocategoria}</option>
+                            </c:forEach>
+                        </optgroup>
+                    </c:forEach>
                 </select>
                 <input type="submit" id="submit-categoria" value="Seleziona"/>
             </form>
@@ -78,19 +73,21 @@
     </div>
     <table>
         <thead>
-            <tr>
-                <th>Prodotto</th>
-                <th class="quantity-title">Quantità disponibile</th>
-                <th class="price-title">Modifica prezzo</th>
-                <th class="promotion-title">Rimuovi promozione</th>
-            </tr>
+        <tr>
+            <th>Prodotto</th>
+            <th class="quantity-title">Quantità disponibile</th>
+            <th class="price-title">Modifica prezzo</th>
+            <th class="promotion-title">Rimuovi promozione</th>
+        </tr>
         </thead>
         <tbody>
         <c:forEach var="elemento" items="${prodotti}">
             <tr id="product-row-${elemento.id}">
                 <td>
                     <div class="product-info">
-                        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${elemento.id}"><img src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png" alt="immagine ${elemento.titolo}"></a>
+                        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${elemento.id}"><img
+                                src="${pageContext.request.contextPath}/product_images/${elemento.id}/1.png"
+                                alt="immagine ${elemento.titolo}"></a>
                         <div>
                             <p>${elemento.titolo}</p>
                             <span>${elemento.id}</span>
@@ -99,16 +96,29 @@
                 </td>
                 <td>
                     <div class="quantity-container">
-                        <button class="minus" aria-label="minus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', -1)" onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;</button>
+                        <button class="minus" aria-label="minus" tabindex="0"
+                                onkeydown="updateQuantity(${elemento.id}, 'update', -1)"
+                                onclick="updateQuantity(${elemento.id}, 'update', -1)">&minus;
+                        </button>
                         <p id="quantity-${elemento.id}">${elemento.quantita} Pz.</p>
-                        <button class="plus" aria-label="plus" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'update', 1)" onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;</button>
-                        <button class="azzera" aria-label="azzera" tabindex="0" onkeydown="updateQuantity(${elemento.id}, 'azzera', 0)" onclick="updateQuantity(${elemento.id}, 'azzera', 0)">azzera quantità</button>
+                        <button class="plus" aria-label="plus" tabindex="0"
+                                onkeydown="updateQuantity(${elemento.id}, 'update', 1)"
+                                onclick="updateQuantity(${elemento.id}, 'update', 1)">&plus;
+                        </button>
+                        <button class="azzera" aria-label="azzera" tabindex="0"
+                                onkeydown="updateQuantity(${elemento.id}, 'azzera', 0)"
+                                onclick="updateQuantity(${elemento.id}, 'azzera', 0)">azzera quantità
+                        </button>
                     </div>
                 </td>
                 <td id="price-${elemento.id}">
                     <div class="price-container">
-                        <input type="number" step="0.01" min="0" value="${elemento.prezzo}" id="newPrice-${elemento.id}">
-                        <button class="changePrice" aria-label="changePrice" tabindex="0" onkeydown="updatePrice(${elemento.id}, 'updatePrice')" onclick="updatePrice(${elemento.id}, 'updatePrice')">cambia prezzo</button>
+                        <input type="number" step="0.01" min="0" value="${elemento.prezzo}"
+                               id="newPrice-${elemento.id}">
+                        <button class="changePrice" aria-label="changePrice" tabindex="0"
+                                onkeydown="updatePrice(${elemento.id}, 'updatePrice')"
+                                onclick="updatePrice(${elemento.id}, 'updatePrice')">cambia prezzo
+                        </button>
                     </div>
 
                 </td>
@@ -147,7 +157,7 @@
                         </p>
 
                         <c:if test="${empty Ordine.dataSpedizione}">
-                        <p class="dataSpedizione"><strong>Data spedizione: </strong>- </p>
+                            <p class="dataSpedizione"><strong>Data spedizione: </strong>- </p>
                         </c:if>
 
                         <c:if test="${not empty Ordine.dataSpedizione}">
@@ -171,21 +181,21 @@
                     <div class="order-details-manage">
                         <form action="modificaOrdine" method="get">
 
-                                <label for="statoOrdine">Modifica Stato ordine</label>
-                                <select name="stato" id="statoOrdine" required>
-                                    <option value="ordinato">ordinato</option>
-                                    <option value="spedito">spedito</option>
-                                    <option value="consegnato">consegnato</option>
-                                </select>
+                            <label for="statoOrdine">Modifica Stato ordine</label>
+                            <select name="stato" id="statoOrdine" required>
+                                <option value="ordinato">ordinato</option>
+                                <option value="spedito">spedito</option>
+                                <option value="consegnato">consegnato</option>
+                            </select>
 
-                                <!-- Campo nascosto per l'ID ordine -->
-                                <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}"><br>
+                            <!-- Campo nascosto per l'ID ordine -->
+                            <input type="hidden" name="idOrdine" value="${Ordine.idOrdine}"><br>
 
-                                <label for="dataSpedizione">Modifica data di spedizione:</label>
-                                <input type="date" id="dataSpedizione" name="dataSpedizione"><br>
-                <!--fixme non funziona il post senza il required-->
-                                <label for="birthday">Modifica data di consegna:</label>
-                                <input type="date" id="birthday" name="dataConsegna"><br>
+                            <label for="dataSpedizione">Modifica data di spedizione:</label>
+                            <input type="date" id="dataSpedizione" name="dataSpedizione"><br>
+                            <!--fixme non funziona il post senza il required-->
+                            <label for="birthday">Modifica data di consegna:</label>
+                            <input type="date" id="birthday" name="dataConsegna"><br>
 
                             <div class="inputOrderManage">
                                 <input type="submit" id="submit" value="Modifica"/>
@@ -199,7 +209,9 @@
                 <c:forEach var="entry" items="${Ordine.prodottiQuantitaOrdine}">
                     <c:set var="prodotto" value="${prodottoHashMap[entry.key]}"/>
                     <div class="product">
-                        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${prodotto.id}"><img src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png" alt="${prodotto.titolo}"></a>
+                        <a href="${pageContext.request.contextPath}/prod?id_prodotto=${prodotto.id}"><img
+                                src="${pageContext.request.contextPath}/product_images/${prodotto.id}/1.png"
+                                alt="${prodotto.titolo}"></a>
                         <p>${prodotto.titolo}</p>
                         <p>${entry.value.quantita} Pz.</p>
                         <p><fmt:setLocale value="fr_FR"/>
@@ -216,53 +228,53 @@
 <!--Parte della gestione promozioni-->
 <div id="promoctionsManage-container">
     <h2>Lista promozioni</h2>
-        <div class="addPromoction">
-            <a href="aggiungiPromozione.jsp">&plus; Aggiungi una promozione</a>
-        </div>
+    <div class="addPromoction">
+        <a href="aggiungiPromozione.jsp">&plus; Aggiungi una promozione</a>
+    </div>
     <table>
-    <thead>
-    <tr>
-        <th>Promozione</th>
-        <th class="quantity-title">Descrizione</th>
-        <th class="price-title">Sconto</th>
-        <th class="promotion-title">Modifica promozione</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="promozione" items="${Promozioni}">
-        <tr id="promoctions-row-${promozione.id}">
-            <td>
-                <div class="promotion-info">
-                    <div>
-                        <p>${promozione.titolo}</p>
-                        <span>ID: ${promozione.id}</span>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="description-container">
-                    <p>${promozione.descrizione}</p>
-                </div>
-            </td>
-            <td id="sconto-${promozione.id}">
-                <div class="sconto-container">
-                    <p>${promozione.sconto}%</p>
-                </div>
-
-            </td>
-            <td id="changePromotion-${promozione.id}">
-                <div class="changePromotion-container">
-                    <form action="modifica-promozione" method="GET">
-                        <input type="hidden" name="idPromozione" value="${promozione.id}">
-                        <input type="submit" value="modifica promozione" class="modificaPromotion">
-                    </form>
-                </div>
-            </td>
+        <thead>
+        <tr>
+            <th>Promozione</th>
+            <th class="quantity-title">Descrizione</th>
+            <th class="price-title">Sconto</th>
+            <th class="promotion-title">Modifica promozione</th>
         </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="promozione" items="${Promozioni}">
+            <tr id="promoctions-row-${promozione.id}">
+                <td>
+                    <div class="promotion-info">
+                        <div>
+                            <p>${promozione.titolo}</p>
+                            <span>ID: ${promozione.id}</span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="description-container">
+                        <p>${promozione.descrizione}</p>
+                    </div>
+                </td>
+                <td id="sconto-${promozione.id}">
+                    <div class="sconto-container">
+                        <p>${promozione.sconto}%</p>
+                    </div>
 
-    </c:forEach>
-    </tbody>
-</table>
+                </td>
+                <td id="changePromotion-${promozione.id}">
+                    <div class="changePromotion-container">
+                        <form action="modifica-promozione" method="GET">
+                            <input type="hidden" name="idPromozione" value="${promozione.id}">
+                            <input type="submit" value="modifica promozione" class="modificaPromotion">
+                        </form>
+                    </div>
+                </td>
+            </tr>
+
+        </c:forEach>
+        </tbody>
+    </table>
 
 </div>
 
@@ -282,7 +294,7 @@
             productContainer.style.display = 'none';
             orderContainer.style.display = 'block';
             promoctionsContainer.style.display = 'none';
-        } else if (view === 'promoctions'){
+        } else if (view === 'promoctions') {
             productContainer.style.display = 'none';
             orderContainer.style.display = 'none';
             promoctionsContainer.style.display = 'block';
@@ -328,9 +340,6 @@
     }
 
 
-
-
-
     function updatePrice(productId, action) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "${pageContext.request.contextPath}/adminAjax", true);
@@ -349,8 +358,8 @@
                     alertElement.style.color = "red";
                 }
             } else {
-            alertElement.innerHTML = "Errore di connessione";
-            alertElement.style.color = "red";
+                alertElement.innerHTML = "Errore di connessione";
+                alertElement.style.color = "red";
             }
 
             // Transizione

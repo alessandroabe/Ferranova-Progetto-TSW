@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "admin", urlPatterns = "/admin")
 public class AdminServlet extends HttpServlet {
@@ -21,7 +20,7 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Utente u= null;
+        Utente u;
         if(req.getSession().getAttribute("UtenteConnesso") != null) {
             u = (Utente) req.getSession().getAttribute("UtenteConnesso");
             if(!u.isAdmin()) {
@@ -38,10 +37,12 @@ public class AdminServlet extends HttpServlet {
                 prodottoHashMap.put(prodotto.getId(), prodotto);
             }
 
-            List<Promozione> Promozioni = new ArrayList<>();
-            Promozioni = PromozioneDAO.doRetrieveAll();
-
-
+            List<Promozione> Promozioni = PromozioneDAO.doRetrieveAll();
+//TODO: vorrei unire questo a SelectCategoryServlet, ma non penso ci sia tempo
+            if(req.getAttribute("prodotti") == null) {
+                ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveAll();
+                req.setAttribute("prodotti", prodotti);
+            }
             req.setAttribute("Promozioni", Promozioni);
             req.setAttribute("prodottoHashMap", prodottoHashMap);
             req.getRequestDispatcher("Admin.jsp").forward(req, resp);

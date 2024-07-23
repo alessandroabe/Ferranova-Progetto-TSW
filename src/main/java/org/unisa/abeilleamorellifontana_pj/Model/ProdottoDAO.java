@@ -75,22 +75,6 @@ public class ProdottoDAO {
         }
     }
 
-    //TODO: capire se usare cartelle opppure media singoli e finire quando usata in admin
-    public static void doInsert(Prodotto prodotto) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Prodotto (titolo, descrizione, quantità, id_promozione, macrocategoria, sottocategoria, prezzo) VALUES ( ?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, prodotto.getTitolo());
-            ps.setString(2, prodotto.getDescrizione());
-            ps.setInt(3, prodotto.getQuantita());
-            ps.setInt(4, prodotto.getIdPromozione());
-            ps.setString(5, prodotto.getMacrocategoria());
-            ps.setString(6, prodotto.getSottocategoria());
-            ps.setBigDecimal(7, prodotto.getPrezzo());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static void aggiornaQuantitaProdotto(int idProdotto, int nuovaQuantita) {
         try (Connection con = ConPool.getConnection()) {
@@ -244,6 +228,43 @@ public class ProdottoDAO {
             PreparedStatement ps = con.prepareStatement("UPDATE Prodotto SET id_promozione = NULL WHERE id = ? ");
             ps.setInt(1, idProdotto);
             ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Prodotto doInsert(Prodotto prodotto) {
+        try (Connection con = ConPool.getConnection()) {
+            String query = "INSERT INTO Prodotto (titolo, descrizione, quantità, id_promozione, macrocategoria, sottocategoria, prezzo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, prodotto.getTitolo());
+            ps.setString(2, prodotto.getDescrizione());
+            ps.setInt(3, prodotto.getQuantita());
+            if (prodotto.getIdPromozione() > 0) {
+                ps.setInt(4, prodotto.getIdPromozione());
+            } else {
+                ps.setNull(4, java.sql.Types.INTEGER);
+            }
+            ps.setString(5, prodotto.getMacrocategoria());
+            ps.setString(6, prodotto.getSottocategoria());
+            ps.setBigDecimal(7, prodotto.getPrezzo());
+
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating product failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    prodotto.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Creating product failed, no ID obtained.");
+                }
+            }
+
+            return prodotto;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
