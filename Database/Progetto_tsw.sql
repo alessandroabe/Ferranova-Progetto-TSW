@@ -66,7 +66,7 @@ CREATE TABLE Ordine
     data_spedizione  date,
     data_consegna    date,
     tipo_pagamento   varchar(40)                                            not null default 'carta di credito',
-    indirizzo        varchar(255)                                           not null,
+    indirizzo        varchar(255)                                           not null ,
 
     FOREIGN KEY (id_utente) references Utente (id)
 );
