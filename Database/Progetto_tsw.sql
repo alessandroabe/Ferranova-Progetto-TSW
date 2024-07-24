@@ -96,17 +96,17 @@ CREATE TABLE Recensione
 );
 
 INSERT INTO Utente (nome, cognome, email, passwordhash, telefono, is_admin, indirizzo)
-VALUES ('Domenico', 'Amorelli', 'Domenico.admin@unisa.com', sha1('c\'è poco da dire'), '1234567890', TRUE,
+VALUES ('Domenico', 'Amorelli', 'Domenico.admin@unisa.com', sha1('Bullo1!!!'), '1234567890', TRUE,
         'Policastro, Via Franceschini n.'),
-       ('Alessandro', 'Abeille', 'Alessandro.admin@unisa.com', sha1('c\'è tanto da fare'), '3210987654', TRUE,
+       ('Alessandro', 'Abeille', 'Alessandro.admin@unisa.com', sha1('Bullo1!!!'), '3210987654', TRUE,
         'Avellino, via Tuoro Cappuccini n. 45'),
-       ('Christian', 'Fontana', 'Christian.admin@unisa.com', sha1('bullo'), '3210987654', TRUE,
+       ('Christian', 'Fontana', 'Christian.admin@unisa.com', sha1('Bullo1!!!'), '3210987654', TRUE,
         'Nocera Inferiore, via Gerardo Palma n. 11'),
-       ('Domenico', 'Amorelli', 'Domenico.user@unisa.com', sha1('c\'è poco da dire'), '1234567890', FALSE,
+       ('Domenico', 'Amorelli', 'Domenico.user@unisa.com', sha1('Bullo1!!!'), '1234567890', FALSE,
         'Policastro, Via Franceschini n.'),
-       ('Alessandro', 'Abeille', 'Alessandro.user@unisa.com', sha1('c\'è tanto da fare'), '3210987654', FALSE,
+       ('Alessandro', 'Abeille', 'Alessandro.user@unisa.com', sha1('Bullo1!!!'), '3210987654', FALSE,
         'Avellino, via Tuoro Cappuccini n. 45'),
-       ('Christian', 'Fontana', 'Christian.user@unisa.com', sha1('bullo'), '3210987654', FALSE,
+       ('Christian', 'Fontana', 'Christian.user@unisa.com', sha1('Bullo1!!!'), '3210987654', FALSE,
         'Nocera Inferiore, via Gerardo Palma n. 11');
 
 INSERT INTO Promozione (titolo, descrizione, sconto)
