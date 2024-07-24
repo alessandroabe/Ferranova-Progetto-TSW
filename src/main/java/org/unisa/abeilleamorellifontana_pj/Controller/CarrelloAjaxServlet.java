@@ -19,6 +19,8 @@ public class CarrelloAjaxServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        System.out.println("a " + request.getParameter("quantity"));
+
         HttpSession session = request.getSession(false);
         Carrello carrello = (Carrello) session.getAttribute("Carrello");
 
@@ -39,7 +41,7 @@ public class CarrelloAjaxServlet extends HttpServlet {
 
         if (attuale + quantity > disponibilita) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        }else{
+        }else {
             carrello.aggiungiProdotto(prod_id_d, quantity);
             response.setStatus(HttpServletResponse.SC_OK);
         }
@@ -48,6 +50,8 @@ public class CarrelloAjaxServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        System.out.println("a " + request.getParameter("quantity"));
 
         int productId = Integer.parseInt(request.getParameter("prod"));
         String action = request.getParameter("action");
@@ -64,11 +68,15 @@ public class CarrelloAjaxServlet extends HttpServlet {
             if(attuale + quantity > disponibilita) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Quantità richiesta superiore alla disponibilità");
                 return;
+            }else if(attuale + quantity > 0) {
+                carrello.aggiungiProdotto(productId, quantity);
+                int newQuantity = carrello.getProdottiQuantita().get(productId);
+                System.out.println(newQuantity);
+                response.getWriter().write(String.valueOf(newQuantity));
+                response.setStatus(HttpServletResponse.SC_OK);
+            }else {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
-            carrello.aggiungiProdotto(productId, quantity);
-            int newQuantity = carrello.getProdottiQuantita().get(productId);
-            System.out.println(newQuantity);
-            response.getWriter().write(String.valueOf(newQuantity));
 
         } else if (action.equals("remove")) {
             int newQuantity = carrello.getProdottiQuantita().get(productId);

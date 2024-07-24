@@ -11,10 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 @WebServlet(name = "passwordServlet", urlPatterns = "/passwordServlet")
 public class CambioPasswordUtenteServlet extends HttpServlet {
 
+    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,20}$";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -26,17 +28,19 @@ public class CambioPasswordUtenteServlet extends HttpServlet {
         Utente utenteConnesso = (Utente) request.getSession().getAttribute("UtenteConnesso");
 
         if (utenteConnesso != null) {
-            //UtenteDAO utenteDAO = new UtenteDAO();
-            //Utente storedUtente = utenteDAO.doRetrieveByEmail(utenteConnesso.getEmail());
+            // Verifica se la nuova password rispetta la regex
+            if (!Pattern.matches(PASSWORD_REGEX, newPassword)) {
+                response.sendRedirect(request.getContextPath() + "/password?error=2");
+                return;
+            }
 
+            // Verifica se la password corrente è corretta
             if (SHA1PasswordVerifier.verifyPassword(currentPassword, utenteConnesso.getPasswordhash())) {
                 utenteConnesso.setPasswordhash(SHA1PasswordVerifier.sha1Hash(newPassword));
                 UtenteDAO utenteDAO = new UtenteDAO();
                 utenteDAO.doUpdate(utenteConnesso);
 
-                //todo fare caso error 2 per vedere se la password nuova è idonea, sempre con regex
-
-                // Set a success message in the session
+                // Imposta un messaggio di successo nella sessione
                 request.getSession().setAttribute("message", "Password cambiata con successo!");
 
                 response.sendRedirect(request.getContextPath() + "/profilo");
@@ -44,9 +48,7 @@ public class CambioPasswordUtenteServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/password?error=1");
             }
         } else {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");//TODO: evetuale errore
+            response.sendRedirect(request.getContextPath() + "/login.jsp"); // TODO: eventuale errore
         }
-
-
     }
 }
