@@ -18,7 +18,9 @@
     <div class="acquisto-corretto">
         <img src="${pageContext.request.contextPath}/images/Errore.png" alt="Errore">
     </div>
-
+    <h1>Si è verificato un errore</h1>
+    <p>Errore: ${exception.message}</p>
+    <p>Dettagli: ${exception.stackTrace}</p>
     <div>
         <a class="back-home" href="${pageContext.request.contextPath}/index.jsp">Torna alla home</a>
     </div>

@@ -39,7 +39,7 @@
                             <p class="dataSpedizione"><strong>Data spedizione: </strong>- </p>
                         </c:if>
 
-                        <c:if test="${not empty Ordine.dataSpedizione}">
+                        <c:if test="${ (Ordine.statoOrdine == 'spedito' || Ordine.statoOrdine == 'consegnato' ) && not empty Ordine.dataSpedizione}">
                             <p class="dataSpedizione"><strong>Data spedizione: </strong>${Ordine.dataSpedizione}</p>
                         </c:if>
 
