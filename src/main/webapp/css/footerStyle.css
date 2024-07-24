@@ -18,7 +18,6 @@ footer {
 
 .row {
     display: grid;
-    background-color: transparent;
     padding-bottom: 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     padding-top: 15px;
@@ -26,7 +25,6 @@ footer {
 
 .footer-col {
     width: 100%;
-    background-color: transparent;
     text-align: center;
 }
 

@@ -35,19 +35,12 @@ body{
 .ricerca{
     margin-top: 5px;
     width: 95%;
-    padding: 5px 5px;
+    padding: 5px;
     border: 1px solid black;
     border-radius: 10px;
     text-align: center;
 }
 
-.sidebar .ul-sottocategorie li input[type="checkbox"]:checked + label:before{
-    background-color: #335e1e;
-}
-
-.sidebar .ul-sottocategorie li input[type="checkbox"]:checked + label:after{
-    background-color: white;
-}
 
 .rangePrice{
     width: 95%;

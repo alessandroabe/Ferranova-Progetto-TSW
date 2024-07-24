@@ -21,7 +21,6 @@
 
 <div class="container-catalogo">
     <div class="sidebar">
-        <!-- FIXME: finisci e rendi dinamico con macrocategorie-->
         <form action="catalogo" method="get">
             <c:if test="${ not empty param.categoria}">
                 <h2>${param.categoria}</h2>
