@@ -72,12 +72,7 @@ public class OrdineServlet extends HttpServlet {
             }
             b = b.multiply(BigDecimal.ONE.subtract(sconto));
             b = b.setScale(2, RoundingMode.HALF_EVEN);
-        }
-
-        BigDecimal sum = BigDecimal.ZERO;
-        for (Prodotto p : lista) {
-            BigDecimal b = p.getPrezzo();
-            sum = sum.add(b.multiply(BigDecimal.valueOf(carrello.getProdottiQuantita().get(p.getId()))));
+            p.setPrezzo(b);
         }
 
         Utente u = (Utente) session.getAttribute("UtenteConnesso");

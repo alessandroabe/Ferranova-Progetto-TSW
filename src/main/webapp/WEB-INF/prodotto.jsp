@@ -38,8 +38,17 @@
     <div class="product-details">
         <h1 class="product-title">${prodotto.titolo}</h1>
         <div class="product-price">
-            <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-            <fmt:formatNumber value="${prodotto.prezzo}" type="currency" currencySymbol="€"/></div>
+            <div class="scontoDiv">
+                <p style="text-decoration: line-through; color: #333333; font-size: 18px">
+                    <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                    <fmt:formatNumber value="${prodotto.prezzo}" type="currency" currencySymbol="€"/></p>
+                <p style="margin-left: 5px"> -${promozioni[prodotto.idPromozione]}% </p>
+            </div>
+
+            <p style="margin-top: 10px">
+                <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                <fmt:formatNumber value="${prodotto.prezzo * (1 - ( promozioni[prodotto.idPromozione] / 100))}" type="currency" currencySymbol="€"/></div>
+            </p>
 
 
             <div class="quantity-container">

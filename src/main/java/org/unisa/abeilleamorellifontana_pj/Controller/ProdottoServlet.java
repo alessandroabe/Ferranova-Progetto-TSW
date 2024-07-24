@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.unisa.abeilleamorellifontana_pj.Model.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @WebServlet(name = "prod", value = "/prod")
 public class ProdottoServlet extends HttpServlet {
@@ -23,6 +25,12 @@ public class ProdottoServlet extends HttpServlet {
 
         String id_prodotto = request.getParameter("id_prodotto");
 
+        ArrayList<Promozione> promozioni= (ArrayList<Promozione>) PromozioneDAO.doRetrieveAll();
+        HashMap<Integer, Integer> promozioneHashMap = new HashMap<>();
+        for (Promozione p : promozioni) {
+            promozioneHashMap.put(p.getId(), p.getSconto());
+        }
+        request.setAttribute("promozioni", promozioneHashMap);
 
         if (id_prodotto != null && Integer.parseInt(id_prodotto) > 0) {
             Prodotto input = ProdottoDAO.doRetrieveById(Integer.parseInt(id_prodotto));
