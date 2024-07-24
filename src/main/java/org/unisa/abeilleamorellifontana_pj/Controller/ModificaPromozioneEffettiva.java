@@ -32,6 +32,7 @@ public class ModificaPromozioneEffettiva extends HttpServlet {
 
         int scontos = Integer.parseInt(sconto);
 
+
         PromozioneDAO.doUpdateByFields(id_prom,titolo,descrizione,scontos);
 
         request.getRequestDispatcher("admin").forward(request, response);

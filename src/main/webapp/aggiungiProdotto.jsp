@@ -18,7 +18,7 @@
 
 <div class="container">
     <h1>Aggiungi Prodotto</h1>
-    <form action="${pageContext.request.contextPath}/addProduct" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/addProduct" method="post" enctype="multipart/form-data" onsubmit="validateForm()">
         <label for="titolo">Titolo:</label>
         <input type="text" id="titolo" name="titolo"
         <c:if test="${not empty param.titolo}"> value="${param.titolo}" </c:if> required>
@@ -56,6 +56,18 @@
                value="Seleziona file la prima foto sarà la foto di facciata del prodotto PNG Max 10">
         <button type="submit">Aggiungi Prodotto</button>
     </form>
+
+    <script>
+
+        function validateForm() {
+        var quanti = document.getElementById("quantita").value;
+        if(quanti < 0) {
+                alert("Quantità non disponibile");
+            }
+        }
+
+
+    </script>
 </div>
 
 <%@ include file="/WEB-INF/footer.jsp" %>

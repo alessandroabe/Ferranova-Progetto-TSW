@@ -40,6 +40,9 @@ public class AdminAddproduct extends HttpServlet {
             String titolo = req.getParameter("titolo");
             String descrizione = req.getParameter("descrizione");
             int quantita = req.getParameter("quantita") != null ? Integer.parseInt(req.getParameter("quantita")) : null;
+            if(quantita < 0) {
+                resp.sendRedirect("aggiungiProdotto.jsp");
+            }
             int idPromozione = req.getParameter("id_promozione").isEmpty() ? -1 : Integer.parseInt(req.getParameter("id_promozione"));
             String categoria = req.getParameter("categoria");
             BigDecimal prezzo = new BigDecimal(req.getParameter("prezzo"));

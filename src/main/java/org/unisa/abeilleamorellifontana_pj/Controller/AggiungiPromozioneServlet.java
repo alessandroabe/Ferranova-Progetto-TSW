@@ -28,6 +28,10 @@ public class AggiungiPromozioneServlet extends HttpServlet {
 
         int scontos = Integer.parseInt(sconto);
 
+        if(scontos < 0) {
+            response.sendRedirect("aggiungiPromozione.jsp");
+        }
+
         Promozione promozione = new Promozione(titolo,descrizione,scontos);
 
         PromozioneDAO.doInsert(promozione);

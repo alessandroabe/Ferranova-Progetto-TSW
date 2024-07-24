@@ -13,6 +13,53 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footerStyle.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        function validateForm() {
+            const nome = document.getElementById('nome').value;
+            const cognome = document.getElementById('cognome').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value;
+            const indirizzo = document.getElementById('indirizzo').value;
+
+            const NAME_REGEX = /^[A-Za-z\s]+$/;
+            const EMAIL_REGEX = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/;
+            const PHONE_REGEX = /^\d+$/;
+            const ADDRESS_REGEX = /^[A-Za-z0-9\s,.-]+$/;
+
+            if (!NAME_REGEX.test(nome)) {
+                showError('Nome non valido');
+                return false;
+            }
+
+            if (!NAME_REGEX.test(cognome)) {
+                showError('Cognome non valido');
+                return false;
+            }
+
+            if (!EMAIL_REGEX.test(email)) {
+                showError('Email non valida');
+                return false;
+            }
+
+            if (!PHONE_REGEX.test(telefono)) {
+                showError('Numero di telefono non valido');
+                return false;
+            }
+
+            if (!ADDRESS_REGEX.test(indirizzo)) {
+                showError('Indirizzo non valido');
+                return false;
+            }
+
+            return true;
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorDiv');
+            errorDiv.innerText = message;
+            errorDiv.style.display = 'block';
+        }
+    </script>
 </head>
 <body>
 
@@ -22,7 +69,10 @@
     <h1>Dati personali</h1>
     <p class="subparagraph">Visualizza i dati di login e spedizione.</p>
 
-    <form action="${pageContext.request.contextPath}/CambioDatiUtenteServlet" method="post">
+    <!-- Div per visualizzare i messaggi di errore -->
+    <div id="errorDiv" class="error" style="display:none;"></div>
+
+    <form action="${pageContext.request.contextPath}/CambioDatiUtenteServlet" method="post" onsubmit="return validateForm()">
         <div class="profile-section">
             <div class="profile-item">
                 <div class="icon"><i class="fas fa-user"></i></div>

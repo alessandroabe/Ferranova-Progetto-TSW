@@ -27,6 +27,22 @@
         <label for="sconto">Sconto:</label>
         <input type="number" min="1" id="sconto" name="sconto">
 
+        <script>
+
+            function validateForm() {
+
+                var sconto = document.getElementById("sconto");
+                     if(sconto < 0) {
+                         alert("Sconto non disponibile");
+                     }
+
+            }
+
+
+
+        </script>
+
+
         <button type="submit">Aggiungi promozione</button>
     </form>
 </div>
