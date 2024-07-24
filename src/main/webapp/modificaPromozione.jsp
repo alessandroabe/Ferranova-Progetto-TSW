@@ -18,16 +18,19 @@
 <div class="container">
     <h1>Modifica Promozione</h1>
     <form action="modifica-promozione-effettiva" method="get">
-        <input type="hidden" value="${id_prom}" name="id_prom">
+        <input type="hidden" value="${promo.id}" name="id_prom">
 
         <label for="titolo">Titolo:</label>
-        <input type="text" id="titolo" name="titolo" required>
+        <input type="text" id="titolo" name="titolo"
+        <c:if test="${ not empty promo.titolo}"> value="${ promo.titolo}" </c:if> required>
 
         <label for="descrizione">Descrizione:</label>
-        <textarea id="descrizione" name="descrizione"></textarea>
+        <textarea id="descrizione" name="descrizione"> <c:if
+                test="${ not empty promo.descrizione}"> ${ promo.descrizione} </c:if></textarea>
 
         <label for="sconto">Sconto:</label>
-        <input type="number" min="1" id="sconto" name="sconto">
+        <input type="number" min="1" id="sconto" name="sconto"
+        <c:if test="${ not empty  promo.sconto}"> value="${promo.sconto}" </c:if> >
 
 
         <button type="submit">Modifica promozione</button>

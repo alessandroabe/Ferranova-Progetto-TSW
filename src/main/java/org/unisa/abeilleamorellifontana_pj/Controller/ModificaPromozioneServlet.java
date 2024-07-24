@@ -25,8 +25,9 @@ public class ModificaPromozioneServlet extends HttpServlet {
 
         String id_promozione = request.getParameter("idPromozione");
         int id_prom = Integer.parseInt(id_promozione);
+        Promozione p = PromozioneDAO.doRetrieveById(id_prom);
 
-        request.setAttribute("id_prom",id_prom);
+        request.setAttribute("promo", p);
 
 
         request.getRequestDispatcher("modificaPromozione.jsp").forward(request, response);

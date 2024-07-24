@@ -9,14 +9,14 @@
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/log_regStyle.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
-    <script>
+    <!--script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script-->
+    <!--script>
         function initAutocomplete() {
             var input = document.getElementById('indirizzo');
             var autocomplete = new google.maps.places.Autocomplete(input);
             autocomplete.setFields(['address_component', 'geometry']);
         }
-    </script>
+    </script-->
     <script>
         function validateForm() {
             var nome = document.getElementById('nome').value;

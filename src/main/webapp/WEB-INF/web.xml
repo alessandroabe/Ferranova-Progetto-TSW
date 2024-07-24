@@ -15,23 +15,7 @@
         <url-pattern>/profilo</url-pattern>
     </servlet-mapping>
 
-    <!-- Configurazione della pagina di errore per errori generali -->
-    <error-page>
-        <error-code>500</error-code>
-        <location>/WEB-INF/error.jsp</location>
-    </error-page>
 
-    <!-- Configurazione della pagina di errore per errori 404 (Non trovato) -->
-    <error-page>
-        <error-code>404</error-code>
-        <location>/WEB-INF/error.jsp</location>
-    </error-page>
-
-    <!-- Configurazione della pagina di errore per errori specifici -->
-    <error-page>
-        <exception-type>java.lang.Exception</exception-type>
-        <location>/WEB-INF/error.jsp</location>
-    </error-page>
 
     <servlet>
         <servlet-name>password</servlet-name>
@@ -50,5 +34,47 @@
     <filter-mapping>
         <filter-name>SessionFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>LoggedFilter</filter-name>
+        <filter-class>org.unisa.abeilleamorellifontana_pj.Controller.LoggedFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoggedFilter</filter-name>
+        <url-pattern>/CambioDatiUtenteServlet</url-pattern>
+        <url-pattern>/passwordServlet</url-pattern>
+        <url-pattern>/preAcquisto</url-pattern>
+        <url-pattern>/listaOrdini</url-pattern>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/ordineServlet</url-pattern>
+        <url-pattern>/preAcquisto</url-pattern>
+        <url-pattern>/WEB-INF/cambioPassword.jsp</url-pattern>
+        <url-pattern>/WEB-INF/AcquistatoConSuccesso.jsp</url-pattern>
+        <url-pattern>/WEB-INF/faseAcquisto.jsp</url-pattern>
+        <url-pattern>/WEB-INF/ordini.jsp</url-pattern>
+
+
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>org.unisa.abeilleamorellifontana_pj.Controller.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/Admin.jsp</url-pattern>
+        <url-pattern>/aggiungiProdotto</url-pattern>
+        <url-pattern>/aggiungiPromozione</url-pattern>
+        <url-pattern>/modificaPromozione</url-pattern>
+        <url-pattern>/aggiungi-promozione</url-pattern>
+        <url-pattern>/modificaOrdine</url-pattern>
+        <url-pattern>/modifica-promozione</url-pattern>
+        <url-pattern>/rimuovi-promozione</url-pattern>
+        <url-pattern>/adminAjax</url-pattern>
+        <url-pattern>/aggiungiProdotto.jsp</url-pattern>
+        <url-pattern>/modificapromozione.jsp</url-pattern>
     </filter-mapping>
 </web-app>
