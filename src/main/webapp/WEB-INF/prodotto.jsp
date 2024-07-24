@@ -46,6 +46,7 @@
                     <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
                     <fmt:formatNumber value="${prodotto.prezzo}" type="currency" currencySymbol="€"/></p>
                 <p style="margin-left: 5px"> -${promozioni[prodotto.idPromozione]}% </p>
+                </c:if>
             </div>
 
             <p style="margin-top: 10px">

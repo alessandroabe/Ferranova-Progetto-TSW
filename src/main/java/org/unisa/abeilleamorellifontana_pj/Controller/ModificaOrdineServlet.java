@@ -32,11 +32,13 @@ public class ModificaOrdineServlet extends HttpServlet {
         String dataSped = request.getParameter("dataSpedizione");
         String dataConsegna = request.getParameter("dataConsegna");
 
-
         int idOrdine;
-        try {
-            idOrdine = Integer.parseInt(idOrdineStr);
-        } catch (NumberFormatException e) {
+        Ordine ordine;
+        if(request.getParameter("idOrdine") != null) {
+            idOrdine = idOrdine = Integer.parseInt(idOrdineStr);
+            ordine = OrdineDAO.doRetrieveById(idOrdine);
+        }
+        else {
             request.setAttribute("errorMessage", "Invalid order ID.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Admin.jsp");
             dispatcher.forward(request, response);
@@ -44,28 +46,40 @@ public class ModificaOrdineServlet extends HttpServlet {
         }
 
 
+
+
         if (request.getParameter("stato") != null) {
             Ordine.StatoOrdine statoOrdine = Ordine.StatoOrdine.fromString(request.getParameter("stato"));
 
+
             if (statoOrdine.equals(Ordine.StatoOrdine.SPEDITO) && request.getParameter("dataSpedizione") != null) {
 
-                try {
-                    OrdineDAO.updateOrderStatus(idOrdine, statoOrdine);
-                    OrdineDAO.updateShipmentDate(idOrdine, LocalDate.parse(dataSped));
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                if (ordine.getDataOrdine().isBefore(LocalDate.parse(dataSped))){
+                    ordine.setDataSpedizione(LocalDate.parse(dataSped));
+                    try {
+                        OrdineDAO.updateOrderStatus(idOrdine, statoOrdine);
+                        OrdineDAO.updateShipmentDate(idOrdine, LocalDate.parse(dataSped));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
+                else response.sendRedirect(request.getContextPath() + "/admin");
             }
 
 
-            if (statoOrdine.equals(Ordine.StatoOrdine.CONSEGNATO) && request.getParameter("dataConsegna") != null) {
+            if (statoOrdine.equals(Ordine.StatoOrdine.CONSEGNATO) && request.getParameter("dataConsegna") != null){
 
-                try {
-                    OrdineDAO.updateOrderStatus(idOrdine, statoOrdine);
-                    OrdineDAO.updateShipmentDate(idOrdine, LocalDate.parse(dataConsegna));
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                if (ordine.getDataSpedizione().isBefore(LocalDate.parse(dataConsegna)) && ordine.getDataOrdine().isBefore(LocalDate.parse(dataSped))) {
+                    ordine.setDataConsegna(LocalDate.parse(dataConsegna));
+                    try {
+                        OrdineDAO.updateOrderStatus(idOrdine, statoOrdine);
+                        OrdineDAO.updateShipmentDate(idOrdine, LocalDate.parse(dataSped));
+                        OrdineDAO.updateShipmentDate(idOrdine, LocalDate.parse(dataConsegna));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
+                else response.sendRedirect(request.getContextPath() + "/admin");
             }
 
             if (statoOrdine.equals(Ordine.StatoOrdine.DISPERSO)) {

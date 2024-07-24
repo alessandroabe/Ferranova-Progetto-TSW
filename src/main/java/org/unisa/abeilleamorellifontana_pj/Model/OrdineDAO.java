@@ -79,6 +79,39 @@ public class OrdineDAO {
         return ordini;
     }
 
+    public static Ordine doRetrieveById(int idOrdine) {
+        String retrieveOrderSQL = "SELECT * FROM Ordine WHERE id = ?";
+        String retrieveProductsByOrderSQL = "SELECT * FROM Ordine_Prodotto WHERE id_ordine = ?";
+
+        try (Connection conn = ConPool.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(retrieveOrderSQL)) {
+
+            pstmt.setInt(1, idOrdine);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Ordine ordine = new Ordine(
+                            rs.getInt("id"),
+                            rs.getInt("id_utente"),
+                            Ordine.StatoOrdine.valueOf(rs.getString("stato_ordine").toUpperCase()),
+                            rs.getBigDecimal("prezzo_totale"),
+                            rs.getBigDecimal("spese_spedizione"),
+                            rs.getDate("data_ordine").toLocalDate(),
+                            rs.getDate("data_spedizione") != null ? rs.getDate("data_spedizione").toLocalDate() : null,
+                            rs.getDate("data_consegna") != null ? rs.getDate("data_consegna").toLocalDate() : null,
+                            rs.getString("tipo_pagamento"),
+                            rs.getString("indirizzo")
+                    );
+
+                    ordine.setProdottiQuantitaOrdine(retrieveProductsByOrder(idOrdine));
+                    return ordine;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     // Metodo per ottenere tutti gli ordini di un utente specifico
     public static ArrayList<Ordine> doRetrieveByUserId(int idUtente) {
@@ -174,5 +207,34 @@ public class OrdineDAO {
             System.err.println("Errore durante l'aggiornamento dell'ordine: " + e.getMessage());
         }
     }
+
+    public void updateOrdine(Ordine ordine) throws SQLException {
+        String query = "UPDATE Ordine SET idUtente = ?, statoOrdine = ?, prezzoOrdine = ?, prezzoSpedizione = ?, " +
+                "dataOrdine = ?, dataSpedizione = ?, dataConsegna = ?, tipoPagamento = ?, indirizzo = ? " +
+                "WHERE idOrdine = ?";
+
+        try (Connection connection = ConPool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, ordine.getIdUtente());
+            preparedStatement.setString(2, ordine.getStatoOrdine().getStato());
+            preparedStatement.setBigDecimal(3, ordine.getPrezzoOrdine());
+            preparedStatement.setBigDecimal(4, ordine.getPrezzoSpedizione());
+            preparedStatement.setObject(5, ordine.getDataOrdine()); // LocalDate viene gestito come Object
+            preparedStatement.setObject(6, ordine.getDataSpedizione());
+            preparedStatement.setObject(7, ordine.getDataConsegna());
+            preparedStatement.setString(8, ordine.getTipoPagamento());
+            preparedStatement.setString(9, ordine.getIndirizzo());
+            preparedStatement.setInt(10, ordine.getIdOrdine());
+
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("L'ordine con ID " + ordine.getIdOrdine() + " è stato aggiornato con successo.");
+            } else {
+                System.out.println("Nessun ordine trovato con ID " + ordine.getIdOrdine() + ".");
+            }
+        }
+    }
+
 }
 
