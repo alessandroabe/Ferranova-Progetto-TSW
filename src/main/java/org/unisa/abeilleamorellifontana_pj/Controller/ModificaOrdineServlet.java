@@ -20,7 +20,7 @@ public class ModificaOrdineServlet extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
 
         if (session.getAttribute("UtenteConnesso") == null || !((Utente) session.getAttribute("UtenteConnesso")).isAdmin()) {

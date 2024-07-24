@@ -16,6 +16,24 @@
     </servlet-mapping>
 
 
+    <!-- Configurazione della pagina di errore per errori generali -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/error.jsp</location>
+    </error-page>
+
+    <!-- Configurazione della pagina di errore per errori 404 (Non trovato) -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/error.jsp</location>
+    </error-page>
+
+    <!-- Configurazione della pagina di errore per errori specifici -->
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/WEB-INF/error.jsp</location>
+    </error-page>
+
 
     <servlet>
         <servlet-name>password</servlet-name>
@@ -54,8 +72,6 @@
         <url-pattern>/WEB-INF/AcquistatoConSuccesso.jsp</url-pattern>
         <url-pattern>/WEB-INF/faseAcquisto.jsp</url-pattern>
         <url-pattern>/WEB-INF/ordini.jsp</url-pattern>
-
-
     </filter-mapping>
 
 
@@ -77,4 +93,6 @@
         <url-pattern>/aggiungiProdotto.jsp</url-pattern>
         <url-pattern>/modificapromozione.jsp</url-pattern>
     </filter-mapping>
+
+
 </web-app>

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class AdminAjaxServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int prodId = Integer.parseInt(request.getParameter("prod"));
         String action = request.getParameter("action");
 
@@ -52,7 +52,7 @@ public class AdminAjaxServlet extends HttpServlet {
         }
     }
 
-    private int updateProductQuantity(int prodId, int quantityChange) {
+    private synchronized int updateProductQuantity(int prodId, int quantityChange) {
         try {
             int currentQuantity = ProdottoDAO.doRetrieveById(prodId).getQuantita();
             int newQuantity = currentQuantity + quantityChange;
@@ -67,7 +67,7 @@ public class AdminAjaxServlet extends HttpServlet {
         }
     }
 
-    private int azzeraProductQuantity(int prodId) {
+    private synchronized int azzeraProductQuantity(int prodId) {
         try {
             int newQuantity = 0;
             ProdottoDAO.aggiornaQuantitaProdotto(prodId, newQuantity);
@@ -78,7 +78,7 @@ public class AdminAjaxServlet extends HttpServlet {
         }
     }
 
-    private BigDecimal updateProductPrice(int prodId, BigDecimal newPrice) {
+    private synchronized BigDecimal updateProductPrice(int prodId, BigDecimal newPrice) {
         try {
             ProdottoDAO.aggiornaPrezzoProdotto(prodId, newPrice);
             return newPrice;
@@ -88,7 +88,7 @@ public class AdminAjaxServlet extends HttpServlet {
         }
     }
 
-    private int updateIdPromoProduct(int prodId, int quantityChange) {
+    private synchronized int updateIdPromoProduct(int prodId, int quantityChange) {
         try {
             int currentIdPromo = ProdottoDAO.doRetrieveById(prodId).getIdPromozione();
             int newIdPromo = currentIdPromo + quantityChange;

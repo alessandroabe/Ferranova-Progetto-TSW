@@ -31,7 +31,7 @@ public class PromozioneDAO {
         return promozione;
     }
 
-    public static boolean doInsert(Promozione promozione) {
+    public synchronized static boolean doInsert(Promozione promozione) {
         String query = "INSERT INTO Promozione (titolo, descrizione, sconto) VALUES (?, ?, ?)";
         boolean inserito = false;
 
@@ -85,7 +85,7 @@ public class PromozioneDAO {
         return promozioni;
     }
 
-    public static boolean doUpdate(Promozione promozione) {
+    public synchronized static boolean doUpdate(Promozione promozione) {
         String query = "UPDATE Promozione SET titolo = ?, descrizione = ?, sconto = ? WHERE id = ?";
         boolean aggiornato = false;
 
@@ -111,7 +111,7 @@ public class PromozioneDAO {
         return aggiornato;
     }
 
-    public static boolean doDelete(int id) {
+    public synchronized static boolean doDelete(int id) {
         String query = "DELETE FROM Promozione WHERE id = ?";
         boolean cancellato = false;
 
@@ -134,7 +134,7 @@ public class PromozioneDAO {
         return cancellato;
     }
 
-    public static boolean doUpdateByFields(int id, String titolo, String descrizione, int sconto) {
+    public synchronized static boolean doUpdateByFields(int id, String titolo, String descrizione, int sconto) {
         String query = "UPDATE Promozione SET titolo = ?, descrizione = ?, sconto = ? WHERE id = ?";
         boolean aggiornato = false;
 

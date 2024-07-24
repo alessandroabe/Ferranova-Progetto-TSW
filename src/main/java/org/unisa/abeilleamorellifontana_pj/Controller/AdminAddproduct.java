@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class AdminAddproduct extends HttpServlet {
     private static final int MAX_PHOTO_COUNT = 10;
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected  void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
 
