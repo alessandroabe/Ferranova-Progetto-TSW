@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acquistato correttamente Ferranova</title>
+    <title>Errore Ferranova</title>
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/acquistoConSuccessoStyle.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
@@ -13,19 +13,17 @@
 </head>
 <body>
 
-    <%@ include file="navbar.jsp" %>
 
 <div class="container">
     <div class="acquisto-corretto">
-        <img src="${pageContext.request.contextPath}/images/AcquistoConSuccesso.png" alt="Acquisto con successo">
+        <img src="${pageContext.request.contextPath}/images/Errore.png" alt="Errore">
     </div>
 
     <div>
-        <a class="back-home" href="${pageContext.request.contextPath}/index.jsp">Continua ad acquistare</a>
+        <a class="back-home" href="${pageContext.request.contextPath}/index.jsp">Torna alla home</a>
     </div>
 </div>
 
-    <%@ include file="footer.jsp" %>
 
 </body>
 </html>

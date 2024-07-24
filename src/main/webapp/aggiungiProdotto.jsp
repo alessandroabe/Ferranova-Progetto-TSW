@@ -53,7 +53,7 @@
 
         <label for="immagini">Immagini:</label>
         <input type="file" id="immagini" name="immagini" accept=".png" multiple maxlength="10"
-               value="Seleziona file la prima foto sarà la foto di facciata del prodotto PNG Max 10">
+               value="Seleziona file la prima foto sarà la foto di facciata del prodotto PNG Max 10" required>
         <button type="submit">Aggiungi Prodotto</button>
     </form>
 

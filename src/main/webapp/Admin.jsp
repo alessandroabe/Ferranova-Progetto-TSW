@@ -24,7 +24,7 @@
 <div class="buttons-container">
     <div>
         <button class="productsManage-button" aria-label="productsManage-button" tabindex="0"
-                onkeydown="toggleView('products')" onclick="toggleView('products')">Gestione Prodotti
+                onkeydown="toggleView('products')" onclick="toggleView('products')">Gestione prodotti
         </button>
     </div>
     <div>
@@ -34,7 +34,7 @@
     </div>
     <div>
         <button class="promoctionsManage-button" aria-label="promoctionsManage-button" tabindex="0"
-                onkeydown="toggleView('promoctions')" onclick="toggleView('promoctions')">Gestione Promozioni
+                onkeydown="toggleView('promoctions')" onclick="toggleView('promoctions')">Gestione promozioni
         </button>
     </div>
 </div>
@@ -119,7 +119,7 @@
                 </td>
                 <td id="price-${elemento.id}">
                     <div class="price-container">
-                        <input type="number" step="0.01" min="0" value="${elemento.prezzo}"
+                        <input type="number" aria-label="input-price" step="0.01" min="0" value="${elemento.prezzo}"
                                id="newPrice-${elemento.id}">
                         <button class="changePrice" aria-label="changePrice" tabindex="0"
                                 onkeydown="updatePrice(${elemento.id}, 'updatePrice')"
@@ -165,7 +165,7 @@
 
 <!--Parte della gestione ordini-->
 <div id="ordersManage-container">
-    <h2>Lista Ordini Clienti</h2>
+    <h2>Lista ordini clienti</h2>
     <c:forEach var="Ordine" items="${Ordini}">
         <div class="order">
             <div class="order-header">
@@ -205,7 +205,7 @@
                         <form action="modificaOrdine" method="get">
 
                             <label for="statoOrdine">Modifica Stato ordine </label>
-                            <select name="stato" id="statoOrdine" required>
+                            <select name="stato" aria-label="stato" id="statoOrdine" required>
                                 <option value="ordinato" >ordinato</option>
                                 <option value="spedito">spedito</option>
                                 <option value="consegnato">consegnato</option>
