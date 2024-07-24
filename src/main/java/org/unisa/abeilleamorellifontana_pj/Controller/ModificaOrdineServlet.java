@@ -69,12 +69,12 @@ public class ModificaOrdineServlet extends HttpServlet {
 
             if (statoOrdine.equals(Ordine.StatoOrdine.CONSEGNATO) && request.getParameter("dataConsegna") != null){
 
-                if (ordine.getDataSpedizione().isBefore(LocalDate.parse(dataConsegna)) && ordine.getDataOrdine().isBefore(LocalDate.parse(dataSped))) {
+                if (  (LocalDate.parse(dataSped).isBefore(LocalDate.parse(dataConsegna))  || ordine.getDataSpedizione().isBefore(LocalDate.parse(dataConsegna))) && ordine.getDataOrdine().isBefore(LocalDate.parse(dataSped))) {
                     ordine.setDataConsegna(LocalDate.parse(dataConsegna));
                     try {
                         OrdineDAO.updateOrderStatus(idOrdine, statoOrdine);
                         OrdineDAO.updateShipmentDate(idOrdine, LocalDate.parse(dataSped));
-                        OrdineDAO.updateShipmentDate(idOrdine, LocalDate.parse(dataConsegna));
+                        OrdineDAO.updateDeliveryDate(idOrdine, LocalDate.parse(dataConsegna));
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
