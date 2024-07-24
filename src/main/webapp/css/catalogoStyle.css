@@ -111,6 +111,8 @@ body{
 }
 
 .product-price {
+    display: flex;
+    justify-content: center;
     color:#335e1e;
     font-weight: bold;
     font-size: 15px;

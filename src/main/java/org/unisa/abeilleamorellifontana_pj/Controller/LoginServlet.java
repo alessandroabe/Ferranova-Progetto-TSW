@@ -1,3 +1,5 @@
+package org.unisa.abeilleamorellifontana_pj.Controller;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,19 +26,7 @@ public class LoginServlet extends HttpServlet {
 
         String mail = request.getParameter("email");
         String password = request.getParameter("password");
-
-        // Definizione delle regex
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,20}$";
-
-        if (!Pattern.matches(emailRegex, mail) || !Pattern.matches(passwordRegex, password)) {
-            // Se le regex non corrispondono, imposta l'errore e reindirizza
-            request.setAttribute("error", "Formato email o password non validi");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
-
+        
         UtenteDAO U = new UtenteDAO();
         Utente input = U.doRetrieveByEmail(mail);
 

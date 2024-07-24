@@ -8,39 +8,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/log_regStyle.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script>
-        function validateForm() {
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-
-            var emailRegex = /^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$/;
-            var passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,20}$/;
-
-            if (!emailRegex.test(email)) {
-                showError("Email non valida.");
-                return false;
-            }
-
-            if (!passwordRegex.test(password)) {
-                showError("Password non valida. Deve contenere almeno un numero, una lettera maiuscola, una minuscola, un carattere speciale e avere una lunghezza tra 8 e 20 caratteri.");
-                return false;
-            }
-
-            return true;
-        }
-
-        function showError(message) {
-            var alertDiv = document.getElementById('alert');
-            alertDiv.innerText = message;
-            alertDiv.style.display = 'block';
-        }
-    </script>
-    <style>
-        .alert {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
 </head>
 
 <body>

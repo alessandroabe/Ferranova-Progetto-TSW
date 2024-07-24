@@ -64,7 +64,8 @@
         </form>
         <br>
 
-        <button class="redirect-button"
+        <button class="redirect-button" aria-label="redirect-button" tabindex="0"
+                onkeydown="window.location.replace('${pageContext.request.contextPath}/catalogo?categoria=${param.categoria}');"
                 onclick="window.location.replace('${pageContext.request.contextPath}/catalogo?categoria=${param.categoria}');">
             Resetta
         </button>
@@ -79,11 +80,21 @@
                     <div class="product-title">${entry.titolo}</div>
                 </a>
                 <div class="product-price">
-                  <c:if test="${entry.idPromozione >0 || not empty promozioni[entry.idPromozione]}">  <p>${ promozioni[entry.idPromozione]}%</p></c:if>
-                    <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
-                    <fmt:formatNumber value="${entry.prezzo * (1 - ( promozioni[entry.idPromozione] / 100))} " type="currency"
-                                      currencySymbol="€"/></div>
-                <button onclick="addToCart(${entry.id})" class="product-button">Aggiungi al carrello</button>
+                  <c:if test="${entry.idPromozione >0 || not empty promozioni[entry.idPromozione]}">
+                      <p style="text-decoration: line-through; color: #333333; font-size: 12px"> <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                      <fmt:formatNumber value="${entry.prezzo}" type="currency"
+                                        currencySymbol="€"/>
+                      </p></c:if>
+
+                        <p style="margin-left: 5px">
+                            <fmt:setLocale value="fr_FR"/> <!-- Imposta la localizzazione su Francia che usa l'Euro -->
+                            <fmt:formatNumber value="${entry.prezzo * (1 - ( promozioni[entry.idPromozione] / 100))} " type="currency"
+                                              currencySymbol="€"/>
+                        </p>
+                </div>
+                <button class="product-button" aria-label="product-button" tabindex="0"
+                        onkeydown="updateCartaddToCart(${entry.id})"
+                        onclick="addToCart(${entry.id})" >Aggiungi al carrello</button>
                 <p id="alert-${entry.id}" class="alert"></p>
             </div>
 

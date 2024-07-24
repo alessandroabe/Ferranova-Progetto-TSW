@@ -71,15 +71,11 @@
         function showError(message) {
             var alertDiv = document.getElementById('alert');
             alertDiv.innerText = message;
+            alertDiv.style.color = 'red';
+            alertDiv.style.fontweight = 'bold';
             alertDiv.style.display = 'block';
         }
     </script>
-    <style>
-        .alert {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
 </head>
 
 <body>

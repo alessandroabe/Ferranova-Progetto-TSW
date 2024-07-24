@@ -44,11 +44,8 @@
 
             <div class="quantity-container">
                 <label for="quantity">Pezzi disponibili: ${prodotto.quantita}</label><br>
-                <!-- FIXME: br penso da levare -->
                 <input type="number" id="quantity" name="quantity" min="1" value="1" max="${prodotto.quantita}">
             </div>
-
-            <!--TODO mettere soltanto le jstl per iterare i prodotti in base al prodotto cliccato e inserirlo nell'ajax, adesso è con il form solo per testing-->
 
             <button onclick="addToCart(${prodotto.id})" class="add-to-cart">Aggiungi al carrello</button>
 
