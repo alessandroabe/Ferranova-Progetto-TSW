@@ -22,7 +22,7 @@
         <div class="cambioPassword">
             <label for="currentPassword">Password Corrente:</label>
             <div class="password-container">
-                <input type="password" id="currentPassword" name="password" required><br>
+                <input type="password" id="currentPassword" name="currentPassword" required><br>
                 <button type="button" class="mostraPassword" id="viewCurrentPassword" aria-label="mostraPassword" tabindex="0" onkeydown="toggleCurrentPassword()" onclick="toggleCurrentPassword()"><i class="fa-regular fa-eye"></i></button>
             </div>
 
