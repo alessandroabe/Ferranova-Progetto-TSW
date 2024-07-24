@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page isErrorPage="true" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -8,8 +10,6 @@
     <title>Errore Ferranova</title>
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.ico">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/acquistoConSuccessoStyle.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbarStyle.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footerStyle.css"/>
 </head>
 <body>
 

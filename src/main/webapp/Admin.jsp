@@ -199,6 +199,8 @@
                             <p class="dataSpedizione"><strong>Data consegna: </strong>${Ordine.dataConsegna}</p>
                         </c:if>
 
+
+
                     </div>
 
                     <div class="order-details-manage">
