@@ -25,7 +25,7 @@
         <textarea id="descrizione" name="descrizione"></textarea>
 
         <label for="sconto">Sconto:</label>
-        <input type="number" min="1" id="sconto" name="sconto">
+        <input type="number" min="1" max="100" id="sconto" name="sconto">
 
         <script>
 

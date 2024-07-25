@@ -29,7 +29,7 @@
                 test="${ not empty promo.descrizione}"> ${ promo.descrizione} </c:if></textarea>
 
         <label for="sconto">Sconto:</label>
-        <input type="number" min="1" id="sconto" name="sconto"
+        <input type="number" min="1" max="100" id="sconto" name="sconto"
         <c:if test="${ not empty  promo.sconto}"> value="${promo.sconto}" </c:if> >
 
 

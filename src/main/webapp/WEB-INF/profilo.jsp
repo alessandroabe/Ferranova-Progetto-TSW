@@ -69,8 +69,6 @@
     <h1>Dati personali</h1>
     <p class="subparagraph">Visualizza i dati di login e spedizione.</p>
 
-    <!-- Div per visualizzare i messaggi di errore -->
-    <div id="errorDiv" class="error" style="display:none;"></div>
 
     <form action="${pageContext.request.contextPath}/CambioDatiUtenteServlet" method="post" onsubmit="return validateForm()">
         <div class="profile-section">
@@ -109,6 +107,9 @@
                     <input type="text" id="indirizzo" name="indirizzo" value="${UtenteConnesso.indirizzo}">
                 </div>
             </div>
+
+            <!-- Div per visualizzare i messaggi di errore -->
+            <div id="errorDiv" class="error" style="display:none; text-align: center; width: 100%; margin-top: 10px; color:red;"></div>
 
             <input class="edit-button" type="submit" value="Modifica">
 
