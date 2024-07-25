@@ -263,7 +263,3 @@ VALUES (4, 'ordinato', 558.7, '2024-05-14', 'Nocera inferiore, via roma 44');
 INSERT INTO Ordine_Prodotto (id_ordine, id_prodotto, quantità, prezzo_finale)
 VALUES (1, 1, 3, 39.80),
        (1, 2, 1, 499.00);
-
-INSERT INTO Recensione (id_utente, id_prodotto, voto, descrizione)
-VALUES (4, 1, 5, 'Ottimo prodotto! Spedizione veloce e prodotto conforme alla descrizione.'),
-       (4, 2, 4, 'Il prodotto è arrivato con un leggero ritardo, ma per il resto sono soddisfatto.');
