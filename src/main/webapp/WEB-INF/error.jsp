@@ -23,10 +23,5 @@
     </div>
 </div>
 
-
-<h1>Si è verificato un errore</h1>
-<p>Errore: ${exception.message}</p>
-<p>Dettagli: ${exception.stackTrace}</p>
-
 </body>
 </html>
