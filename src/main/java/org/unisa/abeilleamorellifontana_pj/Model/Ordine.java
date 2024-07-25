@@ -199,12 +199,11 @@ public class Ordine {
         if (this.ordiniProdotti == null)
             this.ordiniProdotti = new HashMap<>();
         for (Prodotto p : prodottoList) {
-//TODO: gestire promozione
             OrdineProdotto ordineProdotto = new OrdineProdotto(prodottiQuantita.get(p.getId()), p.getPrezzo());
             this.prezzoOrdine = this.prezzoOrdine.add(p.getPrezzo().multiply(new BigDecimal(ordineProdotto.getQuantita())));
             this.ordiniProdotti.put(p.getId(), ordineProdotto);
-            this.setPrezzoSpedizione();
         }
+        this.setPrezzoSpedizione();
     }
 
 

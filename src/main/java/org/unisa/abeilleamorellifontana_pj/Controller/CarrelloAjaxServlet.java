@@ -19,7 +19,6 @@ public class CarrelloAjaxServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        System.out.println("a " + request.getParameter("quantity"));
 
         HttpSession session = request.getSession(false);
         Carrello carrello = (Carrello) session.getAttribute("Carrello");
@@ -51,8 +50,6 @@ public class CarrelloAjaxServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        System.out.println("a " + request.getParameter("quantity"));
-
         int productId = Integer.parseInt(request.getParameter("prod"));
         String action = request.getParameter("action");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -71,7 +68,6 @@ public class CarrelloAjaxServlet extends HttpServlet {
             }else if(attuale + quantity > 0) {
                 carrello.aggiungiProdotto(productId, quantity);
                 int newQuantity = carrello.getProdottiQuantita().get(productId);
-                System.out.println(newQuantity);
                 response.getWriter().write(String.valueOf(newQuantity));
                 response.setStatus(HttpServletResponse.SC_OK);
             }else {

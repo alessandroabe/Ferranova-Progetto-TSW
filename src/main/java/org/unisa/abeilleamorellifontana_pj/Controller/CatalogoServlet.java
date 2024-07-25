@@ -31,8 +31,6 @@ public class CatalogoServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         ArrayList<Prodotto> catalogo;
-//TODO: spostare tutto nell'init forse, così da avere tutto nella servletcontext
-//TODO: gestire il caso di errore, in cui si mette una categoria che non esiste
         if (request.getParameter("categoria") != null) {
             String categoria = request.getParameter("categoria");
 
@@ -40,7 +38,6 @@ public class CatalogoServlet extends HttpServlet {
 
 
             if ((request.getParameter("ricerca") != null) || (request.getParameter("sottocategoria") != null) || (request.getParameter("prezzoMin") != null) || (request.getParameter("prezzoMax") != null)) {
-                //TODO: controllo valori subcategoria, forse
                 String ricerca = !request.getParameter("ricerca").equalsIgnoreCase("")
                         ? request.getParameter("ricerca")
                         : null;

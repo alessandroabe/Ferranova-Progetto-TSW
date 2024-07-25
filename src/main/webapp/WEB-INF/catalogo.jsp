@@ -92,7 +92,7 @@
                         </p>
                 </div>
                 <button class="product-button" aria-label="product-button" tabindex="0"
-                        onkeydown="updateCartaddToCart(${entry.id})"
+                        onkeydown="addToCart(${entry.id})"
                         onclick="addToCart(${entry.id})" >Aggiungi al carrello</button>
                 <p id="alert-${entry.id}" class="alert"></p>
             </div>

@@ -55,18 +55,18 @@
                             <td>
                                 <div class="quantity-container">
                                     <button class="minus" aria-label="minus" tabindex="0"
-                                            onkeydown="updateCart(${elemento.id}, 'update', -1, ${elemento.prezzo} )"
-                                            onclick="updateCart(${elemento.id}, 'update', -1, ${elemento.prezzo} )">
+                                            onkeydown="updateCart(${elemento.id}, 'update', -1, ${(elemento.prezzo * (1 - ( promozioni[elemento.idPromozione] / 100)))})"
+                                            onclick="updateCart(${elemento.id}, 'update', -1, ${(elemento.prezzo * (1 - ( promozioni[elemento.idPromozione] / 100)))})">
                                         &minus;
                                     </button>
                                     <p id="quantity-${elemento.id}">${mappa[elemento.id]} Pz.</p>
                                     <button class="plus" aria-label="plus" tabindex="0"
-                                            onkeydown="updateCart(${elemento.id}, 'update', 1, ${elemento.prezzo})"
-                                            onclick="updateCart(${elemento.id}, 'update', 1, ${elemento.prezzo})">&plus;
+                                            onkeydown="updateCart(${elemento.id}, 'update', 1, ${(elemento.prezzo * (1 - ( promozioni[elemento.idPromozione] / 100)))})"
+                                            onclick="updateCart(${elemento.id}, 'update', 1, ${(elemento.prezzo * (1 - ( promozioni[elemento.idPromozione] / 100)))})">&plus;
                                     </button>
                                     <button class="delete" aria-label="delete" tabindex="0"
-                                            onkeydown="updateCart(${elemento.id}, 'remove', 0, ${elemento.prezzo})"
-                                            onclick="updateCart(${elemento.id}, 'remove', 0, ${elemento.prezzo})">
+                                            onkeydown="updateCart(${elemento.id}, 'remove', 0, ${(elemento.prezzo * (1 - ( promozioni[elemento.idPromozione] / 100)))})"
+                                            onclick="updateCart(${elemento.id}, 'remove', 0, ${(elemento.prezzo * (1 - ( promozioni[elemento.idPromozione] / 100)))})">
                                         rimuovi
                                     </button>
                                 </div>
