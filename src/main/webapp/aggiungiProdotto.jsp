@@ -32,7 +32,7 @@
         <c:if test="${not empty param.quantita}"> value="${param.quantita}" </c:if> required>
 
         <label for="id_promozione">ID Promozione:</label>
-        <input type="number" id="id_promozione" name="id_promozione"
+        <input type="number" id="id_promozione"  min="1" name="id_promozione"
         <c:if test="${not empty param.id_promozione}"> value="${param.id_promozione}" </c:if> >
 
         <label for="select-category">Categoria:</label>
@@ -48,7 +48,7 @@
 
 
         <label for="prezzo">Prezzo:</label>
-        <input type="number" step="0.01" min="0" id="prezzo" name="prezzo"
+        <input type="number" step="0.01" min="0.01" id="prezzo" name="prezzo"
         <c:if test="${not empty param.prezzo}"> value="${param.prezzo}" </c:if> required>
 
         <label for="immagini">Immagini:</label>

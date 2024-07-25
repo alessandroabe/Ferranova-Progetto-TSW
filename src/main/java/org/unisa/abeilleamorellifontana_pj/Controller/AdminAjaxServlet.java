@@ -38,8 +38,12 @@ public class AdminAjaxServlet extends HttpServlet {
             } else if ("updatePrice".equals(action)) {
                 BigDecimal newPrice = BigDecimal.ZERO;
                 BigDecimal price = new BigDecimal(request.getParameter("price"));
-                newPrice = updateProductPrice(prodId, price);
-                jsonResponse = "{ \"success\": true, \"newPrice\": " + newPrice + " }";
+                if(price.compareTo(BigDecimal.ZERO)>0){
+                    newPrice = updateProductPrice(prodId, price);
+                    jsonResponse = "{ \"success\": true, \"newPrice\": " + newPrice + " }";
+                }else{
+                    jsonResponse = "{ \"success\": false, \"newPrice\": " + newPrice + " }";
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

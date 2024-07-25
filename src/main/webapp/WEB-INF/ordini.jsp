@@ -35,7 +35,7 @@
                             <fmt:formatNumber value="${Ordine.prezzoOrdine}" type="currency"
                                               currencySymbol="€"/></p>
 
-                        <c:if test="${!(Ordine.statoOrdine.stato == 'spedito') || empty Ordine.dataSpedizione}">
+                        <c:if test="${!(Ordine.statoOrdine.stato == 'spedito' || Ordine.statoOrdine.stato == 'consegnato') || empty Ordine.dataSpedizione}">
                             <p class="dataSpedizione"><strong>Data spedizione: </strong>- </p>
                         </c:if>
 
