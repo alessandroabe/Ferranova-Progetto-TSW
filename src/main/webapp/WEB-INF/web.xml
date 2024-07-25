@@ -13,7 +13,6 @@
         <url-pattern>/profilo</url-pattern>
     </servlet-mapping>
 
-
     <!-- Configurazione della pagina di errore per errori generali -->
     <error-page>
         <error-code>500</error-code>
@@ -31,7 +30,6 @@
         <exception-type>java.lang.Exception</exception-type>
         <location>/WEB-INF/error.jsp</location>
     </error-page>
-
 
     <servlet>
         <servlet-name>password</servlet-name>
