@@ -63,7 +63,7 @@ public class RegistrazioneServlet extends HttpServlet {
             return;
         }
 
-        // TODO: fare controlli
+
         Utente utente = new Utente(0, nome, cognome, email, SHA1PasswordVerifier.sha1Hash(password), telefono, false, indirizzo);
 
         int id;

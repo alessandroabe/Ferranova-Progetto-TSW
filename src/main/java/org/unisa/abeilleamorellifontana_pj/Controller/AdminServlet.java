@@ -15,7 +15,6 @@ import java.util.List;
 @WebServlet(name = "admin", urlPatterns = "/admin")
 public class AdminServlet extends HttpServlet {
 
-    //TODO: convalida tramite filter per gestire le servlet admin
 
 
     @Override
@@ -38,7 +37,7 @@ public class AdminServlet extends HttpServlet {
             }
 
             List<Promozione> Promozioni = PromozioneDAO.doRetrieveAll();
-//TODO: vorrei unire questo a SelectCategoryServlet, ma non penso ci sia tempo
+
             if(req.getAttribute("prodotti") == null) {
                 ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) ProdottoDAO.doRetrieveAll();
                 req.setAttribute("prodotti", prodotti);

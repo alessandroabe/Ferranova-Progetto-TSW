@@ -6,7 +6,6 @@ import static org.unisa.abeilleamorellifontana_pj.Model.SHA1PasswordVerifier.sha
 
 public class UtenteDAO {
 
-    //TODO: se c'è tempo rendere statico
     public Utente doRetrieveByEmail(String mail) {
         Utente utente = null;
 
@@ -65,8 +64,6 @@ public class UtenteDAO {
         }
         return (doRetrieveByEmail(utente.getEmail())).getId();
     }
-
-    //todo fare la validazione con regex
 
     public void doUpdate(Utente utente) {
         String query = "UPDATE Utente SET nome = ?, cognome = ?, email = ?, passwordhash = ?, telefono = ?, indirizzo = ? WHERE id = ?";

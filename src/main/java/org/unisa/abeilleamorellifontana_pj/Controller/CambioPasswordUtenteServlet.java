@@ -48,7 +48,7 @@ public class CambioPasswordUtenteServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/password?error=1");
             }
         } else {
-            response.sendRedirect(request.getContextPath() + "/login.jsp"); // TODO: eventuale errore
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
         }
     }
 }

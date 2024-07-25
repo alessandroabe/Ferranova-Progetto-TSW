@@ -218,7 +218,6 @@
 
                             <label for="dataSpedizione">Modifica data di spedizione: </label>
                             <input type="date" id="dataSpedizione" name="dataSpedizione" <c:if test="${not empty Ordine.dataSpedizione}"> value="${Ordine.dataSpedizione}" </c:if> ><br>
-                            <!--fixme non funziona il post senza il required-->
                             <label for="dataConsegna">Modifica data di consegna: </label>
                             <input type="date" id="dataConsegna" name="dataConsegna" <c:if test="${not empty Ordine.dataConsegna}"> value="${Ordine.dataConsegna}" </c:if> ><br>
 

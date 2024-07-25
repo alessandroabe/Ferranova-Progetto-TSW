@@ -29,7 +29,7 @@ public class CarrelloServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false); //creiamo una nuova sessione
         Carrello carrello = (Carrello) session.getAttribute("Carrello");
-        //TODO: mettere controlli
+
         ArrayList<Prodotto> lista = new ArrayList<>();
         for (Map.Entry<Integer, Integer> entry : carrello.getProdottiQuantita().entrySet()) {
             lista.add(ProdottoDAO.doRetrieveById(entry.getKey()));

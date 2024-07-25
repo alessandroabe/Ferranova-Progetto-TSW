@@ -1,7 +1,6 @@
 package org.unisa.abeilleamorellifontana_pj.Model;
 
 
-//TODO: finire sessione e finire servlet
 public class SessionManager {
     private Utente utente;
     private Carrello carrello;

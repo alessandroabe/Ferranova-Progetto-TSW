@@ -12,11 +12,8 @@ CREATE TABLE Utente
     telefono     VARCHAR(13)  NOT NULL,
     is_admin     BOOLEAN      NOT NULL DEFAULT FALSE,
     indirizzo    VARCHAR(255) NOT NULL
-/*TODO: vedere se rendere indirizzo null
-    /* potrebbe essere sostituita con enumerazione se si dovessero aggiungere altri ruoli*/
 );
 
-/*TODO: tenere conto che  defaul può avere solo un true per utente*/
 
 CREATE TABLE Promozione
 (
@@ -82,18 +79,6 @@ CREATE TABLE Ordine_Prodotto
     FOREIGN KEY (id_prodotto) references Prodotto (id)
 );
 
-/* FIXME: se non facciamo in tempo penso che verrà eliminata*/
-CREATE TABLE Recensione
-(
-    id_utente   INT          NOT NULL,
-    id_prodotto INT          NOT NULL,
-    voto        int unsigned NOT NULL,
-    CHECK (voto <= 10),
-    descrizione text         not null,
-    PRIMARY KEY (id_utente, id_prodotto),
-    FOREIGN KEY (id_utente) references Utente (id),
-    FOREIGN KEY (id_prodotto) references Prodotto (id)
-);
 
 INSERT INTO Utente (nome, cognome, email, passwordhash, telefono, is_admin, indirizzo)
 VALUES ('Domenico', 'Amorelli', 'Domenico.admin@unisa.com', sha1('Bullo1!!!'), '1234567890', TRUE,

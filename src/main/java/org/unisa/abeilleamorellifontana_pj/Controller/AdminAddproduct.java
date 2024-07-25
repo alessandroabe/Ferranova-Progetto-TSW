@@ -26,10 +26,10 @@ public class AdminAddproduct extends HttpServlet {
         doPost(req, resp);
     }
 
-    //TODO: eventualmente fondere co la parte principale di admin
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO: controllare che sia admin
+
         if (req.getSession().getAttribute("UtenteConnesso") != null) {
             Utente u = (Utente) req.getSession().getAttribute("UtenteConnesso");
             if (!u.isAdmin()) {
